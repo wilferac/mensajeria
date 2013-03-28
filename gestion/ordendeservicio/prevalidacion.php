@@ -1,0 +1,184 @@
+<?php
+
+   session_start();
+   include ("../../conexion/conexion.php");
+
+   if ($_REQUEST)
+   {
+
+       $numguia = $_REQUEST['numguia'];
+       $encGuia = false;
+       $encAsig = false;
+
+       if ($numguia != "")
+       {
+           $query = "SELECT * FROM asignacion_guias WHERE $numguia >= inicial_asignacion AND $numguia <= inicial_asignacion+cantidad_asignacion";
+           $results = mysql_query($query) or die(mysql_error());
+           $datosAsig = mysql_fetch_assoc($results);
+           if (mysql_num_rows($results) > 0)
+               $encAsig = true;
+           else
+               $encAsig = false;
+
+           //query para que pasen los que estan a medio llenar
+           $query = "SELECT * FROM guia WHERE numero_guia = $numguia and tercero_iddestinatario IS NOT NULL";
+
+           //$query = "SELECT * FROM guia WHERE numero_guia = $numguia";
+           $results = mysql_query($query) or die('error2' . $query);
+
+           if (mysql_num_rows($results) > 0)
+               $encGuia = true;
+           else
+               $encGuia = false;
+
+
+           if ($encAsig && $encGuia)
+           {
+               echo "<script>
+				ElementosClientesInvisibles();
+			    ElementosDatosABuscarDestinatarioInvisibles();
+				ElementosDestinatariosInvisibles();
+				</script>
+			  <div id='nodisponible' class ='nodisponible' style='display:inline'>Guia ya Asignada</div>
+			  <input type='hidden' id='encGuia' name='encGuia' value='$encGuia'></input>
+			  <input type='hidden' id='encAsig' name='encAsig' value='$encAsig'></input>";
+           }
+           elseif (!$encAsig && $encGuia)
+               echo "	<script>
+				ElementosClientesInvisibles();
+				ElementosDatosABuscarDestinatarioInvisibles();
+				ElementosDestinatariosInvisibles();
+				</script>
+				<div id='nodisponible' class ='nodisponible' style='display:inline'>Guia ya Asignada</div>
+			  <input type='hidden' id='encGuia' name='encGuia' value='$encGuia'></input>
+			  <input type='hidden' id='encAsig' name='encAsig' value='$encAsig'></input>";
+           //esta parte parece tener un bug ? asi que la comento
+           else if ($encAsig && !$encGuia)
+           {
+               $tercero_idtercero = $datosAsig["tercero_idtercero"];
+
+               $query = "SELECT * FROM tercero WHERE idtercero = $tercero_idtercero";
+               $results = mysql_query($query);
+
+               $datosCliente = mysql_fetch_assoc($results);
+
+               $idtercero = $datosCliente["idtercero"];
+               $documento_tercero = $datosCliente["documento_tercero"];
+               $nombres_tercero = $datosCliente["nombres_tercero"];
+               $apellidos_tercero = $datosCliente["apellidos_tercero"];
+               $direccion_tercero = $datosCliente["direccion_tercero"];
+
+
+               echo "
+			
+				<script>
+				ElementosClientesInvisibles();
+ElementosClientesVisibles(true,'$idtercero','$documento_tercero','$nombres_tercero','$apellidos_tercero','$direccion_tercero');
+				ElementosDestinatariosInvisibles();
+				</script>			
+			
+				<script>
+				document.getElementById('titulodestinatarios').style.visibility='visible';
+				ElementosDatosABuscarDestinatarioVisibles();
+				ElementosDestinatariosInvisibles();
+				</script>
+				<input type='hidden' id='encGuia' name='encGuia' value='$encGuia'></input>
+			  <input type='hidden' id='encAsig' name='encAsig' value='$encAsig'></input>";
+           }
+           elseif (!$encAsig && !$encGuia)
+           {
+               //verifico si la guia fue salvada temporalmente :O
+               $query2 = "select g.idguia , g.numero_guia ,
+            c1.idciudad as  ciudad_idorigen, c1.nombre_ciudad as ciudad_nombreorigen,
+            c2.idciudad as  ciudad_iddestino, c2.nombre_ciudad as ciudad_nombredestino,
+            p.idproducto, p.nombre_producto, p.tipo_producto_idtipo_producto, tp.nombre_tipo_producto,
+            t.idtercero , t.documento_tercero, t.nombres_tercero, t.apellidos_tercero, 
+            t.direccion_tercero, g.remitenteInfo
+            from guia g inner join  tercero t on g.tercero_idremitente = t.idtercero  
+            inner join ciudad c1 on c1.idciudad = g.ciudad_idorigen inner join ciudad c2 on c2.idciudad = g.ciudad_iddestino
+            inner join producto p on p.idproducto = g.producto_idproducto
+            inner join tipo_producto tp on tp.idtipo_producto = tipo_producto_idtipo_producto
+            where g.numero_guia = $numguia  and g.tercero_iddestinatario IS NULL";
+
+               $results2 = mysql_query($query2) or die('error2' . $query2);
+
+               if ($fila = mysql_fetch_assoc($results2))
+               {
+//                $tercero_idtercero = $datosAsig["tercero_idtercero"];
+                   //capturo los datos del tercero que envia
+                   $idtercero = $fila["idtercero"];
+                   $documento_tercero = $fila["documento_tercero"];
+                   $nombres_tercero = $fila["nombres_tercero"];
+                   $apellidos_tercero = $fila["apellidos_tercero"];
+                   $direccion_tercero = $fila["direccion_tercero"];
+                   $idTipoPro = $fila["tipo_producto_idtipo_producto"];
+                   $nomtp = $fila["nombre_tipo_producto"];
+                   //capturo los del destino y de el origen del paquete
+                   $idOrigen = $fila["ciudad_idorigen"];
+                   $idDestino = $fila["ciudad_iddestino"];
+                   $idProducto = $fila["idproducto"];
+                   $nomProducto = $fila["nombre_producto"];
+
+                   $remitenteInfo = $fila["remitenteInfo"];
+                   //lo igualo al value en el formulario ya que en la Bd esta con mayuscula inicial
+                   $nomProducto = strtolower($nomProducto);
+                   //$idTipoProducto = $operaciones->calcularTipoProducto($idpaisdorigen, $iddepartamentoorigen, $idciudadorigen, $nombreciudaddestino, $idciudaddestino);
+
+
+                   echo "<script>
+                    alert('entro aca');
+                    ElementosClientesInvisibles();
+                    ElementosClientesVisibles(true,'$idtercero','$documento_tercero','$nombres_tercero','$apellidos_tercero','$direccion_tercero');
+                   // document.getElementById('tipoproducto').value = '$nomProducto';
+                   // document.getElementById('idtipoproducto').value = '$idProducto';
+                   // document.getElementById('idciudadorigen2').value= '$idOrigen';    
+                   // document.getElementById('ciudaddestino').value= '$idDestino';
+                    //    document.getElementById('nombreproducto').value= '$idProducto';
+
+                document.getElementById('tipoproducto').value = '$nomtp';
+		document.getElementById('idtipoproducto').value = '$idTipoPro';
+                    document.getElementById('extraRemitente').value = '$remitenteInfo';
+$(document).ready
+$(function() {
+   $('#idciudadorigen2').val('$idOrigen');
+       $('#nombreproducto').val('$nomProducto');
+           $('#ciudaddestino').val('$idDestino');
+});
+                        
+
+                    document.getElementById('capadatosguia').style.visibility='visible';
+                    document.getElementById('savetemp').style.visibility='hidden';
+                    
+                    
+                    
+				</script>			
+			
+				<script>
+				document.getElementById('titulodestinatarios').style.visibility='visible';
+                                ElementosDatosABuscarDestinatarioVisibles();
+// ELEMENTOS DEL DESTINATARIO VISIBLES
+document.getElementById('datoArecordar').focus();
+				</script>
+				";
+                   return;
+               }
+
+               if (mysql_num_rows($results) > 0)
+                   $encGuia = true;
+               else
+                   $encGuia = false;
+
+
+               echo "<script>
+					ElementosDatosABuscarDestinatarioInvisibles();
+					ElementosClientesInvisibles();
+					ElementosClientesAbuscarVisibles();
+					ElementosDestinatariosInvisibles();
+			  		document.getElementById('cccliente').focus();
+			   </script>
+			   <input type='hidden' id='encGuia' name='encGuia' value='$encGuia'></input>
+			  <input type='hidden' id='encAsig' name='encAsig' value='$encAsig'></input>";
+           }
+       } // if numguia != ""
+   } // if REQUEST
+?>

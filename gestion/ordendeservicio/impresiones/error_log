@@ -1,0 +1,1 @@
+[15-Feb-2013 10:09:53 America/Lima] PHP Warning:  session_start() [<a href='function.session-start'>function.session-start</a>]: Cannot send session cache limiter - headers already sent (output started at /home/innovat1/public_html/a1-entregas/gestion/ordendeservicio/impresiones/imprimirguia.php:8) in /home/innovat1/public_html/a1-entregas/clases/clases.php on line 2

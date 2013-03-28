@@ -1,0 +1,325 @@
+﻿<?xml version="1.0" standalone="yes"?>
+<ew-language date="2012/9/27" version="5.0.0" id="en" name="English" desc="English" author="e.World Technology Ltd.">
+	<global>
+		<phrase id="allrecords" value="All"/>
+		<phrase id="alwaysask" value="Always ask for my user name and password"/>
+		<phrase id="autologin" value="Auto login until I logout explicitly"/>
+		<phrase id="backtologin" value="Back to Login Page"/>
+		<phrase id="booleanno" value="No"/>
+		<phrase id="booleanyes" value="Yes"/>
+		<phrase id="cancelbtn" value="Cancel" client="1"/>
+		<phrase id="currentfilters" value="Current filters:"/>
+		<phrase id="entersenderemail" value="Please enter sender email" client="1"/>
+		<phrase id="enterpropersenderemail" value="Exceed maximum sender email count or email address incorrect" client="1"/>
+		<phrase id="enterrecipientemail" value="Please enter recipient email" client="1"/>
+		<phrase id="enterproperrecipientemail" value="Exceed maximum recipient email count or email address incorrect" client="1"/>
+		<phrase id="enterproperccemail" value="Exceed maximum cc email count or email address incorrect" client="1"/>
+		<phrase id="enterproperbccemail" value="Exceed maximum bcc email count or email address incorrect" client="1"/>
+		<phrase id="entersubject" value="Please enter subject" client="1"/>
+		<phrase id="emailformsender" value="From"/>
+		<phrase id="emailformrecipient" value="To"/>
+		<phrase id="emailformcc" value="Cc"/>
+		<phrase id="emailformbcc" value="Bcc"/>
+		<phrase id="emailformsubject" value="Subject"/>
+		<phrase id="emailformmessage" value="Message"/>
+		<phrase id="emailformcontenttype" value="Send as"/>
+		<phrase id="emailformcontenttypeurl" value="URL"/>
+		<phrase id="emailformcontenttypehtml" value="HTML"/>
+		<phrase id="emptylabel" value="(Empty)"/>
+		<phrase id="enterpassword" value="Please enter password" client="1"/>
+		<phrase id="enterpwd" value="Please enter password" client="1"/>
+		<phrase id="entersearchcriteria" value="Please enter search criteria"/>
+		<phrase id="enteruid" value="Please enter user ID" client="1"/>
+		<phrase id="exceedmaxemailexport" value="Exceed maximum export email count. Please try again later."/>
+		<phrase id="exporttoemail" value="Email" client="1"/>
+		<phrase id="exporttoexcel" value="Export to Excel"/>
+		<phrase id="exporttopdf" value="Export to PDF"/>
+		<phrase id="exporttoword" value="Export to Word"/>
+		<phrase id="filters" value="Filters"/>
+		<phrase id="incorrectcreditcard" value="Incorrect credit card number" client="1"/>
+		<phrase id="incorrectdateymd" value="Incorrect date, format = yyyy%smm%sdd"/>
+		<phrase id="incorrectdatemdy" value="Incorrect date, format = mm%sdd%syyyy"/>
+		<phrase id="incorrectdatedmy" value="Incorrect date, format = dd%smm%syyyy"/>
+		<phrase id="incorrectshortdateymd" value="Incorrect date, format = yy%smm%sdd"/>
+		<phrase id="incorrectshortdatemdy" value="Incorrect date, format = mm%sdd%syy"/>
+		<phrase id="incorrectshortdatedmy" value="Incorrect date, format = dd%smm%syy"/>
+		<phrase id="incorrectemail" value="Incorrect email" client="1"/>
+		<phrase id="incorrectfield" value="Incorrect field" client="1"/>
+		<phrase id="incorrectfloat" value="Incorrect floating point number" client="1"/>
+		<phrase id="incorrectguid" value="Incorrect GUID" client="1"/>
+		<phrase id="incorrectinteger" value="Incorrect integer" client="1"/>
+		<phrase id="incorrectphone" value="Incorrect phone number" client="1"/>
+		<phrase id="incorrectrange" value="Number must be between %1 and %2" client="1"/>
+		<phrase id="incorrectregexp" value="Regular expression not matched" client="1"/>
+		<phrase id="incorrectssn" value="Incorrect Social Security Number" client="1"/>
+		<phrase id="incorrecttime" value="Incorrect time (hh:mm:ss)" client="1"/>
+		<phrase id="incorrectzip" value="Incorrect ZIP code" client="1"/>
+		<phrase id="invaliduidpwd" value="Incorrect user ID or password"/>
+		<phrase id="language" value="Language"/>
+		<phrase id="login" value="Login"/>
+		<phrase id="loginpage" value="Login Page"/>
+		<phrase id="logout" value="Logout"/>
+		<phrase id="monthjan" value="Jan"/>
+		<phrase id="monthfeb" value="Feb"/>
+		<phrase id="monthmar" value="Mar"/>
+		<phrase id="monthapr" value="Apr"/>
+		<phrase id="monthmay" value="May"/>
+		<phrase id="monthjun" value="Jun"/>
+		<phrase id="monthjul" value="Jul"/>
+		<phrase id="monthaug" value="Aug"/>
+		<phrase id="monthsep" value="Sep"/>
+		<phrase id="monthoct" value="Oct"/>
+		<phrase id="monthnov" value="Nov"/>
+		<phrase id="monthdec" value="Dec"/>
+		<phrase id="next" value="Next"/>
+		<phrase id="nopermission" value="You do not have the right permission to view the page"/>
+		<phrase id="norecord" value="No records found"/>
+		<phrase id="noreportorcharts" value="No report or charts is selected for generation. Please check your report/charts settings."/>
+		<phrase id="nodistinctcolvals" value="No distinct column values for sql: "/>
+		<phrase id="nulllabel" value="(Null)"/>
+		<phrase id="of" value="of"/>
+		<phrase id="page" value="Page"/>
+		<phrase id="pagerfirst" value="First"/>
+		<phrase id="pagerlast" value="Last"/>
+		<phrase id="pagernext" value="Next"/>
+		<phrase id="pagerprevious" value="Previous"/>
+		<phrase id="password" value="Password"/>
+		<phrase id="pleaseselect" value=""/>
+		<phrase id="popupall" value="(All)" client="1"/>
+		<phrase id="popupcancel" value="Cancel" client="1"/>
+		<phrase id="popupfrom" value="From" client="1"/>
+		<phrase id="popupnovalue" value="No value selected!" client="1"/>
+		<phrase id="popupok" value="  OK  " client="1"/>
+		<phrase id="popupselect" value="Please Select" client="1"/>
+		<phrase id="popupto" value="To" client="1"/>
+		<phrase id="prev" value="Prev"/>
+		<phrase id="printerfriendly" value="Printer Friendly"/>
+		<phrase id="group" value="Groups"/>
+		<phrase id="groupsperpage" value="Groups per page"/>
+		<phrase id="qtr1" value="1st Quarter"/>
+		<phrase id="qtr2" value="2nd Quarter"/>
+		<phrase id="qtr3" value="3rd Quarter"/>
+		<phrase id="qtr4" value="4th Quarter"/>
+		<phrase id="record" value="Records"/>
+		<phrase id="recordsperpage" value="Records per page"/>
+		<phrase id="report" value="Reports"/>
+		<phrase id="reset" value="Reset"/>
+		<phrase id="resetallfilter" value="Reset all filters"/>
+		<phrase id="resetsearch" value="Reset search criteria"/>
+		<phrase id="rptavg" value="AVG"/>
+		<phrase id="rptcnt" value="COUNT"/>
+		<phrase id="rptdtlrec" value=" detail records"/>
+		<phrase id="rptgrandsummary" value="Grand Summary"/>
+		<phrase id="rptgrandtotal" value="Grand Total"/>
+		<phrase id="rptmax" value="MAX"/>
+		<phrase id="rptmin" value="MIN"/>
+		<phrase id="rptpagesummary" value="Page Summary"/>
+		<phrase id="rptpagetotal" value="Page Total"/>
+		<phrase id="rptseparator" value=":&amp;nbsp;"/>
+		<phrase id="rptsum" value="SUM"/>
+		<phrase id="rptsumhead" value="Summary for"/>
+		<phrase id="saveusername" value="Save my user name"/>
+		<phrase id="search" value="Search"/>
+		<phrase id="selectall" value="(All)"/>
+		<phrase id="sendemailbtn" value="Send" client="1"/>
+		<phrase id="sendemailsuccess" value="Email sent successfully" client="1"/>
+		<phrase id="showall" value="Show all"/>
+		<phrase id="summary" value="Summary"/>
+		<phrase id="tasks" value="Tasks"/>
+		<phrase id="to" value="to"/>
+		<phrase id="top" value="Top"/>
+		<phrase id="total" value="Total"/>
+		<phrase id="username" value="User name"/>
+		<phrase id="week" value="Week"/>
+		<phrase id="year" value="Year"/>
+		<!-- Search Operators -->
+		<phrase id="=" value="="/>
+		<phrase id="&lt;&gt;" value="&lt;&gt;"/>
+		<phrase id="&lt;" value="&lt;"/>
+		<phrase id="&lt;=" value="&lt;="/>
+		<phrase id="&gt;" value="&gt;"/>
+		<phrase id="&gt;=" value="&gt;="/>
+		<phrase id="like" value="contains"/>
+		<phrase id="not like" value="not contains"/>
+		<phrase id="starts with" value="starts with"/>
+		<phrase id="between" value="between"/>
+		<phrase id="and" value="and"/>
+		<phrase id="or" value="or"/>
+		<!-- Menu Prefix/Suffix -->
+		<phrase id="simplereportmenuitemprefix" value=""/>
+		<phrase id="simplereportmenuitemsuffix" value=""/>
+		<phrase id="detailsummaryreportmenuitemprefix" value=""/>
+		<phrase id="detailsummaryreportmenuitemsuffix" value=""/>
+		<phrase id="crosstabreportmenuitemprefix" value=""/>
+		<phrase id="crosstabreportmenuitemsuffix" value=""/>
+		<phrase id="chartreportmenuitemprefix" value=""/>
+		<phrase id="chartreportmenuitemsuffix" value=""/>
+		<!-- Advanced Filter -->
+		<phrase id="future" value="Future"/>
+		<phrase id="past" value="Past"/>
+		<phrase id="last14days" value="Last 14 days"/>
+		<phrase id="last30days" value="Last 30 days"/>
+		<phrase id="last7days" value="Last 7 days"/>
+		<phrase id="next14days" value="Next 14 days"/>
+		<phrase id="next30days" value="Next 30 days"/>
+		<phrase id="next7days" value="Next 7 days"/>
+		<phrase id="today" value="Today"/>
+		<phrase id="tomorrow" value="Tomorrow"/>
+		<phrase id="yesterday" value="Yesterday"/>
+		<phrase id="lastmonth" value="Last month"/>
+		<phrase id="nextmonth" value="Next month"/>
+		<phrase id="thismonth" value="This month"/>
+		<phrase id="lasttwoweeks" value="Last two weeks"/>
+		<phrase id="lastweek" value="Last week"/>
+		<phrase id="nexttwoweeks" value="Next two weeks"/>
+		<phrase id="nextweek" value="Next week"/>
+		<phrase id="thisweek" value="This week"/>
+		<phrase id="lastyear" value="Last year"/>
+		<phrase id="nextyear" value="Next year"/>
+		<phrase id="thisyear" value="This year"/>
+	</global>
+	<project><phrase id="bodytitle" value="Reporte de Prueba"/>
+<phrase id="footertext" value="&amp;copy;2012 e.World Technology Ltd. All rights reserved."/>
+<menu id="1"><phrase id="menutext" value="guia"/>
+</menu>
+<menu id="2"><phrase id="menutext" value="guias"/>
+</menu>
+<menu id="3"><phrase id="menutext" value="Crosstab 1"/>
+</menu>
+<table id=""/>
+<table id=""/>
+<table id=""/>
+<table id=""/>
+<table id=""/>
+<table id=""/>
+<table id=""/>
+<table id=""/>
+<table id=""/>
+<table id="guia"><phrase id="tblcaption" value="guia"/>
+<field id="idguia"><phrase id="fldcaption" value="idguia"/>
+</field>
+<field id="numero_guia"><phrase id="fldcaption" value="numero guia"/>
+</field>
+<field id="orden_servicio_idorden_servicio"><phrase id="fldcaption" value="orden servicio idorden servicio"/>
+</field>
+<field id="zona_idzona"><phrase id="fldcaption" value="zona idzona"/>
+</field>
+<field id="causal_devolucion_idcausal_devolucion"><phrase id="fldcaption" value="causal devolucion idcausal devolucion"/>
+</field>
+<field id="manifiesto_idmanifiesto"><phrase id="fldcaption" value="manifiesto idmanifiesto"/>
+</field>
+<field id="producto_idproducto"><phrase id="fldcaption" value="producto idproducto"/>
+</field>
+<field id="ciudad_iddestino"><phrase id="fldcaption" value="ciudad iddestino"/>
+</field>
+<field id="valor_declarado_guia"><phrase id="fldcaption" value="valor declarado guia"/>
+</field>
+<field id="nombre_destinatario_guia"><phrase id="fldcaption" value="nombre destinatario guia"/>
+</field>
+<field id="direccion_destinatario_guia"><phrase id="fldcaption" value="direccion destinatario guia"/>
+</field>
+<field id="telefono_destinatario_guia"><phrase id="fldcaption" value="telefono destinatario guia"/>
+</field>
+<field id="peso_guia"><phrase id="fldcaption" value="peso guia"/>
+</field>
+<field id="ciudad_idorigen"><phrase id="fldcaption" value="ciudad idorigen"/>
+</field>
+<field id="tercero_idremitente"><phrase id="fldcaption" value="tercero idremitente"/>
+</field>
+<field id="tercero_iddestinatario"><phrase id="fldcaption" value="tercero iddestinatario"/>
+</field>
+</table>
+<table id=""/>
+<table id=""/>
+<table id=""/>
+<table id=""/>
+<table id=""/>
+<table id=""/>
+<table id=""/>
+<table id=""/>
+<table id=""/>
+<table id=""/>
+<table id=""/>
+<table id=""/>
+<table id=""/>
+<table id=""/>
+<table id=""/>
+<table id=""/>
+<table id=""/>
+<table id=""/>
+<table id=""/>
+<table id=""/>
+<table id=""/>
+<table id=""/>
+<table id=""/>
+<table id=""/>
+<table id="guias"><phrase id="tblcaption" value="guias"/>
+<field id="idguia"><phrase id="fldcaption" value="idguia"/>
+</field>
+<field id="numero_guia"><phrase id="fldcaption" value="numero guia"/>
+</field>
+<field id="orden_servicio_idorden_servicio"><phrase id="fldcaption" value="orden servicio idorden servicio"/>
+</field>
+<field id="zona_idzona"><phrase id="fldcaption" value="zona idzona"/>
+</field>
+<field id="causal_devolucion_idcausal_devolucion"><phrase id="fldcaption" value="causal devolucion idcausal devolucion"/>
+</field>
+<field id="manifiesto_idmanifiesto"><phrase id="fldcaption" value="manifiesto idmanifiesto"/>
+</field>
+<field id="producto_idproducto"><phrase id="fldcaption" value="producto idproducto"/>
+</field>
+<field id="ciudad_iddestino"><phrase id="fldcaption" value="ciudad iddestino"/>
+</field>
+<field id="valor_declarado_guia"><phrase id="fldcaption" value="valor declarado guia"/>
+</field>
+<field id="nombre_destinatario_guia"><phrase id="fldcaption" value="nombre destinatario guia"/>
+</field>
+<field id="direccion_destinatario_guia"><phrase id="fldcaption" value="direccion destinatario guia"/>
+</field>
+<field id="telefono_destinatario_guia"><phrase id="fldcaption" value="telefono destinatario guia"/>
+</field>
+<field id="peso_guia"><phrase id="fldcaption" value="peso guia"/>
+</field>
+<field id="ciudad_idorigen"><phrase id="fldcaption" value="ciudad idorigen"/>
+</field>
+<field id="tercero_idremitente"><phrase id="fldcaption" value="tercero idremitente"/>
+</field>
+<field id="tercero_iddestinatario"><phrase id="fldcaption" value="tercero iddestinatario"/>
+</field>
+</table>
+<table id="crosstab1"><phrase id="tblcaption" value="Crosstab 1"/>
+<field id="idguia"><phrase id="fldcaption" value="idguia"/>
+</field>
+<field id="numero_guia"><phrase id="fldcaption" value="numero guia"/>
+</field>
+<field id="orden_servicio_idorden_servicio"><phrase id="fldcaption" value="orden servicio idorden servicio"/>
+</field>
+<field id="zona_idzona"><phrase id="fldcaption" value="zona idzona"/>
+</field>
+<field id="causal_devolucion_idcausal_devolucion"><phrase id="fldcaption" value="causal devolucion idcausal devolucion"/>
+</field>
+<field id="manifiesto_idmanifiesto"><phrase id="fldcaption" value="manifiesto idmanifiesto"/>
+</field>
+<field id="producto_idproducto"><phrase id="fldcaption" value="producto idproducto"/>
+</field>
+<field id="ciudad_iddestino"><phrase id="fldcaption" value="ciudad iddestino"/>
+</field>
+<field id="valor_declarado_guia"><phrase id="fldcaption" value="valor declarado guia"/>
+</field>
+<field id="nombre_destinatario_guia"><phrase id="fldcaption" value="nombre destinatario guia"/>
+</field>
+<field id="direccion_destinatario_guia"><phrase id="fldcaption" value="direccion destinatario guia"/>
+</field>
+<field id="telefono_destinatario_guia"><phrase id="fldcaption" value="telefono destinatario guia"/>
+</field>
+<field id="peso_guia"><phrase id="fldcaption" value="peso guia"/>
+</field>
+<field id="ciudad_idorigen"><phrase id="fldcaption" value="ciudad idorigen"/>
+</field>
+<field id="tercero_idremitente"><phrase id="fldcaption" value="tercero idremitente"/>
+</field>
+<field id="tercero_iddestinatario"><phrase id="fldcaption" value="tercero iddestinatario"/>
+</field>
+</table>
+</project>
+</ew-language>

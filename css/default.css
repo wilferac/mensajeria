@@ -1,0 +1,318 @@
+body{ margin-left: 0px; margin-top: 0px; margin-right: 0px; margin-bottom: 0px; }
+#entrada .required{ border-left: 3px solid #FF9900 }
+#entrada1 .required{ border-left: 3px solid #FF9900 }
+#entrada2 .required{ border-left: 3px solid #FF9900 }
+#entrada3 .required{ border-left: 3px solid #FF9900 }
+.is_required{ position:absolute; background: #FF9900; width:3px; height:15px; }
+.encabezado{ border-bottom: 1px #CCCCCC  solid; padding:5px; font-family:"Trebuchet MS", Verdana, Arial; font-size:16px; color: #CCCCCC; }
+.encabezado h1 { color: #666666; font-family: "Trebuchet MS", Verdana, Arial; font-size:16px; display:inline; text-transform:uppercase; }
+small{ font-size:10px }
+
+p{ margin:0px 0px 0px 0px }
+
+table.display tr.even.row_selected td {
+	background-color: #BEE5A1;
+}
+
+table.display tr.odd.row_selected td {
+	background-color: #BEE5A1;
+}
+
+.ex_highlight #example tbody tr.even:hover, #example tbody tr.even td.highlighted {
+	background-color: #BEE5A1;
+}
+
+.ex_highlight #example tbody tr.odd:hover, #example tbody tr.odd td.highlighted {
+	background-color: #BEE5A1;
+}
+.titulo_tabla { border-bottom: 2px #0B5781  solid; padding:5px; font-family:"Trebuchet MS", Verdana, Arial; font-size:13px; color: #0B5781; margin-bottom:14px; text-transform:uppercase; font-weight:bold; }
+
+.linea_ver { border-bottom: #0B5781 2px solid; margin-bottom:10px }
+.tabla { border:0px solid #000000; border-spacing:0px }
+.marco { border:1px #CCCCCC solid; width:80%; margin-left:auto; margin-right:auto; margin-top:50px}
+.marco_td { border:1px #CCCCCC solid; margin-top:5px; height:250px }
+.module_td { border:1px #CCCCCC solid; margin:10px 10px 10px 10px }
+.class_panel { background-color:#CEE2F2; font-family: Trebuchet MS, Arial, Verdana; font-size:12px; font-weight:bold; color: #0B80BD; text-transform:uppercase }
+.class_text { font-family: Trebuchet MS, Arial, Verdana; font-size:12px; font-weight:normal; color: #000000 }
+
+.ruta { border:0px #CCCCCC solid; width:98%; margin-top:5px; font-family: Trebuchet MS, Arial, Verdana; font-size:12px; font-weight:bold; text-align:left; color:#CCCCCC }
+td { border:0px solid #000000; padding:0px; border-spacing:0px }
+
+.login { background-color:#C7DEF0; }
+.VLetra { font-family: Trebuchet MS, Arial, Verdana; font-size:31px; font-weight:normal; color: #B4B4B4 }
+.VNumero { font-family: Trebuchet MS, Arial, Verdana; font-size:31px; font-weight:normal; color: #0B82C3 }
+
+.titlegrey{ font-family: Trebuchet MS, Arial, Verdana; font-size:14px; font-weight:bold; color: #A7A7A7; padding:0px 0px 0px 5px }
+.class_tr_top { background-color:#0C84C6; background-image:url(../images/theme/default/menu_bg.png) }
+.class_usuario { font-family: Trebuchet MS, Arial, Verdana; font-size:15px; font-weight:bold; color: #1F4B74 }
+.class_enviar { margin: 5px 0px 0px 0px; }
+.user_box{ background-color:#0B5781; }
+.class_nombre { font-family: Trebuchet MS, Arial, Verdana; font-size:14px; font-weight:normal; color: #666666 }/* 0B80BD */
+.class_login { font-family: Trebuchet MS, Arial, Verdana; font-size:14px; font-weight:bold; color: #0B5781 }/* 0B80BD */
+.class_cargo { font-family: Trebuchet MS, Arial, Verdana; font-size:11px; font-weight:bold; color: #FF9900 }
+#a1, #a2 , #a3 { color:#FFFFFF; text-decoration:none; font-weight:bold;}
+ 
+.class_tr { font-family: Trebuchet MS, Arial, Verdana; font-size:12px; font-weight:bold; color: #FFFFFF }
+.class_tr A{ font-family: Trebuchet MS, Arial, Verdana; font-size:12px; font-weight:bold; color: #FFFFFF; text-decoration:none; }
+.class_tr A:hover{ font-family: Trebuchet MS, Arial, Verdana; font-size:12px; font-weight:bold; color: #85B856; text-decoration:none; }
+.class_contador { background-color:#FF9900; width:18px; text-align:center; font-family: Trebuchet MS, Arial, Verdana; font-size:12px; font-weight:bold; color: #FFFFFF }
+.class_index A{ font-family: Trebuchet MS, Arial, Verdana; font-size:12px; font-weight:normal; color: #0B80BD; text-decoration:none; }
+.class_index A:hover{ font-family: Trebuchet MS, Arial, Verdana; font-size:12px; font-weight:bold; color: #0B80BD; text-decoration:none; }
+.class_menu A{ font-family: Trebuchet MS, Arial, Verdana; font-size:12px; font-weight:normal; color: #FF9900; text-decoration:none; }
+.class_menu A:hover{ font-family: Trebuchet MS, Arial, Verdana; font-size:12px; font-weight:bold; color: #FF9900; text-decoration:none; }
+.class_tarea A{ font-family: Trebuchet MS, Arial, Verdana; font-size:10px; font-weight:normal; color: #0B80BD; text-decoration:none; }
+.class_tarea A:hover{ font-family: Trebuchet MS, Arial, Verdana; font-size:10px; font-weight:normal; color: #0B80BD; text-decoration:none; }
+.class_ele A{ font-family: Trebuchet MS, Arial, Verdana; font-size:12px; font-weight:normal; color: #666666; text-decoration:none; }
+.class_ele A:hover{ font-family: Trebuchet MS, Arial, Verdana; font-size:12px; font-weight:bold; color: #FF9900; text-decoration:none; }
+.class_man A{ font-family: Trebuchet MS, Arial, Verdana; font-size:10px; font-weight:normal; color: #0B80BD; text-decoration:none; }
+.class_man A:hover{ font-family: Trebuchet MS, Arial, Verdana; font-size:10px; font-weight:bold; color: #0B80BD; text-decoration:none; }
+.class_tarea A{ font-family: Trebuchet MS, Arial, Verdana; font-size:10px; font-weight:normal; color: #0B80BD; text-decoration:none; }
+.class_tarea A:hover{ font-family: Trebuchet MS, Arial, Verdana; font-size:10px; font-weight:normal; color: #0B80BD; text-decoration:none; }
+
+.img_inicio{ width:18px; height:18px; background-image:url(../images/theme/default/def_index.gif) }
+.img_tareas{ width:18px; height:18px; background-image:url(../images/theme/default/def_tarea.gif) }
+.img_mensajes{ width:18px; height:18px; background-image:url(../images/theme/default/def_mensaje.gif) }
+.img_pendientes{ width:18px; height:18px; background-image:url(../images/theme/default/def_pendiente.gif) }
+.img_noticias{ width:18px; height:18px; background-image:url(../images/theme/default/def_noticias.gif) }
+.img_calendario{ width:18px; height:18px; background-image:url(../images/theme/default/def_calendario.gif) }
+.img_comunidad{ width:18px; height:18px; background-image:url(../images/theme/default/def_comunidad.gif) }
+.img_ayuda{ width:18px; height:18px; background-image:url(../images/theme/default/def_ayuda.gif) }
+.img_sep02{ width:2px; height:30px; background-image:url(../images/theme/default/def_sep02.png); background-repeat:no-repeat }
+
+.class_tr02 { font-family: Trebuchet MS, Arial, Verdana; font-size:12px; font-weight:bold; color: #85B856 }
+.class_href A{ font-weight:bold; color: #85B856; text-decoration:none }
+.class_href A:hover{ font-weight:bold; color: #A2A2A2; text-decoration:none }
+
+.class_tr03 { font-family: Trebuchet MS, Arial, Verdana; font-size:12px; font-weight:bold; color: #666666 }
+.img_clasica{ width:37px; height:24px; background-image:url(../images/theme/default/def_clasica.gif) }
+.img_proceso{ width:37px; height:24px; background-image:url(../images/theme/default/def_proceso01.gif) }
+.img_dashdoard{ width:37px; height:24px; background-image:url(../images/theme/default/def_dashboard01.gif) }
+.img_guia{ width:37px; height:24px; background-image:url(../images/theme/default/def_guia01.gif) }
+
+.input_exit { font-size: 12px; font-family: Trebuchet MS, Arial, Verdana; font-weight:bold; color:#69952D; }
+.input_text { font-size: 12px; font-family: Trebuchet MS, Verdana; border: 1px solid #147FB1; background-color: #ffffff }
+.input_contact { font-size: 11px; font-family: Trebuchet MS, Verdana; border: 1px solid #1F4B74; background-color: #F1F1F1 }
+.input_mejorar { font-size: 11px; font-family: Trebuchet MS, Verdana; border: 1px solid #99CC00; background-color: #FFFFFF }
+
+.main_box { font-family: Trebuchet MS, Arial, Verdana;font-size: 13px; font-weight:bold; color: #FF9900; 
+background-color: #ffffff; padding: 5px 17px 2px 17px }
+.main_box A{ color:#749A03; text-decoration:none; font-weight:bold }
+.main_box A:hover{ color:#FF9900; text-decoration:none; font-weight:bold }
+
+.boton{ display:inline-block; background:none; margin:0; border-width:0; overflow:visible;
+font:100%/1.2 Trebuchet MS, Arial, Verdana; font-size: 12px; text-decoration:none; font-weight:bold; color:#666666; }
+.boton{ background:#DDDDDD url(../Style/bg-button.gif) repeat-x 0 0; padding:4px 10px 4px 10px; border-left:1px solid #bbb; border-top:1px solid #bbb; border-bottom:1px solid #aaa; border-right:1px solid #aaa; }
+.boton:hover{ cursor:pointer; border-color:#DDDDDD !important; background: #0C84C6 url(../images/theme/default/menu_bg.png); color:#FFFFFF; border-top:1px solid #bbb }
+
+.divbotones{ padding-bottom:4px; }
+/*.botones { font-family: Trebuchet MS, Arial, Verdana; font-size: 12px; font-weight:bold; color: #666666 }*/
+.botones A{ color:#666666; background-color: #DDDDDD; text-decoration:none; font-weight:bold; padding: 5px 10px 5px 10px }
+.botones A:hover{ color:#FFFFFF; background-color: #0C84C6; text-decoration:none; font-weight:bold; padding: 5px 10px 5px 10px }
+
+.botones { 
+display:inline-block;
+      background:none;
+      margin:0;
+      padding:5px 0;
+      border-width:0;
+      overflow:visible;
+      font:100%/1.2 Trebuchet MS, Arial, Verdana; font-size: 12px;
+      text-decoration:none;
+font-weight:bold; color:#666666; 
+}
+
+.botones span {
+      background:#DDDDDD url(../Style/bg-button.gif) repeat-x 0 0;
+      margin:0;
+      padding:3px 0;
+      border-left:1px solid #bbb;
+      border-right:1px solid #aaa;
+}
+* html .botones span {
+      padding-top:0;
+}
+.botones span span {
+      position:relative;
+	  padding:3px .4em;
+      border-width:0;
+      border-top:1px solid #bbb;
+      border-bottom:1px solid #aaa;
+}
+.botones:hover span, .botones:hover span span, .botones:focus span, .botones:focus span span {
+      cursor:pointer; /* important for any clickable/pressable element */
+      border-color:#9cf !important;
+      background: #0C84C6 url(../images/theme/default/menu_bg.gif);
+	  color:#FFFFFF;
+}
+
+.index_text{ font-family: Trebuchet MS, Arial, Verdana;font-size: 12px; color: #4E3400; }
+
+.title_greybox{ font-family: Trebuchet MS, Arial, Verdana; font-size:17px; font-weight:bold; color: #626262;
+padding:5px 0px 0px 5px; border-color:#000000; border:#000000 solid 0px }
+.text_greybox{ font-family: Trebuchet MS, Arial, Verdana; font-size:11px; font-weight:normal; color: #959595;
+padding-top:5px; padding-left:5px; border-color:#000000; border:#000000 solid 0px; width:155px }
+.logo_greybox{ padding-top:15px; padding-left:100px; border:#000000 solid 0px; }
+
+.title_bluebox{ font-family: Trebuchet MS, Arial, Verdana; font-size:20px; color: #626262;
+padding:5px 0px 0px 10px; border-color:#000000; border:#000000 solid 0px; width:270px }
+.text01_bluebox{ font-family: Trebuchet MS, Arial, Verdana; font-size:12px; font-weight:bold; color: #749A03;
+padding-top:5px; padding-left:10px; border-color:#000000; border:#000000 solid 0px }
+.text02_bluebox{ font-family: Trebuchet MS, Arial, Verdana; font-size:13px; font-weight:bold; color: #0774A8;
+padding-top:5px; padding-left:10px; border-color:#000000; border:#000000 solid 0px }
+.text03_bluebox{ font-family: Trebuchet MS, Arial, Verdana; font-size:11px; font-weight:normal; color: #000000;
+padding-top:5px; padding-left:10px; border-color:#000000; border:#000000 solid 0px }
+
+.text04_bluebox{ font-family: Trebuchet MS, Arial, Verdana; font-size:14px; font-weight:bold; color: #FF9900;
+padding-top:5px; padding-left:10px; border-color:#000000; border:#000000 solid 0px }
+.text04_bluebox A{ color: #FF9900; text-decoration:none; font-weight:bold }
+.text04_bluebox A:hover{ color: #FF9900; text-decoration:none; font-weight:bold }
+
+.logo_bluebox{ padding-top:5px; padding-left:10px; border:#000000 solid 0px; }
+
+.text_blank{ font-family: Trebuchet MS, Arial, Verdana; font-size:11px; color: #FFFFFF; }
+.text_blue { font-family: Trebuchet MS, Arial, Verdana; font-size:13px; font-weight:bold; color: #016AA0}
+.text_blue A{ text-decoration:none; font-weight:bold; color: #016AA0}
+.text_blue A:hover{ text-decoration:underline; font-weight:bold; color: #016AA0}
+.text_black { font-family: Trebuchet MS, Arial, Verdana; font-size:13px; color: #000000}
+.text_grey { font-family: Trebuchet MS, Arial, Verdana; font-size:13px; color: #666666}
+.text_grey A{ text-decoration:none; color: #666666}
+.text_grey A:hover{ text-decoration:underline; color: #666666}
+.text_orange { font-family: Trebuchet MS, Arial, Verdana;font-size: 13px; color: #FF9900}
+.text_orange A{ text-decoration:none; color: #FF9900}
+.text_orange A:hover{ text-decoration:underline; color: #FF9900}
+.bigtext_black { font-family: Trebuchet MS, Arial, Verdana; font-size:15px; color: #000000}
+.text_white { font-family: Trebuchet MS, Arial, Verdana;font-size: 13px; color: #FFFFFF}
+.text_green { font-family: Trebuchet MS, Arial, Verdana; font-size:15px; color: #739A00}
+
+.ltext_blue { font-family: Trebuchet MS, Arial, Verdana; font-size:11px; color: #016AA0 }
+
+.grey_paginacion { font-family: Trebuchet MS, Arial, Verdana; font-size:13px; color: #959595}
+.grey_paginacion A{ text-decoration:none; font-weight:bold; color: #959595}
+.grey_paginacion A:hover{ text-decoration:none; font-weight:bold; color: #959595}
+
+/* SHOW & HIDE */
+.dhtmlgoodies_question{	/* Start layout CSS */font-family: Trebuchet MS, Arial, Verdana; font-size:13px; color: #666666; cursor:pointer}
+.dhtmlgoodies_answer{ /* Start layout CSS */border:1px solid #FFFFFF; visibility:hidden; height:100%; overflow:hidden; position:relative}
+.dhtmlgoodies_answer_content{ /* Content that is slided down */position:relative; }
+/* END SHOW & HIDE */
+
+.menu { float:left; font-family: Arial, Helvetica, sans-serif; font-size: 11px; font-weight:normal; color:#ffffff}
+.menu A{ color: #CCCCCC; text-decoration: none; font-weight:bold}
+.menu A:hover{ color: #FFFFFF; text-decoration: none; font-weight:bold}
+
+.menu_master{ font-family:"Dakota_FF", "Dakota_IE"; font-size:13px}
+
+.menu_N { font-family: Arial, Helvetica, sans-serif; font-size: 11px; font-weight:normal; color:#ffffff}
+.menu_N A{ color: #CCCCCC; text-decoration: none; font-weight:bold}
+.menu_N A:hover{ color: #FFFFFF; text-decoration: none; font-weight:bold}
+
+.menu2 { font-family: Verdana, Arial, Helvetica, sans-serif; font-size: 9px; color: #666666}
+
+.mapa{ font-family: Verdana; font-size:36px; font-weight:bold; color: #666666}
+
+.menu2 A{ color: #9A9A9A; text-decoration: none}
+.menu2 A:hover{ color: #000000; text-decoration: none}
+
+.titcaja1 { text-transform: uppercase; color: #666666}
+
+td { font-family: Verdana, Arial, Helvetica, sans-serif; font-size: 10px}
+
+.panel_01 { border: 1px solid #717171}
+
+.contenido { padding-top: 10px; padding-left: 10px; padding-right:10px; padding-bottom:2px; background-color:#717171}
+
+.contenido2 { /*padding-top: 0px; padding-left: 0px;*/ background-color:#8C8C8C}
+
+.contenido3 { padding-top: 10px; padding-left: 10px}
+
+.textMenu { font-family: Arial, Helvetica, sans-serif; font-size: 11px; font-weight:normal; color:#9A9A9A}
+
+.textMenu A{ color: #9A9A9A; text-decoration: none}
+.textMenu A:hover{ color: #9A9A9A; text-decoration:underline}
+
+.textCaja { font-family: Arial, Helvetica, sans-serif; font-size: 11px; font-weight:normal; color:#000000; background:#B0B0B0}
+
+.menuTitle { font-family: Arial, Helvetica, sans-serif; font-size: 11px; font-weight:bold; color:#FFFFFF}
+
+.menuCaja { font-family: Arial, Helvetica, sans-serif; font-size: 11px; font-weight:normal; color:#000000; background:#A7A7A7; height:40px}
+.menuCaja A{ color: #ffffff; text-decoration: none; font-weight:bold}
+.menuCaja A:hover{ color: #2AE92E; text-decoration:none; font-size: 12px}
+
+.menuActiva{ font-family: Arial, Helvetica, sans-serif; font-size: 12px; font-weight:bold; color: #2AE92E; text-decoration:none; 	background:#A7A7A7; height:40px}
+
+.input_textbox{ font-size: 10px; font-family: Arial; border: 1px solid #000000; background-color: #ffffff}
+
+.contenido4 { font-family: Arial, Helvetica, sans-serif; font-size: 13px; font-weight:normal; text-align:justify; padding-left:10px;
+padding-right:10px; color:#CBCBCB; width: 33%}
+
+.caja1cont { color: #9DA7B1; padding-top: 10px; padding-left: 35px; padding-bottom: 10px}
+
+.caja1cont2 { padding-top: 10px; padding-bottom: 10px}
+
+.mensaborde { border: 1px solid #DFDFDF}
+
+.cajainfo { padding-left: 20px}
+
+.textura { background-image: url(../imagenes/derecha_bg.gif); background-repeat: no-repeat; background-position: right bottom}
+
+.usuario { color: #5783AF; font-size: 9px; background-image: url(../imagenes/usuario_bg.jpg); background-repeat: no-repeat;
+vertical-align: baseline; padding-bottom: 2px}	
+
+.profundidad { color: #FFFFFF; font-size: 9px; padding-left: 14px}	
+
+.menuprincipal { font-family: Verdana, Arial, Helvetica, sans-serif; font-size: 10px; color: #5E7D9B}
+.menuprincipal A { color: #5E7D9B; text-decoration: none}
+.menuprincipal A:hover { font-size: 10px; color: #6F9BC7}
+
+.submenu1 { font-size: 9px; color: #E6E6E6}
+
+.submenu2 { font-size: 9px; color: #5F8AB6}
+
+.navegacion { font-family: Verdana; font-size: 11px; font-weight: normal; color: #336699; text-decoration:none}
+
+.update{ border-left-color:#000000; border-left-style:solid; border-left-width:1px; border-bottom-color:#000000;
+border-bottom-style:solid; border-bottom-width:1px; border-right-color:#003399; border-right-style:solid; border-right-width:2px;
+border-top-color:#003399; border-top-style:solid; border-top-width:2px; background-color:#99CCFF}
+
+.update_proceso{ border-left-color:#000000; border-left-style:solid; border-left-width:1px; border-bottom-color:#000000;
+border-bottom-style:solid; border-bottom-width:1px; border-right-color:#000000; border-right-style:solid; border-right-width:1px;
+border-top-color:#000000; border-top-style:solid; border-top-width:1px; background-color:#efefef}
+
+.opciones{ color: #003399; font-size: 10px; font-family: Verdana; font-style: normal; font-weight: bold; text-decoration: none}
+.opciones:hover{ color: #996666; font-size: 10px; font-family: Verdana; font-style: normal; font-weight: bold; text-decoration: underline}
+.opciones:visited{ color: #CC0000; font-size: 10px; font-family: Verdana; font-style: normal; font-weight: bold; text-decoration: underline}
+
+.tarea{ font-family:Verdana, Arial, Helvetica, sans-serif; font-size:11px; font-weight:bold; color:#FFFFFF;	background-color:#FF0000}
+
+.proce1 { background-image: url(/kawak/map_proceso/bg_procs.jpg); background-repeat: repeat-x; background-position: 0px top;
+border: 1px solid #DDDDDD}
+
+.titcajap { text-transform: uppercase; color: #FFFFFF; padding-left: 0px}
+
+.caja1 { border: 1px solid #B5C8DB}
+
+.cajaplan { border: 1px solid #DBE4EE; font-family: Verdana, Arial, Helvetica, sans-serif; font-size: 10px;	padding-left: 0px;
+padding-top: 0px; padding-bottom: 0px}
+
+.titformulario { font-family: Verdana, Arial, Helvetica, sans-serif; color: #666666; font-size: 10px; padding-left: 0px;
+padding-top: 0px; padding-bottom: 0px}
+
+.link{ font-family:Verdana, Arial, Helvetica, sans-serif; font-size:10px; color:#003399; font-weight:normal; text-decoration:none}
+.link:hover{ font-family:Verdana, Arial, Helvetica, sans-serif; font-size:11px; color:#000066; font-weight:bold; 
+text-decoration:none}
+
+#legend{ font-family:Verdana, Arial, Helvetica, sans-serif; font-size:10px; font-weight:bold; color:#000000}
+
+#folio { top:0; left:0; overflow:auto; width:100%; float:left; height:601px}
+
+ul.nums li {list-style:none; list-style-type:none; float:left; border:1px solid #333; text-align:center; margin:0 5px 0 0; font-weight:bold;}
+ul.nums span {float:right; padding: 10px 0 5px 3px; height:25px; margin:0 5px 0 0; background-color:#C6C6C6;}
+ul.nums li a {padding:3px; width:15px; display:block; text-decoration:none; color:#666;}
+ul.nums li a:hover {background-color:#575757;}
+ul.nums li.current {background-color:#575757;}
+ul.nums li.current a:hover {background-color:#575757;}
+
+.error {
+	font-family: Verdana, Arial, Helvetica, sans-serif;
+	color: #FF0000;
+}

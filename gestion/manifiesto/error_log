@@ -1,0 +1,36 @@
+[24-Jan-2013 22:26:40 UTC] PHP Fatal error:  Call to undefined method guia::modificar2() in /home/innovat1/public_html/a1-entregas/gestion/manifiesto/add.php on line 96
+[24-Jan-2013 22:27:03 UTC] PHP Fatal error:  Call to undefined method guia::modificar2() in /home/innovat1/public_html/a1-entregas/gestion/manifiesto/add.php on line 96
+[24-Jan-2013 22:27:26 UTC] PHP Fatal error:  Call to undefined method guia::modificar2() in /home/innovat1/public_html/a1-entregas/gestion/manifiesto/add.php on line 96
+[24-Jan-2013 22:28:06 UTC] PHP Fatal error:  Call to undefined method guia::modificar2() in /home/innovat1/public_html/a1-entregas/gestion/manifiesto/add.php on line 96
+[24-Jan-2013 22:28:46 UTC] PHP Fatal error:  Call to undefined method guia::modificar2() in /home/innovat1/public_html/a1-entregas/gestion/manifiesto/add.php on line 96
+[28-Jan-2013 23:30:11 UTC] PHP Warning:  mysql_num_rows() expects parameter 1 to be resource, boolean given in /home/innovat1/public_html/a1-entregas/gestion/manifiesto/versucursalesyaliados.php on line 22
+[28-Jan-2013 23:30:11 UTC] PHP Warning:  mysql_num_rows() expects parameter 1 to be resource, boolean given in /home/innovat1/public_html/a1-entregas/gestion/manifiesto/versucursalesyaliados.php on line 45
+[30-Jan-2013 14:28:37 UTC] PHP Warning:  mysql_fetch_assoc() expects parameter 1 to be resource, boolean given in /home/innovat1/public_html/a1-entregas/gestion/manifiesto/validarguia.php on line 40
+[30-Jan-2013 14:28:38 UTC] PHP Warning:  mysql_fetch_assoc() expects parameter 1 to be resource, boolean given in /home/innovat1/public_html/a1-entregas/gestion/manifiesto/validarguia.php on line 40
+[30-Jan-2013 14:29:31 UTC] PHP Warning:  mysql_fetch_assoc() expects parameter 1 to be resource, boolean given in /home/innovat1/public_html/a1-entregas/gestion/manifiesto/validarguia.php on line 40
+[15-Feb-2013 10:43:12 America/Lima] PHP Warning:  mysql_fetch_assoc() expects parameter 1 to be resource, boolean given in /home/innovat1/public_html/a1-entregas/gestion/manifiesto/validarguia.php on line 40
+[15-Feb-2013 10:43:59 America/Lima] PHP Warning:  mysql_fetch_assoc() expects parameter 1 to be resource, boolean given in /home/innovat1/public_html/a1-entregas/gestion/manifiesto/validarguia.php on line 40
+[15-Feb-2013 10:50:54 America/Lima] PHP Warning:  mysql_fetch_assoc() expects parameter 1 to be resource, boolean given in /home/innovat1/public_html/a1-entregas/gestion/manifiesto/validarguia.php on line 40
+[15-Feb-2013 10:51:04 America/Lima] PHP Warning:  mysql_fetch_assoc() expects parameter 1 to be resource, boolean given in /home/innovat1/public_html/a1-entregas/gestion/manifiesto/validarguia.php on line 40
+[15-Feb-2013 10:51:13 America/Lima] PHP Warning:  mysql_fetch_assoc() expects parameter 1 to be resource, boolean given in /home/innovat1/public_html/a1-entregas/gestion/manifiesto/validarguia.php on line 40
+[15-Feb-2013 10:51:18 America/Lima] PHP Warning:  mysql_fetch_assoc() expects parameter 1 to be resource, boolean given in /home/innovat1/public_html/a1-entregas/gestion/manifiesto/validarguia.php on line 40
+[26-Feb-2013 16:29:07 America/Lima] PHP Warning:  mysql_fetch_assoc() expects parameter 1 to be resource, boolean given in /home/innovat1/public_html/a1-entregas/gestion/manifiesto/validarguia.php on line 40
+[26-Feb-2013 16:29:32 America/Lima] PHP Warning:  mysql_fetch_assoc() expects parameter 1 to be resource, boolean given in /home/innovat1/public_html/a1-entregas/gestion/manifiesto/validarguia.php on line 40
+[26-Feb-2013 16:35:22 America/Lima] PHP Warning:  mysql_num_rows() expects parameter 1 to be resource, boolean given in /home/innovat1/public_html/a1-entregas/gestion/manifiesto/versucursalesyaliados.php on line 18
+[26-Feb-2013 16:35:22 America/Lima] PHP Warning:  mysql_num_rows() expects parameter 1 to be resource, boolean given in /home/innovat1/public_html/a1-entregas/gestion/manifiesto/versucursalesyaliados.php on line 33
+[26-Feb-2013 16:35:22 America/Lima] PHP Warning:  mysql_num_rows() expects parameter 1 to be resource, boolean given in /home/innovat1/public_html/a1-entregas/gestion/manifiesto/versucursalesyaliados.php on line 53
+[26-Feb-2013 16:38:48 America/Lima] PHP Warning:  mysql_fetch_assoc() expects parameter 1 to be resource, boolean given in /home/innovat1/public_html/a1-entregas/gestion/manifiesto/validarguia.php on line 40
+[27-Feb-2013 09:44:05 America/Lima] PHP Warning:  mysql_fetch_assoc() expects parameter 1 to be resource, boolean given in /home/innovat1/public_html/a1-entregas/gestion/manifiesto/validarguia.php on line 40
+[27-Feb-2013 10:23:11 America/Lima] PHP Warning:  mysql_fetch_assoc() expects parameter 1 to be resource, boolean given in /home/innovat1/public_html/a1-entregas/gestion/manifiesto/validarguia.php on line 40
+[27-Feb-2013 10:23:16 America/Lima] PHP Warning:  mysql_fetch_assoc() expects parameter 1 to be resource, boolean given in /home/innovat1/public_html/a1-entregas/gestion/manifiesto/validarguia.php on line 40
+[27-Feb-2013 10:23:20 America/Lima] PHP Warning:  mysql_fetch_assoc() expects parameter 1 to be resource, boolean given in /home/innovat1/public_html/a1-entregas/gestion/manifiesto/validarguia.php on line 40
+[27-Feb-2013 10:24:25 America/Lima] PHP Warning:  mysql_fetch_assoc() expects parameter 1 to be resource, boolean given in /home/innovat1/public_html/a1-entregas/gestion/manifiesto/validarguia.php on line 40
+[27-Feb-2013 10:25:33 America/Lima] PHP Warning:  mysql_fetch_assoc() expects parameter 1 to be resource, boolean given in /home/innovat1/public_html/a1-entregas/gestion/manifiesto/validarguia.php on line 40
+[27-Feb-2013 10:25:59 America/Lima] PHP Warning:  mysql_fetch_assoc() expects parameter 1 to be resource, boolean given in /home/innovat1/public_html/a1-entregas/gestion/manifiesto/validarguia.php on line 40
+[27-Feb-2013 10:26:06 America/Lima] PHP Warning:  mysql_fetch_assoc() expects parameter 1 to be resource, boolean given in /home/innovat1/public_html/a1-entregas/gestion/manifiesto/validarguia.php on line 40
+[13-Mar-2013 09:04:07 America/Lima] PHP Warning:  mysql_num_rows() expects parameter 1 to be resource, boolean given in /home/innovat1/public_html/a1-entregas/gestion/manifiesto/versucursalesyaliados.php on line 18
+[13-Mar-2013 09:04:07 America/Lima] PHP Warning:  mysql_num_rows() expects parameter 1 to be resource, boolean given in /home/innovat1/public_html/a1-entregas/gestion/manifiesto/versucursalesyaliados.php on line 33
+[13-Mar-2013 09:04:07 America/Lima] PHP Warning:  mysql_num_rows() expects parameter 1 to be resource, boolean given in /home/innovat1/public_html/a1-entregas/gestion/manifiesto/versucursalesyaliados.php on line 53
+[13-Mar-2013 09:04:08 America/Lima] PHP Warning:  mysql_num_rows() expects parameter 1 to be resource, boolean given in /home/innovat1/public_html/a1-entregas/gestion/manifiesto/versucursalesyaliados.php on line 18
+[13-Mar-2013 09:04:08 America/Lima] PHP Warning:  mysql_num_rows() expects parameter 1 to be resource, boolean given in /home/innovat1/public_html/a1-entregas/gestion/manifiesto/versucursalesyaliados.php on line 33
+[13-Mar-2013 09:04:08 America/Lima] PHP Warning:  mysql_num_rows() expects parameter 1 to be resource, boolean given in /home/innovat1/public_html/a1-entregas/gestion/manifiesto/versucursalesyaliados.php on line 53

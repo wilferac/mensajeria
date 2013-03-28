@@ -1,0 +1,764 @@
+@charset "utf-8";
+/* CSS Document */
+
+
+@page { margin: 0px; }
+body { margin: 0px; }
+
+#contenido {
+	position:absolute;
+	margin: 0px;
+	background-color: #FFFFFF;
+	left: 0;
+	top: -5px;
+}
+
+	
+#Noguia1 {
+	position:absolute;
+	left:0cm;
+	top:1.8cm;
+	width:3.2cm;
+	height:0.5cm;
+	z-index:100;
+	background-color: #FFFFFF;
+}
+#debajoNoGuia1 {
+	position:absolute;
+	left:1.561cm;
+	top:1.296cm;
+	width:3cm;
+	height:1cm;
+	z-index:100;
+	background-color: #FFFFFF;
+}
+#debajoNoGuia2 {
+	position:absolute;
+	left:1.455cm;
+	top:2.487cm;
+	width:3cm;
+	height:1cm;
+	z-index:100;
+	background-color: #FFFFFF;
+}
+.Estilo1 {
+	font-size: 12px;
+	font-weight: bold;
+}
+#DescripcionRemitente1 {
+	position:absolute;
+	left:0cm;
+	top:2.3cm;
+	width:3.2cm;
+	height:4.2cm;
+	z-index:100;
+	background-color: #FFFFFF;
+	word-break:break-all;
+}
+#remite1 {
+	position:absolute;
+	left:3.7cm;
+	top:1cm;
+	width:5.1cm;
+	height:0.8cm;
+	z-index:100;
+	background-color: #FFFFFF;
+}
+#Destinatario1 {
+	position:absolute;
+	left:3.7cm;
+	top:1.9cm;
+	width:5.1cm;
+	height:1.7cm;
+	z-index:100;
+	background-color: #FFFFFF;
+}
+#fechaProcesado1 {
+	position:absolute;
+	left:3.7cm;
+	top:3.9cm;
+	width:2.8cm;
+	height:0.6cm;
+	z-index:100;
+	background-color: #FFFFFF;
+}
+#FechaEntrega1 {
+	position:absolute;
+	left:4cm;
+	top:5.3cm;
+	width:2.8cm;
+	height:0.6cm;
+	z-index:100;
+	background-color: #FFFFFF;
+}
+#codigo1 {
+	position:absolute;
+	left:8.8cm;
+	top:1.4cm;
+	width:2cm;
+	height:0.5cm;
+	z-index:100;
+	background-color: #FFFFFF;
+}
+#OrdenNo1 {
+	position:absolute;
+	left:8.8cm;
+	top:2.2cm;
+	width:2cm;
+	height:0.5cm;
+	z-index:100;
+	background-color: #FFFFFF;
+}
+#PesoGrs1 {
+	position:absolute;
+	left:8.8cm;
+	top:3.1cm;
+	width:2cm;
+	height:0.5cm;
+	z-index:100;
+	background-color: #FFFFFF;
+}
+#origen1 {
+	position:absolute;
+	left:10.9cm;
+	top:1.4cm;
+	width:2.5cm;
+	height:0.5cm;
+	z-index:100;
+	background-color: #FFFFFF;
+}
+#destino1 {
+	position:absolute;
+	left:10.9cm;
+	top:2.2cm;
+	width:2.5cm;
+	height:0.5cm;
+	z-index:100;
+	background-color: #FFFFFF;
+}
+#Valor1 {
+	position:absolute;
+	left:10.9cm;
+	top:3.1cm;
+	width:2.5cm;
+	height:0.5cm;
+	z-index:100;
+	background-color: #FFFFFF;
+}
+.Estilo2 {
+	font-size: 9px
+}
+#codigoBarra1 {
+	position:absolute;
+	left:3.5cm;
+	top:0.026cm;
+	width:10cm;
+	height:1cm;
+	z-index:100;
+	background-color: #FFFFFF;
+}
+#apDiv1 {
+	position:absolute;
+	left:0mm;
+	top:4mm;
+	width:13.4cm;
+	height:6.959cm;
+	z-index:101;
+}
+#DescripcionRemitente2 {
+	position:absolute;
+	left:0cm;
+	top:2.3cm;
+	width:3.2cm;
+	height:4.2cm;
+	z-index:100;
+	background-color: #FFFFFF;
+	word-break:break-all;
+}
+#Destinatario2 {
+	position:absolute;
+	left:3.7cm;
+	top:1.9cm;
+	width:5.1cm;
+	height:1.7cm;
+	z-index:100;
+	background-color: #FFFFFF;
+}
+#Noguia2 {
+	position:absolute;
+	left:0cm;
+	top:1.8cm;
+	width:3.2cm;
+	height:0.5cm;
+	z-index:100;
+	background-color: #FFFFFF;
+}
+#OrdenNo2 {
+	position:absolute;
+	left:8.8cm;
+	top:2.2cm;
+	width:2cm;
+	height:0.5cm;
+	z-index:100;
+	background-color: #FFFFFF;
+}
+#PesoGrs2 {
+	position:absolute;
+	left:8.8cm;
+	top:3.1cm;
+	width:2cm;
+	height:0.5cm;
+	z-index:100;
+	background-color: #FFFFFF;
+}
+#Valor2 {
+	position:absolute;
+	left:10.9cm;
+	top:3.1cm;
+	width:2.5cm;
+	height:0.5cm;
+	z-index:100;
+	background-color: #FFFFFF;
+}
+#apDiv2 {
+	position:absolute;
+	left:14.2cm;
+	top:4mm;
+	width:13.4cm;
+	height:6.959cm;
+	z-index:101;
+}
+#codigo2 {
+	position:absolute;
+	left:8.8cm;
+	top:1.4cm;
+	width:2cm;
+	height:0.5cm;
+	z-index:100;
+	background-color: #FFFFFF;
+}
+#codigoBarra2 {
+	position:absolute;
+	left:3.5cm;
+	top:0.026cm;
+	width:10cm;
+	height:1cm;
+	z-index:100;
+	background-color: #FFFFFF;
+}
+#destino2 {
+	position:absolute;
+	left:10.9cm;
+	top:2.2cm;
+	width:2.5cm;
+	height:0.5cm;
+	z-index:100;
+	background-color: #FFFFFF;
+}
+#fechaProcesado2 {
+	position:absolute;
+	left:3.7cm;
+	top:3.9cm;
+	width:2.8cm;
+	height:0.6cm;
+	z-index:100;
+	background-color: #FFFFFF;
+}
+#origen2 {
+	position:absolute;
+	left:10.9cm;
+	top:1.4cm;
+	width:2.5cm;
+	height:0.5cm;
+	z-index:100;
+	background-color: #FFFFFF;
+}
+#remite2 {
+	position:absolute;
+	left:3.7cm;
+	top:1cm;
+	width:5.1cm;
+	height:0.8cm;
+	z-index:100;
+	background-color: #FFFFFF;
+}
+#DescripcionRemitente3 {
+	position:absolute;
+	left:0.212cm;
+	top:2.3cm;
+	width:3.2cm;
+	height:4.2cm;
+	z-index:100;
+	background-color: #FFFFFF;
+	word-break:break-all;
+}
+#Destinatario3 {
+	position:absolute;
+	left:3.9cm;
+	top:1.9cm;
+	width:5.1cm;
+	height:1.7cm;
+	z-index:100;
+	background-color: #FFFFFF;
+}
+#Noguia3 {
+	position:absolute;
+	left:0.2cm;
+	top:1.8cm;
+	width:3.2cm;
+	height:0.5cm;
+	z-index:100;
+	background-color: #FFFFFF;
+}
+#OrdenNo3 {
+	position:absolute;
+	left:9.022cm;
+	top:2.2cm;
+	width:2cm;
+	height:0.5cm;
+	z-index:100;
+	background-color: #FFFFFF;
+}
+#PesoGrs3 {
+	position:absolute;
+	left:8.996cm;
+	top:3.1cm;
+	width:2cm;
+	height:0.5cm;
+	z-index:100;
+	background-color: #FFFFFF;
+}
+#Valor3 {
+	position:absolute;
+	left:11.086cm;
+	top:3.1cm;
+	width:2.5cm;
+	height:0.5cm;
+	z-index:100;
+	background-color: #FFFFFF;
+}
+#apDiv3 {
+	position:absolute;
+	left:0cm;
+	top:7.858cm;
+	width:515px;
+	height:7cm;
+	z-index:101;
+}
+#codigo3 {
+	position:absolute;
+	left:9.022cm;
+	top:1.4cm;
+	width:2cm;
+	height:0.5cm;
+	z-index:100;
+	background-color: #FFFFFF;
+}
+#codigoBarra3 {
+	position:absolute;
+	left:3.6cm;
+	top:0cm;
+	width:10cm;
+	height:1cm;
+	z-index:100;
+	background-color: #FFFFFF;
+}
+#destino3 {
+	position:absolute;
+	left:11.06cm;
+	top:2.2cm;
+	width:2.5cm;
+	height:0.5cm;
+	z-index:100;
+	background-color: #FFFFFF;
+}
+#fechaProcesado3 {
+	position:absolute;
+	left:3.9cm;
+	top:3.9cm;
+	width:2.8cm;
+	height:0.6cm;
+	z-index:100;
+	background-color: #FFFFFF;
+}
+#origen3 {
+	position:absolute;
+	left:11.086cm;
+	top:1.4cm;
+	width:2.5cm;
+	height:0.5cm;
+	z-index:100;
+	background-color: #FFFFFF;
+}
+#remite3 {
+	position:absolute;
+	left:3.9cm;
+	top:1cm;
+	width:5.1cm;
+	height:0.8cm;
+	z-index:100;
+	background-color: #FFFFFF;
+}
+#DescripcionRemitente4 {
+	position:absolute;
+	left:0.212cm;
+	top:2.3cm;
+	width:3.2cm;
+	height:4.2cm;
+	z-index:100;
+	background-color: #FFFFFF;
+	word-break:break-all;
+}
+#Destinatario4 {
+	position:absolute;
+	left:3.9cm;
+	top:1.9cm;
+	width:5.1cm;
+	height:1.7cm;
+	z-index:100;
+	background-color: #FFFFFF;
+}
+#Noguia4 {
+	position:absolute;
+	left:0.2cm;
+	top:1.8cm;
+	width:3.2cm;
+	height:0.5cm;
+	z-index:100;
+	background-color: #FFFFFF;
+}
+#OrdenNo4 {
+	position:absolute;
+	left:9.022cm;
+	top:2.2cm;
+	width:2cm;
+	height:0.5cm;
+	z-index:100;
+	background-color: #FFFFFF;
+}
+#PesoGrs4 {
+	position:absolute;
+	left:8.996cm;
+	top:3.1cm;
+	width:2cm;
+	height:0.5cm;
+	z-index:100;
+	background-color: #FFFFFF;
+}
+#Valor4 {
+	position:absolute;
+	left:11.086cm;
+	top:3.1cm;
+	width:2.5cm;
+	height:0.5cm;
+	z-index:100;
+	background-color: #FFFFFF;
+}
+#apDiv4 {
+	position:absolute;
+	left:14.2cm;
+	top:7.858cm;
+	width:515px;
+	height:7cm;
+	z-index:101;
+}
+#codigo4 {
+	position:absolute;
+	left:9.022cm;
+	top:1.4cm;
+	width:2cm;
+	height:0.5cm;
+	z-index:100;
+	background-color: #FFFFFF;
+}
+#codigoBarra4 {
+	position:absolute;
+	left:3.6cm;
+	top:0cm;
+	width:10cm;
+	height:1cm;
+	z-index:100;
+	background-color: #FFFFFF;
+}
+#destino4 {
+	position:absolute;
+	left:11.06cm;
+	top:2.2cm;
+	width:2.5cm;
+	height:0.5cm;
+	z-index:100;
+	background-color: #FFFFFF;
+}
+#fechaProcesado4 {
+	position:absolute;
+	left:3.9cm;
+	top:3.9cm;
+	width:2.8cm;
+	height:0.6cm;
+	z-index:100;
+	background-color: #FFFFFF;
+}
+#origen4 {
+	position:absolute;
+	left:11.086cm;
+	top:1.4cm;
+	width:2.5cm;
+	height:0.5cm;
+	z-index:100;
+	background-color: #FFFFFF;
+}
+#remite4 {
+	position:absolute;
+	left:3.863cm;
+	top:1cm;
+	width:5.1cm;
+	height:0.8cm;
+	z-index:100;
+	background-color: #FFFFFF;
+}
+#DescripcionRemitente5 {
+	position:absolute;
+	left:0.265cm;
+	top:2.328cm;
+	width:3.2cm;
+	height:4.2cm;
+	z-index:100;
+	background-color: #FFFFFF;
+	word-break:break-all;
+}
+#Destinatario5 {
+	position:absolute;
+	left:3.9cm;
+	top:1.931cm;
+	width:5.1cm;
+	height:1.7cm;
+	z-index:100;
+	background-color: #FFFFFF;
+}
+#Noguia5 {
+	position:absolute;
+	left:0.2cm;
+	top:1.852cm;
+	width:3.2cm;
+	height:0.5cm;
+	z-index:100;
+	background-color: #FFFFFF;
+}
+#OrdenNo5 {
+	position:absolute;
+	left:9.022cm;
+	top:2.223cm;
+	width:2cm;
+	height:0.5cm;
+	z-index:100;
+	background-color: #FFFFFF;
+}
+#PesoGrs5 {
+	position:absolute;
+	left:8.996cm;
+	top:3.122cm;
+	width:2cm;
+	height:0.5cm;
+	z-index:100;
+	background-color: #FFFFFF;
+}
+#Valor5 {
+	position:absolute;
+	left:11.086cm;
+	top:3.122cm;
+	width:2.5cm;
+	height:0.5cm;
+	z-index:100;
+	background-color: #FFFFFF;
+}
+#apDiv5 {
+	position:absolute;
+	left:0cm;
+	top:15.372cm;
+	width:515px;
+	height:7cm;
+	z-index:101;
+}
+#codigo5 {
+	position:absolute;
+	left:9.022cm;
+	top:1.402cm;
+	width:2cm;
+	height:0.5cm;
+	z-index:100;
+	background-color: #FFFFFF;
+}
+#codigoBarra5 {
+	position:absolute;
+	left:3.6cm;
+	top:0.026cm;
+	width:10cm;
+	height:1cm;
+	z-index:100;
+	background-color: #FFFFFF;
+}
+#destino5 {
+	position:absolute;
+	left:11.06cm;
+	top:2.223cm;
+	width:2.5cm;
+	height:0.5cm;
+	z-index:100;
+	background-color: #FFFFFF;
+}
+#fechaProcesado5 {
+	position:absolute;
+	left:3.9cm;
+	top:3.942cm;
+	width:2.8cm;
+	height:0.6cm;
+	z-index:100;
+	background-color: #FFFFFF;
+}
+#origen5 {
+	position:absolute;
+	left:11.086cm;
+	top:1.402cm;
+	width:2.5cm;
+	height:0.5cm;
+	z-index:100;
+	background-color: #FFFFFF;
+}
+#remite5 {
+	position:absolute;
+	left:3.9cm;
+	top:1.058cm;
+	width:5.1cm;
+	height:0.8cm;
+	z-index:100;
+	background-color: #FFFFFF;
+}
+#DescripcionRemitente6 {
+	position:absolute;
+	left:0.212cm;
+	top:2.328cm;
+	width:3.2cm;
+	height:4.2cm;
+	z-index:100;
+	background-color: #FFFFFF;
+	word-break:break-all;
+}
+#Destinatario6 {
+	position:absolute;
+	left:3.9cm;
+	top:1.905cm;
+	width:5.1cm;
+	height:1.7cm;
+	z-index:100;
+	background-color: #FFFFFF;
+}
+#Noguia6 {
+	position:absolute;
+	left:0.2cm;
+	top:1.852cm;
+	width:3.2cm;
+	height:0.5cm;
+	z-index:100;
+	background-color: #FFFFFF;
+}
+#OrdenNo6 {
+	position:absolute;
+	left:9.022cm;
+	top:2.249cm;
+	width:2cm;
+	height:0.5cm;
+	z-index:100;
+	background-color: #FFFFFF;
+}
+#PesoGrs6 {
+	position:absolute;
+	left:8.996cm;
+	top:3.122cm;
+	width:2cm;
+	height:0.5cm;
+	z-index:100;
+	background-color: #FFFFFF;
+}
+#Valor6 {
+	position:absolute;
+	left:11.086cm;
+	top:3.122cm;
+	width:2.5cm;
+	height:0.5cm;
+	z-index:100;
+	background-color: #FFFFFF;
+}
+#apDiv6 {
+	position:absolute;
+	left:14.2cm;
+	top:15.372cm;
+	width:515px;
+	height:7cm;
+	z-index:101;
+}
+#codigo6 {
+	position:absolute;
+	left:9.022cm;
+	top:1.402cm;
+	width:2cm;
+	height:0.5cm;
+	z-index:100;
+	background-color: #FFFFFF;
+}
+#codigoBarra6 {
+	position:absolute;
+	left:3.6cm;
+	top:0.026cm;
+	width:10cm;
+	height:1cm;
+	z-index:100;
+	background-color: #FFFFFF;
+}
+#destino6 {
+	position:absolute;
+	left:11.06cm;
+	top:2.249cm;
+	width:2.5cm;
+	height:0.5cm;
+	z-index:100;
+	background-color: #FFFFFF;
+}
+#fechaProcesado6 {
+	position:absolute;
+	left:3.9cm;
+	top:3.942cm;
+	width:2.8cm;
+	height:0.6cm;
+	z-index:100;
+	background-color: #FFFFFF;
+}
+#origen6 {
+	position:absolute;
+	left:11.086cm;
+	top:1.402cm;
+	width:2.5cm;
+	height:0.5cm;
+	z-index:100;
+	background-color: #FFFFFF;
+}
+#remite6 {
+	position:absolute;
+	left:3.9cm;
+	top:1.058cm;
+	width:5.1cm;
+	height:0.8cm;
+	z-index:100;
+	background-color: #FFFFFF;
+}
+body {
+	margin-left: 0px;
+	margin-top: 0px;
+	margin-right: 0px;
+	margin-bottom: 0px;
+}
+
+#imagen
+{
+	height: 34px;
+	width: 88px;
+}

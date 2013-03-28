@@ -36,9 +36,12 @@
         </style>
 
         <script type="text/javascript">
+            var nguias=0;
+            
             $(document).ready(function() {
                 $('.btnMensajeria').click(function(event) {
                     event.preventDefault();
+                    nguias=0;
                     $('#response').load($(this).attr('href'));
                     $('#response2').html("");
                     $('#response3').html("");
@@ -48,9 +51,47 @@
             
             function quitar(num)
             {
-//                var dataString = 'option=' + 3+ '&numGuia='+num;
- 
+                //                var dataString = 'option=' + 3+ '&numGuia='+num;
+                nguias--;
                 $('#response3').load('addManiMensajero.php?option=3&numGuia='+num);
+            }
+            
+            function guardar(tipo)
+            {
+                //alert(nguias);
+                if(nguias<=0)
+                {
+                    alert("Agrega guias antes de guardar N:"+nguias);
+                    return;
+                }
+                if (confirm('¿Estas seguro que deseas crear el manifiesto con estos datos?')){
+                    var idMensajero = document.getElementById('selMensajeroEntrega').value;
+                    var idZona = document.getElementById('selZonaCiudad').value;
+                    
+                    if(idMensajero==-1 || idZona==-1)
+                    {
+                        alert("Selecciona los datos del Mensajero y la Zona");
+                        return;
+                    }
+                    
+                    alert(idMensajero+" zona: "+idZona);
+                    //alert(tipo);
+                    //mensajero destajo
+                    
+                    
+                    if(tipo==8)
+                    {
+                        return;      
+                    }
+                    //mensajero propio
+                    if(tipo==5)
+                    {
+                        return;
+                    }
+                    
+                    //document.tuformulario.submit()
+                } 
+                
             }
             //                
             //    $('.btnMensajeria').keypress(function(event) {

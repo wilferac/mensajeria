@@ -79,28 +79,32 @@
       $daoZona = new DaoZona();
       $arreZonas = $daoZona->getAll($idCiu);
 
-      echo("<select id='selMensajeroEntrega'>");
+      echo("<table><tr><td>");
+      
+      
+      echo("Mensajero: </td><td> <select id='selMensajeroEntrega'>");
       echo("<option value='-1'>Seleccione</option>");
       foreach ($arrayMensajeros as $objMen)
       {
+          $idMen=$objMen->getId();
           //$objMen->show();
-          echo("<option>");
+          echo("<option value='$idMen'>");
           echo($objMen->getNombre());
           echo("</option>");
       }
-      echo("</select>");
+      echo("</select></td></tr><tr><td>");
 
-
-      echo("<select id='selZonaCiudad'>");
+      echo("Zona: </td><td><select id='selZonaCiudad'>");
       echo("<option value='-1'>Seleccione</option>");
       foreach ($arreZonas as $objZon)
       {
+          $idZona=$objZon->getId();
           //$objMen->show();
-          echo("<option>");
+          echo("<option value='$idZona'>");
           echo($objZon->getNombre());
           echo("</option>");
       }
-      echo("</select>");
+      echo("</select></td></tr></table>");
       echo("<br /><br />");
       if ($tipo == 8)
       {
@@ -111,7 +115,6 @@
       echo('Guia N.: <input name="guia" type="text" id="txtGuia" size="10" require/> ');
 
       echo("<script type='text/javascript'>$('#txtGuia').keypress(function(event) {
-                    
                     if(event.keyCode.toString()== '13')
                     {
                         var guiaNum = document.getElementById('txtGuia').value;
@@ -125,8 +128,12 @@
                         
                         $('#response3').load('addManiMensajero.php?option=2&numGuia='+guiaNum);
                     }
-                });</script>");
-
+                });
+                nguias=0;
+                </script>");
+      echo("<h2 align=center>");
+      echo("<button class='btnGuardar' onclick='guardar($tipo);' style=' width: 90px;'>Guardar</button>");
+      echo("</h2>");
       //resteo el arreglo de guias :D
       $arreGuias = new ArrayObject();
       $_SESSION['arregloGuias'] = serialize($arreGuias);
@@ -149,6 +156,10 @@
           $arreGuias[$num] = $num;
 
           showGuias($arreGuias); //refresco
+          
+          echo("<script type='text/javascript'>
+             nguias++;
+                  </script>");
       }
       else
       {
@@ -180,6 +191,8 @@
       //recupero el arreglo de guias
       //$arreGuias = unserialize($_SESSION['arregloGuias']);
       $_SESSION['arregloGuias'] = serialize($arreGuias);
+      
+      echo("<h2>Numero de guias:<b> ".sizeof($arreGuias)."</b></h2>");
 
       echo("<table>");
       foreach ($arreGuias as $numero)

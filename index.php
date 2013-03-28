@@ -82,7 +82,7 @@ MM_reloadPage(true);
     <td>&nbsp;</td>
   </tr>
 </table>
-<input type="hidden" name="token" value="<?=generarToken('acceso')?>" />
+
 </form>
 </body>
 </html>

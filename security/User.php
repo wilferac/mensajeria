@@ -13,7 +13,7 @@
     $mirar=false;
    foreach ($archivos_incluidos as $nombre_archivo)
    {
-       if($nombre_archivo == "/home/inovate/public_html/Mensajeria/conexion/conexion.php")
+       if($nombre_archivo == "/home/wilferac/public_html/Mensajeria/conexion/conexion.php")
        {
            $mirar=true;
            break;
@@ -36,6 +36,8 @@
        private $apellido;
        private $numDocu;
        private $idSucursal;
+       //ciudad a la que pertenece el usuario
+       private $idCiudad;
        
        public function __construct($login, $pass)
        {
@@ -62,11 +64,21 @@
            return $this->numDocu;
            
        }
+       
+       public function getIdSucursal()
+       {
+           return $this->idSucursal;
+       }
+       
+       public function getIdCiudad()
+       {
+           return $this->idCiudad;
+       }
 
        //hago la query para loguarlo :D
        public function login()
        {
-           $query2 = "select t.nombres_tercero, t.apellidos_tercero, t.documento_tercero, t.idtercero, s.idsucursal
+           $query2 = "select t.nombres_tercero, t.apellidos_tercero, t.documento_tercero, t.idtercero, s.idsucursal, s.ciudad_idciudad
                from tercero t
                inner join sucursal s 
                on t.sucursal_idsucursal = s.idsucursal
@@ -82,6 +94,7 @@
                $this->apellido=$fila['apellidos_tercero'];
                $this->numDocu=$fila['documento_tercero'];
                $this->idSucursal=$fila['idsucursal'];
+               $this->idCiudad=$fila['ciudad_idciudad'];
                $this->isLog = true;
 
                $this->id = $fila['idtercero'];
@@ -140,6 +153,8 @@
            echo($this->pass);
            echo("<br>");
            echo("id de sucursal: ".$this->idSucursal);
+           echo("<br>");
+           echo("id de ciudad: ".$this->idCiudad);
            echo("<br>");
            print_r($this->roles);
        }

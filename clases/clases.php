@@ -5,14 +5,14 @@ session_start();
 //define ('CONEXION', $_SERVER["DOCUMENT_ROOT"].'/tests/mensajeria/conexion/'); // leuss
 //define ('CONEXION', $_SERVER["DOCUMENT_ROOT"].'/mensajeria/conexion/');  // localhost
 //$valor = CONEXION;
-define('CONEXION', '/home/inovate/public_html/Mensajeria/');  // Innovate
+define('CONEXION', '/home/wilferac/public_html/Mensajeria/');  // Innovate
 //echo(CONEXION);
 //toca asi =(
-include ('/home/inovate/public_html/Mensajeria/conexion/conexion.php');
+include ('/home/wilferac/public_html/Mensajeria/conexion/conexion.php');
 
 //define ('RAIZ', '/home/inovate/public_html/Mensajeria'); // leuss
 //define ('RAIZ', '/Mensajeria');  // localhost
-define('RAIZ', "http://localhost/~inovate/Mensajeria");  // Innovate
+define('RAIZ', "http://localhost/~wilferac/Mensajeria");  // Innovate
 /* * **************************************** */
 
 class operacion

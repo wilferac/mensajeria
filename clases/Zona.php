@@ -5,7 +5,7 @@
     *
     * @author inovate
     */
-   class Mensajero
+   class Zona
    {
 
        private $nombre;

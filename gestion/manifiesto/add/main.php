@@ -1,22 +1,22 @@
 <?
 //session_start();
-   include ("../../../param/param.php");
-   include ("../../../clases/clases.php");
+  include ("../../../param/param.php");
+  include ("../../../clases/clases.php");
 
-   include '../../../security/User.php';
-   include ('../../../Menu.php');
+  include '../../../security/User.php';
+  include ('../../../Menu.php');
 
-   $objUser = unserialize($_SESSION['currentUser']);
+  $objUser = unserialize($_SESSION['currentUser']);
 
-   if ($objUser->getStatus() != 1)
-   {
-       $operacion->redireccionar('No Puede entrar', 'index.php');
-       return;
-   }
+  if ($objUser->getStatus() != 1)
+  {
+      $operacion->redireccionar('No Puede entrar', 'index.php');
+      return;
+  }
 
 
 
-   /*    * **************************************************************************** */
+  /*   * **************************************************************************** */
 ?>
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
 <html>
@@ -37,13 +37,29 @@
 
         <script type="text/javascript">
             $(document).ready(function() {
-             alert("lol2");
                 $('.btnMensajeria').click(function(event) {
-                alert($(this).attr('href'));
-                event.preventDefault(); //cancela el comportamiento por defecto
-                $('#response').load($(this).attr('href')); //carga por ajax a la capa "notice_viewer"
+                    event.preventDefault();
+                    $('#response').load($(this).attr('href'));
+                    $('#response2').html("");
                 });
             });
+            
+                        
+            //            $("#registrar").click(function() {
+            //                cadenaValores = cadenaValores + todosLosSelect[i].name + igual + todosLosSelect[i].value + amsp;
+            //
+            //                //alert( cadenaValores);
+            //                //            $('#informacion').html('<img src="../../imagenes/loader2.gif" alt="" height="17" />').fadeOut(1000);
+            //                //            var dataString = cadenaValores;
+            //                //alert (dataString);
+            //                $.ajax({
+            //                    type: "POST",
+            //                    url: "registrarosunitario.php",
+            //                    data: dataString,
+            //                    success: function(data) {
+            //            
+            //                    }}
+            //            )});
 
         </script>
 
@@ -53,8 +69,8 @@
     <body id="dt_example">
 
         <?
-           $objMenu = new Menu($objUser);
-           $objMenu->generarMenu();
+          $objMenu = new Menu($objUser);
+          $objMenu->generarMenu();
         ?>
     <br  style=" clear: all">
     <br  style=" clear: all">
@@ -65,7 +81,7 @@
         <table style=" padding-top: 30px;">
             <tr>
                 <td style=" padding-right: 30px;"><button class="btnMensajeria" style=" width: 90px;" href="addManiCiudad.php">Ciudad</button> </td>
-                <td style=" padding-left:  30px;"><button class="btnMensajeria" style=" width: 90px;" href="addManiMensajero.php">Mensajero</button> </td>
+                <td style=" padding-left:  30px;"><button class="btnMensajeria" style=" width: 90px;" href="addManiMensajero.php?option=0">Mensajero</button> </td>
             </tr>
         </table>
 

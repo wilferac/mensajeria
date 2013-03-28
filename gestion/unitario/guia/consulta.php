@@ -1,19 +1,19 @@
 <?php
-   session_start();
-   include("../../../clases/clases.php");
+  session_start();
+  include("../../../clases/clases.php");
 
-   include "../../../security/User.php";
-   include "../../../Menu.php";
+  include "../../../security/User.php";
+  include "../../../Menu.php";
 
-   $objUser = unserialize($_SESSION['currentUser']);
-   //$objUser = new User();
+  $objUser = unserialize($_SESSION['currentUser']);
+  //$objUser = new User();
 //        echo($objUser->getStatus());
-   if ($objUser->getStatus() != 1)
-   {
-       //$objUser->show();
-       $operacion->redireccionar('No Puede entrar', 'index.php');
-       return;
-   }
+  if ($objUser->getStatus() != 1)
+  {
+      //$objUser->show();
+      $operacion->redireccionar('No Puede entrar', 'index.php');
+      return;
+  }
 
 
 //$producto = new producto();
@@ -25,7 +25,7 @@
 //
 //$res2 = $producto->consultar();
 //query a guia
-   $query2 = "select g.idguia , g.numero_guia , g.causal_devolucion_idcausal_devolucion,
+  $query2 = "select g.idguia , g.numero_guia , g.causal_devolucion_idcausal_devolucion,
             cd.nombre_causal_devolucion, g.tercero_iddestinatario,
             c1.idciudad as  ciudad_idorigen, c1.nombre_ciudad as ciudad_nombreorigen,
             c2.idciudad as  ciudad_iddestino, c2.nombre_ciudad as ciudad_nombredestino,
@@ -41,69 +41,69 @@
             left join destinatario d on d.iddestinatario = g.tercero_iddestinatario
             ";
 
-   $results2 = mysql_query($query2) or die(mysql_error());
+  $results2 = mysql_query($query2) or die(mysql_error());
 
-   $dataSetini = "[";
-   $dataSet = "";
+  $dataSetini = "[";
+  $dataSet = "";
 
-   while ($fila = mysql_fetch_assoc($results2))
-   {
+  while ($fila = mysql_fetch_assoc($results2))
+  {
 //                $tercero_idtercero = $datosAsig["tercero_idtercero"];
-       //capturo los datos del tercero que envia
+      //capturo los datos del tercero que envia
 //    $idtercero = $fila["idtercero"];
-       $estadoGuia = $fila["causal_devolucion_idcausal_devolucion"];
-       $dniDestinatario = $fila["documento_destinatario"];
-       $nomDestinatario = $fila["nombres_destinatario"];
-       $estadoGuiaCausal = $fila["nombre_causal_devolucion"];
-       $iddestinatario = $fila["tercero_iddestinatario"];
-       if ($iddestinatario == NULL)
-       {
-           $dniDestinatario = "Incompleto";
-           $nomDestinatario = "Incompleto";
-       }
+      $estadoGuia = $fila["causal_devolucion_idcausal_devolucion"];
+      $dniDestinatario = $fila["documento_destinatario"];
+      $nomDestinatario = $fila["nombres_destinatario"];
+      $estadoGuiaCausal = $fila["nombre_causal_devolucion"];
+      $iddestinatario = $fila["tercero_iddestinatario"];
+      if ($iddestinatario == NULL)
+      {
+          $dniDestinatario = "Incompleto";
+          $nomDestinatario = "Incompleto";
+      }
 
-       $idGuia = $fila["idguia"];
+      $idGuia = $fila["idguia"];
 
-       $numeroGuia = $fila["numero_guia"];
-       $documento_tercero = $fila["documento_tercero"];
-       $nombres_tercero = $fila["nombres_tercero"];
-       $apellidos_tercero = $fila["apellidos_tercero"];
+      $numeroGuia = $fila["numero_guia"];
+      $documento_tercero = $fila["documento_tercero"];
+      $nombres_tercero = $fila["nombres_tercero"];
+      $apellidos_tercero = $fila["apellidos_tercero"];
 //    $direccion_tercero = $fila["direccion_tercero"];
 //    $idTipoPro = $fila["tipo_producto_idtipo_producto"];
-       $nomtp = $fila["nombre_tipo_producto"];
-       //capturo los del destino y de el origen del paquete
-       $nomOrigen = $fila["ciudad_nombreorigen"];
-       $nomDestino = $fila["ciudad_nombredestino"];
+      $nomtp = $fila["nombre_tipo_producto"];
+      //capturo los del destino y de el origen del paquete
+      $nomOrigen = $fila["ciudad_nombreorigen"];
+      $nomDestino = $fila["ciudad_nombredestino"];
 //    $idProducto = $fila["idproducto"];
-       $nomProducto = $fila["nombre_producto"];
+      $nomProducto = $fila["nombre_producto"];
 
-       if ($estadoGuia != 3)
-       {
-           $resaltar = "";
-           if ($estadoGuia == 2)
-           {
-               $resaltar = "color: red";
-           }
+      if ($estadoGuia != 3)
+      {
+          $resaltar = "";
+          if ($estadoGuia == 2)
+          {
+              $resaltar = "color: red";
+          }
 
-           $linkeliminar = "<button style=\"width: 70px; " . $resaltar . " \"  type=\'button\' onclick=\'abrir(\"delete.php?idGuia=$idGuia\")\'>$estadoGuiaCausal</button>";
-           $linkmodificar = "<a  = href=\'../../ordendeservicio/addosunitario.php?idGuiaFill=$numeroGuia\'><img src=\'../../imagenes/modificar.jpeg\' /></a>";
-       }
-       else
-       {
-           $linkeliminar = "Entregado";
-           $linkmodificar = "Entregado";
-       }
+          $linkeliminar = "<button style=\"width: 70px; " . $resaltar . " \"  type=\'button\' onclick=\'abrir(\"delete.php?idGuia=$idGuia\")\'>$estadoGuiaCausal</button>";
+          $linkmodificar = "<a  = href=\'../../ordendeservicio/addosunitario.php?idGuiaFill=$numeroGuia\'><img src=\'../../imagenes/modificar.jpeg\' /></a>";
+      }
+      else
+      {
+          $linkeliminar = "Entregado";
+          $linkmodificar = "Entregado";
+      }
 
-       $imprimir = "<button type=\'button\' onclick=\'abrir(\"printCorporativo.php?idGuia=$idGuia\")\'>Imprimir</button>";
-       //$editar = "<button type=\'button\' onclick=\'abrir(\"../../ordendeservicio/addosunitario.php?idGuiaFill=$idGuia\")\'>Editar</button>";
+      $imprimir = "<button type=\'button\' onclick=\'abrir(\"printCorporativo.php?idGuia=$idGuia\")\'>Imprimir</button>";
+      //$editar = "<button type=\'button\' onclick=\'abrir(\"../../ordendeservicio/addosunitario.php?idGuiaFill=$idGuia\")\'>Editar</button>";
 //acumulo en el dataset
-       $dataSet = $dataSet . "['$numeroGuia','$documento_tercero','$nombres_tercero','$nomtp','$nomOrigen','$nomDestino','$dniDestinatario','$nomDestinatario','$linkeliminar','$imprimir','$linkmodificar'],";
-   }
+      $dataSet = $dataSet . "['$numeroGuia','$documento_tercero','$nombres_tercero','$nomtp','$nomOrigen','$nomDestino','$dniDestinatario','$nomDestinatario','$linkeliminar','$imprimir','$linkmodificar'],";
+  }
 
-   $dataSet = substr_replace($dataSet, "];", strlen($dataSet) - 1);
-   $dataSet = $dataSetini . $dataSet;
+  $dataSet = substr_replace($dataSet, "];", strlen($dataSet) - 1);
+  $dataSet = $dataSetini . $dataSet;
 //echo $dataSet;
-   $vacio = false;
+  $vacio = false;
 ?>
 
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
@@ -145,7 +145,7 @@
                     var checked = $('#check').is(':checked');
                     //alert("entro");
                     if (checked && aData[6] == "Incompleto") {
-//alert("entro");
+                        //alert("entro");
                         return true;
                     }
                     else if (!checked) {
@@ -204,22 +204,22 @@
 
     </head>
     <body id="dt_example">
-<?
-   $objMenu = new Menu($objUser);
-   $objMenu->generarMenu();
+        <?
+          $objMenu = new Menu($objUser);
+          $objMenu->generarMenu();
 //   $operacion = new operacion();
 //   $operacion->menu();
-?>
+        ?>
         <div id="container">
-        <?
-           if (isset($_GET["mensaje"]))
-           {
-               ?> 
+            <?
+              if (isset($_GET["mensaje"]))
+              {
+                  ?> 
 
-                   <div class="mensaje"><?= $_GET["mensaje"] ?></div>  
+                  <div class="mensaje"><?= $_GET["mensaje"] ?></div>  
 
-                   <?
-               }
+                  <?
+              }
             ?>
             <div class="full_width big">
                 <p>&nbsp;</p>
@@ -229,13 +229,13 @@
             <table class="display"><tr><td>
                         <a href="../../ordendeservicio/addosunitario.php">Crear Guia</a>
                     </td></tr></table> 
-<?
-   if ($vacio)
-   {
-       ?>
-                   <div align="center" style="color:#FF0000">No hay datos para mostrar</div>
-                   <?
-               }
+            <?
+              if ($vacio)
+              {
+                  ?>
+                  <div align="center" style="color:#FF0000">No hay datos para mostrar</div>
+                  <?
+              }
             ?>
             No Terminados: <input id="check" type="checkbox" name="option3" value="incompleto" /> 
             <div id="dynamic"></div>

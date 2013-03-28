@@ -5,7 +5,7 @@
     *
     * @author inovate
     */
-   class DaoMensajero
+   class DaoZona
    {
        
        //por defecto busca mensajeros, a menos que queramos destajos

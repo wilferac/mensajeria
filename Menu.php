@@ -19,7 +19,7 @@
        {
            $this->user = $user;
            //determino la raiz de la aplicacion =)
-           $this->raiz = "http://localhost/~inovate/Mensajeria";
+           $this->raiz = "http://localhost/~wilferac/Mensajeria";
        }
 
        public function generarMenu()

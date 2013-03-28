@@ -1,11 +1,17 @@
 <?php
+
   session_start();
   include '../../../security/User.php';
   include '../../../clases/Mensajero.php';
   include '../../../clases/DaoMensajero.php';
+  include '../../../clases/Zona.php';
+  include '../../../clases/DaoZona.php';
+  include '../../../clases/Guia.php';
+  include '../../../clases/DaoGuia.php';
   // include '../../../conexion/conexion.php';
 
   $objUser = unserialize($_SESSION['currentUser']);
+
 
   if ($objUser->getStatus() != 1)
   {
@@ -23,6 +29,18 @@
       case 1:
           showData($objUser);
           break;
+      //add
+      case 2:
+          addGuia($objUser);
+          break;
+      //del
+      case 3:
+          delGuia();
+          break;
+      //show
+//      case 4:
+//          showGuias();
+//          break;
   }
 
   function showOption()
@@ -35,9 +53,14 @@
             $('.btnMensajero').click(function(event) {
             event.preventDefault();
             $('#response2').load($(this).attr('href'));
+            $('#response3').html('');
             });
           });
           </script>");
+
+      //resteo el arreglo de guias :D
+      $arreGuias = new ArrayObject();
+      $_SESSION['arregloGuias'] = serialize($arreGuias);
   }
 
   //lo pongo a escojer entre destajo y propio
@@ -45,14 +68,18 @@
   function showData($objUser)
   {
       $tipo = $_REQUEST['tipo'];
-      
-      // el id de la sucursal
-      $idSucur=$objUser->getIdSucursal();
 
-      $dao = new DaoMensajero();
-      $arrayMensajeros = $dao->getAll($idSucur, $tipo);
-      
-              echo("<select>");
+      // el id de la sucursal
+      $idSucur = $objUser->getIdSucursal();
+      $idCiu = $objUser->getIdCiudad();
+
+      $daoMen = new DaoMensajero();
+      $arrayMensajeros = $daoMen->getAll($idSucur, $tipo);
+
+      $daoZona = new DaoZona();
+      $arreZonas = $daoZona->getAll($idCiu);
+
+      echo("<select id='selMensajeroEntrega'>");
       echo("<option value='-1'>Seleccione</option>");
       foreach ($arrayMensajeros as $objMen)
       {
@@ -62,5 +89,106 @@
           echo("</option>");
       }
       echo("</select>");
+
+
+      echo("<select id='selZonaCiudad'>");
+      echo("<option value='-1'>Seleccione</option>");
+      foreach ($arreZonas as $objZon)
+      {
+          //$objMen->show();
+          echo("<option>");
+          echo($objZon->getNombre());
+          echo("</option>");
+      }
+      echo("</select>");
+      echo("<br /><br />");
+      if ($tipo == 8)
+      {
+          echo('Tarifa: <input name="tarifa" type="text" id="tarifa" size="10" require/> ');
+          echo(' Plazo: <input name="plazo" type="text" id="plazo" size="10" require/>');
+      }
+      echo("<br /><br />");
+      echo('Guia N.: <input name="guia" type="text" id="txtGuia" size="10" require/> ');
+
+      echo("<script type='text/javascript'>$('#txtGuia').keypress(function(event) {
+                    
+                    if(event.keyCode.toString()== '13')
+                    {
+                        var guiaNum = document.getElementById('txtGuia').value;
+                        if(guiaNum == '')
+                        {
+                            return;
+                        }
+                        document.getElementById('txtGuia').value='';
+                        event.preventDefault();
+                        //alert('se '+guiaNum);
+                        
+                        $('#response3').load('addManiMensajero.php?option=2&numGuia='+guiaNum);
+                    }
+                });</script>");
+
+      //resteo el arreglo de guias :D
+      $arreGuias = new ArrayObject();
+      $_SESSION['arregloGuias'] = serialize($arreGuias);
+  }
+
+  function addGuia($objUser)
+  {
+      //recupero el arreglo de guias
+      $arreGuias = unserialize($_SESSION['arregloGuias']);
+      $num = $_REQUEST['numGuia'];
+      //validar si se puede agregar
+      //echo($num);
+//      $arreGuias->size();
+      $idDep = $objUser->getIdDepartamento();
+      $daoGuia = new DaoGuia();
+      if ($daoGuia->checkManifiesto($num, $idDep))
+      {
+          $last = sizeof($arreGuias);
+
+          $arreGuias[$num] = $num;
+
+          showGuias($arreGuias); //refresco
+      }
+      else
+      {
+          echo("<script type='text/javascript'>
+             alert('La guia $num no puede ser asignada a este manifiesto');
+                  </script>");
+          showGuias($arreGuias);
+      }
+  }
+
+  function delGuia()
+  {
+      
+      $num = $_REQUEST['numGuia'];
+      
+      //recupero el arreglo de guias
+      $arreGuias = unserialize($_SESSION['arregloGuias']);
+      unset($arreGuias[$num]);
+      //echo("xD");
+      //var_dump($arreGuias);
+      //++ quitar una guia del arreglo
+      showGuias($arreGuias); //refresco
+  }
+
+  //funcion para mostrar las guias que tengo acumuladas.
+  //no recupera el arreglo de guias ya que de eso se encargan add y del
+  function showGuias($arreGuias)
+  {
+      //recupero el arreglo de guias
+      //$arreGuias = unserialize($_SESSION['arregloGuias']);
+      $_SESSION['arregloGuias'] = serialize($arreGuias);
+
+      echo("<table>");
+      foreach ($arreGuias as $numero)
+      {
+          echo("<tr>");
+          echo("<td>$numero</td>");
+          echo("<td><a onclick='quitar($numero);'>Quitar</a></td>");
+          echo("</tr>");
+      }
+      echo("</table>");
   }
 ?>

@@ -41,8 +41,23 @@
                     event.preventDefault();
                     $('#response').load($(this).attr('href'));
                     $('#response2').html("");
+                    $('#response3').html("");
                 });
             });
+            
+            
+            function quitar(num)
+            {
+//                var dataString = 'option=' + 3+ '&numGuia='+num;
+ 
+                $('#response3').load('addManiMensajero.php?option=3&numGuia='+num);
+            }
+            //                
+            //    $('.btnMensajeria').keypress(function(event) {
+            //                    event.preventDefault();
+            //                    event.keyCode.toString();
+            //                });
+            //            });
             
                         
             //            $("#registrar").click(function() {
@@ -59,7 +74,7 @@
             //                    success: function(data) {
             //            
             //                    }}
-            //            )});
+            //                        )});
 
         </script>
 
@@ -84,10 +99,14 @@
                 <td style=" padding-left:  30px;"><button class="btnMensajeria" style=" width: 90px;" href="addManiMensajero.php?option=0">Mensajero</button> </td>
             </tr>
         </table>
-
-        <div id="response" style="padding-top: 50px;">
+        <div id="mainResponse" style="padding-top: 30px; float: left; text-align: left;">
+            <div id="response">
+            </div>
+            <div id="response2" style="padding-top: 30px;">
+            </div>
         </div>
-        <div id="response2" style="padding-top: 50px;">
+        <!--aca muestro las guias acumuladas-->
+        <div id="response3" style="padding-top: 30px; padding-left: 30px; float: left; text-align: left;">
         </div>
 
     </div>

@@ -38,6 +38,7 @@
        private $idSucursal;
        //ciudad a la que pertenece el usuario
        private $idCiudad;
+       private $idDepartamento;
        
        public function __construct($login, $pass)
        {
@@ -74,14 +75,20 @@
        {
            return $this->idCiudad;
        }
+       
+       public function getIdDepartamento()
+       {
+           return $this->idDepartamento;
+       }
 
        //hago la query para loguarlo :D
        public function login()
        {
-           $query2 = "select t.nombres_tercero, t.apellidos_tercero, t.documento_tercero, t.idtercero, s.idsucursal, s.ciudad_idciudad
+           $query2 = "select t.nombres_tercero, t.apellidos_tercero, t.documento_tercero, t.idtercero, s.idsucursal, s.ciudad_idciudad, c.departamento_iddepartamento
                from tercero t
                inner join sucursal s 
                on t.sucursal_idsucursal = s.idsucursal
+               inner join ciudad c on c.idciudad = s.ciudad_idciudad
                where usuario_tercero= '$this->login' 
                    and clave_tercero = MD5('$this->pass')
                    and estado = 'Activo'";
@@ -95,6 +102,7 @@
                $this->numDocu=$fila['documento_tercero'];
                $this->idSucursal=$fila['idsucursal'];
                $this->idCiudad=$fila['ciudad_idciudad'];
+               $this->idDepartamento=$fila['departamento_iddepartamento'];
                $this->isLog = true;
 
                $this->id = $fila['idtercero'];
@@ -155,6 +163,8 @@
            echo("id de sucursal: ".$this->idSucursal);
            echo("<br>");
            echo("id de ciudad: ".$this->idCiudad);
+           echo("<br>");
+           echo("id de departamento: ".$this->idDepartamento);
            echo("<br>");
            print_r($this->roles);
        }

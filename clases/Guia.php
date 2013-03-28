@@ -5,29 +5,29 @@
     *
     * @author inovate
     */
-   class Zona
+   class Guia
    {
 
-       private $nombre;
-       private $id;
+       private $numero;
        //obtengo la sucursal para poder filtrarlos desde js
        private $idCiudad;
+       private $idDepartamento;
 
-       public function __construct($id, $nom ,$ciu)
+       public function __construct($num, $ciu, $dep)
        {
-           $this->id= $id;
+           $this->numero= $num;
            $this->idCiudad= $ciu;
-           $this->nombre = $nom;
+           $this->idDepartamento = $dep;
        }
        
        public function show()
        {
-           echo("nombre: $this->nombre<br />");
+           echo("nombre: $this->numero<br />");
        }
        
-       public function getNombre()
+       public function getNumero()
        {
-           return $this->nombre;
+           return $this->numero;
        }
 
    }

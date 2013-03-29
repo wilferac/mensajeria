@@ -8,6 +8,9 @@
   include '../../../clases/DaoZona.php';
   include '../../../clases/Guia.php';
   include '../../../clases/DaoGuia.php';
+
+  include '../../../clases/Manifiesto.php';
+  include '../../../clases/DaoManifiesto.php';
   // include '../../../conexion/conexion.php';
 
   $objUser = unserialize($_SESSION['currentUser']);
@@ -37,10 +40,10 @@
       case 3:
           delGuia();
           break;
-      //show
-//      case 4:
-//          showGuias();
-//          break;
+      //guardar
+      case 4:
+          guardar($objUser);
+          break;
   }
 
   function showOption()
@@ -80,13 +83,13 @@
       $arreZonas = $daoZona->getAll($idCiu);
 
       echo("<table><tr><td>");
-      
-      
+
+
       echo("Mensajero: </td><td> <select id='selMensajeroEntrega'>");
       echo("<option value='-1'>Seleccione</option>");
       foreach ($arrayMensajeros as $objMen)
       {
-          $idMen=$objMen->getId();
+          $idMen = $objMen->getId();
           //$objMen->show();
           echo("<option value='$idMen'>");
           echo($objMen->getNombre());
@@ -98,18 +101,21 @@
       echo("<option value='-1'>Seleccione</option>");
       foreach ($arreZonas as $objZon)
       {
-          $idZona=$objZon->getId();
+          $idZona = $objZon->getId();
           //$objMen->show();
           echo("<option value='$idZona'>");
           echo($objZon->getNombre());
           echo("</option>");
       }
-      echo("</select></td></tr></table>");
+      echo('</select></td></tr>
+          <tr><td>Plazo(N. dias):</td><td> <input name="plazo" type="number" id="plazo" size="10" require/>
+          </td></tr>
+          </table>');
       echo("<br /><br />");
       if ($tipo == 8)
       {
           echo('Tarifa: <input name="tarifa" type="text" id="tarifa" size="10" require/> ');
-          echo(' Plazo: <input name="plazo" type="text" id="plazo" size="10" require/>');
+//          echo(' Plazo: <input name="plazo" type="text" id="plazo" size="10" require/>');
       }
       echo("<br /><br />");
       echo('Guia N.: <input name="guia" type="text" id="txtGuia" size="10" require/> ');
@@ -156,7 +162,7 @@
           $arreGuias[$num] = $num;
 
           showGuias($arreGuias); //refresco
-          
+
           echo("<script type='text/javascript'>
              nguias++;
                   </script>");
@@ -172,9 +178,9 @@
 
   function delGuia()
   {
-      
+
       $num = $_REQUEST['numGuia'];
-      
+
       //recupero el arreglo de guias
       $arreGuias = unserialize($_SESSION['arregloGuias']);
       unset($arreGuias[$num]);
@@ -188,11 +194,10 @@
   //no recupera el arreglo de guias ya que de eso se encargan add y del
   function showGuias($arreGuias)
   {
-      //recupero el arreglo de guias
-      //$arreGuias = unserialize($_SESSION['arregloGuias']);
+      //guardo las guias q llevo
       $_SESSION['arregloGuias'] = serialize($arreGuias);
-      
-      echo("<h2>Numero de guias:<b> ".sizeof($arreGuias)."</b></h2>");
+
+      echo("<h2>Numero de guias:<b> " . sizeof($arreGuias) . "</b></h2>");
 
       echo("<table>");
       foreach ($arreGuias as $numero)
@@ -204,4 +209,40 @@
       }
       echo("</table>");
   }
+
+  //funcion para crear el manifiesto en la BD
+  function guardar($objUser)
+  {
+      $idMen = $_REQUEST['idMensajero'];
+      $idZona = $_REQUEST['idZona'];
+      $plazo = $_REQUEST['plazo'];
+      //debo saber el tipo de mensajero al q le voy a asignar la guia
+      $tipo = $_REQUEST['tipo'];
+      $arreGuias = unserialize($_SESSION['arregloGuias']);
+
+      $idCreador = $objUser->getId();
+
+
+      //echo($idMen." zona ".$idZona." plazo ".$plazo." tipo ".$tipo);
+
+      $objManifiesto;
+      $daoMani = new DaoManifiesto();
+
+      if ($tipo == 5)
+      {
+          $objManifiesto = new Manifiesto(-1, NULL, $idCreador, $plazo, $idZona, NULL);
+
+      }
+
+      if ($tipo == 8)
+      {
+          $tarifa = $_REQUEST['tarifa'];
+
+          $objManifiesto = new Manifiesto(-1, NULL, $idCreador, $plazo, $idZona, $tarifa);
+      }
+
+      $objManifiesto->setTerceros(NULL, $idMen, NULL);
+      $daoMani->insertar($objManifiesto, $arreGuias);
+  }
+
 ?>

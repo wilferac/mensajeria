@@ -67,25 +67,70 @@
                 if (confirm('¿Estas seguro que deseas crear el manifiesto con estos datos?')){
                     var idMensajero = document.getElementById('selMensajeroEntrega').value;
                     var idZona = document.getElementById('selZonaCiudad').value;
-                    
+                    var plazo = document.getElementById('plazo').value;
                     if(idMensajero==-1 || idZona==-1)
                     {
                         alert("Selecciona los datos del Mensajero y la Zona");
                         return;
                     }
+                    var y = parseInt(plazo);
+                    if (isNaN(y))
+                    {
+                        alert("llena los dias de plazo");
+                        return;
+                    }
                     
-                    alert(idMensajero+" zona: "+idZona);
+                    
+                    //alert(idMensajero+" zona: "+idZona+"plazo "+plazo);
                     //alert(tipo);
+                    
+                    
                     //mensajero destajo
-                    
-                    
                     if(tipo==8)
                     {
+                        // alert("destajador :O");
+                        var tarifa = document.getElementById('tarifa').value;
+                        var x = parseInt(tarifa);
+                        if (isNaN(x))
+                        {
+                            alert("digita una tarifa para el mensajero");
+                            return;
+                        }
+                        var dataString = 'idMensajero=' + idMensajero + '&idZona='+idZona+ '&plazo='+plazo+ '&tipo='+tipo+'&option=4'+'&tarifa='+tarifa;
+
+                        $.ajax({
+                            type: "POST",
+                            url: "addManiMensajero.php",
+                            data: dataString,
+                            success: function(data) {
+                                if(data==1)
+                                {
+                                    alert("Manifiesto creado correctamente");
+                                    location.reload(); 
+                                }
+                            
+                            }});
                         return;      
                     }
                     //mensajero propio
                     if(tipo==5)
                     {
+                        //alert("propio");
+                        var dataString = 'idMensajero=' + idMensajero + '&idZona='+idZona+ '&plazo='+plazo+ '&tipo='+tipo+'&option=4';
+
+                        $.ajax({
+                            type: "POST",
+                            url: "addManiMensajero.php",
+                            data: dataString,
+                            success: function(data) {
+                                if(data==1)
+                                {
+                                    alert("Manifiesto creado correctamente");
+                                    location.reload(); 
+                                }
+                            }});
+                        
+                        
                         return;
                     }
                     

@@ -19,7 +19,8 @@
       {
           $cons = "SELECT  * FROM guia g 
 INNER JOIN ciudad c ON c.idciudad = g.ciudad_iddestino
-WHERE g.estado = 1 AND c.departamento_iddepartamento = $depCod AND g.numero_guia = '$numero'";
+WHERE g.estado = 1 AND c.departamento_iddepartamento = $depCod AND g.numero_guia = '$numero' 
+    AND (g.causal_devolucion_idcausal_devolucion =1 OR g.causal_devolucion_idcausal_devolucion =2)";
 
           $results2 = mysql_query($cons) or die(mysql_error());
 

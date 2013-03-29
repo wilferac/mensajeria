@@ -1,14 +1,20 @@
 <?php
 
+  header("Content-Type: text/html;charset=utf-8");
   session_start();
   include '../../../security/User.php';
   include '../../../clases/Mensajero.php';
   include '../../../clases/DaoMensajero.php';
   include '../../../clases/Guia.php';
   include '../../../clases/DaoGuia.php';
-
   include '../../../clases/Manifiesto.php';
   include '../../../clases/DaoManifiesto.php';
+  include '../../../clases/Ciudad.php';
+  include '../../../clases/DaoCiudad.php';
+  include '../../../clases/Sucursal.php';
+  include '../../../clases/DaoSucursal.php';
+  include '../../../clases/Aliado.php';
+  include '../../../clases/DaoAliado.php';
   // include '../../../conexion/conexion.php';
 
   $objUser = unserialize($_SESSION['currentUser']);
@@ -19,7 +25,7 @@
       //$operacion->redireccionar('No Puede entrar', 'index.php');
       return;
   }
-  
+
   $option = $_REQUEST['option'];
 
   switch ($option)
@@ -42,18 +48,45 @@
       case 4:
           guardar($objUser);
           break;
+      //mostrar ingresar las guias
+      case 5:
+          showLastData();
+          break;
+      //agrego guia en un rango
+      case 6:
+          addRango();
+          break;
   }
 
   function showOption()
   {
-      echo('<h3>Tipo de Mensajero</h3>
-          <button class="btnMensajero" style=" width: 90px;" href="addManiMensajero.php?option=1&tipo=5">Propio</button>
-          <button class="btnMensajero" style=" width: 90px;" href="addManiMensajero.php?option=1&tipo=8">Destajo</button>');
+      $daoCiudad = new DaoCiudad();
+      $arreCiudades = $daoCiudad->getAll();
+
+      echo('<h3>Ciudad:</h3>');
+
+      echo("<select id='selCiudad'>");
+      echo("<option value='-1'>Seleccione</option>");
+      foreach ($arreCiudades as $objCiu)
+      {
+          $id = $objCiu->getId();
+          $idDep = $objCiu->getIdDepartamento();
+          //$objMen->show();
+          echo("<option value='$id' label='$idDep'>");
+          echo($objCiu->getNombre() . " (" . $objCiu->getNomDepartamento() . ")");
+          echo("</option>");
+      }
+      echo("</select>");
+
       echo("<script type='text/javascript'>
           $(document).ready(function() {
-            $('.btnMensajero').click(function(event) {
-            event.preventDefault();
-            $('#response2').load($(this).attr('href'));
+            $('#selCiudad').change(function(event) {
+            var el = document.getElementById('selCiudad');
+            var text = el.options[el.selectedIndex].label;
+            var idCiu= el.value;
+            //alert(text+' '+idCiu);
+            //return;
+            $('#response2').load('addManiCiudad.php?option=1&idDep='+text+'&idCiu='+idCiu);
             $('#response3').html('');
             });
           });
@@ -68,8 +101,11 @@
   //filtro con u objeto del tipo usuario
   function showData($objUser)
   {
-      $tipo = $_REQUEST['tipo'];
+      $idDep = $_REQUEST['idDep'];
 
+      // echo("consultando aliados y sucursales");
+      //busco solo mensajeros de la casa (propios)
+      $tipo = 5;
       // el id de la sucursal
       $idSucur = $objUser->getIdSucursal();
       $idCiu = $objUser->getIdCiudad();
@@ -77,13 +113,10 @@
       $daoMen = new DaoMensajero();
       $arrayMensajeros = $daoMen->getAll($idSucur, $tipo);
 
-      $daoZona = new DaoZona();
-      $arreZonas = $daoZona->getAll($idCiu);
-
       echo("<table><tr><td>");
 
 
-      echo("Mensajero: </td><td> <select id='selMensajeroEntrega'>");
+      echo("Mensajero que Entrega: </td><td> <select id='selMensajeroEntrega'>");
       echo("<option value='-1'>Seleccione</option>");
       foreach ($arrayMensajeros as $objMen)
       {
@@ -95,28 +128,89 @@
       }
       echo("</select></td></tr><tr><td>");
 
-      echo("Zona: </td><td><select id='selZonaCiudad'>");
+
+      $daoSucur = new DaoSucursal();
+      $arreSucurs = $daoSucur->getAll($idDep);
+
+
+      echo('<h3>Sucursales:</h3>');
+
+      echo("<select id='selSucursal' onchange='selDestino(1)'>");
       echo("<option value='-1'>Seleccione</option>");
-      foreach ($arreZonas as $objZon)
+      foreach ($arreSucurs as $obj)
       {
-          $idZona = $objZon->getId();
+          $id = $obj->getId();
+
           //$objMen->show();
-          echo("<option value='$idZona'>");
-          echo($objZon->getNombre());
+          echo("<option value='$id' >");
+          echo($obj->getNombre());
           echo("</option>");
       }
-      echo('</select></td></tr>
-          <tr><td>Plazo(N. dias):</td><td> <input name="plazo" type="number" id="plazo" size="10" require/>
-          </td></tr>
-          </table>');
-      echo("<br /><br />");
-      if ($tipo == 8)
+      echo("</select>");
+
+
+
+      $idCiu = $_REQUEST['idCiu'];
+
+      $daoAli = new DaoAliado();
+      $arreAlis = $daoAli->getAll($idCiu);
+
+      //aca van los aliados :O
+      echo('<h3>Aliados:</h3>');
+
+      echo("<select id='selAli' onchange='selDestino(2)'>");
+      echo("<option value='-1'>Seleccione</option>");
+      foreach ($arreAlis as $obj)
       {
-          echo('Tarifa: <input name="tarifa" type="text" id="tarifa" size="10" require/> ');
-//          echo(' Plazo: <input name="plazo" type="text" id="plazo" size="10" require/>');
+          $id = $obj->getId();
+
+          //$objMen->show();
+          echo("<option value='$id' >");
+          echo($obj->getNombre());
+          echo("</option>");
       }
-      echo("<br /><br />");
-      echo('Guia N.: <input name="guia" type="text" id="txtGuia" size="10" require/> ');
+      echo("</select>");
+
+      $arreGuias = new ArrayObject();
+      $_SESSION['arregloGuias'] = serialize($arreGuias);
+  }
+
+  function showLastData()
+  {
+
+      $idAli = $_REQUEST['idAli'];
+      $idSucur = $_REQUEST['idSucur'];
+
+      if ($idSucur != -1)
+      {
+          //muestro los mensajeros de la sucursal :D
+          $daoMen = new DaoMensajero();
+          //busco los mensajeros de la sucursal seleccionada , tipo = 5 (mensajero)
+          $arrayMensajeros = $daoMen->getAll($idSucur, 5);
+
+          echo("Mensajero que Resibe: 
+              <select id='selMensajeroEntrega'>");
+          echo("<option value='-1'>Seleccione</option>");
+          foreach ($arrayMensajeros as $objMen)
+          {
+              $idMen = $objMen->getId();
+              //$objMen->show();
+              echo("<option value='$idMen'>");
+              echo($objMen->getNombre());
+              echo("</option>");
+          }
+          echo("</select>");
+      }
+
+      //muestro la parte de guias consecutivas 
+      echo('<h3>Rango de Guias.</h3>');
+      echo('<input name="rango1" type="text" id="rango1" size="10" require/> ');
+      echo('<input name="rango2" type="text" id="rango2" size="10" require/> ');
+      echo("<button class='btnAgregarRango'  style=' width: 90px;'  onclick='agregarRango()' >Agregar</button>");
+
+      echo('<h3>Guia N.</h3>');
+
+      echo('<input name="guia" type="text" id="txtGuia" size="10" require/> ');
 
       echo("<script type='text/javascript'>$('#txtGuia').keypress(function(event) {
                     if(event.keyCode.toString()== '13')
@@ -130,17 +224,32 @@
                         event.preventDefault();
                         //alert('se '+guiaNum);
                         
-                        $('#response3').load('addManiMensajero.php?option=2&numGuia='+guiaNum);
+                       // $('#response3').load('addManiMensajero.php?option=2&numGuia='+guiaNum);
                     }
                 });
                 nguias=0;
                 </script>");
+
+      echo("<br /><br />");
+
+//onclick='guardar($tipo);'
       echo("<h2 align=center>");
-      echo("<button class='btnGuardar' onclick='guardar($tipo);' style=' width: 90px;'>Guardar</button>");
+      echo("<button class='btnGuardar'  style=' width: 90px;'>Guardar</button>");
       echo("</h2>");
       //resteo el arreglo de guias :D
       $arreGuias = new ArrayObject();
       $_SESSION['arregloGuias'] = serialize($arreGuias);
+  }
+  
+  function addRango()
+  {
+      //recupero el arreglo de guias
+      $arreGuias = unserialize($_SESSION['arregloGuias']);
+      $r1 = $_REQUEST['r1'];
+      $r2 = $_REQUEST['r2'];
+      
+      echo($r1." - ".$r2);
+      
   }
 
   function addGuia($objUser)
@@ -229,7 +338,6 @@
       if ($tipo == 5)
       {
           $objManifiesto = new Manifiesto(-1, NULL, $idCreador, $plazo, $idZona, NULL);
-
       }
 
       if ($tipo == 8)

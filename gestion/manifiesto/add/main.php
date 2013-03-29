@@ -13,8 +13,8 @@
       $operacion->redireccionar('No Puede entrar', 'index.php');
       return;
   }
-
-
+//corrijo lo de las enies
+  header("Content-Type: text/html;charset=utf-8");
 
   /*   * **************************************************************************** */
 ?>
@@ -45,8 +45,68 @@
                     $('#response').load($(this).attr('href'));
                     $('#response2').html("");
                     $('#response3').html("");
+                    $('#response4').html('');
                 });
             });
+            
+            function agregarRango()
+            {
+                var r1=document.getElementById('rango1').value;
+                var r2=document.getElementById('rango2').value;
+                
+                
+                var x = parseInt(r1);
+                var y = parseInt(r2);
+                if (isNaN(x))
+                {
+                    alert("Esta funcion no trabaja con numeros de guia Alfanumericos!");
+                    return;
+                }
+                if (isNaN(y))
+                {
+                    alert("Esta funcion no trabaja con numeros de guia Alfanumericos!");
+                    return;
+                }
+                if(x<y)
+                {
+                    if(confirm("Seguro que desea agregar este rango?\n El programa saltara los numero de guia que no se puedan agregar"))
+                    $('#response3').load('addManiCiudad.php?option=6&r1='+r1+'&r2='+r2);
+                }
+                else
+                {
+                    alert("el rango no es correcto =(");
+                    return;
+                }
+                
+                
+            }
+            
+            function selDestino(num)
+            {
+                alert(num);
+                if(num==1)
+                {
+                    document.getElementById('selAli').value=-1;
+                }
+                else
+                {
+                    document.getElementById('selSucursal').value=-1;
+                }
+                
+                var idAli=document.getElementById('selAli').value
+                var idSucur=document.getElementById('selSucursal').value;
+                if(idAli ==-1 && idSucur== -1)
+                {
+                    //reseteo
+                    $('#response4').html('');
+                    $('#response3').html('');
+                    return;
+                }
+                else
+                {
+                    $('#response4').load('addManiCiudad.php?option=5&idAli='+idAli+'&idSucur='+idSucur);
+                }
+            }
             
             
             function quitar(num)
@@ -54,6 +114,7 @@
                 //                var dataString = 'option=' + 3+ '&numGuia='+num;
                 nguias--;
                 $('#response3').load('addManiMensajero.php?option=3&numGuia='+num);
+                $('#response4').html('');
             }
             
             function guardar(tipo)
@@ -189,6 +250,9 @@
             <div id="response">
             </div>
             <div id="response2" style="padding-top: 30px;">
+            </div>
+            <!--un div estra para la info de los mensajeros-->
+            <div id="response4" style="padding-top: 30px;">
             </div>
         </div>
         <!--aca muestro las guias acumuladas-->

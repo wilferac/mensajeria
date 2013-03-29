@@ -57,6 +57,7 @@
             event.preventDefault();
             $('#response2').load($(this).attr('href'));
             $('#response3').html('');
+            $('#response4').html('');
             });
           });
           </script>");

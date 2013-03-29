@@ -1,18 +1,18 @@
 <?
 //session_start();
-   include ("../../param/param.php");
-   include ("../../clases/clases.php");
+  include ("../../param/param.php");
+  include ("../../clases/clases.php");
 
-   include '../../security/User.php';
-   include ('../../Menu.php');
+  include '../../security/User.php';
+  include ('../../Menu.php');
 
-   $objUser = unserialize($_SESSION['currentUser']);
+  $objUser = unserialize($_SESSION['currentUser']);
 
-   if ($objUser->getStatus() != 1)
-   {
-       $operacion->redireccionar('No Puede entrar', 'index.php');
-       return;
-   }
+  if ($objUser->getStatus() != 1)
+  {
+      $operacion->redireccionar('No Puede entrar', 'index.php');
+      return;
+  }
 
 
 
@@ -24,78 +24,78 @@
 ?>
 
 <?
-   $nombres = "manifiesto";
-   $vacio = true;
+  $nombres = "manifiesto";
+  $vacio = true;
 
-   $manifiesto = new manifiesto();
-   $tercero = new tercero();
-   $sucursal = new sucursal();
-   $operacion = new operacion();
+  $manifiesto = new manifiesto();
+  $tercero = new tercero();
+  $sucursal = new sucursal();
+  $operacion = new operacion();
 
-   //$cons = "SELECT * FROM guia, manifiesto WHERE guia.manifiesto_idmanifiesto=manifiesto.idmanifiesto ORDER BY guia.numero_guia";
-   $cons = "SELECT idmanifiesto,num_manifiesto,tercero_idmensajero_recibe,tercero_idmensajero_entrega,manifiesto.sucursal_idsucursal,plazo_entrega_manifiesto, tercero_idaliado, t1.nombres_tercero 
-       from manifiesto inner join tercero t1 on t1.idtercero = idmanifiesto 
-       inner join tercero t2 on t2.idtercero= idmanifiesto";
+  //$cons = "SELECT * FROM guia, manifiesto WHERE guia.manifiesto_idmanifiesto=manifiesto.idmanifiesto ORDER BY guia.numero_guia";
+  $cons = "SELECT s.nombre_sucursal ,m.idmanifiesto ,m.sucursal_idsucursal, m.plazo_entrega_manifiesto,   GROUP_CONCAT(t.nombres_tercero SEPARATOR ',') AS tercero, GROUP_CONCAT(tm.tipo SEPARATOR ',')  AS tipo
+       FROM manifiesto m INNER JOIN tercero_manifiesto tm ON tm.idmanifiesto = m.idmanifiesto 
+       INNER JOIN tercero t ON t.idtercero= tm.idtercero 
+       LEFT JOIN sucursal s ON s.idsucursal = m.sucursal_idsucursal       
+       GROUP BY m.idmanifiesto";
 
 //FROM guia, manifiesto, tercero 
 //WHERE guia.manifiesto_idmanifiesto=manifiesto.idmanifiesto
 //AND tercero.idtercero = manifiesto.tercero_idaliado
 // group by manifiesto.idmanifiesto ORDER BY guia.numero_guia";
-   $res2 = $operacion->consultar($cons);
-   if (mysql_num_rows($res2) > 0)
-   {
-       $dataSetini = "[";
-       $dataSet = "";
-       while ($filas = mysql_fetch_assoc($res2))
-       {
+  $res2 = mysql_query($cons);
 
-           $idmanifiesto = $filas["idmanifiesto"];
-           //$factura_idfactura = ucfirst( $filas["factura_idfactura"] );
-           $tercero_idmensajero_recibe = $filas["tercero_idmensajero_recibe"];
-           $numero_manifiesto = $filas["num_manifiesto"];
-           $tercero_idmensajero_entrega = $filas["tercero_idmensajero_entrega"];
-           //$area_manifiesto = ucfirst( $filas["area_manifiesto"] );	
-           $sucursal_idsucursal = $filas["sucursal_idsucursal"];
-           $tercero_idaliado = $filas["tercero_idaliado"];
-           $nombres_terceroali = $filas["nombres_tercero"];
-           if ($tercero_idaliado == 1)
-           {
-               $nombres_terceroali = '-';
-           }
-           $plazo_entrega_manifiesto = $filas["plazo_entrega_manifiesto"];
-           //$plazo_asignacion_orden = ucfirst( $filas["plazo_asignacion_orden"] );
+  //$res2 = $operacion->consultar($cons);
+  if (mysql_num_rows($res2) > 0)
+  {
+      $dataSetini = "[";
+      $dataSet = "";
+      while ($filas = mysql_fetch_assoc($res2))
+      {
+          $numero_manifiesto = $filas['idmanifiesto'];
+          $nombreTerceros = $filas['tercero'];
+          $tiposTerceros = $filas['tipo'];
 
-           $cond = "idtercero = $tercero_idmensajero_recibe";
-           $res = $tercero->consultar($cond);
-           $fila2 = mysql_fetch_assoc($res);
-           $nombres_tercero = $fila2["nombres_tercero"];
-           $apellidos_tercero = $fila2["apellidos_tercero"];
-           $documento_tercero = $fila2["documento_tercero"];
+          $cont = 0;
 
-           $cond = "idtercero = $tercero_idmensajero_entrega";
-           $res = $tercero->consultar($cond);
-           $fila2 = mysql_fetch_assoc($res);
-           $nombres_tercero2 = $fila2["nombres_tercero"];
-           $apellidos_tercero2 = $fila2["apellidos_tercero"];
-           $documento_tercero2 = $fila2["documento_tercero"];
 
-           $cond = "idsucursal=$sucursal_idsucursal";
-           $res = $sucursal->consultar($cond);
-           $fila2 = mysql_fetch_assoc($res);
-           $nombre_sucursal = $fila2["nombre_sucursal"];
+$idmanifiesto=$filas['idmanifiesto'];
 
-           $linkcargar = "<a href=\'../manifiesto/actualizaredo.php?nombre=$nombres&id=$idmanifiesto\'><img src=\'../../imagenes/cargar.jpg\' /></a>";
-           // hacer manifiesto count en guias con igual idmanifiesto	 
-           $wrapini = $wrapfin = "";
-           $wrapini = "<a target=\'_blank\' title=\'Ver detalle manifiesto: $idmanifiesto \' href=\'consultadetalle.php?nombre=$nombres&id=$idmanifiesto\' onClick=\'return(wo(this))\'>";
-           $wrapfin = "</a>";
+          do
+          {
+              // echo($nombreTerceros."<br />");
+              // echo($tiposTerceros."<br />");
+              $tipo = strtok($tiposTerceros, ',');
+              $nombre[$tipo] = strtok($nombreTerceros, ',');
 
-           $dataSet = $dataSet . "['$wrapini$numero_manifiesto$wrapfin','$wrapini$nombres_tercero $apellidos_tercero$wrapfin','$wrapini$nombres_tercero2 $apellidos_tercero2$wrapfin','$wrapini$nombre_sucursal$wrapfin','$wrapini$nombres_terceroali$wrapfin','$wrapini$plazo_entrega_manifiesto$wrapfin','$linkcargar'],";
-       }
-       $dataSet = substr_replace($dataSet, "];", strlen($dataSet) - 1);
-       $dataSet = $dataSetini . $dataSet;
-       $vacio = false;
-   }
+              $pos = stripos($nombreTerceros, ',');
+              $nombreTerceros = substr($nombreTerceros, $pos + 1);
+              $pos = stripos($tiposTerceros, ',');
+              $tiposTerceros = substr($tiposTerceros, $pos + 1);
+
+
+
+              $cont++;
+          } while (strlen($tiposTerceros) > 0 && $cont < 4);
+
+          $plazo_entrega_manifiesto = $filas['plazo_entrega_manifiesto'];
+          $nombre_sucursal = $filas['nombre_sucursal'];
+//           $nombres_tercero2=strtok($nombres_tercero, ',');
+//           
+
+
+          $linkcargar = "<a href=\'../manifiesto/actualizaredo.php?nombre=$nombres&id=$idmanifiesto\'><img src=\'../../imagenes/cargar.jpg\' /></a>";
+          // hacer manifiesto count en guias con igual idmanifiesto	 
+          $wrapini = $wrapfin = "";
+          $wrapini = "<a target=\'_blank\' title=\'Ver detalle manifiesto: $idmanifiesto \' href=\'consultadetalle.php?nombre=$nombres&id=$idmanifiesto\' onClick=\'return(wo(this))\'>";
+          $wrapfin = "</a>";
+
+          $dataSet = $dataSet . "['$wrapini$numero_manifiesto$wrapfin','$nombre[1]','$nombre[3]','$nombre[2]','$nombre_sucursal','$nombre[4]','$plazo_entrega_manifiesto','$linkcargar'],";
+      }
+      $dataSet = substr_replace($dataSet, "];", strlen($dataSet) - 1);
+      $dataSet = $dataSetini . $dataSet;
+      $vacio = false;
+  }
 ?>
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
 <html>
@@ -123,6 +123,7 @@
                     "aaData": aDataSet,
                     "aoColumns": [
                         {"sTitle": "Num. Manifiesto"},
+                        {"sTitle": "Creado Por"},
                         {"sTitle": "Mensajero Recibe"},
                         {"sTitle": "Mensajero Entrega"},
                         {"sTitle": "Nombre Sucursal"},
@@ -156,35 +157,35 @@
     </head>
     <body id="dt_example">
         <?
-           //generar menu
-           $objMenu = new Menu($objUser);
-           $objMenu->generarMenu();
+          //generar menu
+          $objMenu = new Menu($objUser);
+          $objMenu->generarMenu();
 //           $operacion = new operacion();
 //           $operacion->menu();
         ?>
         <div id="container">
             <?
-               if (isset($_GET["mensaje"]))
-               {
-                   ?> 
+              if (isset($_GET["mensaje"]))
+              {
+                  ?> 
 
-                   <div class="mensaje"><?= $_GET["mensaje"] ?></div>  
+                  <div class="mensaje"><?= $_GET["mensaje"] ?></div>  
 
-                   <?
-               }
+                  <?
+              }
             ?>
             <p>&nbsp;</p>
             <table class="display"><tr><td>
-                        <a href="add.php">Crear Manifiesto</a>
+                        <a href="add/main.php">Crear Manifiesto</a>
                     </td></tr></table>
             <br>
             <?
-               if ($vacio)
-               {
-                   ?>
-                   <div align="center" style="color:#FF0000">No hay datos para mostrar</div>
-                   <?
-               }
+              if ($vacio)
+              {
+                  ?>
+                  <div align="center" style="color:#FF0000">No hay datos para mostrar</div>
+                  <?
+              }
             ?>
             <div id="dynamic"></div>
             <div class="spacer"></div>

@@ -15,8 +15,14 @@ and open the template in the editor.
         para que se puedan administrar.
     </bug>
     <bug  corregido="true" gravedad="5" >
-        al momento de guardar la guia para el cliente corporativo, se presenta un bug en con el bloqueo de la tabla
+        al momento de guardar la guia para el cliente corporativo, se presenta un bug con el bloqueo de la tabla
         destinatario.
+    </bug>
+    
+    <bug  corregido="false" gravedad="5" >
+        al momento de crear un manifiesto se puede presentar que al crearlos y volver a pasar el mismo numero no se aumente el numero de estos
+        en la capa php , pero si en la capa js, lo que implica que si borro todos el numero de manifiestos en js sea >0 y que al enviar asi los
+        datos se produsca un error al insertarlo. (no confirmado, pero posible)
     </bug>
     
     

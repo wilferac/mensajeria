@@ -190,7 +190,7 @@
           $arrayMensajeros = $daoMen->getAll($idSucur, 5);
 
           echo("Mensajero que Resibe: 
-              <select id='selMensajeroEntrega'>");
+              <select id='selMensajeroResibe'>");
           echo("<option value='-1'>Seleccione</option>");
           foreach ($arrayMensajeros as $objMen)
           {
@@ -238,7 +238,7 @@
 
 //onclick='guardar($tipo);'
       echo("<h2 align=center>");
-      echo("<button class='btnGuardar'  style=' width: 90px;'>Guardar</button>");
+      echo("<button class='btnGuardar'  style=' width: 90px;' onclick='guardarManiCiudad()' >Guardar</button>");
       echo("</h2>");
       //resteo el arreglo de guias :D
       $arreGuias = new ArrayObject();
@@ -343,33 +343,39 @@
   function guardar($objUser)
   {
       $idMen = $_REQUEST['idMensajero'];
-      $idZona = $_REQUEST['idZona'];
-      $plazo = $_REQUEST['plazo'];
-      //debo saber el tipo de mensajero al q le voy a asignar la guia
-      $tipo = $_REQUEST['tipo'];
+
       $arreGuias = unserialize($_SESSION['arregloGuias']);
 
       $idCreador = $objUser->getId();
 
+      $idAli=$_REQUEST['idAli'];
+      $idSucur=$_REQUEST['idSucur'];
+      $idMenResibe=$_REQUEST['idMenResibe'];
 
-      //echo($idMen." zona ".$idZona." plazo ".$plazo." tipo ".$tipo);
+      //echo($idMen." ali ".$idAli." sucur ".$idSucur." menResibe ".$idMenResibe);
+      
+      if($idAli == -1)
+      {
+          $idAli = NULL;
+      }
+      if($idSucur == -1)
+      {
+          $idSucur = NULL;
+      }
+      if($idMenResibe == -1)
+      {
+          $idMenResibe = NULL;
+      }
+      
+      
+      $objManifiesto = new Manifiesto(-1, $idSucur, $idCreador, 0, NULL, NULL);
+      
 
-      $objManifiesto;
       $daoMani = new DaoManifiesto();
 
-      if ($tipo == 5)
-      {
-          $objManifiesto = new Manifiesto(-1, NULL, $idCreador, $plazo, $idZona, NULL);
-      }
 
-      if ($tipo == 8)
-      {
-          $tarifa = $_REQUEST['tarifa'];
-
-          $objManifiesto = new Manifiesto(-1, NULL, $idCreador, $plazo, $idZona, $tarifa);
-      }
-
-      $objManifiesto->setTerceros(NULL, $idMen, NULL);
+      $objManifiesto->setTerceros($idAli, $idMen, $idMenResibe);
+      
       $daoMani->insertar($objManifiesto, $arreGuias);
   }
 

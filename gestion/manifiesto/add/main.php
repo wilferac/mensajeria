@@ -172,6 +172,10 @@
                                     alert("Manifiesto creado correctamente");
                                     location.reload(); 
                                 }
+                                else
+                                {
+                                    alert("no se pudo guardar el manifiesto:\n"+data);
+                                }
                             
                             }});
                         return;      
@@ -192,6 +196,10 @@
                                     alert("Manifiesto creado correctamente");
                                     location.reload(); 
                                 }
+                                else
+                                {
+                                    alert("no se pudo guardar el manifiesto:\n"+data);
+                                }
                             }});
                         
                         
@@ -202,29 +210,73 @@
                 } 
                 
             }
-            //                
-            //    $('.btnMensajeria').keypress(function(event) {
-            //                    event.preventDefault();
-            //                    event.keyCode.toString();
-            //                });
-            //            });
             
-                        
-            //            $("#registrar").click(function() {
-            //                cadenaValores = cadenaValores + todosLosSelect[i].name + igual + todosLosSelect[i].value + amsp;
-            //
-            //                //alert( cadenaValores);
-            //                //            $('#informacion').html('<img src="../../imagenes/loader2.gif" alt="" height="17" />').fadeOut(1000);
-            //                //            var dataString = cadenaValores;
-            //                //alert (dataString);
-            //                $.ajax({
-            //                    type: "POST",
-            //                    url: "registrarosunitario.php",
-            //                    data: dataString,
-            //                    success: function(data) {
-            //            
-            //                    }}
-            //                        )});
+            
+            function guardarManiCiudad()
+            {
+                //alert(nguias);
+                if(nguias<=0)
+                {
+                    alert("Agrega guias antes de guardar N:"+nguias);
+                    return;
+                }
+                if (confirm('¿Estas seguro que deseas crear el manifiesto con estos datos?')){
+                    var idMensajero = document.getElementById('selMensajeroEntrega').value;
+                    
+                    var idAli=document.getElementById('selAli').value
+                    var idSucur=document.getElementById('selSucursal').value;
+                    
+                    
+                    if(idMensajero==-1 )
+                    {
+                        alert("Selecciona los datos del Mensajero que Entrega");
+                        return;
+                    }
+                    
+                    if(idAli ==-1 && idSucur== -1)
+                    {
+                        alert("Algo anda muy mal O_O! (Err. 002)");
+                        return;
+                    }
+                    
+                    var idMenResibe=-1;
+                    if(idSucur  > -1)
+                    {
+                        //selMensajeroResibe
+                        idMenResibe=document.getElementById('selMensajeroResibe').value;
+                        if(idMenResibe==-1)
+                        {
+                            alert("selecciona al mensajero que resibe!");
+                            return;
+                        }
+                    }
+                    //alert(idMensajero+" zona: "+idZona+"plazo "+plazo);
+                    //alert(tipo);
+                    var dataString = 'idMensajero=' + idMensajero + '&option=4'+'&idAli='+idAli+'&idSucur='+idSucur+'&idMenResibe='+idMenResibe;
+
+                    $.ajax({
+                        type: "POST",
+                        url: "addManiCiudad.php",
+                        data: dataString,
+                        success: function(data) {
+                            
+                            if(data==1)
+                            {
+                                alert("Manifiesto creado correctamente");
+                                location.reload(); 
+                            }
+                            else
+                            {
+                                alert("no se pudo guardar el manifiesto:\n"+data);
+                            }
+                            
+                        }});
+                    return;      
+                    
+
+                } 
+                
+            }
 
         </script>
 

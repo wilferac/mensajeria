@@ -88,6 +88,7 @@
             //return;
             $('#response2').load('addManiCiudad.php?option=1&idDep='+text+'&idCiu='+idCiu);
             $('#response3').html('');
+            $('#response4').html('');
             });
           });
           </script>");
@@ -210,21 +211,24 @@
 
       echo('<h3>Guia N.</h3>');
 
-      echo('<input name="guia" type="text" id="txtGuia" size="10" require/> ');
+      echo('<input name="txtGuiaCiu" type="text" id="txtGuiaCiu" size="10" require/> ');
 
-      echo("<script type='text/javascript'>$('#txtGuia').keypress(function(event) {
+      echo("<script type='text/javascript'>$('#txtGuiaCiu').keypress(function(event) {
                     if(event.keyCode.toString()== '13')
                     {
-                        var guiaNum = document.getElementById('txtGuia').value;
+                        var guiaNum = document.getElementById('txtGuiaCiu').value;
                         if(guiaNum == '')
                         {
                             return;
                         }
-                        document.getElementById('txtGuia').value='';
+                        var el = document.getElementById('selCiudad');
+                        var idDep = el.options[el.selectedIndex].label;
+
+                        document.getElementById('txtGuiaCiu').value='';
                         event.preventDefault();
                         //alert('se '+guiaNum);
                         
-                       // $('#response3').load('addManiMensajero.php?option=2&numGuia='+guiaNum);
+                       $('#response3').load('addManiCiudad.php?option=2&numGuia='+guiaNum+'&idDep='+idDep);
                     }
                 });
                 nguias=0;
@@ -240,16 +244,35 @@
       $arreGuias = new ArrayObject();
       $_SESSION['arregloGuias'] = serialize($arreGuias);
   }
-  
+
   function addRango()
   {
       //recupero el arreglo de guias
       $arreGuias = unserialize($_SESSION['arregloGuias']);
       $r1 = $_REQUEST['r1'];
       $r2 = $_REQUEST['r2'];
-      
-      echo($r1." - ".$r2);
-      
+
+      $idDep = $_REQUEST['idDep'];
+
+      //echo($r1 . " - " . $r2);
+
+      $daoGuia = new DaoGuia();
+      for ($cont = $r1; $cont <= $r2; $cont++)
+      {
+          if ($daoGuia->checkManifiesto($cont, $idDep))
+          {
+              $arreGuias[$cont] = $cont;
+              //le sumo uno a las guias
+              echo("<script type='text/javascript'>
+             nguias++;
+                  </script>");
+          }
+          else
+          {
+              echo("La guia numero $cont no se pudo agregar<br>");
+          }
+      }
+      showGuias($arreGuias);
   }
 
   function addGuia($objUser)
@@ -257,11 +280,10 @@
       //recupero el arreglo de guias
       $arreGuias = unserialize($_SESSION['arregloGuias']);
       $num = $_REQUEST['numGuia'];
-      //validar si se puede agregar
-      //echo($num);
-//      $arreGuias->size();
-      $idDep = $objUser->getIdDepartamento();
+      $idDep = $_REQUEST['idDep'];
+
       $daoGuia = new DaoGuia();
+      //valido si la puedo agregar, pasando el departamento al q la voy a enviar
       if ($daoGuia->checkManifiesto($num, $idDep))
       {
           $last = sizeof($arreGuias);
@@ -282,20 +304,20 @@
           showGuias($arreGuias);
       }
   }
-
-  function delGuia()
-  {
-
-      $num = $_REQUEST['numGuia'];
-
-      //recupero el arreglo de guias
-      $arreGuias = unserialize($_SESSION['arregloGuias']);
-      unset($arreGuias[$num]);
-      //echo("xD");
-      //var_dump($arreGuias);
-      //++ quitar una guia del arreglo
-      showGuias($arreGuias); //refresco
-  }
+//se reutiliza la funcion de addMainMensajero :D
+//  function delGuia()
+//  {
+//
+//      $num = $_REQUEST['numGuia'];
+//
+//      //recupero el arreglo de guias
+//      $arreGuias = unserialize($_SESSION['arregloGuias']);
+//      unset($arreGuias[$num]);
+//      //echo("xD");
+//      //var_dump($arreGuias);
+//      //++ quitar una guia del arreglo
+//      showGuias($arreGuias); //refresco
+//  }
 
   //funcion para mostrar las guias que tengo acumuladas.
   //no recupera el arreglo de guias ya que de eso se encargan add y del

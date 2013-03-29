@@ -53,7 +53,9 @@
             {
                 var r1=document.getElementById('rango1').value;
                 var r2=document.getElementById('rango2').value;
-                
+                //saco el departamento para comparar con las guias
+                var el = document.getElementById('selCiudad');
+                var idDep = el.options[el.selectedIndex].label;
                 
                 var x = parseInt(r1);
                 var y = parseInt(r2);
@@ -70,7 +72,7 @@
                 if(x<y)
                 {
                     if(confirm("Seguro que desea agregar este rango?\n El programa saltara los numero de guia que no se puedan agregar"))
-                    $('#response3').load('addManiCiudad.php?option=6&r1='+r1+'&r2='+r2);
+                        $('#response3').load('addManiCiudad.php?option=6&r1='+r1+'&r2='+r2+'&idDep='+idDep);
                 }
                 else
                 {
@@ -104,6 +106,7 @@
                 }
                 else
                 {
+                    $('#response3').html('');
                     $('#response4').load('addManiCiudad.php?option=5&idAli='+idAli+'&idSucur='+idSucur);
                 }
             }
@@ -114,7 +117,7 @@
                 //                var dataString = 'option=' + 3+ '&numGuia='+num;
                 nguias--;
                 $('#response3').load('addManiMensajero.php?option=3&numGuia='+num);
-                $('#response4').html('');
+                //$('#response4').html('');
             }
             
             function guardar(tipo)

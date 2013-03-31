@@ -129,6 +129,8 @@
       }
       echo("</select></td></tr><tr><td>");
 
+      echo("<h3>Peso</h3>");
+      echo('<input name="peso" type="text" id="peso" size="5" require/> ');
 
       $daoSucur = new DaoSucursal();
       $arreSucurs = $daoSucur->getAll($idDep);
@@ -138,6 +140,9 @@
 
       echo("<select id='selSucursal' onchange='selDestino(1)'>");
       echo("<option value='-1'>Seleccione</option>");
+
+
+
       foreach ($arreSucurs as $obj)
       {
           $id = $obj->getId();
@@ -304,6 +309,7 @@
           showGuias($arreGuias);
       }
   }
+
 //se reutiliza la funcion de addMainMensajero :D
 //  function delGuia()
 //  {
@@ -318,7 +324,6 @@
 //      //++ quitar una guia del arreglo
 //      showGuias($arreGuias); //refresco
 //  }
-
   //funcion para mostrar las guias que tengo acumuladas.
   //no recupera el arreglo de guias ya que de eso se encargan add y del
   function showGuias($arreGuias)
@@ -343,39 +348,39 @@
   function guardar($objUser)
   {
       $idMen = $_REQUEST['idMensajero'];
-
+      $peso = $_REQUEST['peso'];
       $arreGuias = unserialize($_SESSION['arregloGuias']);
 
       $idCreador = $objUser->getId();
 
-      $idAli=$_REQUEST['idAli'];
-      $idSucur=$_REQUEST['idSucur'];
-      $idMenResibe=$_REQUEST['idMenResibe'];
+      $idAli = $_REQUEST['idAli'];
+      $idSucur = $_REQUEST['idSucur'];
+      $idMenResibe = $_REQUEST['idMenResibe'];
 
       //echo($idMen." ali ".$idAli." sucur ".$idSucur." menResibe ".$idMenResibe);
-      
-      if($idAli == -1)
+
+      if ($idAli == -1)
       {
           $idAli = NULL;
       }
-      if($idSucur == -1)
+      if ($idSucur == -1)
       {
           $idSucur = NULL;
       }
-      if($idMenResibe == -1)
+      if ($idMenResibe == -1)
       {
           $idMenResibe = NULL;
       }
-      
-      
+
+
       $objManifiesto = new Manifiesto(-1, $idSucur, $idCreador, 0, NULL, NULL);
-      
+      $objManifiesto->peso = $peso;
 
       $daoMani = new DaoManifiesto();
 
 
       $objManifiesto->setTerceros($idAli, $idMen, $idMenResibe);
-      
+
       $daoMani->insertar($objManifiesto, $arreGuias);
   }
 

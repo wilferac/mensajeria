@@ -221,6 +221,16 @@
                     return;
                 }
                 if (confirm('¿Estas seguro que deseas crear el manifiesto con estos datos?')){
+                    
+                    var peso = document.getElementById('peso').value;
+                    var pe = parseInt(peso);
+                    if (isNaN(pe) || pe <=0)
+                    {
+                        alert("Digita el peso de la guia");
+                        return;
+                    }
+                    
+                    
                     var idMensajero = document.getElementById('selMensajeroEntrega').value;
                     
                     var idAli=document.getElementById('selAli').value
@@ -252,7 +262,7 @@
                     }
                     //alert(idMensajero+" zona: "+idZona+"plazo "+plazo);
                     //alert(tipo);
-                    var dataString = 'idMensajero=' + idMensajero + '&option=4'+'&idAli='+idAli+'&idSucur='+idSucur+'&idMenResibe='+idMenResibe;
+                    var dataString = 'idMensajero=' + idMensajero + '&option=4'+'&idAli='+idAli+'&idSucur='+idSucur+'&idMenResibe='+idMenResibe+'&peso='+pe;
 
                     $.ajax({
                         type: "POST",

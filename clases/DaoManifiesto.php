@@ -28,6 +28,9 @@
           $tarifa = !empty($objMani->tarifa) ? $objMani->tarifa : "NULL";
           $idZona = !empty($objMani->idZona) ? $objMani->idZona : "NULL";
 
+          
+          $peso = !empty($objMani->peso) ? $objMani->peso : "NULL";
+          
 
           mysql_query("BEGIN");
 //          
@@ -35,8 +38,8 @@
 //
 //            mysql_query("ROLLBACK");
 
-          $query = "INSERT INTO manifiesto (sucursal_idsucursal, plazo_entrega_manifiesto,tarifadestajo, zonamensajero) 
-              VALUES($idSucur, $objMani->plazo, $tarifa,$idZona )";
+          $query = "INSERT INTO manifiesto (sucursal_idsucursal, plazo_entrega_manifiesto,tarifadestajo, zonamensajero,peso) 
+              VALUES($idSucur, $objMani->plazo, $tarifa,$idZona,$peso )";
 
           if (mysql_query($query))
           {

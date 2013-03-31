@@ -17,7 +17,7 @@
        public $idAliado;
        public $idMenEntrega;
        public $idMenResive;
-       
+       public $peso;
 
        public function __construct($id,$idSucursal,$idCreador,$plazo,$idZona,$tarifa)
        {
@@ -31,6 +31,7 @@
            $this->idAliado=NULL;
            $this->idMenEntrega=NULL;
            $this->idMenResive=NULL;
+           $this->peso = NULL;
        }
        
        //seteo los terceros extra.

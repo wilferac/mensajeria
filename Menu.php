@@ -94,7 +94,7 @@
                                    </ul>
                                </li>
 
-                               <li><a  href="<?= $this->raiz ?>/gestion/guia/pistoleocausal.php">Pistoleo</a>
+                               <li><a  href="<?= $this->raiz ?>/gestion/manifiesto/pistoleo/main.php">Pistoleo</a>
                                </li>
 
                            </ul>

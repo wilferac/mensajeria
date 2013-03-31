@@ -37,7 +37,7 @@
             inner join ciudad c1 on c1.idciudad = g.ciudad_idorigen inner join ciudad c2 on c2.idciudad = g.ciudad_iddestino
             inner join producto p on p.idproducto = g.producto_idproducto
             inner join tipo_producto tp on tp.idtipo_producto = p.tipo_producto_idtipo_producto
-            inner join causal_devolucion cd on cd.idcausal_devolucion = g.causal_devolucion_idcausal_devolucion
+            inner join estadoGuia cd on cd.idcausal_devolucion = g.causal_devolucion_idcausal_devolucion
             left join destinatario d on d.iddestinatario = g.tercero_iddestinatario
             ";
 

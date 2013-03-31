@@ -12,6 +12,8 @@
        //obtengo la sucursal para poder filtrarlos desde js
        private $idCiudad;
        private $idDepartamento;
+       //este es para guardar el id de su relacion con un manifiesto (guia_manifiesto)
+       private $idMani;
 
        public function __construct($num, $ciu, $dep)
        {
@@ -28,6 +30,16 @@
        public function getNumero()
        {
            return $this->numero;
+       }
+       
+       public function getIdMani()
+       {
+           return $this->idMani;
+       }
+       
+       public function setIdMani($id)
+       {
+           $this->idMani=$id;
        }
 
    }

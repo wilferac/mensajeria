@@ -23,12 +23,12 @@
       {
           //$objMani= new Manifiesto($id, $idSucursal, $idCreador, $plazo, $idZona, $tarifa);
           //verifico si es null
-          
+
           $idSucur = !empty($objMani->idSucursal) ? $objMani->idSucursal : "NULL";
           $tarifa = !empty($objMani->tarifa) ? $objMani->tarifa : "NULL";
           $idZona = !empty($objMani->idZona) ? $objMani->idZona : "NULL";
-          
-          
+
+
           mysql_query("BEGIN");
 //          
 //          mysql_query("COMMIT");
@@ -78,7 +78,7 @@
                   foreach ($arreGuias as $numero)
                   {
                       //cambio de estado para las guias implicadas
-                      if (mysql_query($query4." numero_guia = $numero"))
+                      if (mysql_query($query4 . " numero_guia = $numero"))
                       {
                           $query3 = $query3 . "($idMani,$numero),";
                       }
@@ -87,7 +87,6 @@
                           mysql_query("ROLLBACK");
                           die(mysql_error());
                       }
-                      
                   }
                   //quito la ultima coma :)
                   $query3 = substr("$query3", 0, -1);
@@ -113,6 +112,36 @@
           {
               mysql_query("ROLLBACK");
               die(mysql_error());
+          }
+      }
+
+      public function darAlta($idMani)
+      {
+          //debo verificar si de verdad el manifiesto esta sin guias :(
+
+          $cons = "SELECT g.numero_guia, gm.gmId  FROM guia g INNER JOIN  guia_manifiesto gm ON  gm.guiId = g.numero_guia
+WHERE gm.manId = $idMani AND gm.estado = 1";
+
+          $results2 = mysql_query($cons) or die(mysql_error());
+
+          if ($fila = mysql_fetch_assoc($results2))
+          {
+              echo("el manifiesto aun contiene guias activas");
+              return false;
+          }
+          else
+          {
+              $query = "UPDATE manifiesto m SET m.estado = 0 , m.fechaCierre = CURRENT_TIMESTAMP WHERE m.idmanifiesto =$idMani AND m.fechaCierre is NULL";
+
+              if (mysql_query($query))
+              {
+                  return true;
+              }
+              else
+              {
+                  echo(mysql_error());
+                  return false;
+              }
           }
       }
 

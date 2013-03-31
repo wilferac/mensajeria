@@ -92,7 +92,7 @@
           //codigo para dar de alta en la BD
           //echo($arreIdGuias[$numGuia]." num guia ". $numGuia);
           //return;
-          if ($daoGuia->altaDeManifiesto($arreIdGuias[$numGuia], $numGuia))
+          if ($daoGuia->altaDeManifiesto($arreIdGuias[$numGuia], $numGuia,5))
           {
               unset($arreGuias[$numGuia]);
           }

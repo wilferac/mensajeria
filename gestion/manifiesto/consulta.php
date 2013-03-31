@@ -33,7 +33,7 @@
   $operacion = new operacion();
 
   //$cons = "SELECT * FROM guia, manifiesto WHERE guia.manifiesto_idmanifiesto=manifiesto.idmanifiesto ORDER BY guia.numero_guia";
-  $cons = "SELECT s.nombre_sucursal ,m.idmanifiesto ,m.sucursal_idsucursal, m.plazo_entrega_manifiesto,   GROUP_CONCAT(t.nombres_tercero SEPARATOR ',') AS tercero, GROUP_CONCAT(tm.tipo SEPARATOR ',')  AS tipo
+  $cons = "SELECT m.estado, s.nombre_sucursal ,m.idmanifiesto ,m.sucursal_idsucursal, m.plazo_entrega_manifiesto, GROUP_CONCAT(t.apellidos_tercero SEPARATOR ',') AS apellidos,  GROUP_CONCAT(t.nombres_tercero SEPARATOR ',') AS tercero, GROUP_CONCAT(tm.tipo SEPARATOR ',')  AS tipo
        FROM manifiesto m INNER JOIN tercero_manifiesto tm ON tm.idmanifiesto = m.idmanifiesto 
        INNER JOIN tercero t ON t.idtercero= tm.idtercero 
        LEFT JOIN sucursal s ON s.idsucursal = m.sucursal_idsucursal       
@@ -52,12 +52,16 @@
       $dataSet = "";
       while ($filas = mysql_fetch_assoc($res2))
       {
+
+
+          $apellidos = $filas['apellidos'];
           $numero_manifiesto = $filas['idmanifiesto'];
           $nombreTerceros = $filas['tercero'];
           $tiposTerceros = $filas['tipo'];
 
           $cont = 0;
           $nombre = new ArrayObject();
+          $apellido = new ArrayObject();
           $tipo = "";
 
           $idmanifiesto = $filas['idmanifiesto'];
@@ -68,11 +72,14 @@
               // echo($tiposTerceros."<br />");
               $tipo = strtok($tiposTerceros, ',');
               $nombre[$tipo] = strtok($nombreTerceros, ',');
+              $apellido[$tipo] = strtok($apellidos, ',');
 
               $pos = stripos($nombreTerceros, ',');
               $nombreTerceros = substr($nombreTerceros, $pos + 1);
               $pos = stripos($tiposTerceros, ',');
               $tiposTerceros = substr($tiposTerceros, $pos + 1);
+              $pos = stripos($apellidos, ',');
+              $apellidos = substr($apellidos, $pos + 1);
 
 
 
@@ -83,8 +90,8 @@
           $nombre_sucursal = $filas['nombre_sucursal'];
 //           $nombres_tercero2=strtok($nombres_tercero, ',');
 //           
-
-          if (isset($nombre_sucursal))
+          $estado = $filas['estado'];
+          if (isset($nombre_sucursal) && $estado == 1)
           {
               $linkcargar = "<a href=del/main.php?idMani=$idmanifiesto><img src=\'../../imagenes/cargar.jpg\' /></a>";
           }
@@ -92,14 +99,14 @@
           {
               $linkcargar = "";
           }
-
-
+          //cambio el dato para mostrarlo :o
+          $estado = $estado == 0 ? '<font color="green">Cerrado</font>' : '<font color="red">Abierto</font>';
           // hacer manifiesto count en guias con igual idmanifiesto	 
           $wrapini = $wrapfin = "";
           $wrapini = "<a target=\'_blank\' title=\'Ver detalle manifiesto: $idmanifiesto \' href=\'consultadetalle.php?nombre=$nombres&id=$idmanifiesto\' onClick=\'return(wo(this))\'>";
           $wrapfin = "</a>";
 
-          $dataSet = $dataSet . "['$wrapini$numero_manifiesto$wrapfin','$nombre[1]','$nombre[3]','$nombre[2]','$nombre_sucursal','$nombre[4]','$plazo_entrega_manifiesto','$linkcargar'],";
+          $dataSet = $dataSet . "['$wrapini$numero_manifiesto$wrapfin','$estado','$nombre[1] $apellido[1]','$nombre[3] $apellido[3]','$nombre[2] $apellido[2]','$nombre_sucursal','$nombre[4] $apellido[4]','$plazo_entrega_manifiesto','$linkcargar'],";
       }
       $dataSet = substr_replace($dataSet, "];", strlen($dataSet) - 1);
       $dataSet = $dataSetini . $dataSet;
@@ -132,6 +139,7 @@
                     "aaData": aDataSet,
                     "aoColumns": [
                         {"sTitle": "Num. Manifiesto"},
+                        {"sTitle": "Estado"},
                         {"sTitle": "Creado Por"},
                         {"sTitle": "Mensajero Recibe"},
                         {"sTitle": "Mensajero Entrega"},

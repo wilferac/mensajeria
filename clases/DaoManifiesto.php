@@ -129,7 +129,7 @@ WHERE gm.manId = $idMani AND gm.estado = 1";
 
           if ($fila = mysql_fetch_assoc($results2))
           {
-              echo("el manifiesto aun contiene guias activas");
+              //echo("el manifiesto aun contiene guias activas");
               return false;
           }
           else

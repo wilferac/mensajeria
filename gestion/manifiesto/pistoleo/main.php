@@ -40,12 +40,75 @@
         <script type="text/javascript">
             var nguias=0;
 
+            function quitar(num)
+            {
+                //alert(nguias);
+                $('#response2').load('descargarGuia.php?option=3&numGuia='+num);
+                nguias--;
+            }
+
             function swithCase(num)
             { 
                 nguias=0;
                 $('#response2').html('');
                 $('#response').load('descargarGuia.php?option=0&caso='+num); 
             }
+            
+            function guardar(tipo)
+            {
+                //alert(nguias);
+                if(nguias<=0)
+                {
+                    alert("Agrega guias antes de guardar N:"+nguias);
+                    return;
+                }
+                if (confirm('¿Estas seguro que deseas descargar estas guias?')){
+                    var fechaManual = document.getElementById('fechaManual').value;
+                    if(fechaManual == "")
+                        {
+                            alert("Deberias seleccionar una fecha!");
+                            return;
+                        }
+                    
+                    var razon=-1;
+                    
+                    if(tipo==2)
+                    {
+                        razon = document.getElementById('selRazon').value;
+                    
+                        if(razon==-1)
+                        {
+                            alert("Selecciona una causal de devolución");
+                            return;
+                        }
+                    }
+                    
+                    var dataString = 'option=2'+'&tipo='+tipo+'&fechaManual='+fechaManual+'&razon='+razon;
+
+                    $.ajax({
+                        type: "POST",
+                        url: "descargarGuia.php",
+                        data: dataString,
+                        success: function(data) {
+                            if(data==1)
+                            {
+                                alert("Guias Descargadas!");
+                                location.reload(); 
+                            }
+                            else
+                            {
+                                alert("No fue posible descargar las guias =(\n"+data);
+                            }
+                            
+                        }});
+                    return;      
+
+                
+                    
+                //document.tuformulario.submit()
+            } 
+                
+        }
             
             
         </script>

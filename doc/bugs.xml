@@ -25,6 +25,11 @@ and open the template in the editor.
         datos se produsca un error al insertarlo. (no confirmado, pero posible)
     </bug>
     
+    <bug  corregido="false" gravedad="5" >
+        el update a la tabla guia_manifiesto se hace de manera muy rudimentaria, se deberia hacer por una tabla temporal con el fin de ganar
+        velocidad. queda pendiente para la nueva vercion.
+    </bug>
+    
     
     
 </root>

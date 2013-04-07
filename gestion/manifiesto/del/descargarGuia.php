@@ -144,7 +144,7 @@
           echo("<tr>");
           echo("<td>$arreIdGuias[$num]</td>");
           echo("<td>$num</td>");
-          echo("<td><a onclick='quitar($num);'>Quitar</a></td>");
+          echo("<td><a onclick='quitar(\"$num\");'>Quitar</a></td>");
           echo("</tr>");
       }
       echo("</table>");

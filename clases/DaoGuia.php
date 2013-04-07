@@ -69,7 +69,7 @@ WHERE g.estado = 1 AND c.departamento_iddepartamento = $depCod AND g.numero_guia
 
           if (mysql_query($query))
           {
-              $query2 = "UPDATE guia g SET g.`causal_devolucion_idcausal_devolucion` = $estadoGuia WHERE g.`numero_guia` =$idGuia";
+              $query2 = "UPDATE guia g SET g.`causal_devolucion_idcausal_devolucion` = $estadoGuia WHERE g.`numero_guia` ='$idGuia'";
               if (mysql_query($query2))
               {
                   mysql_query("COMMIT");
@@ -105,8 +105,8 @@ WHERE g.estado = 1 AND c.departamento_iddepartamento = $depCod AND g.numero_guia
           $where2 = "WHERE ";
           foreach ($arreIdGuia as $num)
           {
-              $where = $where . " g.gmId=$arreIdGuiaMani[$num] or";
-              $where2 = $where2 . " g.numero_guia=$num or";
+              $where = $where . " g.gmId='$arreIdGuiaMani[$num]' or";
+              $where2 = $where2 . " g.numero_guia='$num' or";
           }
           //quito los ultimos or
           $where = substr($where, 0, -2);
@@ -144,7 +144,7 @@ WHERE g.estado = 1 AND c.departamento_iddepartamento = $depCod AND g.numero_guia
       //esta funcion va a verificar si la guia esta asignada a un manifiesto y se puede dar de alta (guia_manifiesto)
       public function checkAlta($numGuia)
       {
-          $cons = "SELECT * FROM viewGuiasManifiesto WHERE  guiId = $numGuia";
+          $cons = "SELECT * FROM viewGuiasManifiesto WHERE  guiId = '$numGuia'";
 
           $results2 = mysql_query($cons) or die(mysql_error());
 
@@ -156,7 +156,7 @@ WHERE g.estado = 1 AND c.departamento_iddepartamento = $depCod AND g.numero_guia
               $objGuia->setIdMani($fila['gmId']);
               //el id del manifiesto
               $objGuia->setIdManifiesto($fila['manId']);
-              $objGuia->setMensajero($fila['nombres_tercero'] . " " . $fila['apellidos_tercero']);
+              $objGuia->setMensajero($fila['nombres']);
               return $objGuia;
           }
 

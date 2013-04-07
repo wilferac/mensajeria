@@ -51,10 +51,17 @@
 
 
 
-           $cond = "idsucursal=$sucursal_idsucursal";
-           $res = $sucursal->consultar($cond);
-           $fila2 = mysql_fetch_assoc($res);
-           $nombre_sucursal = $fila2["nombre_sucursal"];
+
+
+           if (isset($sucursal_idsucursal))
+           {
+               $cond = "idsucursal=$sucursal_idsucursal";
+               $res = $sucursal->consultar($cond);
+               $fila2 = mysql_fetch_assoc($res);
+               $nombre_sucursal = $fila2["nombre_sucursal"];
+           }
+
+
 
            $cond = "idtipo_identificacion=$tipo_identificacion_tercero";
            $res = $tipo_identificacion->consultar($cond);

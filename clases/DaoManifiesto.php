@@ -81,9 +81,9 @@
                   foreach ($arreGuias as $numero)
                   {
                       //cambio de estado para las guias implicadas
-                      if (mysql_query($query4 . " numero_guia = $numero"))
+                      if (mysql_query($query4 . " numero_guia = '$numero'"))
                       {
-                          $query3 = $query3 . "($idMani,$numero),";
+                          $query3 = $query3 . "($idMani,'$numero'),";
                       }
                       else
                       {

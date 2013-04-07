@@ -1,45 +1,77 @@
 <?php
 
    /**
-    * esta clase se va a encargar del logueo del usuario
-    * guardando los datos del mismo en la variable de session
+    * User class is for manage user login and more :D
     *
-    * @author inovate
+    * @author Wilson Fernando Andrade Cordoba <wilferac@gmail.com>
+    * @author Grupo Innovate 
+    * @version 0.9
     */
    session_start();
    //miro los archivos incluidos para no caer en el error de incluir de nuevo el mismo
    $archivos_incluidos = get_included_files();
 
-    $mirar=false;
+   $mirar = false;
    foreach ($archivos_incluidos as $nombre_archivo)
    {
-       if($nombre_archivo == "/home/wilferac/public_html/Mensajeria/conexion/conexion.php")
+       if ($nombre_archivo == "/home/wilferac/public_html/Mensajeria/conexion/conexion.php")
        {
-           $mirar=true;
+           $mirar = true;
            break;
        }
    }
-   if(!$mirar)
+   if (!$mirar)
    {
-       require "../conexion/conexion.php";
+       require "/home/wilferac/public_html/Mensajeria/conexion/conexion.php";
    }
 
    class User
    {
-
+       /**
+        * @var int the id of the user in the data base
+        */
        private $id;
+       /**
+        * @var string 
+        */
        private $login;
+       /**
+        * @var string
+        */
        private $pass;
+       /**
+        * @var array store user's roles
+        */
        private $roles;
+        /**
+        * @var boolean
+        */
        private $isLog;
+        /**
+        * @var string
+        */
        private $nombre;
+       /**
+        * @var string
+        */
        private $apellido;
+       /**
+        * @var string
+        */
        private $numDocu;
+       /**
+        * @var int
+        */
        private $idSucursal;
-       //ciudad a la que pertenece el usuario
+       /**
+        * @var int the id of user's city
+        */
        private $idCiudad;
+       /**
+        * @var int the id of user's departamento
+        */
        private $idDepartamento;
-       
+
        public function __construct($login, $pass)
        {
 
@@ -50,38 +82,45 @@
            $roles = array();
            $this->nombre = "";
            $this->apellido = "";
-           $numDocu=-1;
+           $numDocu = -1;
        }
 
-       //funcion para saber si esta logueado 
+       /**
+        * getStatus se usa para saber si el usuario esta logueado o no
+        * 
+        * @return boolean
+        */
        public function getStatus()
        {
            //returno el estado
            return $this->isLog;
        }
-       
+
        public function getNumDocu()
        {
            return $this->numDocu;
-           
        }
-       
+
        public function getIdSucursal()
        {
            return $this->idSucursal;
        }
-       
+
        public function getIdCiudad()
        {
            return $this->idCiudad;
        }
-       
+
        public function getIdDepartamento()
        {
            return $this->idDepartamento;
        }
 
-       //hago la query para loguarlo :D
+       /**
+        * login method , loged a user into the system
+        * 
+        * @return boolean return true o success login or false on fail
+        */
        public function login()
        {
            $query2 = "select t.nombres_tercero, t.apellidos_tercero, t.documento_tercero, t.idtercero, s.idsucursal, s.ciudad_idciudad, c.departamento_iddepartamento
@@ -98,11 +137,11 @@
            if ($fila = mysql_fetch_assoc($results2))
            {
                $this->nombre = $fila['nombres_tercero'];
-               $this->apellido=$fila['apellidos_tercero'];
-               $this->numDocu=$fila['documento_tercero'];
-               $this->idSucursal=$fila['idsucursal'];
-               $this->idCiudad=$fila['ciudad_idciudad'];
-               $this->idDepartamento=$fila['departamento_iddepartamento'];
+               $this->apellido = $fila['apellidos_tercero'];
+               $this->numDocu = $fila['documento_tercero'];
+               $this->idSucursal = $fila['idsucursal'];
+               $this->idCiudad = $fila['ciudad_idciudad'];
+               $this->idDepartamento = $fila['departamento_iddepartamento'];
                $this->isLog = true;
 
                $this->id = $fila['idtercero'];
@@ -127,27 +166,30 @@
                return false;
            }
        }
-       
+
        public function getId()
        {
            return $this->id;
        }
-       
+
        public function getLogin()
        {
            return $this->login;
        }
-       
+
        public function getNombre()
        {
            return $this->nombre;
        }
-       
+
        public function getApellido()
        {
            return $this->apellido;
        }
 
+       /**
+        * show the basic user data
+        */
        public function show()
        {
            echo($this->id);
@@ -158,27 +200,33 @@
            echo("<br>");
            echo("is log: " . $this->isLog);
            echo("<br>");
-           echo($this->pass);
+           //echo($this->pass);
+           //echo("<br>");
+           echo("id de sucursal: " . $this->idSucursal);
            echo("<br>");
-           echo("id de sucursal: ".$this->idSucursal);
+           echo("id de ciudad: " . $this->idCiudad);
            echo("<br>");
-           echo("id de ciudad: ".$this->idCiudad);
-           echo("<br>");
-           echo("id de departamento: ".$this->idDepartamento);
+           echo("id de departamento: " . $this->idDepartamento);
            echo("<br>");
            print_r($this->roles);
        }
-       
+
+       /**
+        * check if the user own a specific rol
+        * 
+        * @param string $rol the rol for compare
+        * @return boolean true o false depending if the user have the rol or not
+        */
        public function checkRol($rol)
        {
            //el admin tiene todos los roles :D
-           if($this->roles["Admin"]==1)
+           if ($this->roles["Admin"] == 1)
            {
                return true;
            }
-               
-           
-           if($this->roles[$rol] == 1)
+
+
+           if ($this->roles[$rol] == 1)
            {
                return true;
            }

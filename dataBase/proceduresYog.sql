@@ -22,11 +22,11 @@ CALL addGuia (
 -- codigo del procedure
 DELIMITER $$
 
-USE `innovat1_mensajeria`$$
+USE `mensajeria`$$
 
 DROP PROCEDURE IF EXISTS `addGuia`$$
-CREATE DEFINER=`root`@`localhost` PROCEDURE `addGuia`
-(IN duenoOrden INT(11),IN creador INT(11), IN ordenServi INT(11),
+
+CREATE DEFINER=`root`@`localhost` PROCEDURE `addGuia`(IN duenoOrden INT(11),IN creador INT(11), IN ordenServi INT(11),
 IN remitente INT(11), IN remiInfo VARCHAR(50),IN remiCiu INT(11), IN referencia VARCHAR(30),
 IN destinatario INT(11), IN destiNom VARCHAR(45),  IN destiApel VARCHAR(45),IN destiTel VARCHAR(45),
 IN destiCiu INT(11), IN destiDirec VARCHAR(70), IN destiInfo VARCHAR(50),  
@@ -39,20 +39,15 @@ DECLARE idOr INT DEFAULT -1;
 DECLARE prima INT DEFAULT 0;
 DECLARE flete INT DEFAULT 0;
 DECLARE idProducto INT DEFAULT 0;
-
 DECLARE EXIT HANDLER FOR SQLEXCEPTION ROLLBACK;
 -- DECLARE EXIT HANDLER FOR SQLWARNING ROLLBACK;
-
 START TRANSACTION;
 -- busco el idproducto para insertar en la tabla guia :D
 SELECT p.idproducto INTO  idProducto FROM producto p WHERE LOWER(p.nombre_producto) = LOWER(nomProduc) AND p.tipo_producto_idtipo_producto=idTipoProduc ;
-
-
 -- recuerda que falta calcular el valor a pagar de la orden de servicio.
 -- la idea es ir acumulando valores de guias en cada orden , para que al momento de facturar sea rapido :O
-
 IF ordenServi IS NULL THEN
-	SELECT idorden_servicio INTO idOr FROM orden_servicio WHERE tercero_idcliente = duenoOrden AND estado = 1 AND factura_idfactura IS NULL LIMIT 1;
+	SELECT idorden_servicio INTO idOr FROM orden_servicio WHERE tercero_idcliente = duenoOrden AND  fechaentrada IS NULL  AND estado = 1 AND factura_idfactura IS NULL LIMIT 1;
 	IF (idOr = -1) THEN
 		INSERT INTO orden_servicio(tercero_idcliente,unidades,osTotal) 
 		VALUES(duenoOrden,0,0);
@@ -60,7 +55,6 @@ IF ordenServi IS NULL THEN
 	END IF;
 	SET ordenServi  = idOr;
 END IF;
-
 	INSERT INTO guia (
 	alto,ancho, largo,ciudad_iddestino,ciudad_idorigen,contenido,destinatarioInfo,
 	direccion_destinatario_guia,flete,nombre_destinatario_guia,numero_guia,
@@ -90,9 +84,6 @@ IF destinatario IS NOT NULL THEN
 		direccion_destinatario= destiDirec
 	WHERE iddestinatario=destinatario ;
 END IF;
-
-
-
 -- SELECT * FROM destinatario WHERE  iddestinatario=destinatario ;
 -- select * from guia g inner join orden_servicio o     on g.orden_servicio_idorden_servicio = o.idorden_servicio where o.idorden_servicio = ordenServi ;
      

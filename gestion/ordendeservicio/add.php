@@ -13,11 +13,6 @@
        return;
    }
 
-
-
-
-
-
    if (isset($_POST['registrar']))
    {
        $conex = new conexion();
@@ -28,7 +23,7 @@
 
 
        $orden_servicios = new orden_servicio();
-       $facturas = new factura();
+       //$facturas = new factura();
        $movimientos = new movimiento();
        $operacion = new operacion ();
        $terceros = new tercero();
@@ -40,19 +35,25 @@
        $idsucursal = $_SESSION['datosinicio']["sucursal_idsucursal"];
        $idciudad = $_SESSION['datosinicio']["ciudad_idciudad"];
 
-       $facturas->agregar();
-       $idfactura = $facturas->idfactura;
+       //$facturas->agregar();
+       // no agrego un id de factura, ya que las ordenes pueden ser acumuladas bajo una misma factura.
+       $idfactura = "NULL";
 
        $horaactual = $operacion->obtenerFechayHora("hora");
        $fechaactual = $operacion->obtenerFechayHora("fecha", 'd/m/Y');
 
-
-       $numrecogida = $_POST["idrecogida"]; // ojo requiere validacion previa sobre existencia de tal numero	
+       //-- no se esta usando -_-'
+       //--$numrecogida = $_POST["idrecogida"]; // ojo requiere validacion previa sobre existencia de tal numero	
        $numordenservicio = $_POST["numordenservicio"];
        $idcliente = $_POST["idcliente"];
        //$idciudad = $_POST["idciudad"];
        //$idproducto = $_POST["idproducto"];
        $fechain = $_POST["fechain"];
+       $fechaAsignacion = $_POST["fechaAsignacion"];
+       $fechaEntrega = $_POST["fechaEntrega"];
+       
+       $areaOrden = $_POST["areaOrden"];
+       
        $observaciones = $_POST["observaciones"];
        $plazo = $_POST["plazo"];
 
@@ -62,30 +63,33 @@
        $orden_servicios->fechaentrada = $fechain;
        $orden_servicios->observacion_orden_servicio = $observaciones;
        $orden_servicios->unidades = NULL;
-       $orden_servicios->area_orden_servicio = NULL;
-       $orden_servicios->plazo_entrega_orden = $plazo;
-       $orden_servicios->plazo_asignacion_orden = NULL;
+       $orden_servicios->area_orden_servicio = $areaOrden;
+       $orden_servicios->plazo_entrega_orden = $fechaEntrega;
+       $orden_servicios->plazo_asignacion_orden = $fechaAsignacion;
 
        $resos = $orden_servicios->agregar();
+       
+//       $query ="INSERT INTO orden_servicio (plazo_entrega_orden,plazo_asignacion_orden,factura_idfactura,tercero_idcliente,numero_orden_servicio,fechaentrada,observacion_orden_servicio,unidades,area_orden_servicio,plazo_entrega_orden,plazo_asignacion_orden)
+//                                     values('$fechaEntrega','$fechaAsignacion',$idfactura,$orden_servicios->tercero_idcliente,'$numordenservicio','$fechain',$observaciones,0,$areaOrden)";
 
-       $movimientos->estado_idestado = 5; // alistado
-       $movimientos->tercero_idusuario = $idusuario;
-       $movimientos->tercero_idaliado = 1;
-       $movimientos->fecha_movimiento = $fechaactual;
-       $movimientos->hora_movimiento = $horaactual;
-       $movimientos->orden_servicio_idorden_servicio = $orden_servicios->idorden_servicio;
-       $movimientos->sucursal_idsucursal = $idsucursal;
-       $movimientos->recogida_idrecogida = NULL;   // ojo Debe ser el id de recogida de de la BD. Preguntar de donde viene este id| 
-       $movimientos->manifiesto_idmanifiesto = NULL;
-       $movimientos->guia_idguia = NULL;
-       $movimientos->asignacion_guias_idasignacion_guias = NULL;
-       $movimientos->tarifa_idtarifa = NULL;
+//       $movimientos->estado_idestado = 5; // alistado
+//       $movimientos->tercero_idusuario = $idusuario;
+//       $movimientos->tercero_idaliado = 1;
+//       $movimientos->fecha_movimiento = $fechaactual;
+//       $movimientos->hora_movimiento = $horaactual;
+//       $movimientos->orden_servicio_idorden_servicio = $orden_servicios->idorden_servicio;
+//       $movimientos->sucursal_idsucursal = $idsucursal;
+//       $movimientos->recogida_idrecogida = NULL;   // ojo Debe ser el id de recogida de de la BD. Preguntar de donde viene este id| 
+//       $movimientos->manifiesto_idmanifiesto = NULL;
+//       $movimientos->guia_idguia = NULL;
+//       $movimientos->asignacion_guias_idasignacion_guias = NULL;
+//       $movimientos->tarifa_idtarifa = NULL;
+//
+//       $resmov = $movimientos->agregar();
 
-       $resmov = $movimientos->agregar();
 
 
-
-       if ($resos === true && $resmov === true)
+       if ($resos === true)
        {
            $qtrans = "COMMIT";
            $sac = $conex->ejecutar($qtrans);
@@ -93,7 +97,8 @@
 
            <script language="javascript" type="text/javascript">
                var mensaje = "Registro Exitoso";
-               window.location.href = 'consulta.php?mensaje=' + mensaje;
+               alert(mensaje);
+               window.location.href = 'consulta.php';
            </script>
 
            <?
@@ -105,7 +110,8 @@
            ?>
            <script language="javascript" type="text/javascript">
                var mensaje = "Registro NO Exitoso";
-               window.location.href = 'consulta.php?mensaje=' + mensaje;
+               alert(mensaje);
+               //window.location.href = 'consulta.php?mensaje=' + mensaje;
            </script>
            <?
        }
@@ -130,9 +136,11 @@
             @import "../../media/css/demo_page.css";
             @import "../../media/css/demo_table.css";
             @import "../../media/css/jquery.css";
+            @import "../../media/css/jquery-ui.css";
         </style>
         <script type="text/javascript" language="javascript" src="../../js/jquery.js"></script>
-
+        <!--<script type="text/javascript" language="javascript" src="../../../js/jquery-1.9.1.js"></script>-->
+        <script type="text/javascript" language="javascript" src="../../js/jquery-ui.js"></script>
         <script type="text/javascript" language="javascript" src="../../js/jquery.dataTables.js"></script>
         <script type="text/javascript" language="javascript" src="../../js/jquery.validate.js"></script> 
         <script type="text/javascript" src="../../js/jquery_003.js"></script>
@@ -180,15 +188,7 @@
         <script type="text/javascript" language="javascript" src="../../js/funciones.js">
             //DiferenciaFechas( document.getElementById('fechaactual').value,document.getElementById('fechain').value );
         </script>
-        <!***************************************************************
-        Calendario js
-        **************************************************************>
-        <SCRIPT LANGUAGE="JavaScript" SRC="../../js/CalendarPopup.js"></SCRIPT>
-        <SCRIPT LANGUAGE="JavaScript">document.write(getCalendarStyles());</SCRIPT>
-        <SCRIPT LANGUAGE="JavaScript">
-    var cal18 = new CalendarPopup("testdiv1");
-        </SCRIPT>
-        <!****************************************************************>
+
 
         <script language="javascript">
             parent.frames[0].document.getElementById("a1").innerHTML = "";
@@ -216,12 +216,12 @@
     <body id="dt_example">
 
 
-<?
-   //generar menu
-   $objMenu = new Menu($objUser);
-   $objMenu->generarMenu();
+        <?
+           //generar menu
+           $objMenu = new Menu($objUser);
+           $objMenu->generarMenu();
 //	 $operacion -> menu();
-?>
+        ?>
         <div id="container">
             <div class="full_width big">
                 <p>&nbsp;</p>
@@ -246,15 +246,23 @@
                                     <label for="idcliente">Nombre del Cliente (Obligatorio)</label>
                                 </td>
                                 <td>	
-                                    <input id="idcliente" name="idcliente" class="required" size=40 maxlength="60"/></p>
+                                    <input id="idcliente" name="idcliente" class="required" size=40 maxlength="60" title="Selecciona un cliente" required/></p>
                                 </td>
-                            </tr>    
+                            </tr>   
+                            <tr>
+                                <td>
+                                    <label for="areaOrden">Area de la Empresa</label>
+                                </td>
+                                <td>	
+                                    <input id="areaOrden" name="areaOrden" size=40 maxlength="60" title="información del area de la empresa que envia" /></p>
+                                </td>
+                            </tr> 
                             <tr>
                                 <td>
                                     <label for="numordenservicio">Número de Orden de Servicio</label>
                                 </td>
                                 <td>	
-                                    <input id="numordenservicio" value="<?= $numordenservicio ?>" name="numordenservicio" maxlength="10"/>
+                                    <input id="numordenservicio" value="<?= $numordenservicio ?>" name="numordenservicio" maxlength="10" readonly/>
                                 </td>
                             </tr>     	
 
@@ -281,25 +289,30 @@
                                 <td><label for="fechain">Fecha Entrada (Obligatorio)</label>
                                 </td>
                                 <td>
-                                    <input id="fechain" name="fechain" type="text" value=""  onBlur ="return DiferenciaFechas(document.getElementById('fechaactual').value, document.getElementById('fechain').value, document.getElementById('plazo'), '+', document.getElementById('plazodiasentregaos').value)" />
+                                    <input id="fechain" name="fechain" type="date" value=""   required/>
 
-                                    <!************************Calendario js****************************>
-                                    <a href="#" onClick="cal18.select(document.forms['formulario'].fechain, 'anchor', 'dd/MM/yyyy');"  NAME="anchor" ID="anchor">Seleccionar</a> <br>
-                                    Plazo establecido:
 
-                                    <input type="text"  name="plazodiasentregaos" id="plazodiasentregaos" size="2" maxlength="3" value=" <?= $plazodiasentregaos ?>" onBlur ="return DiferenciaFechas(document.getElementById('fechaactual').value, document.getElementById('fechain').value, document.getElementById('plazo'), '+', document.getElementById('plazodiasentregaos').value)">
-                                    dias
-                                    <!****************************************************************>
                                     <input type="hidden" id="fechaactual" name="fechaactual" value="<?= $fechaactual ?>" />
                                 </td>
-                            </tr>       	
+                            </tr>   
                             <tr>
-                                <td><label for="plazo">Dias restantes para entrega </label>
+                                <td><label for="fechaAsignacion">Limite Asiganación (Obligatorio)</label>
                                 </td>
                                 <td>
-                                    <input id="plazo" name="plazo" readonly></input>
+                                    <input id="fechaAsignacion" name="fechaAsignacion" type="date" value=""   required/>
+
+
                                 </td>
-                            </tr>       	
+                            </tr> 
+                            <tr>
+                                <td><label for="fechaEntrega">Limite Entrega (Obligatorio)</label>
+                                </td>
+                                <td>
+                                    <input id="fechaEntrega" name="fechaEntrega" type="date" value=""   required/>
+
+
+                                </td>
+                            </tr>        	
                             <tr>
                                 <td><label for="observaciones">Observaciones </label>		</td>
                                 <td>
@@ -313,26 +326,29 @@
                         </table>
 
                     </form>
-                    <!************************Calendario js****************************>
-                    <DIV ID="testdiv1" STYLE="position:absolute;visibility:hidden;background-color:white;layer-background-color:white;"></DIV>   
-                    <!****************************************************************>
+
             </div>
         </div>
 
         <script language="javascript">
-var f = new Date();
-var mes = f.getMonth() + 1;
-var dia = f.getDate();
-var hoy;
-if ((f.getDate()) < 10)
-dia = "0" + f.getDate();
+            var f = new Date();
+            var mes = f.getMonth() + 1;
+            var dia = f.getDate();
+            var hoy;
+            if ((f.getDate()) < 10)
+                dia = "0" + f.getDate();
 
 
-if ((f.getMonth() + 1) < 10)
-mes = "0" + (f.getMonth() + 1);
+            if ((f.getMonth() + 1) < 10)
+                mes = "0" + (f.getMonth() + 1);
 
-hoy = dia + "/" + mes + "/" + f.getFullYear();
-document.getElementById("fechain").value = hoy;
+            hoy =  f.getFullYear()+"/"+mes + "/" + dia;
+            document.getElementById("fechain").value = hoy;
+
+            $('input[type=date]').datepicker({
+                dateFormat: 'yy/mm/dd'
+            });
+
         </script>
     </body>
 </html>

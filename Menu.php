@@ -34,7 +34,7 @@
                        <a  href="<?= $this->raiz ?>/redireccionador.php">::Inicio::</a>
                    </li>
                    <?php
-                   if ($this->user->checkRol("Admin"))
+                   if ($this->user->checkRol("Usuario"))
                    {
                        ?>
 
@@ -137,10 +137,12 @@
 
                        <?php
                    }
-                   if ($this->user->checkRol("Cliente"))
+                   if ($this->user->checkRol("Cliente") && !$this->user->checkRol("Admin"))
                    {
                        ?>
                        <li><a  href="<?= $this->raiz ?>/gestion/ordendeservicio/addosunitario.php"  style="text-decoration:none">Nueva Guia</a>
+                       </li>
+                       <li><a  href="<?= $this->raiz ?>/gestion/unitario/guia/consulta.php"  style="text-decoration:none">Ver Guias</a>
                        </li>
                        <?php
                    }

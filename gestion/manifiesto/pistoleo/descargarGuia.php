@@ -88,9 +88,9 @@
           }
           echo("</select>");
       }
-
+      $horaActual = date('Y/m/d');
       echo("<h3>Fecha:</h3>");
-      echo("<input size='15' id='fechaManual' type='date' />");
+      echo("<input size='15' id='fechaManual' type='date' value='$horaActual'/>");
 
       echo("<h3>Guia N.:</h3>");
       echo("<input size='15' id='txtNGuia' type='text' />");
@@ -205,7 +205,7 @@
           echo("<td>$num</td>");
           echo("<td>$arrayMani[$num]</td>");
           echo("<td>$arrayNombres[$num]</td>");
-          echo("<td><a onclick='quitar($num);'>Quitar</a></td>");
+          echo("<td><a onclick='quitar(\"$num\");'>Quitar</a></td>");
           echo("</tr>");
       }
       echo("</table>");

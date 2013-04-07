@@ -359,7 +359,7 @@
 
                                            <td>	 
 
-                                               <FORM name="formulario" id="formulario" onSubmit="return validar(this)" action="validacion_tercero.php" method="post" >
+                                               <FORM name="formulario" id="formularioUsu" onSubmit="return validar(this)" action="validacion_tercero.php" method="post" >
                                                    <input type=hidden name='tipotercero' value='2'>
                                                    <input type=hidden name='numtab' id='numtab' value='1'>
 
@@ -543,7 +543,7 @@
 
                                                        <tr>
                                                            <TD colspan=2 align=center><font size="1" face="Verdana"><strong>VENDEDOR</strong></font><br>
-                                                               <select name="VENDEDOR" size="1">
+                                                               <select name="VENDEDOR" size="1"  style="width: 150px" title="Selecciona un Vendedor, o agrega vendedores" required>
        <?php
        $consulta = mysql_query("select idtercero,nombres_tercero, apellidos_tercero 
                                           from tercero,tercero_tipo
@@ -878,7 +878,7 @@
 
                                                        <TR>
                                                            <TD><font size="1" face="Verdana"><strong>TELEFONO 1</strong></font><font size="1" face="Verdana">(*)</font><br>
-                                                               <input type="text" size="12" maxlength="1" name="TELEFONO3"></TD>
+                                                               <input type="text" size="12" maxlength="11" name="TELEFONO3"></TD>
                                                            <TD><font size="1" face="Verdana"><strong>CELULAR</strong></font><font size="1" face="Verdana">(*)</font><br>
                                                                <input type="text" size="15" maxlength="11" name="CELULAR">			</TD>
                                                        </TR>

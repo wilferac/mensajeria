@@ -1,5 +1,5 @@
 <?
-//session_start();
+  session_start();
   include ("../../param/param.php");
   include ("../../clases/clases.php");
 
@@ -33,7 +33,7 @@
   $operacion = new operacion();
 
   //$cons = "SELECT * FROM guia, manifiesto WHERE guia.manifiesto_idmanifiesto=manifiesto.idmanifiesto ORDER BY guia.numero_guia";
-  $cons = "SELECT m.estado, s.nombre_sucursal ,m.idmanifiesto ,m.sucursal_idsucursal, m.plazo_entrega_manifiesto, GROUP_CONCAT(t.apellidos_tercero SEPARATOR ',') AS apellidos,  GROUP_CONCAT(t.nombres_tercero SEPARATOR ',') AS tercero, GROUP_CONCAT(tm.tipo SEPARATOR ',')  AS tipo
+  $cons = "SELECT m.estado, s.nombre_sucursal ,m.idmanifiesto ,m.sucursal_idsucursal, m.plazo_entrega_manifiesto, GROUP_CONCAT(t.apellidos_tercero SEPARATOR ', ') AS apellidos,  GROUP_CONCAT(t.nombres_tercero SEPARATOR ',') AS tercero, GROUP_CONCAT(tm.tipo SEPARATOR ',')  AS tipo
        FROM manifiesto m INNER JOIN tercero_manifiesto tm ON tm.idmanifiesto = m.idmanifiesto 
        INNER JOIN tercero t ON t.idtercero= tm.idtercero 
        LEFT JOIN sucursal s ON s.idsucursal = m.sucursal_idsucursal       

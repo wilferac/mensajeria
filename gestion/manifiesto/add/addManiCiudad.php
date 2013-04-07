@@ -194,7 +194,7 @@
           //busco los mensajeros de la sucursal seleccionada , tipo = 5 (mensajero)
           $arrayMensajeros = $daoMen->getAll($idSucur, 5);
 
-          echo("Mensajero que Resibe: 
+          echo("Mensajero que Recibe: 
               <select id='selMensajeroResibe'>");
           echo("<option value='-1'>Seleccione</option>");
           foreach ($arrayMensajeros as $objMen)
@@ -338,7 +338,7 @@
       {
           echo("<tr>");
           echo("<td>$numero</td>");
-          echo("<td><a onclick='quitar($numero);'>Quitar</a></td>");
+          echo("<td><a onclick='quitar(\"$numero\");'>Quitar</a></td>");
           echo("</tr>");
       }
       echo("</table>");

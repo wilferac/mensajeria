@@ -12,7 +12,7 @@
 
        if ($numguia != "")
        {
-           $query = "SELECT * FROM asignacion_guias WHERE $numguia >= inicial_asignacion AND $numguia <= inicial_asignacion+cantidad_asignacion";
+           $query = "SELECT * FROM asignacion_guias WHERE '$numguia' >= inicial_asignacion AND '$numguia' <= inicial_asignacion+cantidad_asignacion";
            $results = mysql_query($query) or die(mysql_error());
            $datosAsig = mysql_fetch_assoc($results);
            if (mysql_num_rows($results) > 0)
@@ -21,7 +21,7 @@
                $encAsig = false;
 
            //query para que pasen los que estan a medio llenar
-           $query = "SELECT * FROM guia WHERE numero_guia = $numguia and tercero_iddestinatario IS NOT NULL";
+           $query = "SELECT * FROM guia WHERE numero_guia = '$numguia' and tercero_iddestinatario IS NOT NULL";
 
            //$query = "SELECT * FROM guia WHERE numero_guia = $numguia";
            $results = mysql_query($query) or die('error2' . $query);
@@ -98,7 +98,7 @@ ElementosClientesVisibles(true,'$idtercero','$documento_tercero','$nombres_terce
             inner join ciudad c1 on c1.idciudad = g.ciudad_idorigen inner join ciudad c2 on c2.idciudad = g.ciudad_iddestino
             inner join producto p on p.idproducto = g.producto_idproducto
             inner join tipo_producto tp on tp.idtipo_producto = tipo_producto_idtipo_producto
-            where g.numero_guia = $numguia  and g.tercero_iddestinatario IS NULL";
+            where g.numero_guia = '$numguia'  and g.tercero_iddestinatario IS NULL";
 
                $results2 = mysql_query($query2) or die('error2' . $query2);
 

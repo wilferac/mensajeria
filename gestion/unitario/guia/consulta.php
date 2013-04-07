@@ -40,6 +40,13 @@
             inner join estadoGuia cd on cd.idcausal_devolucion = g.causal_devolucion_idcausal_devolucion
             left join destinatario d on d.iddestinatario = g.tercero_iddestinatario
             ";
+  //si es usuario y no es admin
+  if ($objUser->checkRol("Cliente") && !$objUser->checkRol("Admin"))
+  {
+      $id = $objUser->getId();
+      $query2= $query2." where g.owner = $id ";
+  }
+  
 
   $results2 = mysql_query($query2) or die(mysql_error());
 
@@ -61,7 +68,7 @@
           $dniDestinatario = "Incompleto";
           $nomDestinatario = "Incompleto";
       }
-
+      //$tercero_iddestinatario= $fila["tercero_iddestinatario"];
       $idGuia = $fila["idguia"];
 
       $numeroGuia = $fila["numero_guia"];
@@ -77,7 +84,7 @@
 //    $idProducto = $fila["idproducto"];
       $nomProducto = $fila["nombre_producto"];
 
-      if ($estadoGuia != 3)
+      if ($estadoGuia != 3 && empty($iddestinatario))
       {
           $resaltar = "";
           if ($estadoGuia == 2)
@@ -85,20 +92,20 @@
               $resaltar = "color: red";
           }
 
-          $linkeliminar = "<button style=\"width: 70px; " . $resaltar . " \"  type=\'button\' onclick=\'abrir(\"delete.php?idGuia=$idGuia\")\'>$estadoGuiaCausal</button>";
+         // $linkeliminar = "<button style=\"width: 70px; " . $resaltar . " \"  type=\'button\' onclick=\'abrir(\"delete.php?idGuia=$idGuia\")\'>$estadoGuiaCausal</button>";
           $linkmodificar = "<a  = href=\'../../ordendeservicio/addosunitario.php?idGuiaFill=$numeroGuia\'><img src=\'../../imagenes/modificar.jpeg\' /></a>";
       }
       else 
       {
-          $linkeliminar = "Entregado";
-          $linkmodificar = "Entregado";
+         // $linkeliminar = "Entregado";
+          $linkmodificar = "";
       }
 
 
       $imprimir = "<button type=\'button\' onclick=\'abrir(\"printCorporativo.php?idGuia=$idGuia\")\'>Imprimir</button>";
       //$editar = "<button type=\'button\' onclick=\'abrir(\"../../ordendeservicio/addosunitario.php?idGuiaFill=$idGuia\")\'>Editar</button>";
 //acumulo en el dataset
-      $dataSet = $dataSet . "['$numeroGuia','$documento_tercero','$nombres_tercero','$nomtp','$nomOrigen','$nomDestino','$dniDestinatario','$nomDestinatario','$linkeliminar','$imprimir','$linkmodificar'],";
+      $dataSet = $dataSet . "['$numeroGuia','$documento_tercero','$nombres_tercero','$nomtp','$nomOrigen','$nomDestino','$dniDestinatario','$nomDestinatario','$estadoGuiaCausal','$imprimir','$linkmodificar'],";
   }
 
   $dataSet = substr_replace($dataSet, "];", strlen($dataSet) - 1);

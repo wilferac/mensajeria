@@ -49,107 +49,107 @@
 
             function ocultarTodo()
             {
-            document.getElementById('tituloclientes').style.visibility = 'hidden';
-            document.getElementById('labcccliente').style.visibility = 'hidden';
+                document.getElementById('tituloclientes').style.visibility = 'hidden';
+                document.getElementById('labcccliente').style.visibility = 'hidden';
 
 
-            document.getElementById('cccliente').style.visibility = 'hidden';
+                document.getElementById('cccliente').style.visibility = 'hidden';
 
 
-            document.getElementById('labnombrescliente').style.visibility = 'hidden';
-            document.getElementById('nombrescliente').style.visibility = 'hidden';
+                document.getElementById('labnombrescliente').style.visibility = 'hidden';
+                document.getElementById('nombrescliente').style.visibility = 'hidden';
 
 
-            document.getElementById('labapellidoscliente').style.visibility = 'hidden';
-            document.getElementById('apellidoscliente').style.visibility = 'hidden';
+                document.getElementById('labapellidoscliente').style.visibility = 'hidden';
+                document.getElementById('apellidoscliente').style.visibility = 'hidden';
 
 
-            document.getElementById('labdireccioncliente').style.visibility = 'hidden';
-            document.getElementById('direccioncliente').style.visibility = 'hidden';
+                document.getElementById('labdireccioncliente').style.visibility = 'hidden';
+                document.getElementById('direccioncliente').style.visibility = 'hidden';
 
 
-            document.getElementById('tituloclientes').style.visibility = 'hidden';
-            document.getElementById('labcccliente').style.visibility = 'hidden';
+                document.getElementById('tituloclientes').style.visibility = 'hidden';
+                document.getElementById('labcccliente').style.visibility = 'hidden';
 
-            document.getElementById('cccliente').style.visibility = 'hidden';
-
-
-            document.getElementById('labnombrescliente').style.visibility = 'hidden';
-            document.getElementById('nombrescliente').style.visibility = 'hidden';
+                document.getElementById('cccliente').style.visibility = 'hidden';
 
 
-            document.getElementById('labapellidoscliente').style.visibility = 'hidden';
-            document.getElementById('apellidoscliente').style.visibility = 'hidden';
+                document.getElementById('labnombrescliente').style.visibility = 'hidden';
+                document.getElementById('nombrescliente').style.visibility = 'hidden';
 
 
-
-            document.getElementById('labdireccioncliente').style.visibility = 'hidden';
-            document.getElementById('direccioncliente').style.visibility = 'hidden';
-
-
-            document.getElementById('titulodestinatarios').style.visibility = 'hidden';
-            document.getElementById('labdatoArecordar').style.visibility = 'hidden';
-            document.getElementById('datoArecordar').style.visibility = 'hidden';
+                document.getElementById('labapellidoscliente').style.visibility = 'hidden';
+                document.getElementById('apellidoscliente').style.visibility = 'hidden';
 
 
 
-
-            document.getElementById('labccdestinatario').style.visibility = 'hidden';
-            document.getElementById('ccdestinatario').style.visibility = 'hidden';
-
+                document.getElementById('labdireccioncliente').style.visibility = 'hidden';
+                document.getElementById('direccioncliente').style.visibility = 'hidden';
 
 
-            document.getElementById('labnombresdestinatario').style.visibility = 'hidden';
-            document.getElementById('nombresdestinatario').style.visibility = 'hidden';
-
-
-
-            document.getElementById('labapellidosdestinatario').style.visibility = 'hidden';
-            document.getElementById('apellidosdestinatario').style.visibility = 'hidden';
+                document.getElementById('titulodestinatarios').style.visibility = 'hidden';
+                document.getElementById('labdatoArecordar').style.visibility = 'hidden';
+                document.getElementById('datoArecordar').style.visibility = 'hidden';
 
 
 
-            document.getElementById('labdirecciondestinatario').style.visibility = 'hidden';
-            document.getElementById('direcciondestinatario').style.visibility = 'hidden';
+
+                document.getElementById('labccdestinatario').style.visibility = 'hidden';
+                document.getElementById('ccdestinatario').style.visibility = 'hidden';
 
 
-            document.getElementById('labcelulardestinatario').style.visibility = 'hidden';
-            document.getElementById('celulardestinatario').style.visibility = 'hidden';
+
+                document.getElementById('labnombresdestinatario').style.visibility = 'hidden';
+                document.getElementById('nombresdestinatario').style.visibility = 'hidden';
 
 
-            document.getElementById('labtelefono1destinatario').style.visibility = 'hidden';
-            document.getElementById('telefono1destinatario').style.visibility = 'hidden';
+
+                document.getElementById('labapellidosdestinatario').style.visibility = 'hidden';
+                document.getElementById('apellidosdestinatario').style.visibility = 'hidden';
 
 
-            document.getElementById('capadatosguia').style.visibility = 'hidden';
 
-            document.getElementById('capaPeso').style.visibility = 'hidden';
+                document.getElementById('labdirecciondestinatario').style.visibility = 'hidden';
+                document.getElementById('direcciondestinatario').style.visibility = 'hidden';
 
 
-            document.getElementById('labExtraDestinatario').style.visibility = 'hidden';
-            document.getElementById('extraDestinatario').style.visibility = 'hidden';
-            document.getElementById('labExtraRemitente').style.visibility = 'hidden';
-            document.getElementById('extraRemitente').style.visibility = 'hidden';
-            document.getElementById('savetemp').style.visibility = 'hidden';
+                document.getElementById('labcelulardestinatario').style.visibility = 'hidden';
+                document.getElementById('celulardestinatario').style.visibility = 'hidden';
+
+
+                document.getElementById('labtelefono1destinatario').style.visibility = 'hidden';
+                document.getElementById('telefono1destinatario').style.visibility = 'hidden';
+
+
+                document.getElementById('capadatosguia').style.visibility = 'hidden';
+
+                document.getElementById('capaPeso').style.visibility = 'hidden';
+
+
+                document.getElementById('labExtraDestinatario').style.visibility = 'hidden';
+                document.getElementById('extraDestinatario').style.visibility = 'hidden';
+                document.getElementById('labExtraRemitente').style.visibility = 'hidden';
+                document.getElementById('extraRemitente').style.visibility = 'hidden';
+                document.getElementById('savetemp').style.visibility = 'hidden';
             }
             /*$().ready(function() 
-            {
-            $("#cccliente").autocomplete("../tercero/searchtercero.php", {
-            minChars: 0, max:200, width: 350});
-            });
-
-            $().ready(function() 
-            {
-            $("#idciudad").autocomplete("../ciudad/searchciudad.php", {minChars: 0, max:50, width: 350});
-            });
-
-            */
+             {
+             $("#cccliente").autocomplete("../tercero/searchtercero.php", {
+             minChars: 0, max:200, width: 350});
+             });
+             
+             $().ready(function() 
+             {
+             $("#idciudad").autocomplete("../ciudad/searchciudad.php", {minChars: 0, max:50, width: 350});
+             });
+             
+             */
 
             /*$().ready(function() 
-            {
-            $("#idproducto").autocomplete("../producto/searchproducto.php", {
-            minChars: 0, max:50, width: 350});
-            });*/
+             {
+             $("#idproducto").autocomplete("../producto/searchproducto.php", {
+             minChars: 0, max:50, width: 350});
+             });*/
         </script>
 
         <style type="text/css">
@@ -160,8 +160,8 @@
 
         <script type="text/javascript">
             $.validator.setDefaults({
-            submitHandler: function() { //formulario.submit();
-            }
+                submitHandler: function() { //formulario.submit();
+                }
             });
 
 
@@ -194,318 +194,321 @@
             // wtf?
             function validar()
             {
-            return true;
+                return true;
             }
         </script>
         <script language="javascript">
             $(document).ready(function() {
-            $("#numguia").blur(function() {
+                $("#numguia").blur(function() {
 
-            //debo ocultar todo
-            ocultarTodo();
+                    //debo ocultar todo
+                    ocultarTodo();
 
-            var val = $(this).attr("value");
-
-            if (val != "")
-            {
-
-            $('#info').html('<img src="../../imagenes/loader.gif" alt="" height="17" />').fadeOut(1000);
-            var dataString = 'numguia=' + val;
-            alert(dataString);
-            $.ajax({
-            type: "POST",
-            url: "prevalidacion.php",
-            data: dataString,
-            success: function(data) {
-            $('#info').fadeIn(1000).html(data);
-            }});
+                    var val = $(this).attr("value");
+
+                    if (val != "")
+                    {
+
+                        $('#info').html('<img src="../../imagenes/loader.gif" alt="" height="17" />').fadeOut(1000);
+                        var dataString = 'numguia=' + val;
+                        alert(dataString);
+                        $.ajax({
+                            type: "POST",
+                            url: "prevalidacion.php",
+                            data: dataString,
+                            success: function(data) {
+                                $('#info').fadeIn(1000).html(data);
+                            }});
 
 
-            } // end if (val)
-            });   //BLUR    
-            /////////////////////////////////////////////////////////////////////////////////
+                    } // end if (val)
+                });   //BLUR    
+                /////////////////////////////////////////////////////////////////////////////////
 
-            $("#cccliente").blur(function() {
+                $("#cccliente").blur(function() {
 
-            var val = $(this).attr("value");
-
-            if (val != "")
-            {
-
-            $('#info2').html('<img src="../../imagenes/loader2.gif" alt="" height="17" />').fadeOut(1000);
-            var dataString = 'cccliente=' + val;
-            //alert (dataString);
-            $.ajax({
-            type: "POST",
-            url: "prevalidacion2.php?cccliente=" + val,
-            data: dataString,
-            success: function(data) {
-            $('#info2').fadeIn(1000).html(data);
-            }});
+                    var val = $(this).attr("value");
+
+                    if (val != "")
+                    {
+
+                        $('#info2').html('<img src="../../imagenes/loader2.gif" alt="" height="17" />').fadeOut(1000);
+                        var dataString = 'cccliente=' + val;
+                        //alert (dataString);
+                        $.ajax({
+                            type: "POST",
+                            url: "prevalidacion2.php?cccliente=" + val,
+                            data: dataString,
+                            success: function(data) {
+                                $('#info2').fadeIn(1000).html(data);
+                            }});
 
-            } // end if (val)
-            });   //BLUR	
+                    } // end if (val)
+                });   //BLUR	
 
-            /////////////////////////////////////////////////////////////////////////////////
-            $("#ciudaddestino").change(function() {
+                /////////////////////////////////////////////////////////////////////////////////
+                $("#ciudaddestino").change(function() {
 
-            var val = $(this).attr("value");
+                    var val = $(this).attr("value");
 
-            var x = document.getElementById("ciudaddestino").selectedIndex;
-            var y = document.getElementById("ciudaddestino").options;
-            var innerHtmlSelec = y[x].text;
+                    var x = document.getElementById("ciudaddestino").selectedIndex;
+                    var y = document.getElementById("ciudaddestino").options;
+                    var innerHtmlSelec = y[x].text;
 
-            var pos = innerHtmlSelec.indexOf("-");
-            var ciudad = innerHtmlSelec.substring(pos, -1);
+                    var pos = innerHtmlSelec.indexOf("-");
+                    var ciudad = innerHtmlSelec.substring(pos, -1);
 
-            var departamento = innerHtmlSelec.substring(pos + 1);
+                    var departamento = innerHtmlSelec.substring(pos + 1);
 
-            var idciudadorigen2 = document.getElementById("idciudadorigen2").value;
+                    var idciudadorigen2 = document.getElementById("idciudadorigen2").value;
 
-            // alert (ciudad+departamento);
-            if (val != "")
-            {
-            // alert (idciudadorigen2);
-            $('#info4').html('<img src="../../imagenes/loader2.gif" alt="" height="17" />').fadeOut(1000);
-            var dataString = 'idciudad=' + val + '&ciudaddestino=' + ciudad + '&departamentodestino=' + departamento + '&idciudadorigen2=' + idciudadorigen2;
-            //alert (dataString);
-            $.ajax({
-            type: "POST",
-            url: "obtenerTipoProducto.php?ciudaddestino=" + val,
-            data: dataString,
-            success: function(data) {
-            $('#info4').fadeIn(1000).html(data);
-            }});
+                    // alert (ciudad+departamento);
+                    if (val != "")
+                    {
+                        // alert (idciudadorigen2);
+                        $('#info4').html('<img src="../../imagenes/loader2.gif" alt="" height="17" />').fadeOut(1000);
+                        var dataString = 'idciudad=' + val + '&ciudaddestino=' + ciudad + '&departamentodestino=' + departamento + '&idciudadorigen2=' + idciudadorigen2;
+                        //alert (dataString);
+                        $.ajax({
+                            type: "POST",
+                            url: "obtenerTipoProducto.php?ciudaddestino=" + val,
+                            data: dataString,
+                            success: function(data) {
+                                $('#info4').fadeIn(1000).html(data);
+                            }});
 
-            } // end if (val)
-            });   //change
+                    } // end if (val)
+                });   //change
 
-
+
 
-            $("#idciudadorigen2").change(function() {
-            var valori = $(this).attr("value");
-            var val = document.getElementById("ciudaddestino").value;
-            var x = document.getElementById("ciudaddestino").selectedIndex;
-            var y = document.getElementById("ciudaddestino").options;
-            var innerHtmlSelec = y[x].text;
-
-            var pos = innerHtmlSelec.indexOf("-");
-            var ciudad = innerHtmlSelec.substring(pos, -1);
+                $("#idciudadorigen2").change(function() {
+                    var valori = $(this).attr("value");
+                    var val = document.getElementById("ciudaddestino").value;
+                    var x = document.getElementById("ciudaddestino").selectedIndex;
+                    var y = document.getElementById("ciudaddestino").options;
+                    var innerHtmlSelec = y[x].text;
 
-            var departamento = innerHtmlSelec.substring(pos + 1);
-
-            var idciudadorigen2 = document.getElementById("idciudadorigen2").value;
-
-            // alert (ciudad+departamento);
-            if (valori != "" && val != "")
-            {
-            // alert (idciudadorigen2);
-            $('#info4').html('<img src="../../imagenes/loader2.gif" alt="" height="17" />').fadeOut(1000);
-            var dataString = 'idciudad=' + val + '&ciudaddestino=' + ciudad + '&departamentodestino=' + departamento + '&idciudadorigen2=' + idciudadorigen2;
-            //alert (dataString);
-            $.ajax({
-            type: "POST",
-            url: "obtenerTipoProducto.php?ciudaddestino=" + val,
-            data: dataString,
-            success: function(data) {
-            $('#info4').fadeIn(1000).html(data);
-            }});
+                    var pos = innerHtmlSelec.indexOf("-");
+                    var ciudad = innerHtmlSelec.substring(pos, -1);
 
-            } // end if (val)
-            });   //change
+                    var departamento = innerHtmlSelec.substring(pos + 1);
 
+                    var idciudadorigen2 = document.getElementById("idciudadorigen2").value;
 
-            /////////////////////////////////////////////////////////////////////////////////
-            $("#datoArecordar").blur(function() {
+                    // alert (ciudad+departamento);
+                    if (valori != "" && val != "")
+                    {
+                        // alert (idciudadorigen2);
+                        $('#info4').html('<img src="../../imagenes/loader2.gif" alt="" height="17" />').fadeOut(1000);
+                        var dataString = 'idciudad=' + val + '&ciudaddestino=' + ciudad + '&departamentodestino=' + departamento + '&idciudadorigen2=' + idciudadorigen2;
+                        //alert (dataString);
+                        $.ajax({
+                            type: "POST",
+                            url: "obtenerTipoProducto.php?ciudaddestino=" + val,
+                            data: dataString,
+                            success: function(data) {
+                                $('#info4').fadeIn(1000).html(data);
+                            }});
 
-            var val = $(this).attr("value");
+                    } // end if (val)
+                });   //change
 
-            if (val != "")
-            {
 
-            $('#info3').html('<img src="../../imagenes/loader2.gif" alt="" height="17" />').fadeOut(1000);
-            var dataString = 'datoArecordar=' + val;
-            //alert (dataString);
-            $.ajax({
-            type: "POST",
-            url: "prevalidacion3.php?datoArecordar=" + val,
-            data: dataString,
-            success: function(data) {
-            $('#info3').fadeIn(1000).html(data);
-            }});
-
-            } // end if (val)
-            });   //BLUR	   	   
-
-
-
-
-
-            // evento jquery para guardar temporalmente la guia
-            /////////////////////////////////////////////////////////////////////////////////
-            $("#savetemp").click(function() {
-
-            alert('entro a temp');
-            //return;
-
-            if (validar())
-            {
-            //'valordeclarado='+valordeclarado+'&valorempaque='+valorempaque+'&idtipoproducto='+idtipoproducto
-            var amsp = '&';
-            var igual = '=';
-            var cadenaValores = "";
-            var selectValues = "";
-
-            var todosLosInputs = document.getElementsByTagName('input');
-            var todosLosSelect = document.getElementsByTagName('select');
-
-            for (var i = 0; i < todosLosInputs.length; i++) {
-            cadenaValores = cadenaValores + todosLosInputs[i].name + igual + todosLosInputs[i].value + amsp;
-
-            }
-
-            for (var i = 0; i < todosLosSelect.length; i++) {
-            if (i == todosLosSelect.length - 1)
-            amsp = "";
-            cadenaValores = cadenaValores + todosLosSelect[i].name + igual + todosLosSelect[i].value + amsp;
-
-            }
-            //alert( cadenaValores);
-            $('#informacion').html('<img src="../../imagenes/loader2.gif" alt="" height="17" />').fadeOut(1000);
-            var dataString = cadenaValores;
-            //alert (dataString);
-            $.ajax({
-            type: "POST",
-            url: "registrarOsUnitarioTemp.php",
-            data: dataString,
-            success: function(data) {
-            //alert (data);
-
-            // cadena = "<font face='$font' size='$size' color='$colorEx'>Registro Exitoso</font>";
-
-            if (data == 1)
-            {
-            document.getElementById('registrar').style.visibility = 'hidden';
-            $('#informacion').fadeIn(1000).html("<font face='$font' size='$size' color='$colorEx'>Registro Exitoso</font>");
-            setInterval(function() {
-            redirigir()
-            }, 3000);
-
-            }
-            else if (data == 0)
-            {
-            document.getElementById('registrar').style.visibility = 'hidden';
-            $('#informacion').fadeIn(1000).html("<font face='$font' size='$size' color='$colorNoEx'>Registro NO Exitoso</font>");
-            }
-            // alert(data);
-            }});
-            }
-
-
-
-            });   //CLICK
-
-
-
-
-
-
-            /////////////////////////////////////////////////////////////////////////////////
-            $("#botoncalcular").click(function() {
-
-            var valordeclarado = document.getElementById('valordeclarado').value;
-            //var valorempaque = document.getElementById('valorempaque').value;
-            var valorempaque = 0;
-            var idtipoproducto = document.getElementById('idtipoproducto').value;
-            var nombreproducto = document.getElementById('nombreproducto').value;
-
-            var idcliente = document.getElementById('idcliente').value;
-            var idsucursal = <?= /* $_SESSION['datosinicio']['sucursal_idsucursal'] */ 1 ?> //document.getElementById('sucursal_idsucursal').value;
-            alert(":O");
-            document.getElementById('registrar').style.visibility = "visible";
-            /*                    if (valorempaque != "")
-            alert("empaque");
-            if (valordeclarado != "")
-            alert("decla");
-            if (idtipoproducto != "")
-            {
-            //$('#info4').html('<img src="../../imagenes/loader2.gif" alt="" height="17" />').fadeOut(1000);
-            var dataString = 'valordeclarado=' + valordeclarado + '&valorempaque=' + valorempaque + '&idtipoproducto=' + idtipoproducto + '&nombreproducto=' + nombreproducto + '&idcliente=' + idcliente + '&idsucursal=' + idsucursal;
-            alert (dataString);
-            $.ajax({
-            type: "POST",
-            url: "calcularCostoEnvio.php",
-            data: dataString,
-            success: function(data) {
-            $('#info4').fadeIn(1000).html(data);
-            }});
-            document.getElementById('registrar').style.visibility = "visible";
-            }*/
-            });   //CLICK
-
-            /////////////////////////////////////////////////////////////////////////////////
-            $("#registrar").click(function() {
-
-            if (validar())
-            {
-            //'valordeclarado='+valordeclarado+'&valorempaque='+valorempaque+'&idtipoproducto='+idtipoproducto
-            var amsp = '&';
-            var igual = '=';
-            var cadenaValores = "";
-            var selectValues = "";
-
-            var todosLosInputs = document.getElementsByTagName('input');
-            var todosLosSelect = document.getElementsByTagName('select');
-
-            for (var i = 0; i < todosLosInputs.length; i++) {
-            cadenaValores = cadenaValores + todosLosInputs[i].name + igual + todosLosInputs[i].value + amsp;
-
-            }
-
-            for (var i = 0; i < todosLosSelect.length; i++) {
-            if (i == todosLosSelect.length - 1)
-            amsp = "";
-            cadenaValores = cadenaValores + todosLosSelect[i].name + igual + todosLosSelect[i].value + amsp;
-
-            }
-            //alert( cadenaValores);
-            $('#informacion').html('<img src="../../imagenes/loader2.gif" alt="" height="17" />').fadeOut(1000);
-            var dataString = cadenaValores;
-            //alert (dataString);
-            $.ajax({
-            type: "POST",
-            url: "registrarosunitario.php",
-            data: dataString,
-            success: function(data) {
-            //alert (data);
-
-            // cadena = "<font face='$font' size='$size' color='$colorEx'>Registro Exitoso</font>";
-
-            if (data == 1)
-            {
-            document.getElementById('registrar').style.visibility = 'hidden';
-            $('#informacion').fadeIn(1000).html("<font face='$font' size='$size' color='$colorEx'>Registro Exitoso</font>");
-            setInterval(function() {
-            redirigir()
-            }, 3000);
-
-            }
-            else if (data == 0)
-            {
-            document.getElementById('registrar').style.visibility = 'hidden';
-            $('#informacion').fadeIn(1000).html("<font face='$font' size='$size' color='$colorNoEx'>Registro NO Exitoso</font>");
-            }
-            // alert(data);
-            }});
-            }
-
-            });   //CLICK		
+                /////////////////////////////////////////////////////////////////////////////////
+                $("#datoArecordar").blur(function() {
+
+                    var val = $(this).attr("value");
+
+                    if (val != "")
+                    {
+
+                        $('#info3').html('<img src="../../imagenes/loader2.gif" alt="" height="17" />').fadeOut(1000);
+                        var dataString = 'datoArecordar=' + val;
+                        //alert (dataString);
+                        $.ajax({
+                            type: "POST",
+                            url: "prevalidacion3.php?datoArecordar=" + val,
+                            data: dataString,
+                            success: function(data) {
+                                $('#info3').fadeIn(1000).html(data);
+                            }});
+
+                    } // end if (val)
+                });   //BLUR	   	   
+
+
+
+
+
+                // evento jquery para guardar temporalmente la guia
+                /////////////////////////////////////////////////////////////////////////////////
+                $("#savetemp").click(function() {
+
+                    alert('entro a temp');
+                    //return;
+
+                    if (validar())
+                    {
+                        //'valordeclarado='+valordeclarado+'&valorempaque='+valorempaque+'&idtipoproducto='+idtipoproducto
+                        var amsp = '&';
+                        var igual = '=';
+                        var cadenaValores = "";
+                        var selectValues = "";
+
+                        var todosLosInputs = document.getElementsByTagName('input');
+                        var todosLosSelect = document.getElementsByTagName('select');
+
+                        for (var i = 0; i < todosLosInputs.length; i++) {
+                            cadenaValores = cadenaValores + todosLosInputs[i].name + igual + todosLosInputs[i].value + amsp;
+
+                        }
+
+                        for (var i = 0; i < todosLosSelect.length; i++) {
+                            if (i == todosLosSelect.length - 1)
+                                amsp = "";
+                            cadenaValores = cadenaValores + todosLosSelect[i].name + igual + todosLosSelect[i].value + amsp;
+
+                        }
+                        //alert( cadenaValores);
+                        $('#informacion').html('<img src="../../imagenes/loader2.gif" alt="" height="17" />').fadeOut(1000);
+                        var dataString = cadenaValores;
+                        //alert (dataString);
+                        $.ajax({
+                            type: "POST",
+                            url: "registrarOsUnitarioTemp.php",
+                            data: dataString,
+                            success: function(data) {
+                                //alert (data);
+
+                                // cadena = "<font face='$font' size='$size' color='$colorEx'>Registro Exitoso</font>";
+
+                                if (data == 1)
+                                {
+                                     document.getElementById('registrar').style.visibility = 'hidden';
+                                    alert("Registro Exitoso");
+
+                                    redirigir();
+
+                                }
+                                else if (data == 0)
+                                {
+                                    document.getElementById('registrar').style.visibility = 'hidden';
+                                    $('#informacion').fadeIn(1000).html("<font face='$font' size='$size' color='$colorNoEx'>Registro NO Exitoso</font>");
+                                    alert("registro no exitoso:\n"+data);
+                                }
+                                // alert(data);
+                            }});
+                    }
+
+
+
+                });   //CLICK
+
+
+
+
+
+
+                /////////////////////////////////////////////////////////////////////////////////
+                $("#botoncalcular").click(function() {
+
+                    var valordeclarado = document.getElementById('valordeclarado').value;
+                    //var valorempaque = document.getElementById('valorempaque').value;
+                    var valorempaque = 0;
+                    var idtipoproducto = document.getElementById('idtipoproducto').value;
+                    var nombreproducto = document.getElementById('nombreproducto').value;
+
+                    var idcliente = document.getElementById('idcliente').value;
+                    var idsucursal = <?= /* $_SESSION['datosinicio']['sucursal_idsucursal'] */ 1 ?> //document.getElementById('sucursal_idsucursal').value;
+                    alert(":O");
+                    document.getElementById('registrar').style.visibility = "visible";
+                    /*                    if (valorempaque != "")
+                     alert("empaque");
+                     if (valordeclarado != "")
+                     alert("decla");
+                     if (idtipoproducto != "")
+                     {
+                     //$('#info4').html('<img src="../../imagenes/loader2.gif" alt="" height="17" />').fadeOut(1000);
+                     var dataString = 'valordeclarado=' + valordeclarado + '&valorempaque=' + valorempaque + '&idtipoproducto=' + idtipoproducto + '&nombreproducto=' + nombreproducto + '&idcliente=' + idcliente + '&idsucursal=' + idsucursal;
+                     alert (dataString);
+                     $.ajax({
+                     type: "POST",
+                     url: "calcularCostoEnvio.php",
+                     data: dataString,
+                     success: function(data) {
+                     $('#info4').fadeIn(1000).html(data);
+                     }});
+                     document.getElementById('registrar').style.visibility = "visible";
+                     }*/
+                });   //CLICK
+
+                /////////////////////////////////////////////////////////////////////////////////
+                $("#registrar").click(function() {
+
+                    if (validar())
+                    {
+                        //'valordeclarado='+valordeclarado+'&valorempaque='+valorempaque+'&idtipoproducto='+idtipoproducto
+                        var amsp = '&';
+                        var igual = '=';
+                        var cadenaValores = "";
+                        var selectValues = "";
+
+                        var todosLosInputs = document.getElementsByTagName('input');
+                        var todosLosSelect = document.getElementsByTagName('select');
+
+                        for (var i = 0; i < todosLosInputs.length; i++) {
+                            cadenaValores = cadenaValores + todosLosInputs[i].name + igual + todosLosInputs[i].value + amsp;
+
+                        }
+
+                        for (var i = 0; i < todosLosSelect.length; i++) {
+                            if (i == todosLosSelect.length - 1)
+                                amsp = "";
+                            cadenaValores = cadenaValores + todosLosSelect[i].name + igual + todosLosSelect[i].value + amsp;
+
+                        }
+                        //alert( cadenaValores);
+                        $('#informacion').html('<img src="../../imagenes/loader2.gif" alt="" height="17" />').fadeOut(1000);
+                        var dataString = cadenaValores;
+                        //alert (dataString);
+                        $.ajax({
+                            type: "POST",
+                            url: "registrarosunitario.php",
+                            data: dataString,
+                            success: function(data) {
+                                //alert (data);
+
+                                // cadena = "<font face='$font' size='$size' color='$colorEx'>Registro Exitoso</font>";
+
+                                if (data == 1)
+                                {
+                                    document.getElementById('registrar').style.visibility = 'hidden';
+                                    alert("Registro Exitoso");
+
+                                    redirigir();
+
+
+                                }
+                                else if (data == 0)
+                                {
+                                    document.getElementById('registrar').style.visibility = 'hidden';
+                                    $('#informacion').fadeIn(1000).html("<font face='$font' size='$size' color='$colorNoEx'>Registro NO Exitoso</font>");
+                                    alert("Registro NO Exitoso:\n"+ data);
+                                }
+                                // alert(data);
+                            }});
+                    }
+
+                });   //CLICK		
 
             });
             // funcion para redirigir al usuario
             function redirigir()
             {
-            window.location.replace("http://localhost/~inovate/Mensajeria/gestion/ordendeservicio/addosunitario.php");
+                //window.location.replace("http://localhost/~inovate/Mensajeria/gestion/ordendeservicio/addosunitario.php");
+                //location.reload();
+                window.location.replace('addosunitario.php');
             }
         </script>
 
@@ -646,7 +649,7 @@
                                     <option value="">Seleccione uno...</option>
                                     <?
 //   $idciudadorigen = $_SESSION['datosinicio']['ciudad_idciudad'];
-                                       $idciudadorigen = 1;
+                                       $idciudadorigen = $objUser->getIdCiudad();
 
                                        $operaciones = new operacion();
 
@@ -777,7 +780,7 @@
                             </td>
                             <td>
                                 <input id="ccdestinatario" name="ccdestinatario" class="required" size="30" maxlength="10" style="visibility:hidden" />
-                                <img src="../../imagenes/copy.jpg"  alt="Copiar valor desde C.C ó Teléfono" width="32" height="35" border="0" title="Copiar valor desde C.C ó Teléfono" onClick="javascript: document.getElementById('ccdestinatario').value = document.getElementById('datoArecordar').value";/></label>
+                                <img src="../../imagenes/copy.jpg"  alt="Copiar valor desde C.C ó Teléfono" width="32" height="35" border="0" title="Copiar valor desde C.C ó Teléfono" onClick="javascript: document.getElementById('ccdestinatario').value = document.getElementById('datoArecordar').value"/></label>
 
                             </td>
                         </tr>
@@ -789,7 +792,7 @@
 
                             </td>
                             <td>
-                                <input id="nombresdestinatario" name="nombresdestinatario" class="required" size="30" maxlength="20" style="visibility:hidden" />
+                                <input id="nombresdestinatario" name="nombresdestinatario" class="required" size="30" maxlength="30" style="visibility:hidden" />
 
                             </td>
                         </tr>
@@ -824,7 +827,7 @@
 
                             </td>
                             <td>
-                                <input id="telefono1destinatario" name="telefono1destinatario" class="required" size="30" maxlength="20" style="visibility:hidden" /><img src="../../imagenes/copy.jpg" alt="Copiar valor desde C.C ó Teléfono" width="30" height="32" border="0" title="Copiar valor desde C.C ó Teléfono"  onClick="javascript: document.getElementById('telefono1destinatario').value = document.getElementById('datoArecordar').value";/>            </label>
+                                <input id="telefono1destinatario" name="telefono1destinatario" class="required" size="30" maxlength="20" style="visibility:hidden" /><img src="../../imagenes/copy.jpg" alt="Copiar valor desde C.C ó Teléfono" width="30" height="32" border="0" title="Copiar valor desde C.C ó Teléfono"  onClick="javascript: document.getElementById('telefono1destinatario').value = document.getElementById('datoArecordar').value"/>            </label>
 
                             </td>
                         </tr>
@@ -976,13 +979,13 @@
    //aca consulto si se le paso el dato para que complete automaticamente la guia
    $idGuiaFill = $_REQUEST["idGuiaFill"];
 
-   if ($idGuiaFill > 0)
+   if (isset($idGuiaFill ))
    {
        echo("<script>
            alert('call to fill');
                 ocultarTodo();
                $('#numguia').val('$idGuiaFill');
-                var val =  $idGuiaFill;
+                var val =  '$idGuiaFill';
                 $('#info').html('<img src=\"../../imagenes/loader.gif\"  height=\"17\" />').fadeOut(1000);
                 var dataString = 'numguia=' + val;
                 alert (dataString);

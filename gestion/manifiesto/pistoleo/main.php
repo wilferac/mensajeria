@@ -1,5 +1,5 @@
 <?
-//session_start();
+    session_start();
 
   include '../../../security/User.php';
   include ('../../../Menu.php');

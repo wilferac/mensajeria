@@ -25,8 +25,8 @@
 
    $orden_servicio = new orden_servicio();
    $tercero = new tercero();
-
-   $res2 = $orden_servicio->consultar();
+   $not=" fechaentrada is not null order by numero_orden_servicio";
+   $res2 = $orden_servicio->consultar($not);
    if (mysql_num_rows($res2) > 0)
    {
        $dataSetini = "[";
@@ -52,7 +52,7 @@
            $documento_tercero = $fila2["documento_tercero"];
 
            $linkcargar = "<a href=\'../guia/cargar.php?nombre=$nombres&id=$id\'><img src=\'../../imagenes/cargar.jpg\' /></a>";
-           $linkimprimirguias = "<a href=\'./impresiones/imprimirguia.php?id=$id\' target=\'_blank\'>Imprimir</a>";
+           $linkimprimirguias = "<a href=\'../print/printOrdenServicio.php?id=$id\' target=\'_blank\'>Imprimir</a>";
 
            if ($unidades > 0)
            {
@@ -62,7 +62,7 @@
            else
                $wrapini = $wrapfin = "";
 
-           $dataSet = $dataSet . "['$wrapini$documento_tercero$wrapfin','$wrapini$nombres_tercero$wrapfin','$wrapini$apellidos_tercero$wrapfin','$wrapini$fechaentrada$wrapfin','$wrapini$numero_orden_servicio$wrapfin','$observacion_orden_servicio','$wrapini$plazo_entrega_orden$wrapfin','$wrapini$unidades$wrapfin','$linkcargar','$linkimprimirguias'],";
+           $dataSet = $dataSet . "['$wrapini$numero_orden_servicio$wrapfin','$wrapini$documento_tercero$wrapfin','$wrapini$nombres_tercero$wrapfin','$wrapini$apellidos_tercero$wrapfin','$wrapini$fechaentrada$wrapfin','$observacion_orden_servicio','$wrapini$plazo_entrega_orden$wrapfin','$wrapini$unidades$wrapfin','$linkcargar','$linkimprimirguias'],";
        }
        $dataSet = substr_replace($dataSet, "];", strlen($dataSet) - 1);
        $dataSet = $dataSetini . $dataSet;
@@ -93,11 +93,12 @@
                 $('#example').dataTable({
                     "aaData": aDataSet,
                     "aoColumns": [
+                        {"sTitle": "Num. O.S"},
                         {"sTitle": "Documento Tercero"},
                         {"sTitle": "Nombre Cliente"},
                         {"sTitle": "Apellido Cliente"},
                         {"sTitle": "Fecha Entrada"},
-                        {"sTitle": "Num. O.S"},
+                        
                         {"sTitle": "Observacion"},
                         {"sTitle": "Plazo Entrega"},
                         {"sTitle": "Unidades"},

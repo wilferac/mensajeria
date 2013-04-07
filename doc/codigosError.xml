@@ -9,6 +9,9 @@ and open the template in the editor.
     <error codigo="001" gravedad="2">
         es un error que ocurre al bloquear tablas.
     </error>
+    <error codigo="002" gravedad="1">
+        error que ocurre al actualizar datos.
+    </error>
     
     
     

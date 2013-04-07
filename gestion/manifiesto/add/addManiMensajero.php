@@ -205,7 +205,7 @@
       {
           echo("<tr>");
           echo("<td>$numero</td>");
-          echo("<td><a onclick='quitar($numero);'>Quitar</a></td>");
+          echo("<td><a onclick='quitar(\"$numero\");'>Quitar</a></td>");
           echo("</tr>");
       }
       echo("</table>");

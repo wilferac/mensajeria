@@ -6,9 +6,10 @@
 ?>
 
 
-<input type="button" value="Resumido" onclick='llamar(0)'></input>
+<a href='print.php?option=0&id=<?= $idMani ?>' target='_blank'>Resumido</a>
+
 <br><br>
-<input type="button" value="Detallado" onclick='llamar(1)'></input>
+<a href='print.php?option=1&id=<?= $idMani ?>' target='_blank'>Completo</a>
 <div id="response">
 </div>
 
@@ -16,7 +17,18 @@
 <script language="javascript">
     function llamar(num)
     {
-        $('#response').load('print.php?option=' + num + '&id=' + <?= $idMani ?>);
+//        $('#response').load('print.php?option=' + num + '&id=' + <?= $idMani ?>);
+        var dataString = 'option=' + num + '&id=' + <?= $idMani ?>;
+
+        $.ajax({
+            type: "POST",
+            url: "print.php",
+            data: dataString,
+            success: function(data) {
+                window.open(data);
+
+            }});
+
     }
 </script>
 

@@ -35,95 +35,54 @@
 
    function printResumido($idMani)
    {
-       echo("imprimiendo Resumido... " . $idMani);
+       //genero la informacion basica
        $terceros = consultarTerceros($idMani);
 
-       echo("<br>");
-       echo("creador: " . $terceros[1]);
-       echo("<br>");
-       echo("entrega: " . $terceros[2]);
-       echo("<br>");
-       echo("resive: " . $terceros[3]);
-       echo("<br>");
-       echo("aliado: " . $terceros[4]);
-       echo("<br>");
-       echo("sucursal: " . $terceros[0]);
-       echo("<br>");
-       echo("fecha: " . $terceros[5]);
-       echo("<br>");
-       echo("zona: " . $terceros[6]);
+       //genero la informacion resumida
+       $consulta="";
+       
+       
+       //genero el pdf
+       generarPdf($terceros, "muhahaha");
 
-       $tabla1 = "<table>
-           <tr>
-            <td>Manifiesto No: $idMani</td>
-           </tr>";
-       $tabla1 = $tabla1."
-           <tr>
-            <td>Entrega: $terceros[2]</td>
-           </tr>";
-       if(isset($terceros[3]))
-       {
-            $tabla1 = $tabla1."
-           <tr>
-            <td>Recibe: $terceros[2]</td>
-           </tr>";
-       }
-       if(isset($terceros[3]))
-       {
-            $tabla1 = $tabla1."
-           <tr>
-            <td>Recibe: $terceros[2]</td>
-           </tr>";
-       }
-<tr>
-    <td>Remite:</td>
-</tr>
-<tr>
-    <td>$remitente</td>
-</tr>
-<tr>
-    <td>Destinartario:</td>
-</tr>
-<tr>
-    <td>$detinatario</td>
-</tr>
-<tr>
-    <td>$extra</td>
-</tr>
-<tr>
-    <td>$dir</td>
-<tr>
-    <td>$ciuDesti</td>
-</tr>
-<tr>
-    <td>$depDesti</td>
-</tr>
-<tr>
-    <td>$fecha</td>
-</tr>
-</table>
-EOD;
    }
 
    function printCompleto($idMani)
    {
-       echo("imprimiendo completo... " . $idMani);
+       //genero la informacion basica
+       $terceros = consultarTerceros($idMani);
+
+       //genero la informacion resumida
+       $consulta="";
+       
+       
+       //genero el pdf
+       generarPdf($terceros, "muhahaha");
    }
 
+   
+   function consultarGuias()
+   {
+       
+   }
+   
    /**
     * Esta funcion realiza la consulta de los terceros relacionado con un manifiesto
     * 
     * @param int $id el id del manifiesto a consultar
-    * @return array retorna un array con los resultados de la query
+    * @return string retorna un string (tabla html) con la informacion de los terceros de la guia.
+    * la tabla estara lista para salir en el pdf
     */
    function consultarTerceros($id)
    {
        $conTerceros = "SELECT s.nombre_sucursal ,m.idmanifiesto ,m.sucursal_idsucursal, GROUP_CONCAT(t.apellidos_tercero SEPARATOR ', ') AS apellidos,  GROUP_CONCAT(t.nombres_tercero SEPARATOR ',') AS tercero, GROUP_CONCAT(tm.tipo SEPARATOR ',')  AS tipo,
-	m.`fechaCreacion` ,  z.`nombre_zona`
+	m.`fechaCreacion` ,  z.`nombre_zona` , c1.`nombre_ciudad` as origen , c2.`nombre_ciudad` as destino
        FROM manifiesto m INNER JOIN tercero_manifiesto tm ON tm.idmanifiesto = m.idmanifiesto 
        INNER JOIN tercero t ON t.idtercero= tm.idtercero 
        LEFT JOIN sucursal s ON s.idsucursal = m.sucursal_idsucursal       
        LEFT JOIN zona z ON z.`idzona` = m.`zonamensajero`
+       INNER JOIN ciudad c1 ON c1.`idciudad` = m.`ciudadOrigen`
+       INNER JOIN ciudad c2 ON c2.`idciudad` = m.`ciudadDestino`
 	WHERE m.`idmanifiesto` = $id
        GROUP BY m.idmanifiesto ";
 
@@ -165,9 +124,65 @@ EOD;
 
            $nombre[5] = $filas['fechaCreacion'];
            $nombre[6] = $filas['nombre_zona'];
+           $nombre[7] = $filas['origen'];
+           $nombre[8] = $filas['destino'];
        }
 
-       return $nombre;
+       $tabla1 = "<table>
+           <tr>
+            <td>Manifiesto No: $id ($nombre[5])</td>
+           </tr>";
+       $tabla1 = $tabla1 . "
+           <tr>
+            <td>Entrega: $nombre[2]</td>
+           </tr>";
+       if (isset($nombre[3]))
+       {
+           $tabla1 = $tabla1 . "
+           <tr>
+            <td>Recibe: $nombre[3]</td>
+           </tr>";
+       }
+       if (isset($nombre[0]))
+       {
+           $tabla1 = $tabla1 . "
+           <tr>
+            <td>Para Sucursal: $nombre[0]</td>
+           </tr>";
+       }
+       if (isset($nombre[4]))
+       {
+           $tabla1 = $tabla1 . "
+           <tr>
+            <td>Para Aliado: $nombre[4]</td>
+           </tr>";
+       }
+       $tabla1 = $tabla1 . "
+           <tr>
+            <td>Origen: $nombre[7]</td>
+           </tr>";
+
+       if (isset($nombre[8]))
+       {
+           $tabla1 = $tabla1 . "
+           <tr>
+            <td>Destino: $nombre[8]</td>
+           </tr>";
+       }
+       if (isset($nombre[6]))
+       {
+           $tabla1 = $tabla1 . "
+           <tr>
+            <td>Zona: $nombre[6]</td>
+           </tr>";
+       }
+       $tabla1 = $tabla1 . "
+           <tr>
+            <td>Creado por: $nombre[1]</td>
+           </tr>";
+       $tabla1 = $tabla1 . "</table>";
+
+       return $tabla1;
    }
 
    function generarPdf($tabla1, $tabla2)
@@ -181,36 +196,34 @@ EOD;
        $pdf->setPrintHeader(false);
        $pdf->setPrintFooter(false);
        $pdf->SetDefaultMonospacedFont(PDF_FONT_MONOSPACED);
-       $pdf->SetMargins(5, 1, 0);
+       $pdf->SetMargins(18, 15, 15);
 
        $pdf->SetAutoPageBreak(TRUE, 0);
 
 
-       $pdf->SetFont('times', '', 10);
+       $pdf->SetFont('times', '', 20);
 
        $pdf->AddPage();
 
-       $style = array(
-           'stretch' => false,
-           'fitwidth' => true,
-           'cellfitalign' => '',
-           'border' => false,
-           'hpadding' => 'auto',
-           'vpadding' => 'auto',
-           'fgcolor' => array(0, 0, 0),
-           'bgcolor' => false, //array(255,255,255),
-           'text' => true,
-           'font' => 'helvetica',
-           'fontsize' => 8,
-           'stretchtext' => 4
-       );
-
-
-       $pdf->setCellMargins(1, 1, 1, 1);
+//       $style = array(
+//           'stretch' => false,
+//           'fitwidth' => true,
+//           'cellfitalign' => '',
+//           'border' => false,
+//           'hpadding' => 'auto',
+//           'vpadding' => 'auto',
+//           'fgcolor' => array(0, 0, 0),
+//           'bgcolor' => false, //array(255,255,255),
+//           'text' => true,
+//           'font' => 'helvetica',
+//           'fontsize' => 8,
+//           'stretchtext' => 4
+//       );
+       //$pdf->setCellMargins(1, 1, 1, 1);
 
        $pdf->SetFillColor(255, 255, 255);
 
-       $espacio = 32;
+       //$espacio = 32;
 
 //
 //       $xi = 0;
@@ -218,9 +231,10 @@ EOD;
 //       $cuenta = 0;
 
 
-       $pdf->writeHTMLCell(250, '', '', '', $tabla1, 1, 0, 1, true, 'J', true);
+       $pdf->writeHTMLCell(260, '', '', '', $tabla1, 1, 1, 1, true, 'J', true);
        //tabla 2
-       $pdf->writeHTMLCell(250, '', '', '', $tabla2, 1, 0, 1, true, 'J', true);
+       $pdf->Ln();
+       $pdf->writeHTMLCell(260, '', '', '', $tabla2, 1, 0, 1, true, 'J', true);
 
 
 // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
@@ -231,7 +245,7 @@ EOD;
 
 // ---------------------------------------------------------
 //Close and output PDF document
-       $pdf->Output('example_005.pdf', 'I');
+       $pdf->Output('resumido.pdf', 'D');
 
 //============================================================+
 // END OF FILE
@@ -240,5 +254,8 @@ EOD;
        echo('<script>opener.location.reload(true);
    self.close();</script>');
    }
+   
+   
+   
 
 ?>

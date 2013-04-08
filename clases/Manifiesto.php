@@ -18,7 +18,31 @@
        public $idMenEntrega;
        public $idMenResive;
        public $peso;
+       
+       private $idCiuDesti;
+       private $idCiuOri;
 
+       public function getIdCiuDesti()
+       {
+           return $this->idCiuDesti;
+       }
+
+       public function setIdCiuDesti($idCiuDesti)
+       {
+           $this->idCiuDesti = $idCiuDesti;
+       }
+
+       public function getIdCiuOri()
+       {
+           return $this->idCiuOri;
+       }
+
+       public function setIdCiuOri($idCiuOri)
+       {
+           $this->idCiuOri = $idCiuOri;
+       }
+
+              
        public function __construct($id,$idSucursal,$idCreador,$plazo,$idZona,$tarifa)
        {
            $this->id=$id;

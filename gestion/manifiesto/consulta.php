@@ -110,7 +110,7 @@ SELECT * FROM tercero_manifiesto tm INNER JOIN tercero t ON t.`idtercero` = tm.`
           {
               $linkcargar = "";
           }
-          $imprimir = "<a target=\'_blank\' title=\'imprimir manifiesto: $idmanifiesto \' href=\'consultadetalle.php?nombre=$nombres&id=$idmanifiesto\' >";
+          $imprimir = "<a target=\'_blank\' title=\'imprimir manifiesto: $idmanifiesto \' href=\'../print/manifiesto/gui.php?id=$idmanifiesto\' >Imprimir</a>";
 
           //cambio el dato para mostrarlo :o
           $estado = $estado == 0 ? '<font color="green">Cerrado</font>' : '<font color="red">Abierto</font>';
@@ -119,7 +119,7 @@ SELECT * FROM tercero_manifiesto tm INNER JOIN tercero t ON t.`idtercero` = tm.`
           $wrapini = "<a target=\'_blank\' title=\'Ver detalle manifiesto: $idmanifiesto \' href=\'consultadetalle.php?nombre=$nombres&id=$idmanifiesto\' onClick=\'return(wo(this))\'>";
           $wrapfin = "</a>";
 
-          $dataSet = $dataSet . "['$wrapini$numero_manifiesto$wrapfin','$estado','$nombre[1] $apellido[1]','$nombre[3] $apellido[3]','$nombre[2] $apellido[2]','$nombre_sucursal','$nombre[4] $apellido[4]','$plazo_entrega_manifiesto','$linkcargar'],";
+          $dataSet = $dataSet . "['$wrapini$numero_manifiesto$wrapfin','$estado','$nombre[1] $apellido[1]','$nombre[3] $apellido[3]','$nombre[2] $apellido[2]','$nombre_sucursal','$nombre[4] $apellido[4]','$plazo_entrega_manifiesto','$linkcargar','$imprimir'],";
       }
       $dataSet = substr_replace($dataSet, "];", strlen($dataSet) - 1);
       $dataSet = $dataSetini . $dataSet;
@@ -160,6 +160,7 @@ SELECT * FROM tercero_manifiesto tm INNER JOIN tercero t ON t.`idtercero` = tm.`
                         {"sTitle": "Nombre Aliado"},
                         {"sTitle": "Plazo Entrega"},
                         {"sTitle": "Llegada a Destino"},
+                        {"sTitle": "Imprimir"},
                     ],
                     "sDom": 'T<"clear">lfrtip', "oTableTools": {"aButtons": ["copy", "xls", {"sExtends": "pdf",
                                 "sPdfOrientation": "landscape", "sPdfMessage": "Reporte"}, "print"]}});

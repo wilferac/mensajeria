@@ -349,10 +349,13 @@
   {
       $idMen = $_REQUEST['idMensajero'];
       $peso = $_REQUEST['peso'];
+      $idCiuDesi = $_REQUEST['idDesti'];
       $arreGuias = unserialize($_SESSION['arregloGuias']);
 
       $idCreador = $objUser->getId();
-
+      $idCiuOri = $objUser->getIdCiudad();
+      
+      
       $idAli = $_REQUEST['idAli'];
       $idSucur = $_REQUEST['idSucur'];
       $idMenResibe = $_REQUEST['idMenResibe'];
@@ -375,6 +378,8 @@
 
       $objManifiesto = new Manifiesto(-1, $idSucur, $idCreador, 0, NULL, NULL);
       $objManifiesto->peso = $peso;
+      $objManifiesto->setIdCiuDesti($idCiuDesi);
+      $objManifiesto->setIdCiuOri($idCiuOri);
 
       $daoMani = new DaoManifiesto();
 

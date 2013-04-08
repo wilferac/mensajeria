@@ -21,7 +21,7 @@
 
       public function insertar($objMani, $arreGuias)
       {
-          //$objMani= new Manifiesto($id, $idSucursal, $idCreador, $plazo, $idZona, $tarifa);
+//          $objMani= new Manifiesto($id, $idSucursal, $idCreador, $plazo, $idZona, $tarifa);
           //verifico si es null
 
           $idSucur = !empty($objMani->idSucursal) ? $objMani->idSucursal : "NULL";
@@ -32,14 +32,17 @@
           $peso = !empty($objMani->peso) ? $objMani->peso : "NULL";
           
 
+          $idCiuDesti = $objMani->getIdCiuDesti();
+          $idCiuOri = $objMani->getIdCiuOri();
+          
           mysql_query("BEGIN");
 //          
 //          mysql_query("COMMIT");
 //
 //            mysql_query("ROLLBACK");
 
-          $query = "INSERT INTO manifiesto (sucursal_idsucursal, plazo_entrega_manifiesto,tarifadestajo, zonamensajero,peso) 
-              VALUES($idSucur, $objMani->plazo, $tarifa,$idZona,$peso )";
+          $query = "INSERT INTO manifiesto (sucursal_idsucursal, plazo_entrega_manifiesto,tarifadestajo, zonamensajero,peso,ciudadDestino,ciudadOrigen) 
+              VALUES($idSucur, $objMani->plazo, $tarifa,$idZona,$peso ,$idCiuDesti,$idCiuOri)";
 
           if (mysql_query($query))
           {

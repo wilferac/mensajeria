@@ -18,6 +18,10 @@
       //$operacion->redireccionar('No Puede entrar', 'index.php');
       return;
   }
+  if (!$objUser->checkRol("Usuario"))
+  {
+      die("No tienes permiso");
+  }
 
 
 
@@ -27,7 +31,7 @@
   {
       //carga las guias del manifiesto
       case 0:
-          loadGuias();
+          loadGuias($objUser);
           break;
 
 //descarga una guia del manifiesto :O
@@ -37,18 +41,23 @@
   }
 
   //se encarga de cargar las guias del manifiesto
-  function loadGuias()
+  function loadGuias($objUser)
   {
       $idMani = $_REQUEST['idMani'];
       //echo("loading..." . $idMani);
 
       $daoGuia = new DaoGuia();
-
-      $arreGuias = $daoGuia->getAll($idMani);
+      $sucur = $objUser->getIdSucursal();
+//      echo($sucur);
+//      return;
+      $arreGuias = $daoGuia->getAll($idMani, 1, $sucur);
+      
+      
+      
       if (sizeof($arreGuias) <= 0)
       {
           echo("<script type='text/javascript'>
-                alert('Este manifiesto ya esta descargado!');
+                alert('Este manifiesto ya esta descargado o no tienes permiso para verlo');
           </script>");
           //redirigir a consulta
           die();
@@ -92,7 +101,7 @@
           //codigo para dar de alta en la BD
           //echo($arreIdGuias[$numGuia]." num guia ". $numGuia);
           //return;
-          if ($daoGuia->altaDeManifiesto($arreIdGuias[$numGuia], $numGuia,5))
+          if ($daoGuia->altaDeManifiesto($arreIdGuias[$numGuia], $numGuia, 5))
           {
               unset($arreGuias[$numGuia]);
           }

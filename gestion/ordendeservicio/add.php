@@ -12,6 +12,10 @@
        $operacion->redireccionar('No Puede entrar', 'index.php');
        return;
    }
+   if (!$objUser->checkRol("Usuario"))
+   {
+       die("No tienes permiso");
+   }
 
    if (isset($_POST['registrar']))
    {

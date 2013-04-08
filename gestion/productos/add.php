@@ -3,6 +3,7 @@
    require("../../libreria/libreria.php");
    include '../../security/User.php';
    include ('../../Menu.php');
+   
 
    $objUser = unserialize($_SESSION['currentUser']);
 
@@ -11,6 +12,11 @@
        $operacion->redireccionar('No Puede entrar', 'index.php');
        return;
    }
+
+  if (!$objUser->checkRol("Admin"))
+  {
+      die("No tienes permiso");
+  }
 ?>
 <html>
     <head>

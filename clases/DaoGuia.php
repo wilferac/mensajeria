@@ -8,17 +8,28 @@
   class DaoGuia
   {
 
-      //obtiene todas las guias de un manifiesto :D
-      public function getAll($idMani, $estado = 1)
+      //obtiene todas las guias de un manifiesto :D y las filtar para que solo puedan ver las que fueron creadas/enviadas a su sucursal
+      public function getAll($idMani, $estado = 1, $idSucur = NULL)
       {
           $cons = "SELECT g.numero_guia, gm.gmId  FROM guia g INNER JOIN  guia_manifiesto gm ON  gm.guiId = g.numero_guia
+INNER JOIN manifiesto m ON m.`idmanifiesto`= gm.`gmId`
 WHERE gm.manId = $idMani ";
           if ($estado == 1)
           {
               $buscarEstado = " AND gm.estado = $estado";
               $cons = $cons . $buscarEstado;
-          }
 
+              if (isset($idSucur))
+              {
+                  $cons = $cons . " AND (m.sucursal_idsucursal = $idSucur OR 
+EXISTS (
+SELECT * FROM tercero_manifiesto tm INNER JOIN tercero t ON t.`idtercero` = tm.`idtercero` WHERE tm.`tipo` = 1 AND t.`sucursal_idsucursal` = $idSucur AND tm.`idmanifiesto` = $idMani
+ )  ) ";
+              }
+          }
+          
+//          echo($cons);
+//          return;
 
           $results2 = mysql_query($cons) or die(mysql_error());
 

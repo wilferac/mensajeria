@@ -13,6 +13,10 @@
       $operacion->redireccionar('No Puede entrar', 'index.php');
       return;
   }
+  if (!$objUser->checkRol("Usuario"))
+  {
+      die("No tienes permiso");
+  }
 //corrijo lo de las enies
   header("Content-Type: text/html;charset=utf-8");
 

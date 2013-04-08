@@ -11,6 +11,10 @@
        $operacion->redireccionar('No Puede entrar', 'index.php');
        return;
    }
+   if (!$objUser->checkRol("Usuario"))
+   {
+       die();
+   }
 
 
 

@@ -4,6 +4,21 @@
    require("../../libreria/libreria.php");
 
 
+   
+   include '../../security/User.php';
+
+   $objUser = unserialize($_SESSION['currentUser']);
+
+   if ($objUser->getStatus() != 1)
+   {
+       $operacion->redireccionar('No Puede entrar', 'index.php');
+       return;
+   }
+   if (!$objUser->checkRol("Admin"))
+   {
+       die();
+   }
+   
 
 
    /*    * ***********Modificacion************************ */

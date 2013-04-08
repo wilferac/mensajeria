@@ -2,6 +2,8 @@
    include("../../clases/clases.php");
 
    $idos = $_GET["id"];
+   $numeroOS =  $_REQUEST['numero'];
+   
 
    $os = new orden_servicio();
    $guia = new guia();
@@ -259,7 +261,7 @@ WHERE g.`orden_servicio_idorden_servicio` = $idorden_servicio
                }
             ?>
             <div class="full_width big">
-                Orden de Servicio
+                Orden de Servicio N. <?=$numeroOS?>
             </div>
             <?
                if ($vacio)

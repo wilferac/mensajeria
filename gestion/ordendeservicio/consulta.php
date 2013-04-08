@@ -60,7 +60,7 @@
 
            if ($unidades > 0)
            {
-               $wrapini = "<a target=\'_blank\' title=\'Ver detalle num. orden: $numero_orden_servicio \' href=\'consultadetalle.php?nombre=$nombres&id=$id\' onClick=\'return(wo(this))\'>";
+               $wrapini = "<a target=\'_blank\' title=\'Ver detalle num. orden: $numero_orden_servicio \' href=\'consultadetalle.php?numero=$numero_orden_servicio&id=$id\' onClick=\'return(wo(this))\'>";
                $wrapfin = "</a>";
            }
            else

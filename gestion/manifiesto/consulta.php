@@ -110,6 +110,8 @@ SELECT * FROM tercero_manifiesto tm INNER JOIN tercero t ON t.`idtercero` = tm.`
           {
               $linkcargar = "";
           }
+          $imprimir = "<a target=\'_blank\' title=\'imprimir manifiesto: $idmanifiesto \' href=\'consultadetalle.php?nombre=$nombres&id=$idmanifiesto\' >";
+
           //cambio el dato para mostrarlo :o
           $estado = $estado == 0 ? '<font color="green">Cerrado</font>' : '<font color="red">Abierto</font>';
           // hacer manifiesto count en guias con igual idmanifiesto	 

@@ -24,7 +24,7 @@ DELIMITER $$
 --
 -- Procedimientos
 --
-CREATE DEFINER=`root`@`localhost` PROCEDURE `addGuia`(IN duenoOrden INT(11),IN creador INT(11), IN ordenServi INT(11),
+CREATE  PROCEDURE `addGuia`(IN duenoOrden INT(11),IN creador INT(11), IN ordenServi INT(11),
 IN remitente INT(11), IN remiInfo VARCHAR(50),IN remiCiu INT(11), IN referencia VARCHAR(30),
 IN destinatario INT(11), IN destiNom VARCHAR(45),  IN destiApel VARCHAR(45),IN destiTel VARCHAR(45),
 IN destiCiu INT(11), IN destiDirec VARCHAR(70), IN destiInfo VARCHAR(50),  
@@ -5663,7 +5663,7 @@ INSERT INTO `zona` (`idzona`, `ciudad_idciudad`, `nombre_zona`, `descripcion`) V
 --
 DROP TABLE IF EXISTS `viewGuiasManifiesto`;
 
-CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW `viewGuiasManifiesto` AS select `gm`.`guiId` AS `guiId`,`gm`.`gmId` AS `gmId`,`gm`.`manId` AS `manId`,`tm`.`idtercero` AS `idtercero`,group_concat(concat(`t`.`nombres_tercero`,' ',`t`.`apellidos_tercero`) separator ' ,  ') AS `nombres`,group_concat(`tm`.`tipo` separator ',  ') AS `tipos` from (((`manifiesto` `m` join `guia_manifiesto` `gm` on((`gm`.`manId` = `m`.`idmanifiesto`))) join `tercero_manifiesto` `tm` on((`tm`.`idmanifiesto` = `m`.`idmanifiesto`))) join `tercero` `t` on((`t`.`idtercero` = `tm`.`idtercero`))) where ((`gm`.`estado` = 1) and (`gm`.`idEstadoGuia` = 4) and isnull(`m`.`sucursal_idsucursal`) and ((`tm`.`tipo` = 2) or (`tm`.`tipo` = 4))) group by `gm`.`gmId`;
+CREATE ALGORITHM=UNDEFINED  SQL SECURITY DEFINER VIEW `viewGuiasManifiesto` AS select `gm`.`guiId` AS `guiId`,`gm`.`gmId` AS `gmId`,`gm`.`manId` AS `manId`,`tm`.`idtercero` AS `idtercero`,group_concat(concat(`t`.`nombres_tercero`,' ',`t`.`apellidos_tercero`) separator ' ,  ') AS `nombres`,group_concat(`tm`.`tipo` separator ',  ') AS `tipos` from (((`manifiesto` `m` join `guia_manifiesto` `gm` on((`gm`.`manId` = `m`.`idmanifiesto`))) join `tercero_manifiesto` `tm` on((`tm`.`idmanifiesto` = `m`.`idmanifiesto`))) join `tercero` `t` on((`t`.`idtercero` = `tm`.`idtercero`))) where ((`gm`.`estado` = 1) and (`gm`.`idEstadoGuia` = 4) and isnull(`m`.`sucursal_idsucursal`) and ((`tm`.`tipo` = 2) or (`tm`.`tipo` = 4))) group by `gm`.`gmId`;
 
 --
 -- Restricciones para tablas volcadas

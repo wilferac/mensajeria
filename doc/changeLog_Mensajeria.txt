@@ -39,6 +39,6 @@ cambios V. 0.9
 
 --add: multiples validaciones al archivo que de guias que se carga.
 
-
+--add: imprimir manifestos. (resumido y completo)
 
 

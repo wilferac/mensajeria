@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Servidor: localhost
--- Tiempo de generación: 06-04-2013 a las 21:07:06
+-- Tiempo de generación: 09-04-2013 a las 16:41:24
 -- Versión del servidor: 5.5.29
 -- Versión de PHP: 5.4.6-1ubuntu1.2
 
@@ -5031,8 +5031,8 @@ CREATE TABLE IF NOT EXISTS `guia` (
 
 INSERT INTO `guia` (`idguia`, `numero_guia`, `orden_servicio_idorden_servicio`, `causal_devolucion_idcausal_devolucion`, `producto_idproducto`, `ciudad_iddestino`, `valor_declarado_guia`, `nombre_destinatario_guia`, `direccion_destinatario_guia`, `telefono_destinatario_guia`, `peso_guia`, `ciudad_idorigen`, `tercero_idremitente`, `tercero_iddestinatario`, `fecha`, `remitenteInfo`, `destinatarioInfo`, `owner`, `flete`, `prima`, `contenido`, `referencia`, `largo`, `ancho`, `alto`, `estado`) VALUES
 (1, '1', 1, 4, 11, 1, 5000, 'yo  ayo', 'calle lejossssssss', '', 50.00, 1002, 71, 1, '2013-04-02 16:32:26', '', '', 72, 0.00, 0, 'mouse', 'ff45', 1.00, 1.00, 1.00, 1),
-(3, '2', 2, 4, 9, 1002, 5000, 'yo  ayo', 'calle lejossssssss', '', 50.00, 1002, 82, 1, '2013-04-02 16:36:34', '', '', 72, 0.00, 0, 'pikachu', '', 1.00, 1.00, 1.00, 1),
-(4, 'CC0000001', 3, 1, 11, 1, 5000, 'pancho  villa', 'mexico', '', 50.00, 1002, 84, 2, '2013-04-03 13:44:12', '', 'jojo', 84, 0.00, 0, 'rifle', 'AC45fG', 1.00, 1.00, 1.00, 1),
+(3, '2', 2, 2, 9, 1002, 5000, 'yo  ayo', 'calle lejossssssss', '', 50.00, 1002, 82, 1, '2013-04-02 16:36:34', '', '', 72, 0.00, 0, 'pikachu', '', 1.00, 1.00, 1.00, 1),
+(4, 'CC0000001', 3, 4, 11, 1, 5000, 'pancho  villa', 'mexico', '', 50.00, 1002, 84, 2, '2013-04-03 13:44:12', '', 'jojo', 84, 0.00, 0, 'rifle', 'AC45fG', 1.00, 1.00, 1.00, 1),
 (5, '987542', 1, 1, 11, 844, 5000, 'adsfasdf  asdfas', 'asdfasdf', '', 50.00, 1002, 71, 3, '2013-04-03 14:39:06', '', '', 72, 0.00, 0, '', '', 1.00, 1.00, 1.00, 1),
 (6, '111', 2, 1, 13, 1003, 5000, 'adsfasdf  asdfas', 'asdfasdf', '', 50.00, 1002, 82, 3, '2013-04-03 14:41:04', '', '', 72, 0.00, 0, '', '', 1.00, 1.00, 1.00, 1),
 (7, '222', 7, 1, 11, 817, NULL, NULL, NULL, NULL, NULL, 1002, 82, NULL, '2013-04-03 14:42:12', '', NULL, 72, 0.00, 0, NULL, '', NULL, NULL, NULL, 1),
@@ -5045,7 +5045,7 @@ INSERT INTO `guia` (`idguia`, `numero_guia`, `orden_servicio_idorden_servicio`, 
 (51921, 'MM6', 11, 1, 1, 777, 0, 'jj37 ee39', '59', '60', 10.00, 1002, 76, 67, '2013-04-05 16:02:25', NULL, 'aaaa49', 76, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 1),
 (51922, 'MM7', 11, 1, 1, 912, 0, 'jj94 ee96', '116', '117', 10.00, 1002, 76, 124, '2013-04-05 16:02:25', NULL, 'aaaa106', 76, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 1),
 (51923, 'MM8', 11, 1, 1, 602, 0, 'jj95 ee97', '117', '118', 10.00, 1002, 76, 339, '2013-04-05 16:02:25', NULL, 'aaaa107', 76, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 1),
-(51924, 'MM9', 11, 2, 1, 1, 0, 'jj142 ee144', '164', '165', 10.00, 1002, 76, 386, '2013-04-05 16:02:25', NULL, 'aaaa154', 76, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 1);
+(51924, 'MM9', 11, 4, 1, 1, 0, 'jj142 ee144', '164', '165', 10.00, 1002, 76, 386, '2013-04-05 16:02:25', NULL, 'aaaa154', 76, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 1);
 
 -- --------------------------------------------------------
 
@@ -5069,14 +5069,14 @@ CREATE TABLE IF NOT EXISTS `guia_manifiesto` (
   KEY `index_guiid` (`guiId`),
   KEY `FK_guia_manifiesto_estadoGuia` (`idEstadoGuia`),
   KEY `FK_guia_manifiesto_causales` (`idCausal`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=11 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=14 ;
 
 --
 -- Volcado de datos para la tabla `guia_manifiesto`
 --
 
 INSERT INTO `guia_manifiesto` (`gmId`, `manId`, `guiId`, `estado`, `idEstadoGuia`, `idCausal`, `fechaDescarga`, `fechaManual`) VALUES
-(1, 1, '2', 1, 4, NULL, NULL, NULL),
+(1, 1, '2', 0, 2, 1, '2013-04-08 15:32:20', '2013-04-08'),
 (2, 2, '1', 1, 4, NULL, NULL, NULL),
 (3, 8, 'MM3', 0, 3, NULL, '2013-04-05 16:40:38', '2013-04-05'),
 (4, 9, 'MM4', 0, 5, NULL, '2013-04-05 16:45:43', NULL),
@@ -5085,7 +5085,10 @@ INSERT INTO `guia_manifiesto` (`gmId`, `manId`, `guiId`, `estado`, `idEstadoGuia
 (7, 10, 'MM5', 0, 2, 1, '2013-04-05 17:14:06', '2013-04-05'),
 (8, 11, 'MM5', 0, 3, NULL, '2013-04-05 17:15:35', '2013-04-05'),
 (9, 12, 'MM9', 0, 5, NULL, '2013-04-05 18:40:24', NULL),
-(10, 13, 'MM9', 0, 2, 2, '2013-04-05 18:43:13', '2013-04-05');
+(10, 13, 'MM9', 0, 2, 2, '2013-04-05 18:43:13', '2013-04-05'),
+(11, 14, 'CC0000001', 1, 4, NULL, NULL, NULL),
+(12, 14, 'MM9', 0, 5, NULL, '2013-04-08 16:31:59', NULL),
+(13, 15, 'MM9', 1, 4, NULL, NULL, NULL);
 
 -- --------------------------------------------------------
 
@@ -5103,24 +5106,28 @@ CREATE TABLE IF NOT EXISTS `manifiesto` (
   `fechaCierre` timestamp NULL DEFAULT NULL COMMENT 'la fecha en la que se descargan todas las guias del manifiesto',
   `estado` int(1) NOT NULL DEFAULT '1',
   `peso` decimal(5,1) DEFAULT NULL,
+  `ciudadDestino` int(11) DEFAULT NULL,
+  `ciudadOrigen` int(11) NOT NULL,
   PRIMARY KEY (`idmanifiesto`),
   KEY `fk_manifiesto_sucursal1` (`sucursal_idsucursal`),
   KEY `zonamensajero` (`zonamensajero`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=14 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=16 ;
 
 --
 -- Volcado de datos para la tabla `manifiesto`
 --
 
-INSERT INTO `manifiesto` (`idmanifiesto`, `sucursal_idsucursal`, `plazo_entrega_manifiesto`, `tarifadestajo`, `zonamensajero`, `fechaCreacion`, `fechaCierre`, `estado`, `peso`) VALUES
-(1, NULL, 1, NULL, 5, '2013-04-02 16:38:08', NULL, 1, NULL),
-(2, 13, 0, NULL, NULL, '2013-04-02 16:49:02', NULL, 1, 2.0),
-(8, NULL, 4, NULL, 4, '2013-04-05 16:33:04', '2013-04-05 16:40:38', 0, NULL),
-(9, 13, 0, NULL, NULL, '2013-04-05 16:41:51', '2013-04-05 16:45:44', 0, 3.0),
-(10, NULL, 4, NULL, 8, '2013-04-05 16:52:06', '2013-04-05 17:14:06', 0, NULL),
-(11, NULL, 3, NULL, 8, '2013-04-05 17:15:09', '2013-04-05 17:15:35', 0, NULL),
-(12, 13, 0, NULL, NULL, '2013-04-05 18:39:56', '2013-04-05 18:40:24', 0, 2.0),
-(13, NULL, 1, NULL, 2, '2013-04-05 18:42:53', '2013-04-05 18:43:13', 0, NULL);
+INSERT INTO `manifiesto` (`idmanifiesto`, `sucursal_idsucursal`, `plazo_entrega_manifiesto`, `tarifadestajo`, `zonamensajero`, `fechaCreacion`, `fechaCierre`, `estado`, `peso`, `ciudadDestino`, `ciudadOrigen`) VALUES
+(1, NULL, 1, NULL, 5, '2013-04-02 16:38:08', '2013-04-08 15:32:20', 0, NULL, NULL, 1002),
+(2, 13, 0, NULL, NULL, '2013-04-02 16:49:02', NULL, 1, 2.0, NULL, 1002),
+(8, NULL, 4, NULL, 4, '2013-04-05 16:33:04', '2013-04-05 16:40:38', 0, NULL, NULL, 1002),
+(9, 13, 0, NULL, NULL, '2013-04-05 16:41:51', '2013-04-05 16:45:44', 0, 3.0, NULL, 1002),
+(10, NULL, 4, NULL, 8, '2013-04-05 16:52:06', '2013-04-05 17:14:06', 0, NULL, NULL, 1002),
+(11, NULL, 3, NULL, 8, '2013-04-05 17:15:09', '2013-04-05 17:15:35', 0, NULL, NULL, 1002),
+(12, 13, 0, NULL, NULL, '2013-04-05 18:39:56', '2013-04-05 18:40:24', 0, 2.0, NULL, 1002),
+(13, NULL, 1, NULL, 2, '2013-04-05 18:42:53', '2013-04-05 18:43:13', 0, NULL, NULL, 1002),
+(14, 13, 0, NULL, NULL, '2013-04-08 15:35:54', NULL, 1, 1.0, 1, 1002),
+(15, NULL, 3, NULL, 2, '2013-04-08 16:37:19', NULL, 1, NULL, NULL, 1);
 
 -- --------------------------------------------------------
 
@@ -5521,7 +5528,7 @@ CREATE TABLE IF NOT EXISTS `tercero_manifiesto` (
   KEY `FK_terceroManifiesto_tercero` (`idtercero`),
   KEY `FK_terceroManifiesto_manifiesto` (`idmanifiesto`),
   KEY `FK_terceroManifiesto_tipoTercero` (`tipo`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=30 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=35 ;
 
 --
 -- Volcado de datos para la tabla `tercero_manifiesto`
@@ -5546,7 +5553,12 @@ INSERT INTO `tercero_manifiesto` (`idTerMani`, `idtercero`, `idmanifiesto`, `tip
 (26, 86, 12, 2),
 (27, 83, 12, 3),
 (28, 85, 13, 1),
-(29, 83, 13, 2);
+(29, 83, 13, 2),
+(30, 72, 14, 1),
+(31, 86, 14, 2),
+(32, 83, 14, 3),
+(33, 85, 15, 1),
+(34, 83, 15, 2);
 
 -- --------------------------------------------------------
 

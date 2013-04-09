@@ -4,6 +4,7 @@
 
 
    include '../../../security/User.php';
+   include '../../../clases/Guia.php';
    require_once('../../../libreria/tcpdf/tcpdf.php');
 
    $objUser = unserialize($_SESSION['currentUser']);
@@ -39,12 +40,104 @@
        $terceros = consultarTerceros($idMani);
 
        //genero la informacion resumida
-       $consulta="";
-       
-       
-       //genero el pdf
-       generarPdf($terceros, "muhahaha");
+       $guias = consultarGuias($idMani);
 
+
+       $ordenes = new ArrayObject();
+       $clientes = new ArrayObject();
+       $numeros = new ArrayObject();
+
+       $entregadas = new ArrayObject();
+       $devueltas = new ArrayObject();
+       $enDestino = new ArrayObject();
+       $enManifiesto = new ArrayObject();
+
+///de aca voy a sacar los numero de las OS
+       $numeros[0] = 0;
+
+       $entregadas[0] = 0;
+       $devueltas[0] = 0;
+       $enDestino[0] = 0;
+       $enManifiesto[0] = 0;
+       $ordenes[0] = 0;
+       $clientes[0] = "Unitario";
+       //aca acumulo las guias por ordenes de servicio
+       foreach ($guias as $guia)
+       {
+           //$guia = new Guia($num, $ciu, $dep);
+           $numOs = $guia->getNumeroOrdenSer();
+           if (empty($numOs))
+           {
+               $ordenes[0]++;
+           }
+           else
+           {
+               if (isset($ordenes[$numOs]))
+               {
+                   $ordenes[$numOs]++;
+               }
+               else
+               {
+                   $numeros[$numOs] = $numOs;
+                   $clientes[$numOs] = $guia->getClienteNom();
+                   $ordenes[$numOs] = 1;
+                   $entregadas[$numOs] = 0;
+                   $devueltas[$numOs] = 0;
+                   $enDestino[$numOs] = 0;
+                   $enManifiesto[$numOs] = 0;
+               }
+               $estado = $guia->getIdEstado();
+               switch($estado)
+               {
+                   case 2:
+                       $devueltas[$numOs]++;
+                       break;
+                   case 3:
+                       $entregadas[$numOs]++;
+                       break;
+                   case 4:
+                       $enManifiesto[$numOs]++;
+                       break;
+                   case 5:
+                       $enDestino[$numOs]++;
+                       break;
+               }
+               
+           }
+       }
+       
+       $table2="<table>
+           <tr>
+           <td>N. Orden</td>
+           <td>Cliente</td>
+           <td>Cantidad</td>
+           <td>Entregadas</td>
+           <td>Devueltas</td>
+           <td>En Manifiesto</td>
+           <td>En Destino</td>
+           </tr>";
+
+       foreach($numeros as $num)
+       {
+           if($ordenes[$num] <=0)
+           {
+               continue;
+           }
+           $table2= $table2."
+               <tr>
+               <td>$num</td>
+               <td>$clientes[$num]</td>
+               <td>$ordenes[$num]</td>
+               <td>$entregadas[$num]</td>
+               <td>$devueltas[$num]</td>
+               <td>$enManifiesto[$num]</td>
+               <td>$enDestino[$num]</td>
+               </tr>";
+       }
+
+
+       //genero el pdf
+       generarPdf($terceros, $table2);
    }
 
    function printCompleto($idMani)
@@ -53,19 +146,71 @@
        $terceros = consultarTerceros($idMani);
 
        //genero la informacion resumida
-       $consulta="";
-       
-       
+       $guias = consultarGuias($idMani);
+
+       $tabla2 = "<table border=\"1\">
+           <tr>
+            <td>Guia N.</td>
+            <td>Dirección</td>
+            <td>Destinatario</td>
+            <td>Estado</td>
+           </tr>";
+
+       foreach ($guias as $guia)
+       {
+           // $guia = new Guia($num, $ciu, $dep);
+           $numOS = $guia->getNumeroOrdenSer();
+           $num = $guia->getNumero() . ' ' . (!empty($numOS) ? '(' . $numOS . ')' : "");
+           $dir = $guia->getDireccion();
+           $desti = $guia->getNombreDestinatario();
+           $estado = $guia->getEstado();
+
+           $tabla2 = $tabla2 .
+                   "<tr>
+            <td>$num</td>
+            <td>$dir</td>
+            <td>$desti</td>
+            <td>$estado</td>
+           </tr>";
+       }
+       $tabla2 = $tabla2 . "</table>";
+
        //genero el pdf
-       generarPdf($terceros, "muhahaha");
+       generarPdf($terceros, $tabla2);
    }
 
-   
-   function consultarGuias()
+   function consultarGuias($idMani)
    {
-       
+       $consulta = "SELECT g.numero_guia, gm.gmId  , os.`numero_orden_servicio`, os.`idorden_servicio` ,
+g.`direccion_destinatario_guia`, g.`nombre_destinatario_guia` , g.`contenido`, es.`nombre_causal_devolucion`,
+CONCAT (t.`nombres_tercero`, ' ',t.`apellidos_tercero`) AS clienteOs, gm.`idEstadoGuia`
+FROM guia g INNER JOIN  guia_manifiesto gm ON  gm.guiId = g.numero_guia
+INNER JOIN manifiesto m ON m.`idmanifiesto`= gm.`gmId`
+INNER JOIN orden_servicio os ON g.`orden_servicio_idorden_servicio` = os.`idorden_servicio`
+INNER JOIN estadoGuia es ON es.`idcausal_devolucion` = gm.`idEstadoGuia`
+INNER JOIN tercero t ON t.`idtercero` = os.`tercero_idcliente`
+WHERE gm.manId =  $idMani ";
+
+
+       $res2 = mysql_query($consulta);
+       $res = new ArrayObject();
+       $cont = 0;
+       while ($filas = mysql_fetch_assoc($res2))
+       {
+           $objGuia = new Guia($filas['numero_guia'], -1, -1);
+           $objGuia->setDireccion($filas['direccion_destinatario_guia']);
+           $objGuia->setNombreDestinatario($filas['nombre_destinatario_guia']);
+           $objGuia->setEstado($filas['nombre_causal_devolucion']);
+           $objGuia->setNumeroOrdenSer($filas['numero_orden_servicio']);
+           $objGuia->setIdOrdenServi($filas['idorden_servicio']);
+           $objGuia->setClienteNom($filas['clienteOs']);
+           $objGuia->setIdEstado($filas['idEstadoGuia']);
+           $res[$cont] = $objGuia;
+           $cont++;
+       }
+       return $res;
    }
-   
+
    /**
     * Esta funcion realiza la consulta de los terceros relacionado con un manifiesto
     * 
@@ -81,8 +226,8 @@
        INNER JOIN tercero t ON t.idtercero= tm.idtercero 
        LEFT JOIN sucursal s ON s.idsucursal = m.sucursal_idsucursal       
        LEFT JOIN zona z ON z.`idzona` = m.`zonamensajero`
-       INNER JOIN ciudad c1 ON c1.`idciudad` = m.`ciudadOrigen`
-       INNER JOIN ciudad c2 ON c2.`idciudad` = m.`ciudadDestino`
+       LEFT JOIN ciudad c1 ON c1.`idciudad` = m.`ciudadOrigen`
+       LEFT JOIN ciudad c2 ON c2.`idciudad` = m.`ciudadDestino`
 	WHERE m.`idmanifiesto` = $id
        GROUP BY m.idmanifiesto ";
 
@@ -179,7 +324,11 @@
        $tabla1 = $tabla1 . "
            <tr>
             <td>Creado por: $nombre[1]</td>
-           </tr>";
+           </tr>
+           <tr>
+            <td></td>
+           </tr>    
+               ";
        $tabla1 = $tabla1 . "</table>";
 
        return $tabla1;
@@ -187,7 +336,7 @@
 
    function generarPdf($tabla1, $tabla2)
    {
-       $pdf = new TCPDF('l', PDF_UNIT, PDF_PAGE_FORMAT, true, 'UTF-8', false);
+       $pdf = new TCPDF(PDF_PAGE_ORIENTATION, PDF_UNIT, PDF_PAGE_FORMAT, true, 'UTF-8', false);
 
        $pdf->SetCreator(PDF_CREATOR);
        $pdf->SetAuthor('A1');
@@ -201,41 +350,26 @@
        $pdf->SetAutoPageBreak(TRUE, 0);
 
 
-       $pdf->SetFont('times', '', 20);
+       $pdf->SetFont('times', '', 15);
 
        $pdf->AddPage();
 
-//       $style = array(
-//           'stretch' => false,
-//           'fitwidth' => true,
-//           'cellfitalign' => '',
-//           'border' => false,
-//           'hpadding' => 'auto',
-//           'vpadding' => 'auto',
-//           'fgcolor' => array(0, 0, 0),
-//           'bgcolor' => false, //array(255,255,255),
-//           'text' => true,
-//           'font' => 'helvetica',
-//           'fontsize' => 8,
-//           'stretchtext' => 4
-//       );
-       //$pdf->setCellMargins(1, 1, 1, 1);
 
        $pdf->SetFillColor(255, 255, 255);
 
-       //$espacio = 32;
-
-//
-//       $xi = 0;
-//       $yi = 0;
-//       $cuenta = 0;
 
 
-       $pdf->writeHTMLCell(260, '', '', '', $tabla1, 1, 1, 1, true, 'J', true);
+       $pdf->writeHTMLCell(180, '', '', '', $tabla1, 0, 1, 1, true, 'J', true);
        //tabla 2
-       $pdf->Ln();
-       $pdf->writeHTMLCell(260, '', '', '', $tabla2, 1, 0, 1, true, 'J', true);
+//       $pdf->Ln();
+       $pdf->SetFont('times', '', 13);
+       $pdf->writeHTMLCell(180, '', '', '', $tabla2, 0, 1, 1, true, 'J', true);
 
+       $pdf->Ln(25);
+
+       $firma = "Firma:_______________  C.C:_______________";
+
+       $pdf->writeHTMLCell(180, '', '', 280, $firma, 0, 1, 1, true, 'C', true);
 
 // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 // move pointer to last page
@@ -254,8 +388,5 @@
        echo('<script>opener.location.reload(true);
    self.close();</script>');
    }
-   
-   
-   
 
 ?>

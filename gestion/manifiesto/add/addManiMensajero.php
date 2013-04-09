@@ -222,7 +222,7 @@
       $arreGuias = unserialize($_SESSION['arregloGuias']);
 
       $idCreador = $objUser->getId();
-
+      $idCiuOri = $objUser->getIdCiudad();
 
       //echo($idMen." zona ".$idZona." plazo ".$plazo." tipo ".$tipo);
 
@@ -241,6 +241,9 @@
 
           $objManifiesto = new Manifiesto(-1, NULL, $idCreador, $plazo, $idZona, $tarifa);
       }
+      
+//      $objManifiesto->setIdCiuDesti($idCiuDesi);
+      $objManifiesto->setIdCiuOri($idCiuOri);
 
       $objManifiesto->setTerceros(NULL, $idMen, NULL);
       $daoMani->insertar($objManifiesto, $arreGuias);

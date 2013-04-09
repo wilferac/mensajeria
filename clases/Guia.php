@@ -33,6 +33,55 @@
        private $ciuOrigen;
        private $peso;
        private $numeroOrdenSer;
+       private $clienteNom;
+
+       /**
+        *
+        * @var string el estado de la guia (devuelta, entregada, etc...)
+        */
+       private $estado;
+       private $idEstado;
+       private $idOrdenServi;
+
+       public function getIdEstado()
+       {
+           return $this->idEstado;
+       }
+
+       public function setIdEstado($idEstado)
+       {
+           $this->idEstado = $idEstado;
+       }
+
+       public function getClienteNom()
+       {
+           return $this->clienteNom;
+       }
+
+       public function setClienteNom($clienteNom)
+       {
+           $this->clienteNom = $clienteNom;
+       }
+
+       public function getIdOrdenServi()
+       {
+           return $this->idOrdenServi;
+       }
+
+       public function setIdOrdenServi($idOrdenServi)
+       {
+           $this->idOrdenServi = $idOrdenServi;
+       }
+
+       public function getEstado()
+       {
+           return $this->estado;
+       }
+
+       public function setEstado($estado)
+       {
+           $this->estado = $estado;
+       }
 
        public function getNumeroOrdenSer()
        {

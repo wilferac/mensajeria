@@ -6,7 +6,8 @@ include ('../../Menu.php');
 
 $objUser = unserialize($_SESSION['currentUser']);
 
-if ($objUser->getStatus() != 1) {
+if ($objUser->getStatus() != 1)
+{
     $operacion->redireccionar('No Puede entrar', 'index.php');
     return;
 }
@@ -51,7 +52,7 @@ if ($objUser->getStatus() != 1) {
             if (val != "")
             {
 
-            $('#info').html('<img src="../../imagenes/loader.gif" alt="" height="17" />').fadeOut(1000);
+           // $('#info').html('<img src="../../imagenes/loader.gif" alt="" height="17" />').fadeOut(1000);
             var dataString = 'documentotercero=' + val;
             //alert (dataString);
             $.ajax({
@@ -59,7 +60,7 @@ if ($objUser->getStatus() != 1) {
             url: "consultarasignacion.php",
             data: dataString,
             success: function(data) {
-            $('#info').fadeIn(1000).html(data);
+            $('#info').html(data);
             }});
             } // end if (val)
             });   //BLUR    
@@ -72,20 +73,22 @@ if ($objUser->getStatus() != 1) {
             var documentotercero = document.getElementById('documentotercero').value;
             var asignardesde = document.getElementById('asignardesde').value;
             var asignarcantidad = document.getElementById('asignarcantidad').value;
-
+            var tipo = $('input[name=tipo]:checked').val();
+            //alert(tipo);
+            //return;
 
             if (documentotercero != "")
             if (asignardesde != 0 || asignarcantidad != 0)
             {
             $('#info2').html('<img src="../../imagenes/loader.gif" alt="" height="17" />').fadeOut(1000);
-            var dataString = 'documentotercero=' + documentotercero + '&asignardesde=' + asignardesde + '&asignarcantidad=' + asignarcantidad;
+            var dataString = 'tipo=' +tipo+'&documentotercero=' + documentotercero + '&asignardesde=' + asignardesde + '&asignarcantidad=' + asignarcantidad;
             //alert (dataString);
             $.ajax({
             type: "POST",
             url: "registrarasignacion.php",
             data: dataString,
             success: function(data) {
-            $('#info2').fadeIn(1000).html(data);
+            $('#info2').fadeIn(100).html(data);
             }});
             } // end if (asignardesde != 0 || asignarcantidad != 0)
             });   //click   
@@ -172,22 +175,19 @@ if ($objUser->getStatus() != 1) {
                            cellspacing="0">
 
                         <tr>
-                            <td>&nbsp;</td>
+
                             <td><table width="503" align="center" border="0" cellspacing="0"
                                        cellpadding="3" bgcolor="#FFFFFF">
 
-                                    <tr>
-                                        <td colspan="2">&nbsp;</td>
-                                    </tr>
+
                                     <tr>
                                         <td width="221"><div>Documento de Tercero:</div></td>
-                                        <td width="263"><input name="documentotercero" type="text"
-                                                               id="documentotercero" size="30" maxlength="60"> <input
-                                                               name="buscar" type="button" value="Buscar"></td>
+                                        <td width="263"><input name="documentotercero" type="text" id="documentotercero" size="30" maxlength="60"> </td>
+                                        <td>
+                                            <input name="buscar" type="button" value="Buscar">
+                                        </td>
                                     </tr>
-                                    <tr>
-                                        <td colspan="2">&nbsp;</td>
-                                    </tr>
+
                                     <tr>
                                         <td colspan="2" align="center">
                                             <div id="info"></div>
@@ -203,6 +203,13 @@ if ($objUser->getStatus() != 1) {
                                             <p>&nbsp;</p></td>
                                     </tr>
                                     <tr>
+                                        <td> <input type="radio" name="tipo" value="1" checked="true">Credito
+                                        </td>
+                                        <td> 
+                                            <input type="radio" name="tipo" value="2">Contado
+                                        </td>
+                                    </tr>
+                                    <tr>
                                         <td align="center"><strong>Desde</strong>:<br> <input
                                                 type="text" name="asignardesde" id="asignardesde" value="0">
                                         </td>
@@ -210,11 +217,13 @@ if ($objUser->getStatus() != 1) {
                                                 type="text" name="asignarcantidad" id="asignarcantidad"
                                                 value="0"></td>
                                     </tr>
+
                                     <tr>
                                         <td colspan="2" align="center"><input type="button"
                                                                               name="botonasignar" id="botonasignar" value="Asignar">
                                         </td>
                                     </tr>
+
                                     <tr>
                                         <td colspan="2" align="center">
                                             <p>

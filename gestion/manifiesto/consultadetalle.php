@@ -110,7 +110,7 @@
   //creo una tabla temporal :O
   $queryTable = "CREATE TEMPORARY TABLE guia_temp
 (
-      id int(11) unique not null
+      id varchar(20) unique not null
       ) ;";
 
   if (mysql_query($queryTable))
@@ -119,7 +119,7 @@
       $insert = "INSERT INTO guia_temp VALUES ";
       foreach ($arrayGuias as $id)
       {
-          $insert = $insert . "($id),";
+          $insert = $insert . "('$id'),";
       }
       //quito la ultima coma
       $insert = substr($insert, 0, -1);

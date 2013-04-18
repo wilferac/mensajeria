@@ -5,6 +5,14 @@
 //Programa en produccion
 
 
+cambios V. 0.9.1
+
+-- fixed: era imposible consultar manifiestos con guias de masivo.
+-- modified: cambios en el tamaño de letra al imprimir manifiesto.
+-- modified: cambios en el modo de ordenar las guias de una orden de servicio.
+
+
+
 cambios V. 0.9
 - fixed: error que impedia la carga de la pantalla de agregar cliente 
 	(Mensajeria/gestion/terceros/addCliente.php)

@@ -1,0 +1,7 @@
+[10-Apr-2013 18:00:13 America/Lima] PHP Warning:  mysql_fetch_assoc() expects parameter 1 to be resource, boolean given in /home/innovat1/public_html/Mensajeria/gestion/print/manifiesto/print.php on line 198
+[10-Apr-2013 18:07:06 America/Lima] PHP Warning:  mysql_fetch_assoc() expects parameter 1 to be resource, boolean given in /home/innovat1/public_html/Mensajeria/gestion/print/manifiesto/print.php on line 198
+[10-Apr-2013 20:09:34 America/Lima] PHP Warning:  mysql_fetch_assoc() expects parameter 1 to be resource, boolean given in /home/innovat1/public_html/Mensajeria/gestion/print/manifiesto/print.php on line 197
+[10-Apr-2013 20:09:54 America/Lima] PHP Warning:  mysql_fetch_assoc() expects parameter 1 to be resource, boolean given in /home/innovat1/public_html/Mensajeria/gestion/print/manifiesto/print.php on line 197
+[10-Apr-2013 20:10:27 America/Lima] PHP Warning:  mysql_fetch_assoc() expects parameter 1 to be resource, boolean given in /home/innovat1/public_html/Mensajeria/gestion/print/manifiesto/print.php on line 197
+[10-Apr-2013 20:16:27 America/Lima] PHP Warning:  mysql_fetch_assoc() expects parameter 1 to be resource, boolean given in /home/innovat1/public_html/Mensajeria/gestion/print/manifiesto/print.php on line 197
+[10-Apr-2013 20:16:30 America/Lima] PHP Warning:  mysql_fetch_assoc() expects parameter 1 to be resource, boolean given in /home/innovat1/public_html/Mensajeria/gestion/print/manifiesto/print.php on line 197

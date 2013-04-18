@@ -1,0 +1,55 @@
+[10-Apr-2013 17:53:20 America/Lima] PHP Warning:  mysqli_free_result() expects parameter 1 to be mysqli_result, resource given in /home/innovat1/public_html/Mensajeria/gestion/print/printOrdenServicio.php on line 252
+[10-Apr-2013 17:53:20 America/Lima] PHP Warning:  array_push() expects parameter 1 to be array, null given in /home/innovat1/public_html/Mensajeria/libreria/tcpdf/tcpdf.php on line 16738
+[10-Apr-2013 17:53:20 America/Lima] PHP Warning:  array_push() expects parameter 1 to be array, null given in /home/innovat1/public_html/Mensajeria/libreria/tcpdf/tcpdf.php on line 16738
+[10-Apr-2013 17:53:20 America/Lima] PHP Warning:  array_push() expects parameter 1 to be array, null given in /home/innovat1/public_html/Mensajeria/libreria/tcpdf/tcpdf.php on line 16738
+[10-Apr-2013 17:53:20 America/Lima] PHP Warning:  Invalid argument supplied for foreach() in /home/innovat1/public_html/Mensajeria/libreria/tcpdf/tcpdf.php on line 19208
+[10-Apr-2013 17:53:20 America/Lima] PHP Warning:  Invalid argument supplied for foreach() in /home/innovat1/public_html/Mensajeria/libreria/tcpdf/tcpdf.php on line 19240
+[10-Apr-2013 17:53:20 America/Lima] PHP Warning:  array_push() expects parameter 1 to be array, null given in /home/innovat1/public_html/Mensajeria/libreria/tcpdf/tcpdf.php on line 16738
+[10-Apr-2013 17:53:20 America/Lima] PHP Warning:  array_push() expects parameter 1 to be array, null given in /home/innovat1/public_html/Mensajeria/libreria/tcpdf/tcpdf.php on line 16738
+[10-Apr-2013 17:53:20 America/Lima] PHP Warning:  Invalid argument supplied for foreach() in /home/innovat1/public_html/Mensajeria/libreria/tcpdf/tcpdf.php on line 19208
+[10-Apr-2013 17:53:20 America/Lima] PHP Warning:  Invalid argument supplied for foreach() in /home/innovat1/public_html/Mensajeria/libreria/tcpdf/tcpdf.php on line 19240
+[10-Apr-2013 17:53:20 America/Lima] PHP Warning:  array_push() expects parameter 1 to be array, null given in /home/innovat1/public_html/Mensajeria/libreria/tcpdf/tcpdf.php on line 16738
+[10-Apr-2013 17:53:20 America/Lima] PHP Warning:  array_push() expects parameter 1 to be array, null given in /home/innovat1/public_html/Mensajeria/libreria/tcpdf/tcpdf.php on line 16738
+[10-Apr-2013 17:53:20 America/Lima] PHP Warning:  array_push() expects parameter 1 to be array, null given in /home/innovat1/public_html/Mensajeria/libreria/tcpdf/tcpdf.php on line 16738
+[10-Apr-2013 17:53:20 America/Lima] PHP Warning:  Invalid argument supplied for foreach() in /home/innovat1/public_html/Mensajeria/libreria/tcpdf/tcpdf.php on line 19208
+[10-Apr-2013 17:53:20 America/Lima] PHP Warning:  Invalid argument supplied for foreach() in /home/innovat1/public_html/Mensajeria/libreria/tcpdf/tcpdf.php on line 19240
+[10-Apr-2013 17:53:20 America/Lima] PHP Warning:  array_push() expects parameter 1 to be array, null given in /home/innovat1/public_html/Mensajeria/libreria/tcpdf/tcpdf.php on line 16738
+[10-Apr-2013 17:53:20 America/Lima] PHP Warning:  array_push() expects parameter 1 to be array, null given in /home/innovat1/public_html/Mensajeria/libreria/tcpdf/tcpdf.php on line 16738
+[10-Apr-2013 17:53:21 America/Lima] PHP Warning:  Invalid argument supplied for foreach() in /home/innovat1/public_html/Mensajeria/libreria/tcpdf/tcpdf.php on line 19208
+[10-Apr-2013 17:53:21 America/Lima] PHP Warning:  Invalid argument supplied for foreach() in /home/innovat1/public_html/Mensajeria/libreria/tcpdf/tcpdf.php on line 19240
+[10-Apr-2013 17:53:21 America/Lima] PHP Warning:  array_push() expects parameter 1 to be array, null given in /home/innovat1/public_html/Mensajeria/libreria/tcpdf/tcpdf.php on line 16738
+[10-Apr-2013 17:53:21 America/Lima] PHP Warning:  array_push() expects parameter 1 to be array, null given in /home/innovat1/public_html/Mensajeria/libreria/tcpdf/tcpdf.php on line 16738
+[10-Apr-2013 17:53:21 America/Lima] PHP Warning:  array_push() expects parameter 1 to be array, null given in /home/innovat1/public_html/Mensajeria/libreria/tcpdf/tcpdf.php on line 16738
+[10-Apr-2013 17:53:21 America/Lima] PHP Warning:  Invalid argument supplied for foreach() in /home/innovat1/public_html/Mensajeria/libreria/tcpdf/tcpdf.php on line 19208
+[10-Apr-2013 17:53:21 America/Lima] PHP Warning:  Invalid argument supplied for foreach() in /home/innovat1/public_html/Mensajeria/libreria/tcpdf/tcpdf.php on line 19240
+[10-Apr-2013 17:53:21 America/Lima] PHP Warning:  array_push() expects parameter 1 to be array, null given in /home/innovat1/public_html/Mensajeria/libreria/tcpdf/tcpdf.php on line 16738
+[10-Apr-2013 17:53:21 America/Lima] PHP Warning:  array_push() expects parameter 1 to be array, null given in /home/innovat1/public_html/Mensajeria/libreria/tcpdf/tcpdf.php on line 16738
+[10-Apr-2013 17:53:21 America/Lima] PHP Warning:  Invalid argument supplied for foreach() in /home/innovat1/public_html/Mensajeria/libreria/tcpdf/tcpdf.php on line 19208
+[10-Apr-2013 17:53:21 America/Lima] PHP Warning:  Invalid argument supplied for foreach() in /home/innovat1/public_html/Mensajeria/libreria/tcpdf/tcpdf.php on line 19240
+[10-Apr-2013 17:53:21 America/Lima] PHP Warning:  array_push() expects parameter 1 to be array, null given in /home/innovat1/public_html/Mensajeria/libreria/tcpdf/tcpdf.php on line 16738
+[10-Apr-2013 17:53:21 America/Lima] PHP Warning:  array_push() expects parameter 1 to be array, null given in /home/innovat1/public_html/Mensajeria/libreria/tcpdf/tcpdf.php on line 16738
+[10-Apr-2013 17:53:21 America/Lima] PHP Warning:  array_push() expects parameter 1 to be array, null given in /home/innovat1/public_html/Mensajeria/libreria/tcpdf/tcpdf.php on line 16738
+[10-Apr-2013 17:53:21 America/Lima] PHP Warning:  Invalid argument supplied for foreach() in /home/innovat1/public_html/Mensajeria/libreria/tcpdf/tcpdf.php on line 19208
+[10-Apr-2013 17:53:21 America/Lima] PHP Warning:  Invalid argument supplied for foreach() in /home/innovat1/public_html/Mensajeria/libreria/tcpdf/tcpdf.php on line 19240
+[10-Apr-2013 17:53:21 America/Lima] PHP Warning:  array_push() expects parameter 1 to be array, null given in /home/innovat1/public_html/Mensajeria/libreria/tcpdf/tcpdf.php on line 16738
+[10-Apr-2013 17:53:21 America/Lima] PHP Warning:  array_push() expects parameter 1 to be array, null given in /home/innovat1/public_html/Mensajeria/libreria/tcpdf/tcpdf.php on line 16738
+[10-Apr-2013 17:53:21 America/Lima] PHP Warning:  Invalid argument supplied for foreach() in /home/innovat1/public_html/Mensajeria/libreria/tcpdf/tcpdf.php on line 19208
+[10-Apr-2013 17:53:21 America/Lima] PHP Warning:  Invalid argument supplied for foreach() in /home/innovat1/public_html/Mensajeria/libreria/tcpdf/tcpdf.php on line 19240
+[10-Apr-2013 17:53:21 America/Lima] PHP Warning:  array_push() expects parameter 1 to be array, null given in /home/innovat1/public_html/Mensajeria/libreria/tcpdf/tcpdf.php on line 16738
+[10-Apr-2013 17:53:21 America/Lima] PHP Warning:  array_push() expects parameter 1 to be array, null given in /home/innovat1/public_html/Mensajeria/libreria/tcpdf/tcpdf.php on line 16738
+[10-Apr-2013 17:53:21 America/Lima] PHP Warning:  array_push() expects parameter 1 to be array, null given in /home/innovat1/public_html/Mensajeria/libreria/tcpdf/tcpdf.php on line 16738
+[10-Apr-2013 17:53:21 America/Lima] PHP Warning:  Invalid argument supplied for foreach() in /home/innovat1/public_html/Mensajeria/libreria/tcpdf/tcpdf.php on line 19208
+[10-Apr-2013 17:53:21 America/Lima] PHP Warning:  Invalid argument supplied for foreach() in /home/innovat1/public_html/Mensajeria/libreria/tcpdf/tcpdf.php on line 19240
+[10-Apr-2013 17:53:21 America/Lima] PHP Warning:  array_push() expects parameter 1 to be array, null given in /home/innovat1/public_html/Mensajeria/libreria/tcpdf/tcpdf.php on line 16738
+[10-Apr-2013 17:53:21 America/Lima] PHP Warning:  array_push() expects parameter 1 to be array, null given in /home/innovat1/public_html/Mensajeria/libreria/tcpdf/tcpdf.php on line 16738
+[10-Apr-2013 17:53:21 America/Lima] PHP Warning:  Invalid argument supplied for foreach() in /home/innovat1/public_html/Mensajeria/libreria/tcpdf/tcpdf.php on line 19208
+[10-Apr-2013 17:53:21 America/Lima] PHP Warning:  Invalid argument supplied for foreach() in /home/innovat1/public_html/Mensajeria/libreria/tcpdf/tcpdf.php on line 19240
+[10-Apr-2013 17:53:21 America/Lima] PHP Warning:  array_push() expects parameter 1 to be array, null given in /home/innovat1/public_html/Mensajeria/libreria/tcpdf/tcpdf.php on line 16738
+[10-Apr-2013 17:53:21 America/Lima] PHP Warning:  array_push() expects parameter 1 to be array, null given in /home/innovat1/public_html/Mensajeria/libreria/tcpdf/tcpdf.php on line 16738
+[10-Apr-2013 17:53:21 America/Lima] PHP Warning:  array_push() expects parameter 1 to be array, null given in /home/innovat1/public_html/Mensajeria/libreria/tcpdf/tcpdf.php on line 16738
+[10-Apr-2013 17:53:21 America/Lima] PHP Warning:  Invalid argument supplied for foreach() in /home/innovat1/public_html/Mensajeria/libreria/tcpdf/tcpdf.php on line 19208
+[10-Apr-2013 17:53:21 America/Lima] PHP Warning:  Invalid argument supplied for foreach() in /home/innovat1/public_html/Mensajeria/libreria/tcpdf/tcpdf.php on line 19240
+[10-Apr-2013 17:53:21 America/Lima] PHP Warning:  array_push() expects parameter 1 to be array, null given in /home/innovat1/public_html/Mensajeria/libreria/tcpdf/tcpdf.php on line 16738
+[10-Apr-2013 17:53:21 America/Lima] PHP Warning:  array_push() expects parameter 1 to be array, null given in /home/innovat1/public_html/Mensajeria/libreria/tcpdf/tcpdf.php on line 16738
+[10-Apr-2013 17:53:21 America/Lima] PHP Warning:  Invalid argument supplied for foreach() in /home/innovat1/public_html/Mensajeria/libreria/tcpdf/tcpdf.php on line 19208
+[10-Apr-2013 17:53:21 America/Lima] PHP Warning:  Invalid argument supplied for foreach() in /home/innovat1/public_html/Mensajeria/libreria/tcpdf/tcpdf.php on line 19240

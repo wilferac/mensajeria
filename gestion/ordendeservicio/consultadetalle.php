@@ -226,6 +226,7 @@ WHERE g.`orden_servicio_idorden_servicio` = $idorden_servicio
             $(document).ready(function() {
                 $('#dynamic2').html('<table cellpadding="0" cellspacing="0"  border="0" class="display" id="example2"></table>');
                 $('#example2').dataTable({
+                "bSort": false,
                     "aaData": aDataSet2,
                     "aoColumns": [
                         {"sTitle": "Guia"},

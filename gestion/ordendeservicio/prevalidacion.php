@@ -1,40 +1,101 @@
 <?php
 
-   session_start();
-   include ("../../conexion/conexion.php");
+session_start();
+include ("../../conexion/conexion.php");
 
-   if ($_REQUEST)
-   {
+if ($_REQUEST)
+{
 
-       $numguia = $_REQUEST['numguia'];
-       $encGuia = false;
-       $encAsig = false;
+    $numguia = $_REQUEST['numguia'];
+    $encGuia = false;
+    $encAsig = false;
 
-       if ($numguia != "")
-       {
-           $query = "SELECT * FROM asignacion_guias WHERE '$numguia' >= inicial_asignacion AND '$numguia' <= inicial_asignacion+cantidad_asignacion";
-           $results = mysql_query($query) or die(mysql_error());
-           $datosAsig = mysql_fetch_assoc($results);
-           if (mysql_num_rows($results) > 0)
-               $encAsig = true;
-           else
-               $encAsig = false;
+    if ($numguia != "")
+    {
+        $stringsContado = new ArrayObject();
+        $stringsContado[0] = "BOCO";
+        $stringsContado[1] = "BACO";
+        $stringsContado[2] = "CACO";
 
-           //query para que pasen los que estan a medio llenar
-           $query = "SELECT * FROM guia WHERE numero_guia = '$numguia' and tercero_iddestinatario IS NOT NULL";
+        $entroFor = false;
+        //intentando llenar una guia contado unitario
+        foreach ($stringsContado as $find)
+        {
+            $pos = strpos($numguia, $find);
+            //echo($pos . ' la pos <br>');
+            if ($pos !== false)
+            {
+                //elimino el que encontre para comparar
+                $numguiaCorta = trim($numguia, $find);
+                //verifico la guia contado
+                $query = "SELECT * FROM asignacion_guias ag
+INNER JOIN sucursal s ON s.`idsucursal` = ag.`sucursal_idsucursal`
+WHERE $numguiaCorta >= inicial_asignacion AND $numguiaCorta <= inicial_asignacion+cantidad_asignacion AND asigTipo = 2
+AND s.`facturacion` = '$find'";
+                $results = mysql_query($query) or die('error al consultar contado ' . mysql_error());
+                $datosAsig = mysql_fetch_assoc($results);
+                if (mysql_num_rows($results) > 0)
+                    $encAsig = true;
+                else
+                    $encAsig = false;
+                //marco la entrada al for
+                $entroFor = true;
+                break;
+            }
+        }
 
-           //$query = "SELECT * FROM guia WHERE numero_guia = $numguia";
-           $results = mysql_query($query) or die('error2' . $query);
+        //verifico si es una guia credito
 
-           if (mysql_num_rows($results) > 0)
-               $encGuia = true;
-           else
-               $encGuia = false;
+        if (!$entroFor)
+        {
+            $query = "SELECT * FROM asignacion_guias WHERE $numguia >= inicial_asignacion AND $numguia <= inicial_asignacion+cantidad_asignacion and asigTipo = 1";
+
+            try
+            {
+                $results = mysql_query($query) or die('error al consultar credito ' . mysql_error());
+
+                $datosAsig = mysql_fetch_assoc($results);
+                if (mysql_num_rows($results) > 0)
+                {
+                    $encAsig = true;
+                } else
+                {
+                    $encAsig = false;
+                }
+            } catch (Exception $e)
+            {
+                //no hago nada
+            }
+        }
 
 
-           if ($encAsig && $encGuia)
-           {
-               echo "<script>
+
+        if (!$encAsig)
+        {
+            echo "<script>alert('Antes de digitar la guia esta debe estar asignada a un cliente');</script>";
+            die("Error (005)");
+        }
+
+
+
+
+
+
+        //query para que pasen los que estan a medio llenar
+        $query = "SELECT * FROM guia WHERE numero_guia = '$numguia' and tercero_iddestinatario IS NOT NULL";
+
+        //$query = "SELECT * FROM guia WHERE numero_guia = $numguia";
+        $results = mysql_query($query) or die('error2' . $query);
+
+        if (mysql_num_rows($results) > 0)
+            $encGuia = true;
+        else
+            $encGuia = false;
+
+
+        if ($encAsig && $encGuia)
+        {
+            echo "<script>
 				ElementosClientesInvisibles();
 			    ElementosDatosABuscarDestinatarioInvisibles();
 				ElementosDestinatariosInvisibles();
@@ -42,9 +103,8 @@
 			  <div id='nodisponible' class ='nodisponible' style='display:inline'>Guia ya Asignada</div>
 			  <input type='hidden' id='encGuia' name='encGuia' value='$encGuia'></input>
 			  <input type='hidden' id='encAsig' name='encAsig' value='$encAsig'></input>";
-           }
-           elseif (!$encAsig && $encGuia)
-               echo "	<script>
+        } elseif (!$encAsig && $encGuia)
+            echo "	<script>
 				ElementosClientesInvisibles();
 				ElementosDatosABuscarDestinatarioInvisibles();
 				ElementosDestinatariosInvisibles();
@@ -52,24 +112,24 @@
 				<div id='nodisponible' class ='nodisponible' style='display:inline'>Guia ya Asignada</div>
 			  <input type='hidden' id='encGuia' name='encGuia' value='$encGuia'></input>
 			  <input type='hidden' id='encAsig' name='encAsig' value='$encAsig'></input>";
-           //esta parte parece tener un bug ? asi que la comento
-           else if ($encAsig && !$encGuia)
-           {
-               $tercero_idtercero = $datosAsig["tercero_idtercero"];
+        //esta parte parece tener un bug ? asi que la comento
+        else if ($encAsig && !$encGuia)
+        {
+            $tercero_idtercero = $datosAsig["tercero_idtercero"];
 
-               $query = "SELECT * FROM tercero WHERE idtercero = $tercero_idtercero";
-               $results = mysql_query($query);
+            $query = "SELECT * FROM tercero WHERE idtercero = $tercero_idtercero";
+            $results = mysql_query($query);
 
-               $datosCliente = mysql_fetch_assoc($results);
+            $datosCliente = mysql_fetch_assoc($results);
 
-               $idtercero = $datosCliente["idtercero"];
-               $documento_tercero = $datosCliente["documento_tercero"];
-               $nombres_tercero = $datosCliente["nombres_tercero"];
-               $apellidos_tercero = $datosCliente["apellidos_tercero"];
-               $direccion_tercero = $datosCliente["direccion_tercero"];
+            $idtercero = $datosCliente["idtercero"];
+            $documento_tercero = $datosCliente["documento_tercero"];
+            $nombres_tercero = $datosCliente["nombres_tercero"];
+            $apellidos_tercero = $datosCliente["apellidos_tercero"];
+            $direccion_tercero = $datosCliente["direccion_tercero"];
 
 
-               echo "
+            echo "
 			
 				<script>
 				ElementosClientesInvisibles();
@@ -84,11 +144,10 @@ ElementosClientesVisibles(true,'$idtercero','$documento_tercero','$nombres_terce
 				</script>
 				<input type='hidden' id='encGuia' name='encGuia' value='$encGuia'></input>
 			  <input type='hidden' id='encAsig' name='encAsig' value='$encAsig'></input>";
-           }
-           elseif (!$encAsig && !$encGuia)
-           {
-               //verifico si la guia fue salvada temporalmente :O
-               $query2 = "select g.idguia , g.numero_guia ,
+        } elseif (!$encAsig && !$encGuia)
+        {
+            //verifico si la guia fue salvada temporalmente :O
+            $query2 = "select g.idguia , g.numero_guia ,
             c1.idciudad as  ciudad_idorigen, c1.nombre_ciudad as ciudad_nombreorigen,
             c2.idciudad as  ciudad_iddestino, c2.nombre_ciudad as ciudad_nombredestino,
             p.idproducto, p.nombre_producto, p.tipo_producto_idtipo_producto, tp.nombre_tipo_producto,
@@ -100,32 +159,32 @@ ElementosClientesVisibles(true,'$idtercero','$documento_tercero','$nombres_terce
             inner join tipo_producto tp on tp.idtipo_producto = tipo_producto_idtipo_producto
             where g.numero_guia = '$numguia'  and g.tercero_iddestinatario IS NULL";
 
-               $results2 = mysql_query($query2) or die('error2' . $query2);
+            $results2 = mysql_query($query2) or die('error2' . $query2);
 
-               if ($fila = mysql_fetch_assoc($results2))
-               {
+            if ($fila = mysql_fetch_assoc($results2))
+            {
 //                $tercero_idtercero = $datosAsig["tercero_idtercero"];
-                   //capturo los datos del tercero que envia
-                   $idtercero = $fila["idtercero"];
-                   $documento_tercero = $fila["documento_tercero"];
-                   $nombres_tercero = $fila["nombres_tercero"];
-                   $apellidos_tercero = $fila["apellidos_tercero"];
-                   $direccion_tercero = $fila["direccion_tercero"];
-                   $idTipoPro = $fila["tipo_producto_idtipo_producto"];
-                   $nomtp = $fila["nombre_tipo_producto"];
-                   //capturo los del destino y de el origen del paquete
-                   $idOrigen = $fila["ciudad_idorigen"];
-                   $idDestino = $fila["ciudad_iddestino"];
-                   $idProducto = $fila["idproducto"];
-                   $nomProducto = $fila["nombre_producto"];
+                //capturo los datos del tercero que envia
+                $idtercero = $fila["idtercero"];
+                $documento_tercero = $fila["documento_tercero"];
+                $nombres_tercero = $fila["nombres_tercero"];
+                $apellidos_tercero = $fila["apellidos_tercero"];
+                $direccion_tercero = $fila["direccion_tercero"];
+                $idTipoPro = $fila["tipo_producto_idtipo_producto"];
+                $nomtp = $fila["nombre_tipo_producto"];
+                //capturo los del destino y de el origen del paquete
+                $idOrigen = $fila["ciudad_idorigen"];
+                $idDestino = $fila["ciudad_iddestino"];
+                $idProducto = $fila["idproducto"];
+                $nomProducto = $fila["nombre_producto"];
 
-                   $remitenteInfo = $fila["remitenteInfo"];
-                   //lo igualo al value en el formulario ya que en la Bd esta con mayuscula inicial
-                   $nomProducto = strtolower($nomProducto);
-                   //$idTipoProducto = $operaciones->calcularTipoProducto($idpaisdorigen, $iddepartamentoorigen, $idciudadorigen, $nombreciudaddestino, $idciudaddestino);
+                $remitenteInfo = $fila["remitenteInfo"];
+                //lo igualo al value en el formulario ya que en la Bd esta con mayuscula inicial
+                $nomProducto = strtolower($nomProducto);
+                //$idTipoProducto = $operaciones->calcularTipoProducto($idpaisdorigen, $iddepartamentoorigen, $idciudadorigen, $nombreciudaddestino, $idciudaddestino);
 
 
-                   echo "<script>
+                echo "<script>
                     alert('entro aca');
                     ElementosClientesInvisibles();
                     ElementosClientesVisibles(true,'$idtercero','$documento_tercero','$nombres_tercero','$apellidos_tercero','$direccion_tercero');
@@ -160,16 +219,16 @@ $(function() {
 document.getElementById('datoArecordar').focus();
 				</script>
 				";
-                   return;
-               }
+                return;
+            }
 
-               if (mysql_num_rows($results) > 0)
-                   $encGuia = true;
-               else
-                   $encGuia = false;
+            if (mysql_num_rows($results) > 0)
+                $encGuia = true;
+            else
+                $encGuia = false;
 
 
-               echo "<script>
+            echo "<script>
 					ElementosDatosABuscarDestinatarioInvisibles();
 					ElementosClientesInvisibles();
 					ElementosClientesAbuscarVisibles();
@@ -178,7 +237,7 @@ document.getElementById('datoArecordar').focus();
 			   </script>
 			   <input type='hidden' id='encGuia' name='encGuia' value='$encGuia'></input>
 			  <input type='hidden' id='encAsig' name='encAsig' value='$encAsig'></input>";
-           }
-       } // if numguia != ""
-   } // if REQUEST
+        }
+    } // if numguia != ""
+} // if REQUEST
 ?>

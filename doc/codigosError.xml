@@ -12,6 +12,9 @@ and open the template in the editor.
     <error codigo="002" gravedad="1">
         error que ocurre al actualizar datos.
     </error>
+    <error codigo="003" gravedad="1">
+        error que ocurre al tratar de digitar guias que no han sido asignadas.
+    </error>
     
     
     

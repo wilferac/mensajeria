@@ -41,7 +41,7 @@ if ($_REQUEST)
           $datos = mysql_fetch_assoc($restercero);
           $idtercero = $datos['idtercero']; */
         $query = "SELECT ag.asigTipo, ag.inicial_asignacion AS desde, ag.inicial_asignacion+ag.cantidad_asignacion AS hasta FROM asignacion_guias ag 
-        WHERE ag.asigTipo = 1 AND ag.inicial_asignacion <= $asignarhasta
+        WHERE ag.asigTipo = $tipo AND ag.inicial_asignacion <= $asignarhasta
         ORDER BY  ag.inicial_asignacion DESC";
         $desde = 0;
         $hasta = 0;

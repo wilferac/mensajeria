@@ -3,15 +3,13 @@
 session_start();
 include ("../../conexion/conexion.php");
 
-if ($_REQUEST)
-{
+if ($_REQUEST) {
 
     $numguia = $_REQUEST['numguia'];
     $encGuia = false;
     $encAsig = false;
 
-    if ($numguia != "")
-    {
+    if ($numguia != "") {
         $stringsContado = new ArrayObject();
         $stringsContado[0] = "BOCO";
         $stringsContado[1] = "BACO";
@@ -19,12 +17,10 @@ if ($_REQUEST)
 
         $entroFor = false;
         //intentando llenar una guia contado unitario
-        foreach ($stringsContado as $find)
-        {
+        foreach ($stringsContado as $find) {
             $pos = strpos($numguia, $find);
             //echo($pos . ' la pos <br>');
-            if ($pos !== false)
-            {
+            if ($pos !== false) {
                 //elimino el que encontre para comparar
                 $numguiaCorta = trim($numguia, $find);
                 //verifico la guia contado
@@ -46,32 +42,26 @@ AND s.`facturacion` = '$find'";
 
         //verifico si es una guia credito
 
-        if (!$entroFor)
-        {
+        if (!$entroFor) {
             $query = "SELECT * FROM asignacion_guias WHERE $numguia >= inicial_asignacion AND $numguia <= inicial_asignacion+cantidad_asignacion and asigTipo = 1";
 
-            try
-            {
+            try {
                 $results = mysql_query($query) or die('error al consultar credito ' . mysql_error());
 
                 $datosAsig = mysql_fetch_assoc($results);
-                if (mysql_num_rows($results) > 0)
-                {
+                if (mysql_num_rows($results) > 0) {
                     $encAsig = true;
-                } else
-                {
+                } else {
                     $encAsig = false;
                 }
-            } catch (Exception $e)
-            {
+            } catch (Exception $e) {
                 //no hago nada
             }
         }
 
 
 
-        if (!$encAsig)
-        {
+        if (!$encAsig) {
             echo "<script>alert('Antes de digitar la guia esta debe estar asignada a un cliente');</script>";
             die("Error (005)");
         }
@@ -93,8 +83,7 @@ AND s.`facturacion` = '$find'";
             $encGuia = false;
 
 
-        if ($encAsig && $encGuia)
-        {
+        if ($encAsig && $encGuia) {
             echo "<script>
 				ElementosClientesInvisibles();
 			    ElementosDatosABuscarDestinatarioInvisibles();
@@ -103,18 +92,11 @@ AND s.`facturacion` = '$find'";
 			  <div id='nodisponible' class ='nodisponible' style='display:inline'>Guia ya Asignada</div>
 			  <input type='hidden' id='encGuia' name='encGuia' value='$encGuia'></input>
 			  <input type='hidden' id='encAsig' name='encAsig' value='$encAsig'></input>";
-        } elseif (!$encAsig && $encGuia)
-            echo "	<script>
-				ElementosClientesInvisibles();
-				ElementosDatosABuscarDestinatarioInvisibles();
-				ElementosDestinatariosInvisibles();
-				</script>
-				<div id='nodisponible' class ='nodisponible' style='display:inline'>Guia ya Asignada</div>
-			  <input type='hidden' id='encGuia' name='encGuia' value='$encGuia'></input>
-			  <input type='hidden' id='encAsig' name='encAsig' value='$encAsig'></input>";
+            return;
+        }
+
         //esta parte parece tener un bug ? asi que la comento
-        else if ($encAsig && !$encGuia)
-        {
+        else if ($encAsig) {
             $tercero_idtercero = $datosAsig["tercero_idtercero"];
 
             $query = "SELECT * FROM tercero WHERE idtercero = $tercero_idtercero";
@@ -141,11 +123,13 @@ ElementosClientesVisibles(true,'$idtercero','$documento_tercero','$nombres_terce
 				document.getElementById('titulodestinatarios').style.visibility='visible';
 				ElementosDatosABuscarDestinatarioVisibles();
 				ElementosDestinatariosInvisibles();
+                                document.getElementById('cccliente').focus();
 				</script>
 				<input type='hidden' id='encGuia' name='encGuia' value='$encGuia'></input>
 			  <input type='hidden' id='encAsig' name='encAsig' value='$encAsig'></input>";
-        } elseif (!$encAsig && !$encGuia)
-        {
+            // return;
+        }
+        if ($encAsig && !$encGuia) {
             //verifico si la guia fue salvada temporalmente :O
             $query2 = "select g.idguia , g.numero_guia ,
             c1.idciudad as  ciudad_idorigen, c1.nombre_ciudad as ciudad_nombreorigen,
@@ -161,8 +145,7 @@ ElementosClientesVisibles(true,'$idtercero','$documento_tercero','$nombres_terce
 
             $results2 = mysql_query($query2) or die('error2' . $query2);
 
-            if ($fila = mysql_fetch_assoc($results2))
-            {
+            if ($fila = mysql_fetch_assoc($results2)) {
 //                $tercero_idtercero = $datosAsig["tercero_idtercero"];
                 //capturo los datos del tercero que envia
                 $idtercero = $fila["idtercero"];
@@ -221,22 +204,23 @@ document.getElementById('datoArecordar').focus();
 				";
                 return;
             }
+            return;
 
-            if (mysql_num_rows($results) > 0)
-                $encGuia = true;
-            else
-                $encGuia = false;
-
-
-            echo "<script>
-					ElementosDatosABuscarDestinatarioInvisibles();
-					ElementosClientesInvisibles();
-					ElementosClientesAbuscarVisibles();
-					ElementosDestinatariosInvisibles();
-			  		document.getElementById('cccliente').focus();
-			   </script>
-			   <input type='hidden' id='encGuia' name='encGuia' value='$encGuia'></input>
-			  <input type='hidden' id='encAsig' name='encAsig' value='$encAsig'></input>";
+//            if (mysql_num_rows($results) > 0)
+//                $encGuia = true;
+//            else
+//                $encGuia = false;
+//
+//
+//            echo "<script>
+//					ElementosDatosABuscarDestinatarioInvisibles();
+//					ElementosClientesInvisibles();
+//					ElementosClientesAbuscarVisibles();
+//					ElementosDestinatariosInvisibles();
+//			  		document.getElementById('cccliente').focus();
+//			   </script>
+//			   <input type='hidden' id='encGuia' name='encGuia' value='$encGuia'></input>
+//			  <input type='hidden' id='encAsig' name='encAsig' value='$encAsig'></input>";
         }
     } // if numguia != ""
 } // if REQUEST

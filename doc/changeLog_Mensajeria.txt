@@ -10,6 +10,13 @@ cambios V. 0.9.1
 -- fixed: era imposible consultar manifiestos con guias de masivo.
 -- modified: cambios en el tamaño de letra al imprimir manifiesto.
 -- modified: cambios en el modo de ordenar las guias de una orden de servicio.
+-- fixed: error que no permitia la asignacion de guias
+-- add: seleccion de tipo (credito-contado) en el formulario guia.
+-- modified: filtro por el cual se permitia el registro de guias (http://localhost/~inovate/Mensajeria/gestion/ordendeservicio/addosunitario.php)
+-- add: al momento de asignar guias contado se informa el prefijo que estas van a adquirir.
+-- modified: la asignacion de foco al momento de llenar una guia asignada.
+--fixed: but que impledia la carga de los datos de las guias temporales.
+
 
 
 

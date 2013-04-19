@@ -581,7 +581,7 @@
                             <td>
                                 <input id="cccliente" name="cccliente" class="required" size="30"  tabindex="2"  maxlength="10" style="visibility:hidden;border:<?= $estiloinput ?>" required/>
                                 <input id="idcliente" name="idcliente" type="hidden" value=""/>
-
+                                <input id="idAsignacion" name="idAsignacion" type="hidden" value=""/>
                                 <div id="info2" style="display:inline"></div>
                             </td>
                         </tr>
@@ -1015,6 +1015,8 @@
           ElementosClientesAbuscarVisibles();
           ElementosDestinatariosInvisibles();
           document.getElementById('cccliente').focus();
+          
+          document.getElementById('idAsignacion').value = -1;
           document.getElementById('cccliente').value = $cc;
           document.getElementById('idcliente').value = $idCli;
           document.getElementById('cccliente').readOnly = true;

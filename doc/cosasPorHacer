@@ -1,0 +1,13 @@
+2. mostrar mensaje diciendo que se añadira un prefijo (ok)
+
+3. llenar despues no funca (ok)
+
+3.1 foco al momento del crear la guia. (ok)
+
+4. anular la asignacion de guias respetando las que ya se usaron
+
+5. no esta descontando del listado de asignadas las que se van gastando. (ok)
+
+6. controlar el rango de asignacion , que no sea cero ni negativo.
+
+7. mostrar la traza de las guias, para los clientes.

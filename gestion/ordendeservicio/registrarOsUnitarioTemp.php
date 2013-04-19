@@ -103,6 +103,7 @@
        $nombreproducto = $_POST['nombreproducto'];
        $idtipoproducto = $_POST['idtipoproducto'];
        $valorDeclarado = $_POST['valordeclarado'];
+       $idAsignacion = $_POST['idAsignacion'];
 
 //en el registro temporal envio varios nulls
        $query = "
@@ -112,7 +113,7 @@
                  NULL,NULL, NULL,NULL,
 $ciudaddestino, NULL, NULL, 
                '$numero_guia', '$nombreproducto', $idtipoproducto, NULL,
-                 NULL,   NULL, NULL, NULL, NULL ,1 
+                 NULL,   NULL, NULL, NULL, NULL ,1 ,$idAsignacion
                )";
        //echo($query);
        mysql_query($query) or die("0");

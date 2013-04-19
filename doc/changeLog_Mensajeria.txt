@@ -16,6 +16,8 @@ cambios V. 0.9.1
 -- add: al momento de asignar guias contado se informa el prefijo que estas van a adquirir.
 -- modified: la asignacion de foco al momento de llenar una guia asignada.
 --fixed: but que impledia la carga de los datos de las guias temporales.
+--fixed: ahora ya se descuentan correctamente las guias asignadas que se van usando.
+-- fixed: la generacion de consecutivos para cliente corporativo ahora trabajar correctamente.
 
 
 

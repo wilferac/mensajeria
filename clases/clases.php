@@ -5,14 +5,14 @@ session_start();
 //define ('CONEXION', $_SERVER["DOCUMENT_ROOT"].'/tests/mensajeria/conexion/'); // leuss
 //define ('CONEXION', $_SERVER["DOCUMENT_ROOT"].'/mensajeria/conexion/');  // localhost
 //$valor = CONEXION;
-define('CONEXION', '/home/inovate/public_html/Mensajeria/');  // Innovate
+define('CONEXION', '/home/wilferac/public_html/Mensajeria/');  // Innovate
 //echo(CONEXION);
 //toca asi =(
-include ('/home/inovate/public_html/Mensajeria/conexion/conexion.php');
+include ('/home/wilferac/public_html/Mensajeria/conexion/conexion.php');
 
 //define ('RAIZ', '/home/inovate/public_html/Mensajeria'); // leuss
 //define ('RAIZ', '/Mensajeria');  // localhost
-define('RAIZ', "http://localhost/~inovate/Mensajeria");  // Innovate
+define('RAIZ', "http://localhost/~wilferac/Mensajeria");  // Innovate
 /* * **************************************** */
 
 class operacion
@@ -3147,9 +3147,9 @@ class asignacion_guias
             $this->idasignacion_guias = $row[0] + 1;
         else
             $this->idasignacion_guias = 1;
-        $SQL = sprintf("INSERT INTO asignacion_guias (asigTipo,idasignacion_guias,sucursal_idsucursal,tercero_idtercero,inicial_asignacion,cantidad_asignacion,saldo_asignnacion,estado_asignacion,observaciones_asignacion)
-values(%s,'%s','%s','%s','%s','%s','%s','%s','%s')
-", $this->tipo, $this->idasignacion_guias, $this->sucursal_idsucursal, $this->tercero_idtercero, $this->inicial_asignacion, $this->cantidad_asignacion, $this->saldo_asignnacion, $this->estado_asignacion, $this->observaciones_asignacion);
+        $SQL = sprintf("INSERT INTO asignacion_guias (asigTipo,idasignacion_guias,sucursal_idsucursal,tercero_idtercero,inicial_asignacion,cantidad_asignacion,saldo_asignnacion,observaciones_asignacion)
+values(%s,'%s','%s','%s','%s','%s','%s','%s')
+", $this->tipo, $this->idasignacion_guias, $this->sucursal_idsucursal, $this->tercero_idtercero, $this->inicial_asignacion, $this->cantidad_asignacion, $this->saldo_asignnacion, $this->observaciones_asignacion);
         if ($conn->ejecutar($SQL))
             return true;
         else

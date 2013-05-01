@@ -14,7 +14,7 @@
    $mirar = false;
    foreach ($archivos_incluidos as $nombre_archivo)
    {
-       if ($nombre_archivo == "/home/inovate/public_html/Mensajeria/conexion/conexion.php")
+       if ($nombre_archivo == "/home/wilferac/public_html/Mensajeria/conexion/conexion.php")
        {
            $mirar = true;
            break;
@@ -22,7 +22,7 @@
    }
    if (!$mirar)
    {
-       require "/home/inovate/public_html/Mensajeria/conexion/conexion.php";
+       require "/home/wilferac/public_html/Mensajeria/conexion/conexion.php";
    }
 
    class User

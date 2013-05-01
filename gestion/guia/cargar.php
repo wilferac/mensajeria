@@ -88,15 +88,24 @@
                }
 
 //echo $ciudaddestino;
+		$ciudaddestino = eregi_replace("[\n|\r|\n\r]", ' ',$ciudaddestino);
                $camposguia[$i]["ciudaddestino"] = $ciudaddestino;
                //municipio es departamento... :S
+               $municipiodestino = eregi_replace("[\n|\r|\n\r]", ' ',$municipiodestino);
                $camposguia[$i]["municipiodestino"] = $municipiodestino;
+               $cedula = eregi_replace("[\n|\r|\n\r]", ' ',$cedula);
                $camposguia[$i]["cedula"] = $cedula;
+               $nombre = eregi_replace("[\n|\r|\n\r]", ' ',$nombre);
                $camposguia[$i]["nombre"] = $nombre;
+               $apellido = eregi_replace("[\n|\r|\n\r]", ' ',$apellido);
                $camposguia[$i]["apellido"] = $apellido;
+               $direccion = eregi_replace("[\n|\r|\n\r]", ' ',$direccion);
                $camposguia[$i]["direccion"] = $direccion;
+               $telefono = eregi_replace("[\n|\r|\n\r]", ' ',$telefono);
                $camposguia[$i]["telefono"] = $telefono;
+               $celular = eregi_replace("[\n|\r|\n\r]", ' ',$celular);
                $camposguia[$i]["celular"] = $celular;
+                $observacion = eregi_replace("[\n|\r|\n\r]", ' ', $observacion);
                $camposguia[$i]["observacion"] = $observacion;
 
                // echo($ciudaddestino."". $municipiodestino."". $cedula."". $nombre."". $apellido."". $direccion."". $telefono."". $celular."". $observacion);
@@ -189,7 +198,7 @@ VALUES
                if ($j == $cantidadguias)
                    break;
            }
-           $stringset = "unidades=$cantidadguias";
+           $stringset = " unidades=$cantidadguias+unidades ";
            $ros = $os->modificar2($stringset, $idos);
        }
 

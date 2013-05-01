@@ -393,10 +393,11 @@
                                                        </TR>
 
                                                        <TR>
-                                                           <TD><font size="1" face="Verdana"><strong>APELLIDOS</strong></font><br>
-                                                               <input type="text" size="30" maxlength="30" name="APELLIDOS1"  id="APELLIDOS1">			</TD>
+                                                           
                                                            <TD><font size="1" face="Verdana"><strong>NOMBRES</strong></font><br>
                                                                <input type="text" size="30" maxlength="30" name="NOMBRES">			</TD>
+                                                           <TD><font size="1" face="Verdana"><strong>APELLIDOS</strong></font><br>
+                                                               <input type="text" size="30" maxlength="30" name="APELLIDOS1"  id="APELLIDOS1">			</TD>
                                                        </TR>
 
                                                        <TR>
@@ -498,10 +499,11 @@
                                                        </TR>
 
                                                        <TR>
-                                                           <TD><font size="1" face="Verdana"><strong>APELLIDOS</strong></font><br>
-                                                               <input type="text" size="30" maxlength="30" name="APELLIDOS2"  id="APELLIDOS2">			</TD>
+                                                           
                                                            <TD><font size="1" face="Verdana"><strong>NOMBRES</strong></font><br>
                                                                <input type="text" size="30" maxlength="30" name="NOMBRES">			</TD>
+                                                           <TD><font size="1" face="Verdana"><strong>APELLIDOS</strong></font><br>
+                                                               <input type="text" size="30" maxlength="30" name="APELLIDOS2"  id="APELLIDOS2">			</TD>
                                                        </TR>
 
                                                        <TR>
@@ -628,10 +630,11 @@
                                                        </TR>
 
                                                        <TR>
-                                                           <TD><font size="1" face="Verdana"><strong>APELLIDOS</strong></font><br>
-                                                               <input type="text" size="30" maxlength="30" name="APELLIDOS3"  id="APELLIDOS3">			</TD>
+                                                           
                                                            <TD><font size="1" face="Verdana"><strong>NOMBRES</strong></font><br>
                                                                <input type="text" size="30" maxlength="30" name="NOMBRES">			</TD>
+                                                           <TD><font size="1" face="Verdana"><strong>APELLIDOS</strong></font><br>
+                                                               <input type="text" size="30" maxlength="30" name="APELLIDOS3"  id="APELLIDOS3">			</TD>
                                                        </TR>
 
                                                        <TR>
@@ -742,10 +745,11 @@
                                                                <div id="info4" style="display:inline"></div>			</TD>
                                                        </TR>
                                                        <TR>
-                                                           <TD><font size="1" face="Verdana"><strong>APELLIDOS</strong></font><br>
-                                                               <input type="text" size="30" maxlength="30" name="APELLIDOS4"  id="APELLIDOS4">			</TD>
+                                                           
                                                            <TD><font size="1" face="Verdana"><strong>NOMBRES</strong></font><br>
                                                                <input type="text" size="30" maxlength="30" name="NOMBRES">			</TD>
+                                                           <TD><font size="1" face="Verdana"><strong>APELLIDOS</strong></font><br>
+                                                               <input type="text" size="30" maxlength="30" name="APELLIDOS4"  id="APELLIDOS4">			</TD>
                                                        </TR>
 
                                                        <TR>
@@ -855,10 +859,11 @@
                                                                <div id="info5" style="display:inline"></div>			</TD>
                                                        </TR>
                                                        <TR>
-                                                           <TD><font size="1" face="Verdana"><strong>APELLIDOS</strong></font><br>
-                                                               <input type="text" size="30" maxlength="30" name="APELLIDOS5"  id="APELLIDOS5">			</TD>
+                                                           
                                                            <TD><font size="1" face="Verdana"><strong>NOMBRES</strong></font><br>
                                                                <input type="text" size="30" maxlength="30" name="NOMBRES">			</TD>
+                                                           <TD><font size="1" face="Verdana"><strong>APELLIDOS</strong></font><br>
+                                                               <input type="text" size="30" maxlength="30" name="APELLIDOS5"  id="APELLIDOS5">			</TD>
                                                        </TR>
 
                                                        <TR>

@@ -31,7 +31,7 @@
             c2.idciudad as  ciudad_iddestino, c2.nombre_ciudad as ciudad_nombredestino,
             p.idproducto, p.nombre_producto, p.tipo_producto_idtipo_producto, tp.nombre_tipo_producto,
             t.idtercero , t.documento_tercero, t.nombres_tercero, t.apellidos_tercero, 
-            t.direccion_tercero,
+            t.direccion_tercero, date(g.fecha) as fechaGuia, time(g.fecha) as horaGuia,
             d.documento_destinatario, d.nombres_destinatario
             from guia g inner join  tercero t on g.tercero_idremitente = t.idtercero  
             inner join ciudad c1 on c1.idciudad = g.ciudad_idorigen inner join ciudad c2 on c2.idciudad = g.ciudad_iddestino
@@ -55,6 +55,9 @@
 
   while ($fila = mysql_fetch_assoc($results2))
   {
+  
+  	$fecha =  $fila["fechaGuia"];
+  	$hora =  $fila["horaGuia"];
 //                $tercero_idtercero = $datosAsig["tercero_idtercero"];
       //capturo los datos del tercero que envia
 //    $idtercero = $fila["idtercero"];
@@ -105,7 +108,7 @@
       $imprimir = "<button type=\'button\' onclick=\'abrir(\"printCorporativo.php?idGuia=$idGuia\")\'>Imprimir</button>";
       //$editar = "<button type=\'button\' onclick=\'abrir(\"../../ordendeservicio/addosunitario.php?idGuiaFill=$idGuia\")\'>Editar</button>";
 //acumulo en el dataset
-      $dataSet = $dataSet . "['$numeroGuia','$documento_tercero','$nombres_tercero','$nomtp','$nomOrigen','$nomDestino','$dniDestinatario','$nomDestinatario','$estadoGuiaCausal','$imprimir','$linkmodificar'],";
+      $dataSet = $dataSet . "['$numeroGuia','$fecha','$hora','$documento_tercero','$nombres_tercero','$nomtp','$nomOrigen','$nomDestino','$dniDestinatario','$nomDestinatario','$estadoGuiaCausal','$imprimir','$linkmodificar'],";
   }
 
   $dataSet = substr_replace($dataSet, "];", strlen($dataSet) - 1);
@@ -171,6 +174,8 @@
                     "aaData": aDataSet,
                     "aoColumns": [
                         {"sTitle": "N. Guia"},
+                        {"sTitle": "Fecha"},
+                        {"sTitle": "Hora"},
                         {"sTitle": "Remite C.C."},
                         {"sTitle": "Remite Nombre"},
                         {"sTitle": "Tipo"},

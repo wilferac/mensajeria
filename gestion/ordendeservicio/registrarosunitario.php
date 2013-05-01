@@ -1,7 +1,7 @@
 <?
 
   include ("../../clases/clases.php");
-  include ("../../param/param.php");
+  //include ("../../param/param.php");
 
 //agrego la seguridad
   include "../../security/User.php";
@@ -70,17 +70,10 @@
 
       if ($encDestinatario)
       {
-//
-//           $guia->nombre_destinatario_guia = $nombresdestinatario . ' ' . $apellidosdestinatario;
-//           $guia->direccion_destinatario_guia = $direcciondestinatario;
-//           $guia->telefono_destinatario_guia = $telefono1destinatario;
       }
       else
       {
-
-//           $guia->nombre_destinatario_guia = $nombresdestinatario . ' ' . $apellidosdestinatario;
-//           $guia->direccion_destinatario_guia = $direcciondestinatario;
-//           $guia->telefono_destinatario_guia = $telefono1destinatario;
+          //TODO: aca debe estar el problema, no queda de otra mas que hacer una consulta para esto.
 
           $destinatario = new destinatario();
 
@@ -123,11 +116,7 @@
       $ciudaddestino = $_POST['ciudaddestino'];
 
       $contenido = $_POST['contenido'];
-      //llamo al procedimiento de almacenado =)
-      //toca mirar en el rol del usuario para enviar correctamente el primer parametro al procedure.
-      //para un Cliente corporativo seria su id de usuario y para
-      //un punto de venta seria el id del cliente (remitente). OJO
-      //$objUser = new User();
+
       $idCliente = $idcliente;
       $creador = $objUser->getId();
       //en caso que sea un cliente :D
@@ -147,13 +136,6 @@
       $valorDeclarado = $_POST['valordeclarado'];
       $idAsignacion = $_POST['idAsignacion'];
 
-// duenoOrden INT(11), creador INT(11),  ordenServi INT(11),
-// remitente INT(11),  remiInfo VARCHAR(50), remiCiu INT(11),  referencia VARCHAR(30),
-// destinatario INT(11),  destiNom VARCHAR(45),   destiApel VARCHAR(45), destiTel VARCHAR(45),
-// destiCiu INT(11),  destiDirec VARCHAR(70),  destiInfo VARCHAR(50),  
-// numero VARCHAR(45),   nomProduc VARCHAR(30),  idTipoProduc INT(11),  vrDeclarado INT(11),  
-//peso DECIMAL(10,2),   contenido VARCHAR(32), 
-//  largo DECIMAL(10,2),  ancho DECIMAL(10,2),  alto DECIMAL(10,2)
 //en el registro temporal envio varios nulls
       $query = "
            CALL addGuia (
@@ -164,11 +146,12 @@ $ciudaddestino, '$direcciondestinatario', '$extraDestinatario',
                '$numero_guia', '$nombreproducto', $idtipoproducto, $valorDeclarado,
                  $peso,   '$contenido', $largo, $ancho, $alto,1 ,$idAsignacion
                )";
-      // echo($query);
+
       mysql_query($query) or die("0");
 
+      
       //echo($query);
-     // return;
+      //return;
 
       if ($objUser->checkRol("Cliente") && !$objUser->checkRol("Admin"))
       {

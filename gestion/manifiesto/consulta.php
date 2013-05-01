@@ -38,6 +38,7 @@
   $sucur = $objUser->getIdSucursal();
   //$cons = "SELECT * FROM guia, manifiesto WHERE guia.manifiesto_idmanifiesto=manifiesto.idmanifiesto ORDER BY guia.numero_guia";
   $cons = "SELECT m.estado, s.nombre_sucursal ,m.idmanifiesto ,m.sucursal_idsucursal, m.plazo_entrega_manifiesto, GROUP_CONCAT(t.apellidos_tercero SEPARATOR ', ') AS apellidos,  GROUP_CONCAT(t.nombres_tercero SEPARATOR ',') AS tercero, GROUP_CONCAT(tm.tipo SEPARATOR ',')  AS tipo
+  , date(m.fechaCreacion) as fechaMani
        FROM manifiesto m INNER JOIN tercero_manifiesto tm ON tm.idmanifiesto = m.idmanifiesto 
        INNER JOIN tercero t ON t.idtercero= tm.idtercero 
        LEFT JOIN sucursal s ON s.idsucursal = m.sucursal_idsucursal       
@@ -64,7 +65,7 @@ SELECT * FROM tercero_manifiesto tm INNER JOIN tercero t ON t.`idtercero` = tm.`
       while ($filas = mysql_fetch_assoc($res2))
       {
 
-
+	$fechaMani = $filas['fechaMani'];
           $apellidos = $filas['apellidos'];
           $numero_manifiesto = $filas['idmanifiesto'];
           $nombreTerceros = $filas['tercero'];
@@ -119,7 +120,7 @@ SELECT * FROM tercero_manifiesto tm INNER JOIN tercero t ON t.`idtercero` = tm.`
           $wrapini = "<a target=\'_blank\' title=\'Ver detalle manifiesto: $idmanifiesto \' href=\'consultadetalle.php?nombre=$nombres&id=$idmanifiesto\' onClick=\'return(wo(this))\'>";
           $wrapfin = "</a>";
 
-          $dataSet = $dataSet . "['$wrapini$numero_manifiesto$wrapfin','$estado','$nombre[1] $apellido[1]','$nombre[3] $apellido[3]','$nombre[2] $apellido[2]','$nombre_sucursal','$nombre[4] $apellido[4]','$plazo_entrega_manifiesto','$linkcargar','$imprimir'],";
+          $dataSet = $dataSet . "['$wrapini$numero_manifiesto$wrapfin','$fechaMani','$estado','$nombre[1] $apellido[1]','$nombre[3] $apellido[3]','$nombre[2] $apellido[2]','$nombre_sucursal','$nombre[4] $apellido[4]','$plazo_entrega_manifiesto','$linkcargar','$imprimir'],";
       }
       $dataSet = substr_replace($dataSet, "];", strlen($dataSet) - 1);
       $dataSet = $dataSetini . $dataSet;
@@ -152,6 +153,7 @@ SELECT * FROM tercero_manifiesto tm INNER JOIN tercero t ON t.`idtercero` = tm.`
                     "aaData": aDataSet,
                     "aoColumns": [
                         {"sTitle": "Num. Manifiesto"},
+                        {"sTitle": "Fecha"},
                         {"sTitle": "Estado"},
                         {"sTitle": "Creado Por"},
                         {"sTitle": "Mensajero Recibe"},

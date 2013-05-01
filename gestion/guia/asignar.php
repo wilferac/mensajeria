@@ -126,6 +126,7 @@ if ($objUser->getStatus() != 1)
 
             });
         </script>
+  
 
         <script type="text/javascript">
             $().ready(function()
@@ -169,7 +170,7 @@ if ($objUser->getStatus() != 1)
             <p>&nbsp;</p>
 
             <div class="spacer">
-                <form name="asignarguia" method="post" action=".php">
+                <form name="asignarguia" >
 
                     <table width="767" border="0" align="center" cellpadding="0"
                            cellspacing="0">

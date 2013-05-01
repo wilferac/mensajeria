@@ -470,6 +470,7 @@
                         }
                         //alert( cadenaValores);
                         $('#informacion').html('<img src="../../imagenes/loader2.gif" alt="" height="17" />').fadeOut(1000);
+                        document.getElementById('registrar').style.visibility = 'hidden';
                         var dataString = cadenaValores;
                         //alert (dataString);
                         $.ajax({
@@ -483,7 +484,7 @@
 
                                 if (data == 1)
                                 {
-                                    document.getElementById('registrar').style.visibility = 'hidden';
+                                    
                                     alert("Registro Exitoso");
 
                                     redirigir();
@@ -492,7 +493,7 @@
                                 }
                                 else if (data == 0)
                                 {
-                                    document.getElementById('registrar').style.visibility = 'hidden';
+                                    //document.getElementById('registrar').style.visibility = 'hidden';
                                     $('#informacion').fadeIn(1000).html("<font face='$font' size='$size' color='$colorNoEx'>Registro NO Exitoso</font>");
                                     alert("Registro NO Exitoso:\n"+ data);
                                 }

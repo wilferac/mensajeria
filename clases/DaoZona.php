@@ -13,7 +13,7 @@
       {
           //consulta para recuperar la zonas de una ciudad
           $cons = "SELECT  z.idzona, z.ciudad_idciudad, z.nombre_zona  FROM zona z";
-          $cons = $cons . " where z.ciudad_idciudad=" . $idCiudad;
+          $cons = $cons . " where z.ciudad_idciudad=" . $idCiudad. " order by z.nombre_zona";
 
 
           $results2 = mysql_query($cons) or die(mysql_error());

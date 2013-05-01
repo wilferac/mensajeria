@@ -92,33 +92,34 @@
                        else
                        {
                            mysql_query("ROLLBACK");
-                           die(mysql_error());
+                           die("-1");
                        }
                    }
                    //quito la ultima coma :)
                    $query3 = substr("$query3", 0, -1);
                    if (mysql_query($query3))
                    {
+                       
                        //si llega aca es que todas las consulta fueron ejecutadas bien
-                       echo("1");
+                       echo($idMani);
                        mysql_query("COMMIT");
                    }
                    else
                    {
                        mysql_query("ROLLBACK");
-                       die(mysql_error());
+                       die("-1");
                    }
                }
                else
                {
                    mysql_query("ROLLBACK");
-                   die(mysql_error());
+                   die("-1");
                }
            }
            else
            {
                mysql_query("ROLLBACK");
-               die(mysql_error());
+               die("-1");
            }
        }
 

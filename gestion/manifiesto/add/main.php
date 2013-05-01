@@ -122,6 +122,8 @@
             
             function guardar(tipo)
             {
+            
+            document.getElementById('btnGuardar').style.visibility="hidden";
                 //alert(nguias);
                 if(nguias<=0)
                 {
@@ -167,14 +169,15 @@
                             url: "addManiMensajero.php",
                             data: dataString,
                             success: function(data) {
-                                if(data==1)
+                                if(data>1)
                                 {
-                                    alert("Manifiesto creado correctamente");
+                                    alert("Manifiesto creado correctamente "+data);
                                     location.reload(); 
                                 }
                                 else
                                 {
                                     alert("no se pudo guardar el manifiesto:\n"+data);
+                                    document.getElementById('btnGuardar').style.visibility="visible";
                                 }
                             
                             }});
@@ -191,9 +194,9 @@
                             url: "addManiMensajero.php",
                             data: dataString,
                             success: function(data) {
-                                if(data==1)
+                                if(data>1)
                                 {
-                                    alert("Manifiesto creado correctamente");
+                                    alert("Manifiesto creado correctamente "+data);
                                     location.reload(); 
                                 }
                                 else
@@ -214,6 +217,10 @@
             
             function guardarManiCiudad()
             {
+            
+            	
+            	document.getElementById('btnGuardarManiCiudad').style.visibility="hidden";
+            
                 //alert(nguias);
                 if(nguias<=0)
                 {
@@ -275,14 +282,15 @@
                         data: dataString,
                         success: function(data) {
                             
-                            if(data==1)
+                            if(data>1)
                             {
-                                alert("Manifiesto creado correctamente");
+                                    alert("Manifiesto creado correctamente "+data);
                                 location.reload(); 
                             }
                             else
                             {
                                 alert("no se pudo guardar el manifiesto:\n"+data);
+                                document.getElementById('btnGuardarManiCiudad').style.visibility="visible";
                             }
                             
                         }});

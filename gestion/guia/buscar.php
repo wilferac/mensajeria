@@ -1,18 +1,18 @@
 <?
-   include ("../../param/param.php");
-   include ("../../autenticar.php");
-   include ("../../clases/clases.php");
+  // include ("../../param/param.php");
+   //include ("../../autenticar.php");
+  // include ("../../clases/clases.php");
 
-   include '../../security/User.php';
-   include ('../../Menu.php');
+  // include '../../security/User.php';
+   //include ('../../Menu.php');
 
-   $objUser = unserialize($_SESSION['currentUser']);
-
-   if ($objUser->getStatus() != 1)
-   {
-       $operacion->redireccionar('No Puede entrar', 'index.php');
-       return;
-   }
+//   $objUser = unserialize($_SESSION['currentUser']);
+//
+//   if ($objUser->getStatus() != 1)
+//   {
+//       $operacion->redireccionar('No Puede entrar', 'index.php');
+//       return;
+//   }
 
 
 
@@ -63,8 +63,8 @@
     <body id="dt_example">
         <?
            //generar menu
-           $objMenu = new Menu($objUser);
-           $objMenu->generarMenu();
+         //  $objMenu = new Menu($objUser);
+           //$objMenu->generarMenu();
 //		   	$operacion = new operacion();
 //			 $operacion -> menu();
         ?>

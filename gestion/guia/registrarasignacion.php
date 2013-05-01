@@ -24,6 +24,11 @@ if ($_REQUEST) {
     $idtercero = $_REQUEST['documentotercero'];
     $asignardesde = $_REQUEST['asignardesde'];
     $asignarcantidad = $_REQUEST['asignarcantidad'];
+    
+    if($asignarcantidad <= 0)
+    {
+        die("Cantidad no permitida");
+    }
 
     $tipo = $_REQUEST['tipo'];
 
@@ -39,7 +44,7 @@ if ($_REQUEST) {
 
 
     //se calcula el final del rango
-    $asignarhasta = $asignardesde + $asignarcantidad;
+    $asignarhasta = $asignardesde + ($asignarcantidad-1);
 
     $idtercero = substr($idtercero, 0, strpos($idtercero, " -"));
     if ($idtercero != "") {
@@ -51,8 +56,8 @@ if ($_REQUEST) {
           {
           $datos = mysql_fetch_assoc($restercero);
           $idtercero = $datos['idtercero']; */
-        $query = "SELECT ag.asigTipo, ag.inicial_asignacion AS desde, ag.inicial_asignacion+ag.cantidad_asignacion AS hasta FROM asignacion_guias ag 
-        WHERE ag.asigTipo = $tipo AND ag.inicial_asignacion <= $asignarhasta
+        $query = "SELECT ag.asigTipo, ag.inicial_asignacion AS desde, ag.inicial_asignacion+(ag.cantidad_asignacion-1) AS hasta FROM asignacion_guias ag 
+        WHERE ag.asigTipo = $tipo AND ag.inicial_asignacion <= $asignarhasta AND ag.estado_asignacion = 1
         ORDER BY  ag.inicial_asignacion DESC";
         $desde = 0;
         $hasta = 0;

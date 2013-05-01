@@ -243,7 +243,7 @@
 
 //onclick='guardar($tipo);'
       echo("<h2 align=center>");
-      echo("<button class='btnGuardar'  style=' width: 90px;' onclick='guardarManiCiudad()' >Guardar</button>");
+      echo("<button class='btnGuardar' id='btnGuardarManiCiudad' style=' width: 90px;' onclick='guardarManiCiudad()' >Guardar</button>");
       echo("</h2>");
       //resteo el arreglo de guias :D
       $arreGuias = new ArrayObject();

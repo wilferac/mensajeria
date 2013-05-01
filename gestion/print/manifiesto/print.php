@@ -182,13 +182,13 @@
   {
       $consulta = "SELECT g.numero_guia, gm.gmId  , os.numero_orden_servicio, os.idorden_servicio ,
 g.direccion_destinatario_guia, g.nombre_destinatario_guia , g.contenido, es.nombre_causal_devolucion, 
-t.nombres_tercero|| ' '||t.apellidos_tercero AS clienteOs, gm.idEstadoGuia
+concat(t.nombres_tercero,' ',t.apellidos_tercero) AS clienteOs, gm.idEstadoGuia
 FROM guia g INNER JOIN  guia_manifiesto gm ON  gm.guiId = g.numero_guia
-INNER JOIN manifiesto m ON m.idmanifiesto= gm.gmId
+INNER JOIN manifiesto m ON m.idmanifiesto= gm.manId
 INNER JOIN orden_servicio os ON g.orden_servicio_idorden_servicio = os.idorden_servicio
 INNER JOIN estadoGuia es ON es.idcausal_devolucion = gm.idEstadoGuia
 INNER JOIN tercero t ON t.idtercero = os.tercero_idcliente
-WHERE gm.manId =  $idMani ";
+WHERE gm.manId = $idMani order by g.numero_guia";
 
 
       if(!$res2 = mysql_query($consulta))

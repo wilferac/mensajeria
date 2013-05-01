@@ -48,6 +48,8 @@
    $dataSet2 = "";
    //$cond = "orden_servicio_idorden_servicio=$idorden_servicio";
    //++ debo hacerlo todo en una sola consulta para que sea mas rapido :D
+   
+   mysql_query("SET NAMES 'utf8'");
 
    $queryGuias = "SELECT g.`numero_guia`, g.`nombre_destinatario_guia`, g.`direccion_destinatario_guia`,
 c.`nombre_ciudad` AS ciuOrigen,  d.`nombre_departamento` AS depOrigen,
@@ -102,6 +104,7 @@ WHERE g.`orden_servicio_idorden_servicio` = $idorden_servicio
        $numero_guia = $filas["numero_guia"];
        $destinatario = $filas["nombre_destinatario_guia"];
        $direccion = $filas["direccion_destinatario_guia"];
+        $direccion = eregi_replace("[\n|\r|\n\r]", ' ', $direccion);
        $ciuOrigen = $filas["ciuOrigen"];
        $depOrigen = $filas["depOrigen"];
        $ciuDesti = $filas["ciuDesti"];
@@ -210,7 +213,7 @@ WHERE g.`orden_servicio_idorden_servicio` = $idorden_servicio
                     "sDom": '',
                     "aaData": aDataSet3,
                     "aoColumns": [
-                        {"sTitle": "Normal"},
+                        {"sTitle": "Casillero"},
                         {"sTitle": "Devueltas"},
                         {"sTitle": "Entregadas"},
                         {"sTitle": "En Manifiesto"},

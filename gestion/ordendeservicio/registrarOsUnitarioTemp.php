@@ -1,7 +1,7 @@
 <?
 
-   include ("../../clases/clases.php");
-   include ("../../param/param.php");
+   //include ("../../clases/clases.php");
+   //include ("../../param/param.php");
 
    //agrego la seguridad
    include "../../security/User.php";

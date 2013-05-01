@@ -139,7 +139,7 @@
                 nguias=0;
                 </script>");
       echo("<h2 align=center>");
-      echo("<button class='btnGuardar' onclick='guardar($tipo);' style=' width: 90px;'>Guardar</button>");
+      echo("<button class='btnGuardar' id='btnGuardar' onclick='guardar($tipo);' style=' width: 90px;'>Guardar</button>");
       echo("</h2>");
       //resteo el arreglo de guias :D
       $arreGuias = new ArrayObject();

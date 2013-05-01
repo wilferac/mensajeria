@@ -33,7 +33,7 @@
                   $query = "SELECT * FROM asignacion_guias ag
 INNER JOIN sucursal s ON s.`idsucursal` = ag.`sucursal_idsucursal`
 WHERE $numguiaCorta >= inicial_asignacion AND $numguiaCorta <= inicial_asignacion+cantidad_asignacion AND asigTipo = 2
-AND s.`facturacion` = '$find'";
+AND s.`facturacion` = '$find' and ag.estado_asignacion = 1";
                   $results = mysql_query($query) or die('error al consultar contado ' . mysql_error());
                   $datosAsig = mysql_fetch_assoc($results);
                   if (mysql_num_rows($results) > 0)
@@ -57,7 +57,7 @@ AND s.`facturacion` = '$find'";
 
           if (!$entroFor)
           {
-              $query = "SELECT * FROM asignacion_guias WHERE $numguia >= inicial_asignacion AND $numguia <= inicial_asignacion+cantidad_asignacion and asigTipo = 1";
+              $query = "SELECT * FROM asignacion_guias WHERE $numguia >= inicial_asignacion AND $numguia <= inicial_asignacion+cantidad_asignacion and asigTipo = 1 and estado_asignacion = 1";
 
               try
               {

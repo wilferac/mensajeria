@@ -62,7 +62,7 @@ MM_reloadPage(true);
       </tr>
       <tr>
         <td><div align="right" class="Estilo1"> Contrase&ntilde;a: </div></td>
-        <td><input name="password" type="password" id="password"  size="25" maxlength="10"></td>
+        <td><input name="password" type="password" id="password"  size="25" maxlength="20"></td>
       </tr>
       <tr>
         <td colspan="2"><br></td>

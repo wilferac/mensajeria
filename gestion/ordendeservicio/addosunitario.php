@@ -888,7 +888,7 @@
                                 Peso (gr):
                             </td>
                             <td>
-                                <input id="peso" name="peso"  class="required" maxlength="3" size="5" value="50" type="number"  min="1" max="99999" /> 
+                                <input id="peso" name="peso"  class="required" maxlength="5" size="5" value="50" type="number"  min="1" max="99999" /> 
                             </td>
                             <td>
                                 Dimensiones (cm):

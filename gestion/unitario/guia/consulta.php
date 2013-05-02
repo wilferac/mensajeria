@@ -1,19 +1,19 @@
 <?php
-  session_start();
-  include("../../../clases/clases.php");
+session_start();
+include("../../../clases/clases.php");
 
-  include "../../../security/User.php";
-  include "../../../Menu.php";
+include "../../../security/User.php";
+include "../../../Menu.php";
 
-  $objUser = unserialize($_SESSION['currentUser']);
-  //$objUser = new User();
+$objUser = unserialize($_SESSION['currentUser']);
+//$objUser = new User();
 //        echo($objUser->getStatus());
-  if ($objUser->getStatus() != 1)
-  {
-      //$objUser->show();
-      $operacion->redireccionar('No Puede entrar', 'index.php');
-      return;
-  }
+if ($objUser->getStatus() != 1)
+{
+    //$objUser->show();
+    $operacion->redireccionar('No Puede entrar', 'index.php');
+    return;
+}
 
 
 //$producto = new producto();
@@ -25,96 +25,107 @@
 //
 //$res2 = $producto->consultar();
 //query a guia
-  $query2 = "select g.idguia , g.numero_guia , g.causal_devolucion_idcausal_devolucion,
+$query2 = "SELECT g.idguia , g.numero_guia ,gm.`idEstadoGuia` ,g.causal_devolucion_idcausal_devolucion, g.direccion_destinatario_guia,
             cd.nombre_causal_devolucion, g.tercero_iddestinatario,
-            c1.idciudad as  ciudad_idorigen, c1.nombre_ciudad as ciudad_nombreorigen,
-            c2.idciudad as  ciudad_iddestino, c2.nombre_ciudad as ciudad_nombredestino,
+            c1.idciudad AS  ciudad_idorigen, c1.nombre_ciudad AS ciudad_nombreorigen,
+            c2.idciudad AS  ciudad_iddestino, c2.nombre_ciudad AS ciudad_nombredestino,
             p.idproducto, p.nombre_producto, p.tipo_producto_idtipo_producto, tp.nombre_tipo_producto,
             t.idtercero , t.documento_tercero, t.nombres_tercero, t.apellidos_tercero, 
-            t.direccion_tercero, date(g.fecha) as fechaGuia, time(g.fecha) as horaGuia,
-            d.documento_destinatario, d.nombres_destinatario
-            from guia g inner join  tercero t on g.tercero_idremitente = t.idtercero  
-            inner join ciudad c1 on c1.idciudad = g.ciudad_idorigen inner join ciudad c2 on c2.idciudad = g.ciudad_iddestino
-            inner join producto p on p.idproducto = g.producto_idproducto
-            inner join tipo_producto tp on tp.idtipo_producto = p.tipo_producto_idtipo_producto
-            inner join estadoGuia cd on cd.idcausal_devolucion = g.causal_devolucion_idcausal_devolucion
-            left join destinatario d on d.iddestinatario = g.tercero_iddestinatario
-            ";
-  //si es usuario y no es admin
-  if ($objUser->checkRol("Cliente") && !$objUser->checkRol("Admin"))
-  {
-      $id = $objUser->getId();
-      $query2= $query2." where g.owner = $id ";
-  }
-  
+            t.direccion_tercero, DATE(g.fecha) AS fechaGuia, TIME(g.fecha) AS horaGuia,date(m.`fechaCreacion`) AS maniFecha ,gm.`manId`,
+            d.documento_destinatario, d.nombres_destinatario, gm.`fechaManual` , DATE(gm.`fechaDescarga`), c.nombrecausales
+            FROM guia g INNER JOIN  tercero t ON g.tercero_idremitente = t.idtercero  
+            INNER JOIN ciudad c1 ON c1.idciudad = g.ciudad_idorigen INNER JOIN ciudad c2 ON c2.idciudad = g.ciudad_iddestino
+            INNER JOIN producto p ON p.idproducto = g.producto_idproducto
+            INNER JOIN tipo_producto tp ON tp.idtipo_producto = p.tipo_producto_idtipo_producto
+            INNER JOIN estadoGuia cd ON cd.idcausal_devolucion = g.causal_devolucion_idcausal_devolucion
+            LEFT JOIN destinatario d ON d.iddestinatario = g.tercero_iddestinatario
+            LEFT JOIN guia_manifiesto gm ON gm.`guiId` = g.`numero_guia`
+            LEFT JOIN guia_manifiesto gm2 ON (gm2.`guiId` = gm.`guiId` AND gm.`gmId` < gm2.`gmId`)
+            LEFT JOIN causales c ON c.idcausales = gm.`idCausal`
+            LEFT JOIN manifiesto m ON m.`idmanifiesto` = gm.`manId`
+            WHERE gm2.`gmId`  IS NULL";
+//si es usuario y no es admin
+if ($objUser->checkRol("Cliente") && !$objUser->checkRol("Admin"))
+{
+    $id = $objUser->getId();
+    $query2 = $query2 . " where g.owner = $id ";
+}
 
-  $results2 = mysql_query($query2) or die(mysql_error());
 
-  $dataSetini = "[";
-  $dataSet = "";
+$results2 = mysql_query($query2) or die(mysql_error());
 
-  while ($fila = mysql_fetch_assoc($results2))
-  {
-  
-  	$fecha =  $fila["fechaGuia"];
-  	$hora =  $fila["horaGuia"];
+$dataSetini = "[";
+$dataSet = "";
+
+while ($fila = mysql_fetch_assoc($results2))
+{
+    $idMani = $fila['manId'];
+    $fechaEstado = !empty($fila['fechaManual']) ? $fila['fechaManual'] : $fila['fechaSys'];
+    $fechaEstado = !empty($fechaEstado) ? $fechaEstado : $fila['maniFecha'];
+
+    $fecha = $fila["fechaGuia"];
+    $hora = $fila["horaGuia"];
 //                $tercero_idtercero = $datosAsig["tercero_idtercero"];
-      //capturo los datos del tercero que envia
+    //capturo los datos del tercero que envia
 //    $idtercero = $fila["idtercero"];
-      $estadoGuia = $fila["causal_devolucion_idcausal_devolucion"];
-      $dniDestinatario = $fila["documento_destinatario"];
-      $nomDestinatario = $fila["nombres_destinatario"];
-      $estadoGuiaCausal = $fila["nombre_causal_devolucion"];
-      $iddestinatario = $fila["tercero_iddestinatario"];
-      if ($iddestinatario == NULL)
-      {
-          $dniDestinatario = "Incompleto";
-          $nomDestinatario = "Incompleto";
-      }
-      //$tercero_iddestinatario= $fila["tercero_iddestinatario"];
-      $idGuia = $fila["idguia"];
+    $estadoGuia = $fila["causal_devolucion_idcausal_devolucion"];
+    $dniDestinatario = $fila["documento_destinatario"];
+    $nomDestinatario = $fila["nombres_destinatario"];
+    $estadoGuiaCausal = $fila["nombre_causal_devolucion"];
+    $iddestinatario = $fila["tercero_iddestinatario"];
+    if ($iddestinatario == NULL)
+    {
+        $dniDestinatario = "Incompleto";
+        $nomDestinatario = "Incompleto";
+    }
+    //$tercero_iddestinatario= $fila["tercero_iddestinatario"];
+    $idGuia = $fila["idguia"];
 
-      $numeroGuia = $fila["numero_guia"];
-      $documento_tercero = $fila["documento_tercero"];
-      $nombres_tercero = $fila["nombres_tercero"];
-      $apellidos_tercero = $fila["apellidos_tercero"];
+    $numeroGuia = $fila["numero_guia"];
+    $documento_tercero = $fila["documento_tercero"];
+    $nombres_tercero = $fila["nombres_tercero"];
+    $apellidos_tercero = $fila["apellidos_tercero"];
 //    $direccion_tercero = $fila["direccion_tercero"];
 //    $idTipoPro = $fila["tipo_producto_idtipo_producto"];
-      $nomtp = $fila["nombre_tipo_producto"];
-      //capturo los del destino y de el origen del paquete
-      $nomOrigen = $fila["ciudad_nombreorigen"];
-      $nomDestino = $fila["ciudad_nombredestino"];
+    $nomtp = $fila["nombre_tipo_producto"];
+    //capturo los del destino y de el origen del paquete
+    $nomOrigen = $fila["ciudad_nombreorigen"];
+    $nomDestino = $fila["ciudad_nombredestino"];
 //    $idProducto = $fila["idproducto"];
-      $nomProducto = $fila["nombre_producto"];
-
-      if ($estadoGuia != 3 && empty($iddestinatario))
-      {
-          $resaltar = "";
-          if ($estadoGuia == 2)
-          {
-              $resaltar = "color: red";
-          }
-
-         // $linkeliminar = "<button style=\"width: 70px; " . $resaltar . " \"  type=\'button\' onclick=\'abrir(\"delete.php?idGuia=$idGuia\")\'>$estadoGuiaCausal</button>";
-          $linkmodificar = "<a  = href=\'../../ordendeservicio/addosunitario.php?idGuiaFill=$numeroGuia\'><img src=\'../../imagenes/modificar.jpeg\' /></a>";
-      }
-      else 
-      {
-         // $linkeliminar = "Entregado";
-          $linkmodificar = "";
-      }
+    $nomProducto = $fila["nombre_producto"];
 
 
-      $imprimir = "<button type=\'button\' onclick=\'abrir(\"printCorporativo.php?idGuia=$idGuia\")\'>Imprimir</button>";
-      //$editar = "<button type=\'button\' onclick=\'abrir(\"../../ordendeservicio/addosunitario.php?idGuiaFill=$idGuia\")\'>Editar</button>";
+
+    $destiDirec = $fila["direccion_destinatario_guia"];
+
+    if ($estadoGuia != 3 && empty($iddestinatario))
+    {
+        $resaltar = "";
+        if ($estadoGuia == 2)
+        {
+            $resaltar = "color: red";
+        }
+
+        // $linkeliminar = "<button style=\"width: 70px; " . $resaltar . " \"  type=\'button\' onclick=\'abrir(\"delete.php?idGuia=$idGuia\")\'>$estadoGuiaCausal</button>";
+        $linkmodificar = "<a  = href=\'../../ordendeservicio/addosunitario.php?idGuiaFill=$numeroGuia\'><img src=\'../../imagenes/modificar.jpeg\' /></a>";
+    } else
+    {
+        // $linkeliminar = "Entregado";
+        $linkmodificar = "";
+    }
+
+    $linkDetalle = "<a href=\'consultaDetallada.php?idGuia=$numeroGuia\' target=\'_blank\' onClick=\'window.open(this.href, this.target, \'idth=500,height=500\'); return false;\'>$numeroGuia</a>";
+
+    $imprimir = "<button type=\'button\' onclick=\'abrir(\"printCorporativo.php?idGuia=$idGuia\")\'>Imprimir</button>";
+    //$editar = "<button type=\'button\' onclick=\'abrir(\"../../ordendeservicio/addosunitario.php?idGuiaFill=$idGuia\")\'>Editar</button>";
 //acumulo en el dataset
-      $dataSet = $dataSet . "['$numeroGuia','$fecha','$hora','$documento_tercero','$nombres_tercero','$nomtp','$nomOrigen','$nomDestino','$dniDestinatario','$nomDestinatario','$estadoGuiaCausal','$imprimir','$linkmodificar'],";
-  }
+    $dataSet = $dataSet . "['$linkDetalle','$idMani','$fecha','$hora','$documento_tercero','$nombres_tercero','$nomtp','$nomOrigen','$nomDestino','$dniDestinatario','$nomDestinatario','$destiDirec','$estadoGuiaCausal','$fechaEstado','$imprimir','$linkmodificar'],";
+}
 
-  $dataSet = substr_replace($dataSet, "];", strlen($dataSet) - 1);
-  $dataSet = $dataSetini . $dataSet;
+$dataSet = substr_replace($dataSet, "];", strlen($dataSet) - 1);
+$dataSet = $dataSetini . $dataSet;
 //echo $dataSet;
-  $vacio = false;
+$vacio = false;
 ?>
 
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
@@ -174,6 +185,7 @@
                     "aaData": aDataSet,
                     "aoColumns": [
                         {"sTitle": "N. Guia"},
+                        {"sTitle": "Manifiesto"},
                         {"sTitle": "Fecha"},
                         {"sTitle": "Hora"},
                         {"sTitle": "Remite C.C."},
@@ -183,7 +195,9 @@
                         {"sTitle": "Destino"},
                         {"sTitle": "Destinatario C.C."},
                         {"sTitle": "Destinatario"},
+                        {"sTitle": "Dirección"},
                         {"sTitle": "Estado"},
+                        {"sTitle": "Fecha Estado"},
                         {"sTitle": "Imprimir"},
                         {"sTitle": "Editar"}
                     ],
@@ -218,21 +232,21 @@
     </head>
     <body id="dt_example">
         <?
-          $objMenu = new Menu($objUser);
-          $objMenu->generarMenu();
+        $objMenu = new Menu($objUser);
+        $objMenu->generarMenu();
 //   $operacion = new operacion();
 //   $operacion->menu();
         ?>
         <div id="container">
             <?
-              if (isset($_GET["mensaje"]))
-              {
-                  ?> 
+            if (isset($_GET["mensaje"]))
+            {
+                ?> 
 
-                  <div class="mensaje"><?= $_GET["mensaje"] ?></div>  
+                <div class="mensaje"><?= $_GET["mensaje"] ?></div>  
 
-                  <?
-              }
+                <?
+            }
             ?>
             <div class="full_width big">
                 <p>&nbsp;</p>
@@ -243,12 +257,12 @@
                         <a href="../../ordendeservicio/addosunitario.php">Crear Guia</a>
                     </td></tr></table> 
             <?
-              if ($vacio)
-              {
-                  ?>
-                  <div align="center" style="color:#FF0000">No hay datos para mostrar</div>
-                  <?
-              }
+            if ($vacio)
+            {
+                ?>
+                <div align="center" style="color:#FF0000">No hay datos para mostrar</div>
+                <?
+            }
             ?>
             No Terminados: <input id="check" type="checkbox" name="option3" value="incompleto" /> 
             <div id="dynamic"></div>

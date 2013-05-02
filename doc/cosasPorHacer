@@ -11,3 +11,46 @@
 6. controlar el rango de asignacion , que no sea cero ni negativo.
 
 7. mostrar la traza de las guias, para los clientes.
+
+
+·         Al editar un cliente para agregar el usuario y contraseña no aparece el campo “contraseña”
+
+ 
+
+·         Al consultar guia de correo unitario falta que muestre el  direccion de destinatario,  fecha de estado y causal cuando sea devoluciòn
+    (toca hacer un informe detallado por guia.) (ok)
+ 
+
+·         Se requiere que al crear manifiesto para aliados, el programa acepte los destinos del Departamento.
+(no entiendo en que caso falla?)
+
+ 
+
+·         Opcion para corregir datos de las guias que ya se grabaron en el caso que que se requiera corregir algun campo de destinatario.
+(esto no se debe implementar ya que es fraudulento?)
+
+ 
+
+·         Se crea un manifiesto y se le agregan registros, luego se le da clic en guardad y al darle cancelar al mensaje emergente para agregar mas datos ya no aparece el boto de “Guardar”
+(ok)
+ 
+
+·         En causales de devolucion agregar causal “No Cubrimiento” y retirar los causales repetidos.
+(ok, no encontre causales repetidos, preguntar por los mismo)
+ 
+
+·         Al digitar la guia, la casilla de peso en gramos solo acepta 3 digitos.
+3 digitos serian 999, casi un kilo, se cambia a 5. (ok)
+ 
+
+·         Opcion Unitario / Consultar y/o asignar guias / cliente EMPSII: en las guias disponibles salen numeros negativos.
+(si, se debe a un error de doble asignacion que ya fue corregido)
+ 
+
+·         Falta impresión de guias masivas directamente por el programa
+(ya esta, solo falta cuadrar los margenes)(es muy lento, paso a reestructurar)
+
+
+* campos par areporte de guias: direccion, nombre del ultimo mensajero que tubo la guia (y la fecha del ultimo manifiesto).
+ (ok)
+

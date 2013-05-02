@@ -9,7 +9,7 @@
 //$archivo = "http://www.leuss.com.ve/tests/mensajeria/param/param.properties"; 
 //$archivo = "http://localhost/mensajeria/param/param.properties";
 
-$archivo = "/home/wilferac/public_html/Mensajeria/param/param.properties";
+$archivo = "/home/inovate/public_html/Mensajeria/param/param.properties";
 
 //if(!file_exists($archivo))
 //{echo "Config. de parametros no existe.";exit;}

@@ -49,7 +49,7 @@
    //$cond = "orden_servicio_idorden_servicio=$idorden_servicio";
    //++ debo hacerlo todo en una sola consulta para que sea mas rapido :D
    
-   mysql_query("SET NAMES 'utf8'");
+   //mysql_query("SET NAMES 'utf8'");
 
    $queryGuias = "SELECT g.`numero_guia`, g.`nombre_destinatario_guia`, g.`direccion_destinatario_guia`,
 c.`nombre_ciudad` AS ciuOrigen,  d.`nombre_departamento` AS depOrigen,
@@ -57,7 +57,7 @@ c2.`nombre_ciudad` AS ciuDesti,  d2.`nombre_departamento` AS depDesti ,
 eg.`nombre_causal_devolucion`, ca.`nombrecausales`,
 m.`idmanifiesto`,
 m.`fechaCreacion`,
-t.`nombres_tercero` AS mensajero,
+concat(t.`nombres_tercero`,' ', t.apellidos_tercero) AS mensajero,
 z.`nombre_zona`,
 eg.`idcausal_devolucion` AS idEstado
 

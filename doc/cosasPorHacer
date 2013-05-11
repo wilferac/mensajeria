@@ -48,9 +48,29 @@
  
 
 ·         Falta impresión de guias masivas directamente por el programa
-(ya esta, solo falta cuadrar los margenes)(es muy lento, paso a reestructurar)
+(ya esta, solo falta cuadrar los margenes)(es muy lento, paso a reestructurar)(ok, se cambiaron partes del algoritmo para darle velocidad)
 
 
 * campos par areporte de guias: direccion, nombre del ultimo mensajero que tubo la guia (y la fecha del ultimo manifiesto).
  (ok)
+
+ultimos bugs:
+
+Atender los requerimientos de mensajeria, entre ellos:
+- Pantalla de edicion de guias ( que pueden cambiar el origen/destino de una guia. La condicion es q no este entregada)
+
+- Impresión guias CC (salieron unas guias en blanco)
+cuales? supongo que ya esta solucionado.
+- Reportes de guias, ordenes y manif (sabemos que las modificaciones a estos reportes van a causar que queden super lentos por la cantidad de inner, debemos buscar una solucion con paginacion, tablas temporales, etc, etc. No se si acotando por fechas mejore la busqueda para el caso de las ordenes y los manif, y en el caso de las guias no mostrar todas si no solo el numero de guia que busquen.)
+
+- Cuando un cliente ya existe y se le da editar no se le puede asignar una contraseña, esto se debe solucionar.
+
+- Al editar un aliado y modificar las ciudades en las que este entrega sale un error mysql.
+a lo bien? =(
+
+
+
+
+
+
 

@@ -130,7 +130,6 @@ header("Content-Type: text/html;charset=utf-8");
                     return;
                 }
                 if (confirm('¿Estas seguro que deseas crear el manifiesto con estos datos?')) {
-                    document.getElementById('btnGuardar').style.visibility = "hidden";
 
                     var idMensajero = document.getElementById('selMensajeroEntrega').value;
                     var idZona = document.getElementById('selZonaCiudad').value;
@@ -164,6 +163,7 @@ header("Content-Type: text/html;charset=utf-8");
                             return;
                         }
                         var dataString = 'idMensajero=' + idMensajero + '&idZona=' + idZona + '&plazo=' + plazo + '&tipo=' + tipo + '&option=4' + '&tarifa=' + tarifa;
+                        document.getElementById('btnGuardar').style.visibility = "hidden";
 
                         $.ajax({
                             type: "POST",
@@ -189,6 +189,7 @@ header("Content-Type: text/html;charset=utf-8");
                     {
                         //alert("propio");
                         var dataString = 'idMensajero=' + idMensajero + '&idZona=' + idZona + '&plazo=' + plazo + '&tipo=' + tipo + '&option=4';
+                        document.getElementById('btnGuardar').style.visibility = "hidden";
 
                         $.ajax({
                             type: "POST",
@@ -228,7 +229,6 @@ header("Content-Type: text/html;charset=utf-8");
                     return;
                 }
                 if (confirm('¿Estas seguro que deseas crear el manifiesto con estos datos?')) {
-                    document.getElementById('btnGuardarManiCiudad').style.visibility = "hidden";
 
 
                     var peso = document.getElementById('peso').value;
@@ -277,6 +277,7 @@ header("Content-Type: text/html;charset=utf-8");
                             '&option=4' + '&idAli=' + idAli + '&idSucur=' + idSucur + '&idMenResibe=' +
                             idMenResibe + '&peso=' + pe +
                             '&idDesti=' + idDesti;
+                    document.getElementById('btnGuardarManiCiudad').style.visibility = "hidden";
 
                     $.ajax({
                         type: "POST",

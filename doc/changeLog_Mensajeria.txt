@@ -8,7 +8,8 @@
 cambios V. 0.9.2
 -- fixed: error que impedia la validacion de campos a la hora de subir un archivo csv a la orden de servicio, 
             el error se presentaba por culpa de caracteres especiales no manejados (ñ,´, etc...)
-
+-- modified: error que impedia la imprecion de guias que tenian caracteres especiales.
+-- 
 
 cambios V. 0.9.1
 

@@ -1,20 +1,20 @@
 <?
-   include ("../../clases/clases.php");
-   include ("../../param/param.php");
+include ("../../clases/clases.php");
+include ("../../param/param.php");
 
-   include "../../security/User.php";
-   include "../../Menu.php";
+include "../../security/User.php";
+include "../../Menu.php";
 
-   $objUser = unserialize($_SESSION['currentUser']);
-   //$objUser = new User();
+$objUser = unserialize($_SESSION['currentUser']);
+//$objUser = new User();
 //        echo($objUser->getStatus());
-   if ($objUser->getStatus() != 1)
-   {
-       //$objUser->show();
-       $operacion->redireccionar('No Puede entrar', 'index.php');
-       return;
-   }
-   //++ esta parte queda pendiente.
+if ($objUser->getStatus() != 1)
+{
+    //$objUser->show();
+    $operacion->redireccionar('No Puede entrar', 'index.php');
+    return;
+}
+//++ esta parte queda pendiente.
 //   else
 //   {
 //       //verifico si tiene los permisos para ver el recurso.
@@ -385,7 +385,7 @@
 
                                 if (data == 1)
                                 {
-                                     document.getElementById('registrar').style.visibility = 'hidden';
+                                    document.getElementById('registrar').style.visibility = 'hidden';
                                     alert("Registro Exitoso");
 
                                     redirigir();
@@ -395,7 +395,7 @@
                                 {
                                     document.getElementById('registrar').style.visibility = 'hidden';
                                     $('#informacion').fadeIn(1000).html("<font face='$font' size='$size' color='$colorNoEx'>Registro NO Exitoso</font>");
-                                    alert("registro no exitoso:\n"+data);
+                                    alert("registro no exitoso:\n" + data);
                                 }
                                 // alert(data);
                             }});
@@ -484,7 +484,7 @@
 
                                 if (data == 1)
                                 {
-                                    
+
                                     alert("Registro Exitoso");
 
                                     redirigir();
@@ -495,7 +495,7 @@
                                 {
                                     //document.getElementById('registrar').style.visibility = 'hidden';
                                     $('#informacion').fadeIn(1000).html("<font face='$font' size='$size' color='$colorNoEx'>Registro NO Exitoso</font>");
-                                    alert("Registro NO Exitoso:\n"+ data);
+                                    alert("Registro NO Exitoso:\n" + data);
                                 }
                                 // alert(data);
                             }});
@@ -531,8 +531,8 @@
         <?
 //   $operacion = new operacion();
 //   $operacion->menu();
-           $objMenu = new Menu($objUser);
-           $objMenu->generarMenu();
+        $objMenu = new Menu($objUser);
+        $objMenu->generarMenu();
         ?>
         <div class="titulo">
             <br>
@@ -542,11 +542,11 @@
 
     <div align="center"> <?
 //        $nombreciudadorigen = $_SESSION['datosinicio']['nombre_ciudad'];
-           $nombreciudadorigen = "lol";
-           $peso = $_SESSION['param']['peso'];
-           $valordeclarado = $_SESSION['param']['valordeclarado'];
-           $estiloinput = 'double'; //inset  double
-           //print_r ($_SESSION);
+        $nombreciudadorigen = "lol";
+        $peso = $_SESSION['param']['peso'];
+        $valordeclarado = $_SESSION['param']['valordeclarado'];
+        $estiloinput = 'double'; //inset  double
+        //print_r ($_SESSION);
         ?>
         <form class="formulario" id="formulario" name="formulario" method="post" onkeypress="javascript:if (event.keyCode == 13) {
                     return false;
@@ -650,27 +650,27 @@
                                     <option value="">Seleccione uno...</option>
                                     <?
 //   $idciudadorigen = $_SESSION['datosinicio']['ciudad_idciudad'];
-                                       $idciudadorigen = $objUser->getIdCiudad();
+                                    $idciudadorigen = $objUser->getIdCiudad();
 
-                                       $operaciones = new operacion();
+                                    $operaciones = new operacion();
 
-                                       $qry = "SELECT ciudad.idciudad, ciudad.nombre_ciudad, ciudad.departamento_iddepartamento, departamento.iddepartamento, departamento.nombre_departamento FROM ciudad, departamento WHERE ciudad.departamento_iddepartamento = departamento.iddepartamento
+                                    $qry = "SELECT ciudad.idciudad, ciudad.nombre_ciudad, ciudad.departamento_iddepartamento, departamento.iddepartamento, departamento.nombre_departamento FROM ciudad, departamento WHERE ciudad.departamento_iddepartamento = departamento.iddepartamento
                                                 ORDER BY ciudad.nombre_ciudad";
-                                       $res2 = $operaciones->consultar($qry);
-                                       if (mysql_num_rows($res2) > 0)
-                                       {
-                                           $selected = "";
-                                           //$salir = 20;
-                                           while ($filas = mysql_fetch_assoc($res2)) //$filas['idciudad'] //$filas['nombre_ciudad']
-                                           {
-                                               if ($idciudadorigen == $filas['idciudad'])
-                                                   $selected = 'selected';
-                                               echo "<option $selected value='" . $filas['idciudad'] . "'>$filas[nombre_ciudad]-$filas[nombre_departamento]</option>";
-                                               if ($selected != "")
-                                                   $selected = "";
-                                               //$salir--;
-                                           }
-                                       }
+                                    $res2 = $operaciones->consultar($qry);
+                                    if (mysql_num_rows($res2) > 0)
+                                    {
+                                        $selected = "";
+                                        //$salir = 20;
+                                        while ($filas = mysql_fetch_assoc($res2)) //$filas['idciudad'] //$filas['nombre_ciudad']
+                                        {
+                                            if ($idciudadorigen == $filas['idciudad'])
+                                                $selected = 'selected';
+                                            echo "<option $selected value='" . $filas['idciudad'] . "'>$filas[nombre_ciudad]-$filas[nombre_departamento]</option>";
+                                            if ($selected != "")
+                                                $selected = "";
+                                            //$salir--;
+                                        }
+                                    }
                                     ?>
                                 </select>
                             </td>
@@ -683,14 +683,14 @@
                                 <select id="ciudaddestino" name="ciudaddestino"   style="display:inline;border:<?= $estiloinput ?>">
                                     <option value="">Seleccione uno...</option>
                                     <?
-                                       $operaciones = new operacion();
+                                    $operaciones = new operacion();
 
-                                       $qry = "SELECT ciudad.idciudad, ciudad.nombre_ciudad, ciudad.departamento_iddepartamento, departamento.iddepartamento, departamento.nombre_departamento FROM ciudad, departamento WHERE ciudad.departamento_iddepartamento = departamento.iddepartamento
+                                    $qry = "SELECT ciudad.idciudad, ciudad.nombre_ciudad, ciudad.departamento_iddepartamento, departamento.iddepartamento, departamento.nombre_departamento FROM ciudad, departamento WHERE ciudad.departamento_iddepartamento = departamento.iddepartamento
                                             ORDER BY ciudad.nombre_ciudad";
-                                       $res2 = $operaciones->consultar($qry);
-                                       if (mysql_num_rows($res2) > 0)
-                                           while ($filas = mysql_fetch_assoc($res2)) //$filas['idciudad'] //$filas['nombre_ciudad']
-                                               echo "<option value='" . trim($filas['idciudad']) . "'>$filas[nombre_ciudad]-$filas[nombre_departamento]</option>";
+                                    $res2 = $operaciones->consultar($qry);
+                                    if (mysql_num_rows($res2) > 0)
+                                        while ($filas = mysql_fetch_assoc($res2)) //$filas['idciudad'] //$filas['nombre_ciudad']
+                                            echo "<option value='" . trim($filas['idciudad']) . "'>$filas[nombre_ciudad]-$filas[nombre_departamento]</option>";
                                     ?>
                                 </select>
                                 <div id="info4" style="display:inline"></div>
@@ -714,27 +714,27 @@
                                 <select name="nombreproducto" id="nombreproducto">
 
                                     <?
-                                       $operacion = new operacion();
-                                       $sql = "select nombre_producto from producto group by nombre_producto";
-                                       $res = $operacion->consultar($sql);
+                                    $operacion = new operacion();
+                                    $sql = "select nombre_producto from producto group by nombre_producto";
+                                    $res = $operacion->consultar($sql);
 
 
-                                       while ($fila = mysql_fetch_assoc($res))
-                                       {
-                                           $nombre_producto = $fila["nombre_producto"];
+                                    while ($fila = mysql_fetch_assoc($res))
+                                    {
+                                        $nombre_producto = $fila["nombre_producto"];
 
-                                           if (strtolower($nombre_producto) == 'unitario')
-                                               $selected = 'selected';
-                                           ?>
-                                           <option <?= $selected ?> value="<?= strtolower($nombre_producto) ?>"><?= strtoupper($nombre_producto) ?></option>
-                                           <?
-                                           if ($selected != '')
-                                           {
-                                               $selected = '';
-                                           }
-                                           ?>
-                                           <?
-                                       }
+                                        if (strtolower($nombre_producto) == 'unitario')
+                                            $selected = 'selected';
+                                        ?>
+                                        <option <?= $selected ?> value="<?= strtolower($nombre_producto) ?>"><?= strtoupper($nombre_producto) ?></option>
+                                        <?
+                                        if ($selected != '')
+                                        {
+                                            $selected = '';
+                                        }
+                                        ?>
+                                        <?
+                                    }
                                     ?>
                                 </select>
                             </td>
@@ -977,12 +977,12 @@
 
 
 <?php
-   //aca consulto si se le paso el dato para que complete automaticamente la guia
-   $idGuiaFill = $_REQUEST["idGuiaFill"];
+//aca consulto si se le paso el dato para que complete automaticamente la guia
+$idGuiaFill = $_REQUEST["idGuiaFill"];
 
-   if (isset($idGuiaFill ))
-   {
-       echo("<script>
+if (isset($idGuiaFill))
+{
+    echo("<script>
            alert('call to fill');
                 ocultarTodo();
                $('#numguia').val('$idGuiaFill');
@@ -998,16 +998,16 @@
                     $('#info').fadeIn(1000).html(data);
                     }});
 </script>");
-       //require("prevalidacion.php");
-   }
+    //require("prevalidacion.php");
+}
 
 
 //   $objUser = new User();
-   if ($objUser->checkRol("Cliente") && !$objUser->checkRol("Admin"))
-   {
-       $cc = $objUser->getNumDocu();
-       $idCli = $objUser->getId();
-       echo("<script>
+if ($objUser->checkRol("Cliente") && !$objUser->checkRol("Admin"))
+{
+    $cc = $objUser->getNumDocu();
+    $idCli = $objUser->getId();
+    echo("<script>
           alert('llamado por un cliente');
           document.getElementById('labnumguia').style.visibility='hidden';
           document.getElementById('numguia').style.visibility='hidden';
@@ -1022,5 +1022,5 @@
           document.getElementById('idcliente').value = $idCli;
           document.getElementById('cccliente').readOnly = true;
 </script>");
-   }
+}
 ?>

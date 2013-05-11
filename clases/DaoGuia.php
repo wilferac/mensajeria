@@ -12,7 +12,7 @@ class DaoGuia
     public function getAll($idMani, $estado = 1, $idSucur = NULL)
     {
         $cons = "SELECT g.numero_guia, gm.gmId  FROM guia g INNER JOIN  guia_manifiesto gm ON  gm.guiId = g.numero_guia
-INNER JOIN manifiesto m ON m.`idmanifiesto`= gm.`gmId`
+INNER JOIN manifiesto m ON m.`idmanifiesto`= gm.`manId`
 WHERE gm.manId = $idMani ";
         if ($estado == 1)
         {
@@ -30,6 +30,8 @@ SELECT * FROM tercero_manifiesto tm INNER JOIN tercero t ON t.`idtercero` = tm.`
 
 //          echo($cons);
 //          return;
+        
+        //echo("<br>$cons<br>");
 
         $results2 = mysql_query($cons) or die(mysql_error());
 

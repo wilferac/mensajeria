@@ -45,94 +45,105 @@ if ($objUser->getStatus() != 1)
 
         <script language="javascript">
             $(document).ready(function() {
-            $("#documentotercero").blur(function() {
-
-            var val = $(this).attr("value");
-
-            if (val != "")
-            {
-
-           // $('#info').html('<img src="../../imagenes/loader.gif" alt="" height="17" />').fadeOut(1000);
-            var dataString = 'documentotercero=' + val;
-            //alert (dataString);
-            $.ajax({
-            type: "POST",
-            url: "consultarasignacion.php",
-            data: dataString,
-            success: function(data) {
-            $('#info').html(data);
-            }});
-            } // end if (val)
-            });   //BLUR    
 
 
+                $(document).keypress(function(e) {
+                    if (e.which == 13) {
+//                        e.preventDefault();
+            // alert('You pressed enter!');
+             return false;
+                    }
+                });
 
 
-            $("#botonasignar").click(function() {
+                $("#documentotercero").blur(function() {
 
-            var documentotercero = document.getElementById('documentotercero').value;
-            var asignardesde = document.getElementById('asignardesde').value;
-            var asignarcantidad = document.getElementById('asignarcantidad').value;
-            var tipo = $('input[name=tipo]:checked').val();
-            //alert(tipo);
-            //return;
+                    var val = $(this).attr("value");
 
-            if (documentotercero != "")
-            if (asignardesde != 0 || asignarcantidad != 0)
-            {
-            $('#info2').html('<img src="../../imagenes/loader.gif" alt="" height="17" />').fadeOut(1000);
-            var dataString = 'tipo=' +tipo+'&documentotercero=' + documentotercero + '&asignardesde=' + asignardesde + '&asignarcantidad=' + asignarcantidad;
-            //alert (dataString);
-            $.ajax({
-            type: "POST",
-            url: "registrarasignacion.php",
-            data: dataString,
-            success: function(data) {
-            $('#info2').fadeIn(100).html(data);
-            }});
-            } // end if (asignardesde != 0 || asignarcantidad != 0)
-            });   //click   
+                    if (val != "")
+                    {
+
+                        // $('#info').html('<img src="../../imagenes/loader.gif" alt="" height="17" />').fadeOut(1000);
+                        var dataString = 'documentotercero=' + val;
+                        //alert (dataString);
+                        $.ajax({
+                            type: "POST",
+                            url: "consultarasignacion.php",
+                            data: dataString,
+                            success: function(data) {
+                                $('#info').html(data);
+                            }});
+                    } // end if (val)
+                });   //BLUR    
 
 
 
 
+                $("#botonasignar").click(function() {
+
+                    var documentotercero = document.getElementById('documentotercero').value;
+                    var asignardesde = document.getElementById('asignardesde').value;
+                    var asignarcantidad = document.getElementById('asignarcantidad').value;
+                    var tipo = $('input[name=tipo]:checked').val();
+                    //alert(tipo);
+                    //return;
+
+                    if (documentotercero != "")
+                        if (asignardesde != 0 || asignarcantidad != 0)
+                        {
+                            $('#info2').html('<img src="../../imagenes/loader.gif" alt="" height="17" />').fadeOut(1000);
+                            var dataString = 'tipo=' + tipo + '&documentotercero=' + documentotercero + '&asignardesde=' + asignardesde + '&asignarcantidad=' + asignarcantidad;
+                            //alert (dataString);
+                            $.ajax({
+                                type: "POST",
+                                url: "registrarasignacion.php",
+                                data: dataString,
+                                success: function(data) {
+                                    $('#info2').fadeIn(100).html(data);
+                                }});
+                        } // end if (asignardesde != 0 || asignarcantidad != 0)
+                });   //click   
 
 
-            $("#documentotercero").keypress(function(event) {
 
-            if (event.which == 13)
-            {
-            var val = $(this).attr("value");
 
-            if (val != "")
-            {
 
-            $('#info').html('<img src="../../imagenes/loader.gif" alt="" height="17" />').fadeOut(1000);
-            var dataString = 'documentotercero=' + val;
-            //alert (dataString);
-            $.ajax({
-            type: "POST",
-            url: "consultarasignacion.php",
-            data: dataString,
-            success: function(data) {
-            $('#info').fadeIn(1000).html(data);
-            }});
-            } // end if (val)
-            }	//if (event.which == 13)   
-            });   //keypress 		
+
+                $("#documentotercero").keypress(function(event) {
+
+                    if (event.which == 13)
+                    {
+                        var val = $(this).attr("value");
+
+                        if (val != "")
+                        {
+
+                            $('#info').html('<img src="../../imagenes/loader.gif" alt="" height="17" />').fadeOut(1000);
+                            var dataString = 'documentotercero=' + val;
+                            //alert (dataString);
+                            $.ajax({
+                                type: "POST",
+                                url: "consultarasignacion.php",
+                                data: dataString,
+                                success: function(data) {
+                                    $('#info').fadeIn(1000).html(data);
+                                }});
+                        } // end if (val)
+                    }	//if (event.which == 13)   
+                });   //keypress 		
 
 
 
 
             });
         </script>
-  
+
 
         <script type="text/javascript">
             $().ready(function()
             {
-            $("#documentotercero").autocomplete("../tercero/searchtercero.php", {
-            minChars: 0, max: 200, width: 350});
+                $("#documentotercero").autocomplete("../tercero/searchtercero.php", {
+                    minChars: 0, max: 200, width: 350});
             });
         </script>
 

@@ -25,14 +25,15 @@ if ($objUser->getStatus() != 1)
 //
 //$res2 = $producto->consultar();
 //query a guia
-$query2 = "SELECT g.idguia , g.numero_guia ,gm.`idEstadoGuia` ,g.causal_devolucion_idcausal_devolucion, g.direccion_destinatario_guia,
+$query2 = "SELECT os.`numero_orden_servicio` as numOrdenServ , CONCAT(term.nombres_tercero,' ',term.apellidos_tercero) AS nomMensajero,
+g.idguia , g.numero_guia ,gm.`idEstadoGuia` ,g.causal_devolucion_idcausal_devolucion, g.direccion_destinatario_guia,
             cd.nombre_causal_devolucion, g.tercero_iddestinatario,
             c1.idciudad AS  ciudad_idorigen, c1.nombre_ciudad AS ciudad_nombreorigen,
             c2.idciudad AS  ciudad_iddestino, c2.nombre_ciudad AS ciudad_nombredestino,
             p.idproducto, p.nombre_producto, p.tipo_producto_idtipo_producto, tp.nombre_tipo_producto,
             t.idtercero , t.documento_tercero, t.nombres_tercero, t.apellidos_tercero, 
-            t.direccion_tercero, DATE(g.fecha) AS fechaGuia, TIME(g.fecha) AS horaGuia,date(m.`fechaCreacion`) AS maniFecha ,gm.`manId`,
-            d.documento_destinatario, d.nombres_destinatario, gm.`fechaManual` , DATE(gm.`fechaDescarga`), c.nombrecausales
+            t.direccion_tercero, DATE(g.fecha) AS fechaGuia, TIME(g.fecha) AS horaGuia,DATE(m.`fechaCreacion`) AS maniFecha ,gm.`manId`,
+            d.documento_destinatario, g.nombre_destinatario_guia, gm.`fechaManual` , DATE(gm.`fechaDescarga`), c.nombrecausales
             FROM guia g INNER JOIN  tercero t ON g.tercero_idremitente = t.idtercero  
             INNER JOIN ciudad c1 ON c1.idciudad = g.ciudad_idorigen INNER JOIN ciudad c2 ON c2.idciudad = g.ciudad_iddestino
             INNER JOIN producto p ON p.idproducto = g.producto_idproducto
@@ -43,12 +44,15 @@ $query2 = "SELECT g.idguia , g.numero_guia ,gm.`idEstadoGuia` ,g.causal_devoluci
             LEFT JOIN guia_manifiesto gm2 ON (gm2.`guiId` = gm.`guiId` AND gm.`gmId` < gm2.`gmId`)
             LEFT JOIN causales c ON c.idcausales = gm.`idCausal`
             LEFT JOIN manifiesto m ON m.`idmanifiesto` = gm.`manId`
+            LEFT JOIN tercero_manifiesto tm ON tm.`idmanifiesto` = m.`idmanifiesto` AND tm.`tipo` = 2
+            LEFT JOIN tercero term ON term.idtercero = tm.`idtercero`
+            INNER JOIN orden_servicio os ON os.`idorden_servicio` = g.`orden_servicio_idorden_servicio`
             WHERE gm2.`gmId`  IS NULL";
 //si es usuario y no es admin
 if ($objUser->checkRol("Cliente") && !$objUser->checkRol("Admin"))
 {
     $id = $objUser->getId();
-    $query2 = $query2 . " where g.owner = $id ";
+    $query2 = $query2 . " and  g.owner = $id ";
 }
 
 
@@ -59,6 +63,9 @@ $dataSet = "";
 
 while ($fila = mysql_fetch_assoc($results2))
 {
+    $nomMensajero = $fila['nomMensajero'];
+    $numOrdenServ = $fila['numOrdenServ'];
+    
     $idMani = $fila['manId'];
     $fechaEstado = !empty($fila['fechaManual']) ? $fila['fechaManual'] : $fila['fechaSys'];
     $fechaEstado = !empty($fechaEstado) ? $fechaEstado : $fila['maniFecha'];
@@ -70,10 +77,10 @@ while ($fila = mysql_fetch_assoc($results2))
 //    $idtercero = $fila["idtercero"];
     $estadoGuia = $fila["causal_devolucion_idcausal_devolucion"];
     $dniDestinatario = $fila["documento_destinatario"];
-    $nomDestinatario = $fila["nombres_destinatario"];
+    $nomDestinatario = $fila["nombre_destinatario_guia"];
     $estadoGuiaCausal = $fila["nombre_causal_devolucion"];
     $iddestinatario = $fila["tercero_iddestinatario"];
-    if ($iddestinatario == NULL)
+    if (empty($iddestinatario))
     {
         $dniDestinatario = "Incompleto";
         $nomDestinatario = "Incompleto";
@@ -119,7 +126,7 @@ while ($fila = mysql_fetch_assoc($results2))
     $imprimir = "<button type=\'button\' onclick=\'abrir(\"printCorporativo.php?idGuia=$idGuia\")\'>Imprimir</button>";
     //$editar = "<button type=\'button\' onclick=\'abrir(\"../../ordendeservicio/addosunitario.php?idGuiaFill=$idGuia\")\'>Editar</button>";
 //acumulo en el dataset
-    $dataSet = $dataSet . "['$linkDetalle','$idMani','$fecha','$hora','$documento_tercero','$nombres_tercero','$nomtp','$nomOrigen','$nomDestino','$dniDestinatario','$nomDestinatario','$destiDirec','$estadoGuiaCausal','$fechaEstado','$imprimir','$linkmodificar'],";
+    $dataSet = $dataSet . "['$linkDetalle','$idMani','$fecha','$hora','$documento_tercero','$nombres_tercero','$nomtp','$nomOrigen','$nomDestino','$dniDestinatario','$nomDestinatario','$destiDirec','$estadoGuiaCausal','$fechaEstado','$numOrdenServ','$nomMensajero','$imprimir','$linkmodificar'],";
 }
 
 $dataSet = substr_replace($dataSet, "];", strlen($dataSet) - 1);
@@ -198,6 +205,8 @@ $vacio = false;
                         {"sTitle": "Dirección"},
                         {"sTitle": "Estado"},
                         {"sTitle": "Fecha Estado"},
+                        {"sTitle": "Numero Orden"},
+                        {"sTitle": "Mensajero"},
                         {"sTitle": "Imprimir"},
                         {"sTitle": "Editar"}
                     ],

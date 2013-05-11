@@ -37,10 +37,14 @@ $pdf->SetAutoPageBreak(FALSE, 0);
 
 // ---------------------------------------------------------
 // set font
-$pdf->SetFont('times', '', 10);
-
+//$pdf->SetFont('times', '', 10);
 // add a page
 $pdf->AddPage();
+
+$pdf->SetDrawColor(0, 0, 0, 50);
+$pdf->SetFillColor(0, 0, 0, 100);
+$pdf->SetTextColor(0, 0, 0, 100);
+$pdf->SetFont('times', 'B', 6);
 
 $style = array(
     'stretch' => false,
@@ -81,7 +85,7 @@ for ($inicial = 0; $inicial < $total;)
     $para = $inicial + 6;
     if ($cantGuias < $para)
     {
-        $para =  $cantGuias;
+        $para = $cantGuias;
     }
     $con = $inicial;
 
@@ -92,27 +96,123 @@ for ($inicial = 0; $inicial < $total;)
     {
         //echo("<br>mostrando la guia numero ".$con." con guia ".$guias[$con]->getNumero()." quedan ".$cantGuias);
         $arre = new ArrayObject();
-        $arre = fillTable($guias[$con]);
-        $tabla1 = $arre[0];
-        $tabla2 = $arre[1];
-        $tabla3 = $arre[2];
-        $tabla4 = $arre[3];
-        $tabla5 = $arre[4];
-        
-        //echo("<br>/*begin table*/".$tabla1." ".$tabla2." ".$tabla3." ".$tabla4." /*fin table*/<br>");
+//        $arre = fillTable($guias[$con]);
+//        $tabla1 = $arre[0];
+//        $tabla2 = $arre[1];
+//        $tabla3 = $arre[2];
+//        $tabla4 = $arre[3];
+//        $tabla5 = $arre[4];
 
-        $pdf->SetFont('times', '', 6);
+        $num = $guias[$con]->getNumero();
+        $remitente = $guias[$con]->getNombreRemitente();
+        $detinatario = $guias[$con]->getNombreDestinatario();
+        $dir = $guias[$con]->getDireccion();
+        $ciuDesti = $guias[$con]->getCiuDesti();
+        $depDesti = $guias[$con]->getDepDesti();
+        $fecha = $guias[$con]->getFecha();
+        $peso = $guias[$con]->getPeso();
+
+        $extra = $guias[$con]->getDestinatarioInfo();
+        $telDesti = $guias[$con]->getTelefonoDesti();
+        $docuRemi = $guias[$con]->getIdRemitente();
+        $numOS = $guias[$con]->getNumeroOrdenSer();
+
+        $ciuOrigen = $guias[$con]->getCiuOrigen();
+
+        //echo("<br>/*begin table*/".$tabla1." ".$tabla2." ".$tabla3." ".$tabla4." /*fin table*/<br>");
+        // $pdf->Cell(32, '', 'aca va lo q voy a decir', 1, 1, 'C', 0, '', 1);
+
         $pdf->write1DBarcode($guias[$con]->getNumero(), 'C128', $xi + 110, $yi, 50, 14, 0.4, $style, '');
-        //muestro la primera tabla
-        $pdf->writeHTMLCell(32, '', $xi + 1, $yi + 22, $tabla1, 0, 0, 1, true, 'J', true);
-        //tabla 2
-        $pdf->writeHTMLCell(53, '', $xi + 35, $yi + 15, $tabla2, 0, 0, 1, true, 'J', true);
-        //tabla 3
-        $pdf->writeHTMLCell(26, '', $xi + 35, $yi + 45, $tabla3, 0, 0, 1, true, 'J', true);
+
+
+        //$pdf->SetTextColor(245,245,245);
+
+        $ancho1 = 35;
+        $alto1 = 3;
+        $y1 = $yi + 18;
+        $borde = 0;
+        $pdf->SetXY($xi + 1, $y1);
+        $pdf->Cell($ancho1, $alto1, $num, $borde, 0, 'C', 0, 0, 1, false, 'T', 'T');
+        $pdf->SetXY($xi + 1, $y1 + 3);
+        $pdf->Cell($ancho1, $alto1, 'Remite:', $borde, 0, 'L', 0, 0, 1, false, 'T', 'T');
+        $pdf->SetXY($xi + 1, $y1 + 6);
+        $pdf->MultiCell($ancho1, 8, $remitente . "\n", $borde, 'L', 1, 2, '', '', true);
+        // $pdf->Cell($ancho1, 40, $remitente, 1, 2, 'L', 0, 0, 4, false,'T','T');
+        $pdf->SetXY($xi + 1, $y1 + 14);
+        $pdf->Cell($ancho1, $alto1, 'Destinartario:', $borde, 0, 'L', 0, 0, 1, false, 'T', 'T');
+        $pdf->SetXY($xi + 1, $y1 + 17);
+        $pdf->MultiCell($ancho1, 6, $detinatario . "\n", $borde, 'L', 1, 2, '', '', true);
+        //$pdf->Cell($ancho1, $alto1, $detinatario, 0, 0, 'L');
+        $pdf->SetXY($xi + 1, $y1 + 23);
+        $pdf->Cell($ancho1, $alto1, $extra, $borde, 0, 'L', 0, 0, 1, false, 'T', 'T');
+        $pdf->SetXY($xi + 1, $y1 + 26);
+        $pdf->MultiCell($ancho1, 6, $dir . "\n", $borde, 'L', 1, 2, '', '', true);
+        $pdf->SetXY($xi + 1, $y1 + 32);
+        $pdf->Cell($ancho1, $alto1, $ciuDesti, $borde, 0, 'L', 0, 0, 1, false, 'T', 'T');
+        $pdf->SetXY($xi + 1, $y1 + 35);
+        $pdf->Cell($ancho1, $alto1, $depDesti, $borde, 0, 'L', 0, 0, 1, false, 'T', 'T');
+        $pdf->SetXY($xi + 1, $y1 + 38);
+        $pdf->Cell($ancho1, $alto1, $fecha, $borde, 0, 'L', 0, 0, 1, false, 'T', 'T');
+
+        $ancho2 = 60;
+        $y2 = $yi + 13;
+        //  $pdf->writeHTMLCell(53, '', $xi + 35, $yi + 15, $tabla2, 0, 0, 1, true, 'J', true);
+        $pdf->SetXY($xi + 36, $y2);
+        $pdf->MultiCell($ancho2, 10, $remitente . "\n", $borde, 'L', 1, 2, '', '', true);
+        $pdf->SetXY($xi + 36, $y2 + 10);
+        $pdf->MultiCell($ancho2, 10, $detinatario . " " . $extra . "\n", $borde, 'L', 1, 2, '', '', true);
+        $pdf->SetXY($xi + 36, $y2 + 20);
+        $pdf->MultiCell($ancho2, 10, $dir . " " . $telDesti . "\n" . $ciuDesti . " " . $depDesti, $borde, 'L', 1, 2, '', '', true);
+        $pdf->SetXY($xi + 36, $y2 + 34);
+        $pdf->MultiCell(15, 3, $fecha, $borde, 'L', 1, 2, '', '', true);
+
         //tabla 4
-        $pdf->writeHTMLCell(26, '', $xi + 89, $yi + 15, $tabla4, 0, 0, 1, true, 'J', true);
+        //  $pdf->writeHTMLCell(26, '', $xi + 89, $yi + 15, $tabla4, 0, 0, 1, true, 'J', true);
         //tabla 5
-        $pdf->writeHTMLCell(26, '', $xi + 115, $yi + 15, $tabla5, 0, 0, 1, true, 'J', true);
+        //  $pdf->writeHTMLCell(26, '', $xi + 115, $yi + 15, $tabla5, 0, 0, 1, true, 'J', true);
+        $y3 = $yi + 15;
+        $ancho3 = 15;
+        $alto3 = 3;
+        $pdf->SetXY($xi + 97, $y3);
+        $pdf->Cell($ancho3, $alto3, $docuRemi, $borde, 0, 'C', 0, 0, 1, false, 'T', 'T');
+        $pdf->SetXY($xi + 97, $y3 + 5);
+        $pdf->Cell($ancho3, $alto3, $numOS, $borde, 0, 'C', 0, 0, 1, false, 'T', 'T');
+        $pdf->SetXY($xi + 97, $y3 + 10);
+        $pdf->Cell($ancho3, $alto3, $peso, $borde, 0, 'C', 0, 0, 1, false, 'T', 'T');
+
+
+        $y4 = $yi + 15;
+        $ancho4 = 18;
+        $alto4 = 3;
+        $pdf->SetXY($xi + 112, $y4);
+        $pdf->Cell($ancho4, $alto3, $ciuOrigen, $borde, 0, 'C', 0, 0, 1, false, 'T', 'T');
+        $pdf->SetXY($xi + 112, $y4 + 5);
+        $pdf->Cell($ancho4, $alto3, $ciuDesti, $borde, 0, 'C', 0, 0, 1, false, 'T', 'T');
+
+
+
+
+//        $pdf->Text(($xi + 1), ($yi + 22), $num);
+//        $pdf->Text(($xi + 1), ($yi + 27), 'Remite:');
+//        $pdf->Text(($xi + 1), ($yi + 32), $remitente);
+//        $pdf->Text(($xi + 1), ($yi + 37), 'Destinartario:');
+//        $pdf->Text(($xi + 1), ($yi + 42), $detinatario);
+//        $pdf->Text(($xi + 1), ($yi + 47), $extra);
+//        $pdf->Text(($xi + 1), ($yi + 22), $dir);
+//        $pdf->Text(($xi + 1), ($yi + 22), $ciuDesti);
+//        $pdf->Text(($xi + 1), ($yi + 22), $depDesti);
+//        $pdf->Text(($xi + 1), ($yi + 22), $fecha);
+        // $pdf->Text($x, $y, $txt, $fstroke, $fclip, $ffill, $border, $ln, $align, $fill);
+        //muestro la primera tabla
+        //   $pdf->writeHTMLCell(32, '', $xi + 1, $yi + 22, $tabla1, 0, 0, 1, true, 'J', true);
+        //tabla 2
+        //  $pdf->writeHTMLCell(53, '', $xi + 35, $yi + 15, $tabla2, 0, 0, 1, true, 'J', true);
+        //tabla 3
+        //   $pdf->writeHTMLCell(26, '', $xi + 35, $yi + 45, $tabla3, 0, 0, 1, true, 'J', true);
+        //tabla 4
+        //  $pdf->writeHTMLCell(26, '', $xi + 89, $yi + 15, $tabla4, 0, 0, 1, true, 'J', true);
+        //tabla 5
+        //  $pdf->writeHTMLCell(26, '', $xi + 115, $yi + 15, $tabla5, 0, 0, 1, true, 'J', true);
 
         $cuenta++;
         if ($cuenta == 2)
@@ -125,14 +225,12 @@ for ($inicial = 0; $inicial < $total;)
             $xi = 145;
         else
             $xi = 0;
-
     }
     $inicial = $con;
-    if($inicial<$total)
+    if ($inicial < $total)
     {
         $pdf->AddPage();
     }
-    
 }
 
 

@@ -39,6 +39,7 @@
           }
           else
           {
+              mysql_query("SET NAMES 'utf8'");
               return $this->id;
           }
       }

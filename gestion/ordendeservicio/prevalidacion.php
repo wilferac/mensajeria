@@ -58,39 +58,49 @@ AND s.`facturacion` = '$find' and ag.estado_asignacion = 1";
             }
         }
 
-        //verifico si es una guia credito
-
-        if (!$entroFor)
+        //verifico si es una guia de masivo
+        if (!strstr($numguia, 'MM'))
         {
-            $query = "SELECT * FROM asignacion_guias WHERE $numguia >= inicial_asignacion AND $numguia <= inicial_asignacion+(cantidad_asignacion-1) and asigTipo = 1 and estado_asignacion = 1";
-
-            try
+            //verifico si es una guia credito
+            if (!$entroFor)
             {
-                $results = mysql_query($query) or die('error al consultar credito ' . mysql_error());
+                $query = "SELECT * FROM asignacion_guias WHERE $numguia >= inicial_asignacion AND $numguia <= inicial_asignacion+(cantidad_asignacion-1) and asigTipo = 1 and estado_asignacion = 1";
 
-                $datosAsig = mysql_fetch_assoc($results);
-                if (mysql_num_rows($results) > 0)
+                try
                 {
-                    $idAsig = $datosAsig['idasignacion_guias'];
-                    echo "<script>document.getElementById('idAsignacion').value = $idAsig;</script>";
-                    $encAsig = true;
-                } else
+                    $results = mysql_query($query) or die('error al consultar credito ' . mysql_error());
+
+                    $datosAsig = mysql_fetch_assoc($results);
+                    if (mysql_num_rows($results) > 0)
+                    {
+                        $idAsig = $datosAsig['idasignacion_guias'];
+                        echo "<script>document.getElementById('idAsignacion').value = $idAsig;</script>";
+                        $encAsig = true;
+                    } else
+                    {
+                        $encAsig = false;
+                    }
+                } catch (Exception $e)
                 {
-                    $encAsig = false;
+                    //no hago nada
                 }
-            } catch (Exception $e)
+            }
+
+
+
+            if (!$encAsig)
             {
-                //no hago nada
+                echo "<script>alert('Antes de digitar la guia esta debe estar asignada a un cliente');</script>";
+                die("Error (005)");
             }
         }
-
-
-
-        if (!$encAsig)
+        else
         {
-            echo "<script>alert('Antes de digitar la guia esta debe estar asignada a un cliente');</script>";
-            die("Error (005)");
+            $encAsig=true;
+            echo("esto es una guia de masivo<br>");
         }
+
+
 
 
 
@@ -114,7 +124,11 @@ AND s.`facturacion` = '$find' and ag.estado_asignacion = 1";
 
             if ($objUser->checkRol('Admin'))
             {
-                echo("aca toca rellenar datos");
+                fillEditData($numguia);
+
+
+
+                // echo("aca toca rellenar datos");
                 return;
             } else
             {
@@ -262,4 +276,112 @@ document.getElementById('datoArecordar').focus();
         }
     } // if numguia != ""
 } // if REQUEST
+
+function fillEditData($numguia)
+{
+    $query2 = "SELECT g.* , des.*,
+            c1.idciudad AS  ciudad_idorigen, c1.nombre_ciudad AS ciudad_nombreorigen,
+            c2.idciudad AS  ciudad_iddestino, c2.nombre_ciudad AS ciudad_nombredestino,
+            p.idproducto, p.nombre_producto, p.tipo_producto_idtipo_producto, tp.nombre_tipo_producto,
+            t.idtercero , t.documento_tercero, t.nombres_tercero, t.apellidos_tercero, 
+            t.direccion_tercero, g.remitenteInfo
+            FROM guia g INNER JOIN  tercero t ON g.tercero_idremitente = t.idtercero  
+            INNER JOIN ciudad c1 ON c1.idciudad = g.ciudad_idorigen INNER JOIN ciudad c2 ON c2.idciudad = g.ciudad_iddestino
+            INNER JOIN producto p ON p.idproducto = g.producto_idproducto
+            INNER JOIN tipo_producto tp ON tp.idtipo_producto = tipo_producto_idtipo_producto
+            INNER JOIN destinatario des ON des.iddestinatario = g.tercero_iddestinatario
+            WHERE g.numero_guia = '$numguia' AND g.causal_devolucion_idcausal_devolucion <> 3 ";
+
+    $results2 = mysql_query($query2) or die('error2' . $query2);
+
+    if ($fila = mysql_fetch_assoc($results2))
+    {
+//                $tercero_idtercero = $datosAsig["tercero_idtercero"];
+        //capturo los datos del tercero que envia
+        $idtercero = $fila["idtercero"];
+        $documento_tercero = $fila["documento_tercero"];
+        $nombres_tercero = $fila["nombres_tercero"];
+        $apellidos_tercero = $fila["apellidos_tercero"];
+        $direccion_tercero = $fila["direccion_tercero"];
+        $idTipoPro = $fila["tipo_producto_idtipo_producto"];
+        $nomtp = $fila["nombre_tipo_producto"];
+        //capturo los del destino y de el origen del paquete
+        $idOrigen = $fila["ciudad_idorigen"];
+        $idDestino = $fila["ciudad_iddestino"];
+        $idProducto = $fila["idproducto"];
+        $nomProducto = $fila["nombre_producto"];
+
+        $remitenteInfo = $fila["remitenteInfo"];
+        //lo igualo al value en el formulario ya que en la Bd esta con mayuscula inicial
+        $nomProducto = strtolower($nomProducto);
+        //$idTipoProducto = $operaciones->calcularTipoProducto($idpaisdorigen, $iddepartamentoorigen, $idciudadorigen, $nombreciudaddestino, $idciudaddestino);
+
+
+        echo "<script>
+            alert('entro aca');
+            ElementosClientesInvisibles();
+            ElementosClientesVisibles(true,'$idtercero','$documento_tercero','$nombres_tercero','$apellidos_tercero','$direccion_tercero');
+            document.getElementById('tipoproducto').value = '$nomtp';
+            document.getElementById('idtipoproducto').value = '$idTipoPro';
+            document.getElementById('extraRemitente').value = '$remitenteInfo';
+                $(document).ready
+                $(function() {
+                    $('#idciudadorigen2').val('$idOrigen');
+                    $('#nombreproducto').val('$nomProducto');
+                    $('#ciudaddestino').val('$idDestino');
+                });
+                document.getElementById('capadatosguia').style.visibility='visible';
+                document.getElementById('savetemp').style.visibility='hidden';
+                </script>
+                <script>
+                    document.getElementById('titulodestinatarios').style.visibility='visible';
+                    ElementosDatosABuscarDestinatarioVisibles();
+                    // ELEMENTOS DEL DESTINATARIO VISIBLES
+                    document.getElementById('datoArecordar').focus();
+                 </script>";
+
+        $encDestinatario = true;
+
+        $iddestinatario = $fila["iddestinatario"];
+        $documento_tercero = $fila["documento_destinatario"];
+        $nombres_tercero = $fila["nombres_destinatario"];
+        $apellidos_tercero = $fila["apellidos_destinatario"];
+        $direccion_tercero = $fila["direccion_destinatario"];
+        $telefono_destinatario = $fila["telefono_destinatario"];
+        $celular_destinatario = $fila["celular_destinatario"];
+
+        echo "<script>
+ElementosDestinatariosVisibles(true,'$documento_tercero','$nombres_tercero','$apellidos_tercero','$direccion_tercero','$telefono_destinatario','$celular_destinatario');
+//muestro la capa de datos de peso			
+document.getElementById('capaPeso').style.visibility='visible';
+//muestro la info extra
+document.getElementById('labExtraDestinatario').style.visibility='visible';
+                                        document.getElementById('extraDestinatario').style.visibility='visible';
+			document.getElementById('direcciondestinatario').focus();
+			//document.getElementById('direcciondestinatario').style.color='#00FA00';
+			</script>
+			 <input type='hidden' id='encDestinatario' name='encDestinatario' value='$encDestinatario'></input>
+			 
+			 <input type='hidden' id='iddestinatario' name='iddestinatario' value='$iddestinatario'></input>
+			 <input type='hidden' id='nombres_terceroOrig' name='nombres_terceroOrig' value='$nombres_tercero'></input>
+			 <input type='hidden' id='apellidos_terceroOrig' name='apellidos_terceroOrig' value='$apellidos_tercero'></input>
+			 <input type='hidden' id='direccion_terceroOrig' name='direccion_terceroOrig' value='$direccion_tercero'></input>
+			 <input type='hidden' id='telefono_destinatarioOrig' name='telefono_destinatarioOrig' value='$telefono_destinatario'></input>
+			 <input type='hidden' id='celular_destinatarioOrig' name='celular_destinatarioOrig' value='$celular_destinatario'></input>
+			 
+			";
+
+
+
+
+
+
+        return;
+    } else
+    {
+        echo('Esta Guia ya fue entregada!');
+    }
+    return;
+}
+
 ?>

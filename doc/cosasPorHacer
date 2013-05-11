@@ -58,15 +58,24 @@ ultimos bugs:
 
 Atender los requerimientos de mensajeria, entre ellos:
 - Pantalla de edicion de guias ( que pueden cambiar el origen/destino de una guia. La condicion es q no este entregada)
-
+¿en coordinador tambien debe poder editar la guia?
+ok
 - Impresión guias CC (salieron unas guias en blanco)
 cuales? supongo que ya esta solucionado.
 - Reportes de guias, ordenes y manif (sabemos que las modificaciones a estos reportes van a causar que queden super lentos por la cantidad de inner, debemos buscar una solucion con paginacion, tablas temporales, etc, etc. No se si acotando por fechas mejore la busqueda para el caso de las ordenes y los manif, y en el caso de las guias no mostrar todas si no solo el numero de guia que busquen.)
+aca se pueden implementar varias estrategias:
+1. hacer un volcado de los datos a tablas temporales.
+2. diseñar mejor los reportes que se necesitan (sin afectar los que ya estan).
+3. hacer un repaso de las consultas para optimizar.
+
+
 
 - Cuando un cliente ya existe y se le da editar no se le puede asignar una contraseña, esto se debe solucionar.
-
+(ok)
 - Al editar un aliado y modificar las ciudades en las que este entrega sale un error mysql.
 a lo bien? =(
+(ok)
+
 
 
 

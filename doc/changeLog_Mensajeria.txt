@@ -1,5 +1,5 @@
 //archivo de cambios: aca queda la bitacora de cambios realizados al sistema 
-//ultima modificacion 01/04/2013
+//ultima modificacion 11/05/2013
 //author: wilferac
 //Programa: Mensajeria
 //Programa en produccion
@@ -9,7 +9,10 @@ cambios V. 0.9.2
 -- fixed: error que impedia la validacion de campos a la hora de subir un archivo csv a la orden de servicio, 
             el error se presentaba por culpa de caracteres especiales no manejados (ñ,´, etc...)
 -- modified: error que impedia la imprecion de guias que tenian caracteres especiales.
--- 
+-- modified: agregada la opcion de editar guias que no se han entregado (solo admin)
+-- fixed: error que no permitia la edicion de usuarios debido a duplicidad en el campo "usuario" de la tabla "tercero"
+-- add: edicion de guias que no estan entregadas (solo admin)
+-- add: campo de contraseña a la hora editar usuario
 
 cambios V. 0.9.1
 

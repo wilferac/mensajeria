@@ -10,11 +10,19 @@
    session_start();
    //miro los archivos incluidos para no caer en el error de incluir de nuevo el mismo
    $archivos_incluidos = get_included_files();
-
+   /**
+    * local
+    */
+   $rutaConexion = "/home/wilferac/public_html/Mensajeria/conexion/conexion.php";
+   /**
+    * Servidor
+    */
+   //$rutaConexion = "/home/innovat1/public_html/Mensajeria/conexion/conexion.php";
+   
    $mirar = false;
    foreach ($archivos_incluidos as $nombre_archivo)
    {
-       if ($nombre_archivo == "/home/inovate/public_html/Mensajeria/conexion/conexion.php")
+       if ($nombre_archivo == $rutaConexion)
        {
            $mirar = true;
            break;
@@ -22,7 +30,7 @@
    }
    if (!$mirar)
    {
-       require "/home/inovate/public_html/Mensajeria/conexion/conexion.php";
+       require $rutaConexion;
    }
 
    class User

@@ -527,7 +527,7 @@ if ($objUser->getStatus() != 1)
         </style>
 
     </head>
-    <body style="font-family:Verdana; font-size:13px;" id="dt_example">
+    <body style="font-family:Verdana;" id="dt_example">
         <?
 //   $operacion = new operacion();
 //   $operacion->menu();

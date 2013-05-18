@@ -57,15 +57,11 @@
    $objMenu->generarMenu();
    //$operacion -> menu();
 ?>
-        <p>&nbsp;</p><p>&nbsp;</p>
-        <div class="marco">
+        <div class="marco" style="padding-top: 20px; padding-bottom: 20px;">
 
-            <p>&nbsp;</p>
             <p align="center">
-                <span class="class_login" style="font-size:20px">BIENVENIDO AL SISTEMA DE MENSAJERIA DE A1</span>         </p>
+                <span class="class_login" style="font-size:20px;">BIENVENIDO AL SISTEMA DE MENSAJERIA DE A1</span>         </p>
 
-
-            <p>&nbsp;</p><p>&nbsp;</p>
         </div>
     </body></html>
 

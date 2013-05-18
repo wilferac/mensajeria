@@ -119,3 +119,21 @@
 	font-style: italic;
 }
 -->
+
+#menu
+{
+    margin-left:auto; 
+    margin-right:auto; 
+    width:512px; 
+    clear: both;
+    text-decoration:none;
+    border-bottom: 10px;
+    padding-bottom: 10px;
+    border-top: 5px;
+    padding-top: 5px;
+}
+
+ul .MenuBarHorizontal
+{
+    background-color:#FFFF00;
+}

@@ -124,6 +124,7 @@ AND s.`facturacion` = '$find' and ag.estado_asignacion = 1";
 
             if ($objUser->checkRol('Admin'))
             {
+                echo("<br>Editando una Guia ya creada<br>");
                 fillEditData($numguia);
 
 

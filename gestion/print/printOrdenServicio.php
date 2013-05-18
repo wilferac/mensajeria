@@ -26,7 +26,7 @@ $pdf->SetTitle('Guia');
 $pdf->setPrintHeader(false);
 $pdf->setPrintFooter(false);
 $pdf->SetDefaultMonospacedFont(PDF_FONT_MONOSPACED);
-$pdf->SetMargins(5, 1, 0);
+$pdf->SetMargins(0, 0, 0);
 $pdf->setFontSubsetting(false);
 //set margins
 //$pdf->SetMargins(PDF_MARGIN_LEFT, PDF_MARGIN_TOP, PDF_MARGIN_RIGHT);
@@ -89,9 +89,10 @@ for ($inicial = 0; $inicial < $total;)
     }
     $con = $inicial;
 
-    $xi = 0;
-    $yi = 0;
+    $xi = 10;
+    $yi = 1;
     $cuenta = 0;
+    $fila = 1;
     for (; $con < $para; $con++)
     {
         //echo("<br>mostrando la guia numero ".$con." con guia ".$guias[$con]->getNumero()." quedan ".$cantGuias);
@@ -122,62 +123,67 @@ for ($inicial = 0; $inicial < $total;)
         //echo("<br>/*begin table*/".$tabla1." ".$tabla2." ".$tabla3." ".$tabla4." /*fin table*/<br>");
         // $pdf->Cell(32, '', 'aca va lo q voy a decir', 1, 1, 'C', 0, '', 1);
 
-        $pdf->write1DBarcode($guias[$con]->getNumero(), 'C128', $xi + 110, $yi, 50, 14, 0.4, $style, '');
+        $pdf->write1DBarcode($guias[$con]->getNumero(), 'C128', $xi + 95, $yi, 50, 12, 0.4, $style, '');
 
 
         //$pdf->SetTextColor(245,245,245);
 
-        $ancho1 = 35;
+        $ancho1 = 28;
         $alto1 = 3;
         $y1 = $yi + 18;
+        $x1 = $xi+3;
         $borde = 0;
-        $pdf->SetXY($xi + 1, $y1);
+        $pdf->SetXY($x1 , $y1);
         $pdf->Cell($ancho1, $alto1, $num, $borde, 0, 'C', 0, 0, 1, false, 'T', 'T');
-        $pdf->SetXY($xi + 1, $y1 + 3);
+        $y1+=2;
+        $pdf->SetXY($x1 , $y1 + 3);
         $pdf->Cell($ancho1, $alto1, 'Remite:', $borde, 0, 'L', 0, 0, 1, false, 'T', 'T');
-        $pdf->SetXY($xi + 1, $y1 + 6);
+        $pdf->SetXY($x1 , $y1 + 6);
         $pdf->MultiCell($ancho1, 8, $remitente . "\n", $borde, 'L', 1, 2, '', '', true);
         // $pdf->Cell($ancho1, 40, $remitente, 1, 2, 'L', 0, 0, 4, false,'T','T');
-        $pdf->SetXY($xi + 1, $y1 + 14);
+        $pdf->SetXY($x1 , $y1 + 14);
         $pdf->Cell($ancho1, $alto1, 'Destinartario:', $borde, 0, 'L', 0, 0, 1, false, 'T', 'T');
-        $pdf->SetXY($xi + 1, $y1 + 17);
+        $pdf->SetXY($x1 , $y1 + 17);
         $pdf->MultiCell($ancho1, 6, $detinatario . "\n", $borde, 'L', 1, 2, '', '', true);
         //$pdf->Cell($ancho1, $alto1, $detinatario, 0, 0, 'L');
-        $pdf->SetXY($xi + 1, $y1 + 23);
+        $pdf->SetXY($x1 , $y1 + 25);
         $pdf->Cell($ancho1, $alto1, $extra, $borde, 0, 'L', 0, 0, 1, false, 'T', 'T');
-        $pdf->SetXY($xi + 1, $y1 + 26);
+        $pdf->SetXY($x1 , $y1 + 28);
         $pdf->MultiCell($ancho1, 6, $dir . "\n", $borde, 'L', 1, 2, '', '', true);
-        $pdf->SetXY($xi + 1, $y1 + 32);
+        $pdf->SetXY($x1 , $y1 + 34);
         $pdf->Cell($ancho1, $alto1, $ciuDesti, $borde, 0, 'L', 0, 0, 1, false, 'T', 'T');
-        $pdf->SetXY($xi + 1, $y1 + 35);
+        $pdf->SetXY($x1 , $y1 + 37);
         $pdf->Cell($ancho1, $alto1, $depDesti, $borde, 0, 'L', 0, 0, 1, false, 'T', 'T');
-        $pdf->SetXY($xi + 1, $y1 + 38);
+        $pdf->SetXY($x1 , $y1 + 40);
         $pdf->Cell($ancho1, $alto1, $fecha, $borde, 0, 'L', 0, 0, 1, false, 'T', 'T');
-
-        $ancho2 = 60;
-        $y2 = $yi + 13;
+	$pdf->SetFont('times', 'B', 8);
+        $ancho2 = 53;
+        $y2 = $yi + 11;
         //  $pdf->writeHTMLCell(53, '', $xi + 35, $yi + 15, $tabla2, 0, 0, 1, true, 'J', true);
-        $pdf->SetXY($xi + 36, $y2);
+        $pdf->SetXY($xi + 37, $y2);
         $pdf->MultiCell($ancho2, 10, $remitente . "\n", $borde, 'L', 1, 2, '', '', true);
-        $pdf->SetXY($xi + 36, $y2 + 10);
+        $pdf->SetXY($xi + 37, $y2 + 10);
         $pdf->MultiCell($ancho2, 10, $detinatario . " " . $extra . "\n", $borde, 'L', 1, 2, '', '', true);
-        $pdf->SetXY($xi + 36, $y2 + 20);
+        $pdf->SetXY($xi + 37, $y2 + 17);
         $pdf->MultiCell($ancho2, 10, $dir . " " . $telDesti . "\n" . $ciuDesti . " " . $depDesti, $borde, 'L', 1, 2, '', '', true);
-        $pdf->SetXY($xi + 36, $y2 + 34);
-        $pdf->MultiCell(15, 3, $fecha, $borde, 'L', 1, 2, '', '', true);
-
+        $pdf->SetXY($xi + 37, $y2 + 30);
+        $pdf->MultiCell(20, 3, $fecha, $borde, 'L', 1, 2, '', '', true);
+	$pdf->SetFont('times', 'B', 6);
         //tabla 4
         //  $pdf->writeHTMLCell(26, '', $xi + 89, $yi + 15, $tabla4, 0, 0, 1, true, 'J', true);
         //tabla 5
         //  $pdf->writeHTMLCell(26, '', $xi + 115, $yi + 15, $tabla5, 0, 0, 1, true, 'J', true);
         $y3 = $yi + 15;
+        $x3 = $xi+94;
         $ancho3 = 15;
         $alto3 = 3;
-        $pdf->SetXY($xi + 97, $y3);
+        $pdf->SetXY($x3 , $y3);
         $pdf->Cell($ancho3, $alto3, $docuRemi, $borde, 0, 'C', 0, 0, 1, false, 'T', 'T');
-        $pdf->SetXY($xi + 97, $y3 + 5);
+        $pdf->SetFont('times', 'B', 8);
+        $pdf->SetXY($x3 , $y3 + 10);
         $pdf->Cell($ancho3, $alto3, $numOS, $borde, 0, 'C', 0, 0, 1, false, 'T', 'T');
-        $pdf->SetXY($xi + 97, $y3 + 10);
+        $pdf->SetFont('times', 'B', 6);
+        $pdf->SetXY($x3 , $y3 + 18);
         $pdf->Cell($ancho3, $alto3, $peso, $borde, 0, 'C', 0, 0, 1, false, 'T', 'T');
 
 
@@ -186,7 +192,7 @@ for ($inicial = 0; $inicial < $total;)
         $alto4 = 3;
         $pdf->SetXY($xi + 112, $y4);
         $pdf->Cell($ancho4, $alto3, $ciuOrigen, $borde, 0, 'C', 0, 0, 1, false, 'T', 'T');
-        $pdf->SetXY($xi + 112, $y4 + 5);
+        $pdf->SetXY($xi + 112, $y4 + 10);
         $pdf->Cell($ancho4, $alto3, $ciuDesti, $borde, 0, 'C', 0, 0, 1, false, 'T', 'T');
 
 
@@ -217,14 +223,23 @@ for ($inicial = 0; $inicial < $total;)
         $cuenta++;
         if ($cuenta == 2)
         {
-            $yi+=70;
+            //$yi+=(72+($fila*2));
+            if($fila==1)
+            {
+                $yi=73;
+            }
+            if($fila==2)
+            {
+                $yi=145;
+            }
+            
             $cuenta = 0;
+            $fila++;
         }
-
-        if ($xi == 0)
-            $xi = 145;
+        if ($xi == 10)
+            $xi = 149;
         else
-            $xi = 0;
+            $xi = 10;
     }
     $inicial = $con;
     if ($inicial < $total)
@@ -295,7 +310,7 @@ WHERE g.`orden_servicio_idorden_servicio` = $id
     // echo('salio');
     mysqli_free_result($result);
 }
-
+//deprecated
 function fillTable($objGuia)
 {
 //       $objGuia = new Guia($num, $ciu, $dep);

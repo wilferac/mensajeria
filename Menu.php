@@ -16,7 +16,7 @@ class Menu {
         /**
          * local
          */
-        $this->raiz = "http://localhost/~wilferac/Mensajeria";
+        $this->raiz = "http://localhost/~inovate/Mensajeria";
         /**
          * Servidor
          */
@@ -119,6 +119,18 @@ class Menu {
                             </li>
 
                         </ul>
+                    </li>
+                    
+                    <li><a href="#"  >Consulta</a>
+                        <ul>
+                            <li><a class="MenuBarItemSubmenu" href="#">Guia</a>
+                                <ul>
+                                    <li><a href="<?= $this->raiz ?>/gestion/guia/consulta/index.php">Consultar</a></li>
+                                </ul>
+                            </li>
+                            
+                        </ul>
+
                     </li>
                     <?php
                 }

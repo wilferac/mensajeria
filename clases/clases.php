@@ -4,9 +4,9 @@ session_start();
 /**
  * localhost
  */
-define('CONEXION', '/home/wilferac/public_html/Mensajeria/');
-include ('/home/wilferac/public_html/Mensajeria/conexion/conexion.php');
-define('RAIZ', "http://localhost/~wilferac/Mensajeria");
+define('CONEXION', '/home/inovate/public_html/Mensajeria/');
+include ('/home/inovate/public_html/Mensajeria/conexion/conexion.php');
+define('RAIZ', "http://localhost/~inovate/Mensajeria");
 
 /**
  * servidor

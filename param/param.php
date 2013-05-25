@@ -12,11 +12,11 @@
 /**
  * local
  */
-$archivo = "/home/inovate/public_html/Mensajeria/param/param.properties";
+//$archivo = "/home/inovate/public_html/Mensajeria/param/param.properties";
 /**
  * servidor
  */
-//$archivo = "/home/innovat1/public_html/Mensajeria/param/param.properties";
+$archivo = "/home/innovat1/public_html/Mensajeria/param/param.properties";
 
 
 

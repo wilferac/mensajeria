@@ -123,7 +123,7 @@ for ($inicial = 0; $inicial < $total;)
         //echo("<br>/*begin table*/".$tabla1." ".$tabla2." ".$tabla3." ".$tabla4." /*fin table*/<br>");
         // $pdf->Cell(32, '', 'aca va lo q voy a decir', 1, 1, 'C', 0, '', 1);
 
-        $pdf->write1DBarcode($guias[$con]->getNumero(), 'C128', $xi + 95, $yi, 50, 12, 0.4, $style, '');
+        $pdf->write1DBarcode($guias[$con]->getNumero(), 'C128', $xi + 80, $yi, 50, 12, 0.4, $style, '');
 
 
         //$pdf->SetTextColor(245,245,245);
@@ -270,14 +270,16 @@ function getDatosGuia($id, $guias)
     mysql_query("SET NAMES 'utf8'");
     //echo('nada');
     $result = mysql_query("SELECT numero_guia,   nombre_destinatario_guia, g.destinatarioInfo,
- direccion_destinatario_guia, telefono_destinatario_guia, peso_guia, DATE(fecha) as fecha, referencia,
+ direccion_destinatario_guia, telefono_destinatario_guia, peso_guia, DATE(fecha) AS fecha, referencia,
  t.`nombres_tercero`, t.`apellidos_tercero`, t.documento_tercero,
- c.`nombre_ciudad` AS ciuOrigen, cd.`nombre_ciudad` AS ciuDesti, dd.`nombre_departamento` AS depDesti
+ c.`nombre_ciudad` AS ciuOrigen, cd.`nombre_ciudad` AS ciuDesti, dd.`nombre_departamento` AS depDesti,
+ os.`numero_orden_servicio`
 FROM guia g 
 INNER JOIN  tercero t ON t.`idtercero` = g.`tercero_idremitente`
 INNER JOIN ciudad c ON c.`idciudad` = g.`ciudad_idorigen`
 INNER JOIN ciudad cd ON cd.`idciudad` = g.`ciudad_iddestino`
 INNER JOIN departamento dd ON dd.`iddepartamento` = cd.`departamento_iddepartamento`
+INNER JOIN orden_servicio os ON os.`idorden_servicio` = g.`orden_servicio_idorden_servicio`
 WHERE g.`orden_servicio_idorden_servicio` = $id
 ");
     if (!$result)
@@ -302,7 +304,7 @@ WHERE g.`orden_servicio_idorden_servicio` = $id
         $obj->setDepDesti($row['depDesti']);
         $obj->setDestinatarioInfo($row['destinatarioInfo']);
         $obj->setIdRemitente($row['documento_tercero']);
-        $obj->setNumeroOrdenSer($id);
+        $obj->setNumeroOrdenSer($row['numero_orden_servicio']);
         //$obj->show();
         $guias[$cont] = $obj;
         $cont++;

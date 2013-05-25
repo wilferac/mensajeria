@@ -16,11 +16,11 @@ class Menu {
         /**
          * local
          */
-        $this->raiz = "http://localhost/~inovate/Mensajeria";
+//        $this->raiz = "http://localhost/~inovate/Mensajeria";
         /**
          * Servidor
          */
-        //$this->raiz = "http://innovate.com.co/Mensajeria";
+        $this->raiz = "http://innovate.com.co/Mensajeria";
     }
 
     public function generarMenu() {

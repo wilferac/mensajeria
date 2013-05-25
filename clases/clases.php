@@ -4,16 +4,16 @@ session_start();
 /**
  * localhost
  */
-//define('CONEXION', '/home/inovate/public_html/Mensajeria/');
-//include ('/home/inovate/public_html/Mensajeria/conexion/conexion.php');
-//define('RAIZ', "http://localhost/~inovate/Mensajeria");
+define('CONEXION', '/home/inovate/public_html/Mensajeria/');
+include ('/home/inovate/public_html/Mensajeria/conexion/conexion.php');
+define('RAIZ', "http://localhost/~inovate/Mensajeria");
 
 /**
  * servidor
  */
-define('CONEXION', '/home/innovat1/public_html/Mensajeria/');
-include ('/home/innovat1/public_html/Mensajeria/conexion/conexion.php');
-define('RAIZ', "http://innovate.com.co/Mensajeria");
+//define('CONEXION', '/home/innovat1/public_html/Mensajeria/');
+//include ('/home/innovat1/public_html/Mensajeria/conexion/conexion.php');
+//define('RAIZ', "http://innovate.com.co/Mensajeria");
 
 class operacion
 {

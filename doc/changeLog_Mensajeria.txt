@@ -13,6 +13,8 @@ cambios V. 0.9.2
 -- fixed: error que no permitia la edicion de usuarios debido a duplicidad en el campo "usuario" de la tabla "tercero"
 -- add: edicion de guias que no estan entregadas (solo admin)
 -- add: campo de contraseña a la hora editar usuario
+-- modified: cambios el la interfaz del programa.
+-- fix: error al mostrar el numero de guia en la impresion de masivo.
 
 cambios V. 0.9.1
 

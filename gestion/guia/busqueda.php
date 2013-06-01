@@ -68,7 +68,7 @@ $conexionftp = new conexionftp();
 $idconftp = $conexionftp->conexion($ftphost, $ftpusuario, $ftpclave, $ftpdirectorio);
 $contenido = $conexionftp->listar();
 
-if (in_array($idguia . $ext1, $contenido))
+//if (in_array($idguia . $ext1, $contenido))
     $archivojpg = $idguia . $ext1;
 //elseif ( in_array($idguia.$ext2,$contenido) )
 //$archivojpg = $idguia.$ext2;

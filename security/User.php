@@ -13,11 +13,11 @@
    /**
     * local
     */
-   $rutaConexion = "/home/inovate/public_html/Mensajeria/conexion/conexion.php";
+//   $rutaConexion = "/home/inovate/public_html/Mensajeria/conexion/conexion.php";
    /**
     * Servidor
     */
-//   $rutaConexion = "/home/innovat1/public_html/Mensajeria/conexion/conexion.php";
+   $rutaConexion = "/home/innovat1/public_html/Mensajeria/conexion/conexion.php";
    
    $mirar = false;
    foreach ($archivos_incluidos as $nombre_archivo)

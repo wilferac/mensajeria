@@ -15,6 +15,7 @@ cambios V. 0.9.2
 -- add: campo de contraseña a la hora editar usuario
 -- modified: cambios el la interfaz del programa.
 -- fix: error al mostrar el numero de guia en la impresion de masivo.
+-- fix: corregido un error que impedia la consulta de pruebas de entrega que contenian caracteres alfanumericos.
 
 cambios V. 0.9.1
 

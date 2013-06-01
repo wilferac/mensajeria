@@ -66,7 +66,7 @@ g.idguia , g.numero_guia ,gm.`idEstadoGuia` ,g.causal_devolucion_idcausal_devolu
             LEFT JOIN tercero_manifiesto tm ON tm.`idmanifiesto` = m.`idmanifiesto` AND tm.`tipo` = 2
             LEFT JOIN tercero term ON term.idtercero = tm.`idtercero`
             INNER JOIN orden_servicio os ON os.`idorden_servicio` = g.`orden_servicio_idorden_servicio`
-            WHERE gm2.`gmId`  IS NULL AND date(g.`fecha`) BETWEEN '$fecha1' AND '$fecha2'";
+            WHERE gm2.`gmId`  IS NULL AND date(g.`fecha`) BETWEEN '$fecha1' AND '$fecha2' AND g.estado = 1";
 
 //echo($query2);
 //si es usuario y no es admin

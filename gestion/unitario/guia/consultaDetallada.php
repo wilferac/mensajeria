@@ -1,51 +1,52 @@
 <?
 session_start();
 include "../../../param/param.php";
-
-
 include ("../../../conexion/conexion.php");
-
 include "../../../security/User.php";
-include "../../../Menu.php";
 
 $objUser = unserialize($_SESSION['currentUser']);
 if ($objUser->getStatus() != 1)
 {
-    $operacion->redireccionar('No Puede entrar', 'index.php');
-    return;
+  $operacion->redireccionar('No Puede entrar', 'index.php');
+  return;
 }
-
 $idguia = $_REQUEST["idGuia"];
+$showAnulate = $_REQUEST["anulate"];
 ?>
-
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
 <html>
-    <head>
-        <meta http-equiv="content-type" content="text/html; charset=utf-8" />
-        <title>Detallado de Guia</title>
-        <style type="text/css" title="currentStyle">
-            @import "../../../media/css/demo_page.css";
-            @import "../../../media/css/demo_table.css";
-            @import "../../../media/media/css/TableTools.css";
-        </style>
+  <head>
+    <meta http-equiv="content-type" content="text/html; charset=utf-8" />
+    <title>Detallado de Guia</title>
+    <style type="text/css" title="currentStyle">
+      @import "../../../media/css/demo_page.css";
+      @import "../../../media/css/demo_table.css";
+      @import "../../../media/media/css/TableTools.css";
+    </style>
 
-    </head>
-    <body id="dt_example">
-<?
-$objMenu = new Menu($objUser);
-$objMenu->generarMenu();
-?>
-        <div id="container">
-            <div class="full_width big">
-                <p>&nbsp;</p>
-                Gu&iacute;a <?= $idguia ?></div>
-            <p>&nbsp;</p>
-<?
-consultarTraza($idguia);
+  </head>
+  <body id="dt_example">
+    <div id="container">
+      <div class="full_width big">
+        <p>&nbsp;</p>
+        Gu&iacute;a <?= $idguia ?></div>
+      <p>&nbsp;</p>
+      <?php $fueManifestado = consultarTraza($idguia); ?>
+      <div>
+        <?php if (!$fueManifestado && $objUser->checkRol('Admin') && $showAnulate) : ?>
+          <button class="btnAnularGuia" style=" width: 90px;" onclick="anularGuia('<?php echo $idguia ?>')">Anular</button>
+        <?php endif; ?>
+      </div>
+    </div>
+  </body>
+</html>
+
+<?php
 
 function consultarTraza($idguia)
 {
-    $query = "SELECT 
+  $fueManifestado = false;
+  $query = "SELECT 
 g.`numero_guia`,
 g.`idguia`, DATE(g.`fecha`) AS guiaFecha, gm.fechaManual AS gmFechaManual, DATE(gm.`fechaDescarga`) AS gmFechaAuto, DATE(m.`fechaCreacion`) AS maniFecha,
 m.`ciudadDestino`, m.`ciudadOrigen`, m.idmanifiesto, cau.nombrecausales,
@@ -62,70 +63,61 @@ LEFT JOIN tercero_manifiesto tm ON tm.`idmanifiesto` = m.`idmanifiesto` AND tm.`
 LEFT JOIN tercero t ON t.idtercero = tm.`idtercero`
 INNER JOIN tercero t2 ON t2.idtercero = g.`tercero_idremitente`
 LEFT JOIN causales cau ON cau.idcausales = gm.`idCausal`
-WHERE g.`numero_guia` = '$idguia'
+WHERE g.`numero_guia` = '$idguia' and g.estado = 1
 ORDER BY g.idguia";
 
-    //echo($query);
-    echo("<br /><br />");
-    if ($res = mysql_query($query))
+  echo("<br /><br />");
+  if ($res = mysql_query($query))
+  {
+    if (mysql_affected_rows() == 0)
     {
-        $ultimaFecha = null;
-        $cont = 0;
-        while ($fila = mysql_fetch_assoc($res))
-        {
-            //aca muestro los datos :O
-            if ($cont == 0)
-            {
-                $fechaInicial = $fila['guiaFecha'];
-                $direc = $fila['direccion_destinatario_guia'];
-                $remi = $fila['nomRemitente'];
-                $desti = $fila['nombre_destinatario_guia'];
-                echo("Fecha Entrada: " . $fechaInicial);
-                echo("<br />");
-                echo("<br />Remitente: " . $remi);
-                echo("<br />Destinatario: " .$desti );
-                echo("<br />Direccion: " . $direc);
-                echo("<br />Estado Actual: " . $fila['est1Nombre']." ".$fila['nombrecausales']);
-                echo("<br />Historial Guia");
-
-                echo("<ul>");
-            }
-            $idmanifiesto = $fila['idmanifiesto'];
-            if (!empty($idmanifiesto))
-            {
-                echo("<li>");
-                echo("Agregado a Manifiesto: " . $fila['maniFecha']);
-                $fechaEstado = !empty($fila['gmFechaManual']) ? $fila['gmFechaManual'] : $fila['gmFechaAuto'];
-                echo("<br>Mensajero:" . $fila['nomMensajero']);
-                echo("<br />Estado: (" . $fila['est2Nombre'] .") ".$fila['nombrecausales']. " - " . $fechaEstado);
-                echo("</li>");
-                $ultimaFecha = $fechaEstado;
-                echo("<br />");
-            }
-
-
-
-            $cont++;
-        }
-        echo("<ul>");
-        //$newdate = strtotime ( -strtotime ($ultimaFecha),strtotime ($fechaInicial)  ) ;
-        $datetime1 = date_create($fechaInicial);
-        $datetime2 = date_create($ultimaFecha);
-        $interval = $datetime1->diff($datetime2);
-        //$interval = date_diff($ultimaFecha, $fechaInicial);
-        echo $interval->format('Tiempo De Gestion: %R%a dias');
-        //$newdate = date ( 'Y-m-j' , $newdate );
-        //echo("Tiempo Total: ".$newdate);
-    } else
-    {
-
-        die("Error al consultar la guia " . mysql_error());
+      exit("No se encontro la guia ó esta anulada");
     }
+    $ultimaFecha = null;
+    $cont = 0;
+    while ($fila = mysql_fetch_assoc($res))
+    {
+      //aca muestro los datos :O
+      if ($cont == 0)
+      {
+        $fechaInicial = $fila['guiaFecha'];
+        $direc = $fila['direccion_destinatario_guia'];
+        $remi = $fila['nomRemitente'];
+        $desti = $fila['nombre_destinatario_guia'];
+        echo("Fecha Entrada: " . $fechaInicial);
+        echo("<br />");
+        echo("<br />Remitente: " . $remi);
+        echo("<br />Destinatario: " . $desti );
+        echo("<br />Direccion: " . $direc);
+        echo("<br />Estado Actual: " . $fila['est1Nombre'] . " " . $fila['nombrecausales']);
+        echo("<br />Historial Guia");
+        echo("<ul>");
+      }
+      $idmanifiesto = $fila['idmanifiesto'];
+      if (!empty($idmanifiesto))
+      {
+        $fueManifestado = true;
+        echo("<li>");
+        echo("Agregado a Manifiesto: " . $fila['maniFecha']);
+        $fechaEstado = !empty($fila['gmFechaManual']) ? $fila['gmFechaManual'] : $fila['gmFechaAuto'];
+        echo("<br>Mensajero:" . $fila['nomMensajero']);
+        echo("<br />Estado: (" . $fila['est2Nombre'] . ") " . $fila['nombrecausales'] . " - " . $fechaEstado);
+        echo("</li>");
+        $ultimaFecha = $fechaEstado;
+        echo("<br />");
+      }
+      $cont++;
+    }
+    echo("<ul>");
+    $datetime1 = date_create($fechaInicial);
+    $datetime2 = date_create($ultimaFecha);
+    $interval = $datetime1->diff($datetime2);
+    echo $interval->format('Tiempo De Gestion: %R%a dias');
+  } else
+  {
+    die("Error al consultar la guia " . mysql_error());
+  }
+
+  return $fueManifestado;
 }
-
-$con->cerrar();
 ?>
-
-        </div>
-    </body>
-</html>

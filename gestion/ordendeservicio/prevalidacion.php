@@ -59,7 +59,7 @@ AND s.`facturacion` = '$find' and ag.estado_asignacion = 1";
         }
 
         //verifico si es una guia de masivo
-        if (!strstr($numguia, 'MM'))
+        if (!strstr($numguia, 'MM') && !strstr($numguia, 'cc'))
         {
             //verifico si es una guia credito
             if (!$entroFor)

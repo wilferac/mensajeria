@@ -163,6 +163,8 @@ class Menu {
                     </li>
                     <li><a  href="<?= $this->raiz ?>/gestion/unitario/guia/consulta.php"  >Ver Guias</a>
                     </li>
+                    <li><a  href="<?= $this->raiz ?>/gestion/print/guias/index.php"  >Imprimir Guias</a>
+                    </li>
                     <?php
                 }
                 ?>

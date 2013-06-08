@@ -13,24 +13,15 @@ $idOrdenServicio = $_REQUEST["id"];
 $guias = new ArrayObject();
 
 getDatosGuia($idOrdenServicio, $guias);
-//   return;
-//   $datosGuia = getDatosGuia($idGuia);
-//lo horiento horizontalmente 'l'
 $pdf = new TCPDF('l', PDF_UNIT, PDF_PAGE_FORMAT, true, 'UTF-8', false);
-//$pdf->setPageOrientation(PDF_PAGE_ORIENTATION);
-// set document information
 $pdf->SetCreator(PDF_CREATOR);
 $pdf->SetAuthor('A1');
 $pdf->SetTitle('Guia');
-
 $pdf->setPrintHeader(false);
 $pdf->setPrintFooter(false);
 $pdf->SetDefaultMonospacedFont(PDF_FONT_MONOSPACED);
 $pdf->SetMargins(0, 0, 0);
 $pdf->setFontSubsetting(false);
-//set margins
-//$pdf->SetMargins(PDF_MARGIN_LEFT, PDF_MARGIN_TOP, PDF_MARGIN_RIGHT);
-//auto salto de linea a false para hacerlo manualmente
 $pdf->SetAutoPageBreak(FALSE, 0);
 
 

@@ -1,7 +1,10 @@
 <?
   /**
    * cargar.php este archivo es el encargado de subir un archivo csv a la BD, afecta a la tabla guia y en menor medida a orde de servicio.
-   * 
+   * e
+   * tengo dos problemas a la hora de agregar las guias de unitario pos csv.
+   * 1. el remitente, la cedula no es el id, por lo tanto debo hacer un consulta para sacar la cedula.
+   * 2. la ciudad de origen no es la de la sucursal, por lo tanto tambien se debe validar eso.
    */
   include ("../../../param/param.php");
   include ("../../../clases/clases.php");
@@ -14,6 +17,11 @@
       echo('No Puede entrar');
       return;
   }
+  if (!$objUser->checkRol("Usuario"))
+  {
+      echo('No tienes los permisos para acceder a este recurso');
+      return;
+  }
 
   function microtime_float()
   {
@@ -24,21 +32,10 @@
   if (isset($_POST["cargar"]))
   {
       $tiempo_inicio = microtime_float();
-      //print_r ($_POST);
-
-      if (isset($_GET["id"]))
-          $idos = $_GET["id"];
-      elseif (isset($_POST["idos"]))
-          $idos = $_POST["idos"];
-
+      
       $rguia = $ros = $rdpe = false;
 
-      $nombreproducto = "Masivo"; // ojo ver bien la procedencia de este campo de producto
-//       $idciudadorigen = $_SESSION['datosinicio']['ciudad_idciudad'];
-//       $iddepartamentoorigen = $_SESSION['datosinicio']['departamento_iddepartamento'];
-//       $nombreciudadorigen = $_SESSION['datosinicio']['nombre_ciudad'];
-//       $idpaisdorigen = $_SESSION['datosinicio']['pais_ciudad'];
-//       $objUser = new User();
+      $nombreproducto = "Unitario"; 
 
       $idciudadorigen = $objUser->getIdCiudad();
       $iddepartamentoorigen = $objUser->getIdDepartamento();
@@ -49,7 +46,7 @@
       $cond = "idorden_servicio=$idos";
       $r = $os->consultar($cond);
       $fil = mysql_fetch_assoc($r);
-      $idremitente = $fil["tercero_idcliente"];
+//      $idremitente = $fil["tercero_idcliente"];
 
       $uploaddir = "../../tmp/";
       $uploadfile = $uploaddir . basename($_FILES['fileguia']['name']);
@@ -81,15 +78,11 @@
 
           for ($i = 0; $i < $tamanio; $i++)
           {
-//               echo("haciendo para $i con $tamanio <br>");
-//               continue;
               list($ciudaddestino, $municipiodestino, $cedula, $nombre, $apellido, $direccion, $telefono, $celular, $observacion) = explode(";", $lineas[$i]);
               if ($ciudaddestino == "" || $municipiodestino == '' || $nombre == '' || $direccion == '')
               {
                   die("Error en el archivo en la linea " . ($i + 1));
               }
-
-//echo $ciudaddestino;
               $ciudaddestino = eregi_replace("[\n|\r|\n\r]", ' ', $ciudaddestino);
               $camposguia[$i]["ciudaddestino"] = $ciudaddestino;
               //municipio es departamento... :S
@@ -110,8 +103,6 @@
               $observacion = eregi_replace("[\n|\r|\n\r]", ' ', $observacion);
               $camposguia[$i]["observacion"] = $observacion;
 
-              // echo($ciudaddestino."". $municipiodestino."". $cedula."". $nombre."". $apellido."". $direccion."". $telefono."". $celular."". $observacion);
-//               $i++;
           }
 //            return;
           /*           * ***********************************************************************
@@ -121,8 +112,7 @@
           $producto = new producto();
           //$detalle_producto_especial = new detalle_producto_especial();
           $operaciones = new operacion();
-
-
+          
           $conex = new conexion();
           $qtrans = "SET AUTOCOMMIT=0;";
           $sac = $conex->ejecutar($qtrans);
@@ -138,14 +128,8 @@
               mysql_query("SET NAMES 'utf8'");
               $datosciudad = NULL;
               $idTipoProducto = NULL;
-              //echo($camposguia[$j]["ciudaddestino"] . " ciudad $j<br />");
-
               $idTipoProducto = $operaciones->calcularTipoProducto($idpaisdorigen, $iddepartamentoorigen, $idciudadorigen, $camposguia[$j]["ciudaddestino"]);
-
-
               $datosciudad = datosCiudad($camposguia[$j]["ciudaddestino"], $camposguia[$j]["municipiodestino"]);
-
-
               if (!isset($idTipoProducto))
               {
                   print_r($camposguia[$j]);
@@ -161,9 +145,6 @@
               $res = $producto->consultar($cond);
               $fila = mysql_fetch_assoc($res);
               $idproducto = $fila['idproducto'];
-
-
-              //$idproducto = $producto->idproducto;
 
               $guia->numero_guia = $camposguia[$j]['numeroguia'];
               $guia->orden_servicio_idorden_servicio = $idos;
@@ -213,8 +194,6 @@ VALUES
               if ($j == $cantidadguias)
                   break;
           }
-          $stringset = " unidades=$cantidadguias+unidades ";
-          $ros = $os->modificar2($stringset, $idos);
       }
 
 

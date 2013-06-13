@@ -51,34 +51,6 @@ foreach ($AllDatosGuia as $datosGuia)
   
 
 
-  $tabla3 = "
-    <table >
-<tr>
-    <td width=\"48\">FECHA:</td>
-    <td width=\"82\">" . $datosGuia["fecha"] . "</td>
-</tr>
-<tr>
-    <td>Ref:</td>
-    <td>" . $datosGuia["referencia"] . "</td>
-</tr>
-<tr>
-    <td>C.C/NIT:</td>
-    <td>" . $datosGuia["remiDocu"] . "</td>
-</tr>
-<tr>
-    <td>C.C/NIT:</td>
-    <td><b>" . $datosGuia["destiDocu"] . "</b></td>
-</tr>
-<tr>
-    <td>PESO:</td>
-    <td><b>" . $datosGuia["peso"] . "</b></td>
-</tr>
-<tr>
-    <td>TAMAÑO:</td>
-    <td><b>" . round($datosGuia["largo"]) . "x" . round($datosGuia["ancho"]) . "x" . round($datosGuia["alto"]) . "</b></td>
-</tr>
-</table>";
-
   $espacio = 32;
 //$disminuir = 0.1;
 //$pdf->Ln(1);
@@ -110,7 +82,7 @@ foreach ($AllDatosGuia as $datosGuia)
     $pdf->SetXY($x1 , $yn1);
     $pdf->Cell($ancho1, $alto1, 'DIRECCION:', $borde, 0, 'L', 0, 0, 1, false, 'T', 'T');
     $pdf->SetXY($x1+28, $yn1);
-    $pdf->Cell($ancho2, $alto1, $datosGuia["remiCiu"] . "/" . $datosGuia["remiDep"], $borde, 0, 'L', 0, 0, 1, false, 'T', 'T');
+    $pdf->Cell($ancho2, $alto1, $datosGuia["remiDir"] . "/" . $datosGuia["remiDep"], $borde, 0, 'L', 0, 0, 1, false, 'T', 'T');
     $yn1+=$space;
     $pdf->SetXY($x1 , $yn1);
     $pdf->Cell($ancho1, $alto1, 'CIUDAD:', $borde, 0, 'L', 0, 0, 1, false, 'T', 'T');

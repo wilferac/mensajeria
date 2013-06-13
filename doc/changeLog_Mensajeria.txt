@@ -6,6 +6,9 @@
 
 @descripcion: en esta etapa se agregan nuevas funcionalidades
 cambios V. 0.9.3
+-- add: imprimir en un rango de fechas para el CC
+-- add: carga de guias unitario por csv
+-- fix: imprimir guias en rango de fechas no mostraba la direccion correcta
 
 
 

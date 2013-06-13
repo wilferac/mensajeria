@@ -4,16 +4,16 @@ session_start();
 /**
  * localhost
  */
-define('CONEXION', '/home/inovate/public_html/Mensajeria/');
-include ('/home/inovate/public_html/Mensajeria/conexion/conexion.php');
-define('RAIZ', "http://localhost/~inovate/Mensajeria");
+//define('CONEXION', '/home/inovate/public_html/Mensajeria/');
+//include ('/home/inovate/public_html/Mensajeria/conexion/conexion.php');
+//define('RAIZ', "http://localhost/~inovate/Mensajeria");
 
 /**
  * servidor
  */
-//define('CONEXION', '/home/innovat1/public_html/Mensajeria/');
-//include ('/home/innovat1/public_html/Mensajeria/conexion/conexion.php');
-//define('RAIZ', "http://innovate.com.co/Mensajeria");
+define('CONEXION', '/home/innovat1/public_html/Mensajeria/');
+include ('/home/innovat1/public_html/Mensajeria/conexion/conexion.php');
+define('RAIZ', "http://innovate.com.co/Mensajeria");
 
 class operacion
 {
@@ -806,6 +806,43 @@ values('%s','%s','%s','%s','%s','%s','%s','%s','%s','%s','%s','%s','%s','%s','%s
             return true;
         else
             $this->idguia = "";
+    }
+    
+    function agregarUnitario($idCreador)
+    {
+        global $conn;
+//calcular el codigo
+        $SQL = "SELECT g.`numero_guia` FROM guia g WHERE 
+g.`numero_guia` NOT LIKE 'MM%' 
+AND  g.`numero_guia` NOT LIKE 'CC%' 
+AND  g.`numero_guia` NOT LIKE 'CACO%' 
+AND  g.`numero_guia` NOT LIKE 'BOCO%' 
+AND  g.`numero_guia` NOT LIKE 'BACO%'
+ORDER BY idguia DESC LIMIT 1";
+        if ($conn->ejecutar($SQL) && ($row = $conn->siguiente(NULL)))
+            $this->numero_guia = $row[0] + 1;
+        else
+            $this->numero_guia = '1';
+        
+        echo("Generando guia: ".$this->numero_guia." numero<br>");
+        
+        $query = "
+           CALL addGuia (
+           $this->owner,$idCreador,NULL,  
+               $this->owner, '', $this->ciudad_idorigen,'',
+                 $this->tercero_iddestinatario,'$this->nombre_destinatario_guia', '',' $this->telefono_destinatario_guia',
+$this->ciudad_iddestino, '$this->direccion_destinatario_guia', '$this->extraDestinatario', 
+               '$this->numero_guia', 'Unitario', $this->producto_idproducto, $this->valor_declarado_guia,
+                 $this->peso_guia,   '', 1, 1, 1,1 ,-1
+               )";
+        
+//        echo($query);
+        if ($conn->ejecutar($query))
+            return true;
+        else
+        {
+          return false;
+        }            
     }
 
     function modificar()

@@ -16,11 +16,11 @@ class Menu {
         /**
          * local
          */
-        $this->raiz = "http://localhost/~inovate/Mensajeria";
+//        $this->raiz = "http://localhost/~inovate/Mensajeria";
         /**
          * Servidor
          */
-//        $this->raiz = "http://innovate.com.co/Mensajeria";
+        $this->raiz = "http://innovate.com.co/Mensajeria";
     }
 
     public function generarMenu() {
@@ -105,7 +105,9 @@ class Menu {
                         <ul>
 
                             <li><a  class="MenuBarItemSubmenu" href="#">Guia</a>
-                                <ul>
+                              <ul>
+                                  <li><a  href="<?= $this->raiz ?>/gestion/unitario/guia/loadUnitary.php">Subir Csv</a>
+                                    </li>
                                     <li><a  href="<?= $this->raiz ?>/gestion/ordendeservicio/addosunitario.php">Digitar</a>
                                     </li>
                                     <li><a  href="<?= $this->raiz ?>/gestion/unitario/guia/consulta.php">Consultar</a>

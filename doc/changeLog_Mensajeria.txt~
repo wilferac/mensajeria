@@ -1,0 +1,34 @@
+//archivo de cambios: aca queda la bitacora de cambios realizados al sistema 
+// ultima modificacion 01/04/2013
+//author: wilferac
+//Programa: Mensajeria
+//Programa en produccion
+
+
+cambios V. 0.9
+- fixed: error que impedia la carga de la pantalla de agregar cliente 
+	(Mensajeria/gestion/terceros/addCliente.php)
+
+-fixed: error al momento de guardar una guia el cual no redireccionaba correctamente al usuario.
+	(Mensajeria/gestion/ordendeservicio/addosunitario.php)
+
+-fixed-Modified: error al momento de cambiar el estado de la guia. se quita esta capacidad ya que de ello se encarga pistoleo.
+	(http://localhost/~inovate/Mensajeria/gestion/unitario/guia/consulta.php)
+
+-modified: ya no aparece el link editar para guias que ya estan completas.
+
+-modified: al crear una guia ahora en ciudad origen se pone por defecto la ciudad del usuario logueado
+
+-fixed: un error visual que mostraba el apellido de un mensajero como si fuera el de un aliado
+	(Mensajeria/gestion/manifiesto/consulta.php)
+
+--fixed: ya no se pueden dar de alta guias q pertecen a un manifiesto ciudad, solo se podran marcar en como 
+"en ciudad destino".
+
+--modified: borrardos los registros basura de la BD.
+
+--fixed: creacion de usuarios era no funcionaba 
+
+--fixed: error que impedia consultar usuarios.
+
+

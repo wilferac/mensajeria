@@ -4,9 +4,9 @@ session_start();
 /**
  * localhost
  */
-//define('CONEXION', '/home/inovate/public_html/Mensajeria/');
-//include ('/home/inovate/public_html/Mensajeria/conexion/conexion.php');
-//define('RAIZ', "http://localhost/~inovate/Mensajeria");
+//define('CONEXION', '/home/wilferac/public_html/Mensajeria/');
+//include ('/home/wilferac/public_html/Mensajeria/conexion/conexion.php');
+//define('RAIZ', "http://localhost/~wilferac/Mensajeria");
 
 /**
  * servidor
@@ -808,24 +808,22 @@ values('%s','%s','%s','%s','%s','%s','%s','%s','%s','%s','%s','%s','%s','%s','%s
             $this->idguia = "";
     }
     
-    function agregarUnitario($idCreador)
-    {
+    function agregarCC($idCreador)
+ {
         global $conn;
 //calcular el codigo
-        $SQL = "SELECT g.`numero_guia` FROM guia g WHERE 
-g.`numero_guia` NOT LIKE 'MM%' 
-AND  g.`numero_guia` NOT LIKE 'CC%' 
-AND  g.`numero_guia` NOT LIKE 'CACO%' 
-AND  g.`numero_guia` NOT LIKE 'BOCO%' 
-AND  g.`numero_guia` NOT LIKE 'BACO%'
-ORDER BY idguia DESC LIMIT 1";
-        if ($conn->ejecutar($SQL) && ($row = $conn->siguiente(NULL)))
-            $this->numero_guia = $row[0] + 1;
-        else
-            $this->numero_guia = '1';
-        
-        echo("Generando guia: ".$this->numero_guia." numero<br>");
-        
+        $query2 = "SELECT numero_guia FROM guia  WHERE numero_guia LIKE 'CC%' ORDER BY idguia DESC LIMIT 1";
+        $results2 = mysql_query($query2) or die(mysql_error());
+
+        $nuevoN = 0;
+        if ($fila = mysql_fetch_assoc($results2)) {
+            $nuevoN = trim($fila['numero_guia'], "C");
+        }
+        $nuevoN++;
+        $numero_guia = "CC" . substr("0000000", 0, 7 - (strlen($nuevoN))) . $nuevoN;
+        $this->numero_guia=$numero_guia;
+        echo("Generando guia: " . $this->numero_guia . " numero<br>");
+
         $query = "
            CALL addGuia (
            $this->owner,$idCreador,NULL,  
@@ -835,14 +833,13 @@ $this->ciudad_iddestino, '$this->direccion_destinatario_guia', '$this->extraDest
                '$this->numero_guia', 'Unitario', $this->producto_idproducto, $this->valor_declarado_guia,
                  $this->peso_guia,   '', 1, 1, 1,1 ,-1
                )";
-        
+
 //        echo($query);
         if ($conn->ejecutar($query))
             return true;
-        else
-        {
-          return false;
-        }            
+        else {
+            return false;
+        }
     }
 
     function modificar()

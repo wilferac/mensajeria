@@ -12,7 +12,7 @@
 /**
  * local
  */
-$archivo = "/home/inovate/public_html/Mensajeria/param/param.properties";
+$archivo = "/home/wilferac/public_html/Mensajeria/param/param.properties";
 /**
  * servidor
  */

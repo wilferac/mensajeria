@@ -16,7 +16,7 @@ class Menu {
         /**
          * local
          */
-//        $this->raiz = "http://localhost/~inovate/Mensajeria";
+//        $this->raiz = "http://localhost/~wilferac/Mensajeria";
         /**
          * Servidor
          */
@@ -166,6 +166,8 @@ class Menu {
                     <li><a  href="<?= $this->raiz ?>/gestion/unitario/guia/consulta.php"  >Ver Guias</a>
                     </li>
                     <li><a  href="<?= $this->raiz ?>/gestion/print/guias/index.php"  >Imprimir Guias</a>
+                    </li>
+                    <li><a  href="<?= $this->raiz ?>/gestion/unitario/guia/loadUnitaryCC.php"  >Subir Csv</a>
                     </li>
                     <?php
                 }

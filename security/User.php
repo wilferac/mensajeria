@@ -13,7 +13,7 @@
    /**
     * local
     */
-   $rutaConexion = "/home/inovate/public_html/Mensajeria/conexion/conexion.php";
+   $rutaConexion = "/home/wilferac/public_html/Mensajeria/conexion/conexion.php";
    /**
     * Servidor
     */

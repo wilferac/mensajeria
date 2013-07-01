@@ -9,7 +9,7 @@ cambios V. 0.9.3
 -- add: imprimir en un rango de fechas para el CC
 -- add: carga de guias unitario por csv
 -- fix: imprimir guias en rango de fechas no mostraba la direccion correcta
-
+-- add: subir guias cc por csv (solo para el cliente)
 
 
 @descripcion: aumento la version ya que se agrego la funcion de imprimir a las guias de masivo, ademas el programa ha ganado algo de robustes.

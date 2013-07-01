@@ -1,11 +1,10 @@
-<?
+<?php
 /**
  * index de la aplicacion, muestra el login para que el usuario se loguee.
  */
 session_start();
-include ("param/param.php");
+require_once "param/param.php";
 include ("autenticar.php");
-
 
 $titulopagina = $_SESSION['param']['titulopagina'];
 ?>

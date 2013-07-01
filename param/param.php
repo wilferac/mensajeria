@@ -12,12 +12,11 @@
 /**
  * local
  */
-$archivo = "/home/wilferac/public_html/Mensajeria/param/param.properties";
+$archivo = "/var/www/Mensajeria/param/param.properties";
 /**
  * servidor
  */
 //$archivo = "/home/innovat1/public_html/Mensajeria/param/param.properties";
-
 
 
 //if(!file_exists($archivo))

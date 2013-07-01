@@ -13,7 +13,7 @@
    /**
     * local
     */
-   $rutaConexion = "/home/wilferac/public_html/Mensajeria/conexion/conexion.php";
+   $rutaConexion = "/var/www/Mensajeria/conexion/conexion.php";
    /**
     * Servidor
     */

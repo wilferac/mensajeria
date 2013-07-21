@@ -227,7 +227,7 @@ inner join tipo_producto tp on tp.idtipo_producto = tipo_producto_idtipo_product
 inner join departamento dp1 on dp1.iddepartamento = c1.departamento_iddepartamento
 inner join departamento dp2 on dp2.iddepartamento = c2.departamento_iddepartamento
 left join destinatario d on d.iddestinatario = g.tercero_iddestinatario
-where g.idguia = $id and documento_destinatario is not null and g.causal_devolucion_idcausal_devolucion <> 3
+where g.idguia = $id and documento_destinatario is not null /*and g.causal_devolucion_idcausal_devolucion <> 3*/
 ";
 
        $results2 = mysql_query($query2) or die(mysql_error());

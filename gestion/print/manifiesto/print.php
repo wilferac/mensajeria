@@ -61,9 +61,11 @@
       $enManifiesto[0] = 0;
       $ordenes[0] = 0;
       $clientes[0] = "Unitario";
+      $totalGuias = 0;
       //aca acumulo las guias por ordenes de servicio
       foreach ($guias as $guia)
       {
+          $totalGuias++;
           //$guia = new Guia($num, $ciu, $dep);
           $numOs = $guia->getNumeroOrdenSer();
           if (empty($numOs))
@@ -133,6 +135,7 @@
                <td>$enDestino[$num]</td>
                </tr>";
       }
+      $table2 .= "<tr><td colspan=\"7\">Total guias: $totalGuias</td></tr>";
       $table2 = $table2."</table>";
 
       //genero el pdf

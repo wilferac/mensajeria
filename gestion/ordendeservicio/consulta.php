@@ -95,6 +95,7 @@
             $(document).ready(function() {
                 $('#dynamic').html('<table cellpadding="0" cellspacing="0"  border="0" class="display" id="example"></table>');
                 $('#example').dataTable({
+                    "bSort": false,
                     "aaData": aDataSet,
                     "aoColumns": [
                         {"sTitle": "Num. O.S"},

@@ -79,7 +79,7 @@ LEFT JOIN tercero_manifiesto tm ON tm.`idmanifiesto` = m.`idmanifiesto` AND tm.`
 LEFT JOIN tercero t ON t.`idtercero` = tm.`idtercero`
 LEFT JOIN zona z ON z.`idzona` = m.`zonamensajero`
 WHERE g.`orden_servicio_idorden_servicio` = $idorden_servicio
-
+order by g.orden_servicio_idorden_servicio
        
 ";
 

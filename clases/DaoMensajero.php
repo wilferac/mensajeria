@@ -17,7 +17,8 @@
                inner join tercero_tipo tp on tp.tercero_idtercero = t.idtercero";
            //busco por rol
            $cons=$cons." where tipo_tercero_idtipo_tercero=".$tipo;
-           
+           $cons.=" AND t.estado = 'Activo'";
+           $cons.=" order by t.nombres_tercero, t.apellidos_tercero ";
            if($idSucur != NULL)
            {
                //agrego la sucursal a la consulta

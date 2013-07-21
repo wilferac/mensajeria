@@ -41,7 +41,7 @@ $sucursal = new sucursal();
 $operacion = new operacion();
 $sucur = $objUser->getIdSucursal();
 //$cons = "SELECT * FROM guia, manifiesto WHERE guia.manifiesto_idmanifiesto=manifiesto.idmanifiesto ORDER BY guia.numero_guia";
-$cons = "SELECT m.estado, s.nombre_sucursal ,m.idmanifiesto ,m.sucursal_idsucursal, m.plazo_entrega_manifiesto, GROUP_CONCAT(t.apellidos_tercero SEPARATOR ', ') AS apellidos,  GROUP_CONCAT(t.nombres_tercero SEPARATOR ',') AS tercero, GROUP_CONCAT(tm.tipo SEPARATOR ',')  AS tipo
+$cons = "SELECT m.estado, s.nombre_sucursal ,m.idmanifiesto, m.fechaCierre ,m.sucursal_idsucursal, m.plazo_entrega_manifiesto, GROUP_CONCAT(t.apellidos_tercero SEPARATOR ', ') AS apellidos,  GROUP_CONCAT(t.nombres_tercero SEPARATOR ',') AS tercero, GROUP_CONCAT(tm.tipo SEPARATOR ',')  AS tipo
   , date(m.fechaCreacion) as fechaMani
        FROM manifiesto m INNER JOIN tercero_manifiesto tm ON tm.idmanifiesto = m.idmanifiesto 
        INNER JOIN tercero t ON t.idtercero= tm.idtercero 
@@ -100,6 +100,7 @@ if (mysql_num_rows($res2) > 0)
         
         $fechaMani = $filas['fechaMani'];
         $apellidos = $filas['apellidos'];
+        $fechaCierre = $filas['fechaCierre'];
         $nombreTerceros = $filas['tercero'];
         $tiposTerceros = $filas['tipo'];
         $cont = 0;
@@ -148,7 +149,7 @@ if (mysql_num_rows($res2) > 0)
         $wrapini = "<a target=\'_blank\' title=\'Ver detalle manifiesto: $idmanifiesto \' href=\'../consultadetalle.php?nombre=$nombres&id=$idmanifiesto\' onClick=\'return(wo(this))\'>";
         $wrapfin = "</a>";
 
-        $dataSet = $dataSet . "['$wrapini$numero_manifiesto$wrapfin','$fechaMani','$estado','$nombre[1] $apellido[1]','$nombre[3] $apellido[3]','$nombre[2] $apellido[2]','$nombre_sucursal','$nombre[4] $apellido[4]','$plazo_entrega_manifiesto','$devuelto','$entregado','$enMani','$enCiudad',$totalguias,'$linkcargar','$imprimir'],";
+        $dataSet = $dataSet . "['$wrapini$numero_manifiesto$wrapfin','$fechaMani','$estado','$fechaCierre','$nombre[1] $apellido[1]','$nombre[3] $apellido[3]','$nombre[2] $apellido[2]','$nombre_sucursal','$nombre[4] $apellido[4]','$plazo_entrega_manifiesto','$devuelto','$entregado','$enMani','$enCiudad',$totalguias,'$linkcargar','$imprimir'],";
     }
     $dataSet = substr_replace($dataSet, "];", strlen($dataSet) - 1);
     $dataSet = $dataSetini . $dataSet;
@@ -183,6 +184,7 @@ if (mysql_num_rows($res2) > 0)
                         {"sTitle": "Num. Manifiesto"},
                         {"sTitle": "Fecha"},
                         {"sTitle": "Estado"},
+                        {"sTitle": "Fecha Cierre"},
                         {"sTitle": "Creado Por"},
                         {"sTitle": "Mensajero Recibe"},
                         {"sTitle": "Mensajero Entrega"},

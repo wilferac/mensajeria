@@ -100,6 +100,7 @@ while ($fila = mysql_fetch_assoc($results2))
     $dniDestinatario = $fila["documento_destinatario"];
     $nomDestinatario = $fila["nombre_destinatario_guia"];
     $estadoGuiaCausal = $fila["nombre_causal_devolucion"];
+    $causalDevolucion = $fila["nombrecausales"];
     $iddestinatario = $fila["tercero_iddestinatario"];
     if (empty($iddestinatario))
     {
@@ -147,7 +148,7 @@ while ($fila = mysql_fetch_assoc($results2))
     $imprimir = "<button type=\'button\' onclick=\'abrir(\"../../unitario/guia/printCorporativo.php?idGuia=$idGuia\")\'>Imprimir</button>";
     //$editar = "<button type=\'button\' onclick=\'abrir(\"../../ordendeservicio/addosunitario.php?idGuiaFill=$idGuia\")\'>Editar</button>";
 //acumulo en el dataset
-    $dataSet = $dataSet . "['$linkDetalle','$idMani','$fecha','$hora','$documento_tercero','$nombres_tercero','$nomtp','$nomOrigen','$nomDestino','$dniDestinatario','$nomDestinatario','$destiDirec','$estadoGuiaCausal','$fechaEstado','$numOrdenServ','$nomMensajero','$imprimir','$linkmodificar'],";
+    $dataSet = $dataSet . "['$linkDetalle','$idMani','$fecha','$hora','$documento_tercero','$nombres_tercero','$nomtp','$nomOrigen','$nomDestino','$dniDestinatario','$nomDestinatario','$destiDirec','$estadoGuiaCausal','$causalDevolucion','$fechaEstado','$numOrdenServ','$nomMensajero','$imprimir','$linkmodificar'],";
 }
 
 $dataSet = substr_replace($dataSet, "];", strlen($dataSet) - 1);
@@ -206,6 +207,7 @@ $vacio = false;
                 {"sTitle": "Destinatario"},
                 {"sTitle": "Dirección"},
                 {"sTitle": "Estado"},
+                {"sTitle": "Causal"},
                 {"sTitle": "Fecha Estado"},
                 {"sTitle": "Numero Orden"},
                 {"sTitle": "Mensajero"},

@@ -37,8 +37,6 @@ include ("../../conexion/conexion.php");
 //creo una coneccion rapida para la consulta
 $con = new conexion();
 
-
-
 $idguia = $_POST["idguia"];
 $token = $_POST['token'];
 //$idguia = '1212';

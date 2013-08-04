@@ -1,22 +1,12 @@
 <?
-
-/* * ***************************************************************************
-  Rutina para cargar los parametros especificados en param/param.properties
-  a variables de sesion.
- * *************************************************************************** */
-
-//$archivo="../../param/param.properties";
-//$archivo = "http://www.leuss.com.ve/tests/mensajeria/param/param.properties"; 
-//$archivo = "http://localhost/mensajeria/param/param.properties";
-
 /**
  * local
  */
-$archivo = "/var/www/Mensajeria/param/param.properties";
+//$archivo = "/var/www/Mensajeria/param/param.properties";
 /**
  * servidor
  */
-//$archivo = "/home/innovat1/public_html/Mensajeria/param/param.properties";
+$archivo = "/home/innovate/public_html/Mensajeria/param/param.properties";
 
 
 //if(!file_exists($archivo))

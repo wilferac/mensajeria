@@ -135,7 +135,7 @@
       $idtipoproducto = $_POST['idtipoproducto'];
       $valorDeclarado = $_POST['valordeclarado'];
       $idAsignacion = $_POST['idAsignacion'];
-
+      $idAsignacion = trim($idAsignacion) != '' ? $idAsignacion: -1;
 //en el registro temporal envio varios nulls
       $query = "
            CALL addGuia (
@@ -146,11 +146,11 @@ $ciudaddestino, '$direcciondestinatario', '$extraDestinatario',
                '$numero_guia', '$nombreproducto', $idtipoproducto, $valorDeclarado,
                  $peso,   '$contenido', $largo, $ancho, $alto,1 ,$idAsignacion
                )";
-
+      echo($query);
       mysql_query($query) or die("0");
 
       
-      //echo($query);
+//      echo($query);
       //return;
 
       if ($objUser->checkRol("Cliente") && !$objUser->checkRol("Admin"))

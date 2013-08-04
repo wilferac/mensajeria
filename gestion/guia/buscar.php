@@ -14,10 +14,6 @@
 //       return;
 //   }
 
-
-
-
-
    $formname = "busqueda";
 ?>
 <html>

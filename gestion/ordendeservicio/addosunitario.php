@@ -211,7 +211,7 @@ if ($objUser->getStatus() != 1)
 
                         $('#info').html('<img src="../../imagenes/loader.gif" alt="" height="17" />').fadeOut(1000);
                         var dataString = 'numguia=' + val;
-                        alert(dataString);
+//                        alert(dataString);
                         $.ajax({
                             type: "POST",
                             url: "prevalidacion.php",
@@ -345,7 +345,7 @@ if ($objUser->getStatus() != 1)
                 /////////////////////////////////////////////////////////////////////////////////
                 $("#savetemp").click(function() {
 
-                    alert('entro a temp');
+//                    alert('entro a temp');
                     //return;
 
                     if (validar())
@@ -421,7 +421,7 @@ if ($objUser->getStatus() != 1)
 
                     var idcliente = document.getElementById('idcliente').value;
                     var idsucursal = <?= /* $_SESSION['datosinicio']['sucursal_idsucursal'] */ 1 ?> //document.getElementById('sucursal_idsucursal').value;
-                    alert(":O");
+//                    alert(":O");
                     document.getElementById('registrar').style.visibility = "visible";
                     /*                    if (valorempaque != "")
                      alert("empaque");
@@ -983,13 +983,12 @@ $idGuiaFill = $_REQUEST["idGuiaFill"];
 if (isset($idGuiaFill))
 {
     echo("<script>
-           alert('call to fill');
                 ocultarTodo();
                $('#numguia').val('$idGuiaFill');
                 var val =  '$idGuiaFill';
                 $('#info').html('<img src=\"../../imagenes/loader.gif\"  height=\"17\" />').fadeOut(1000);
                 var dataString = 'numguia=' + val;
-                alert (dataString);
+//                alert (dataString);
                 $.ajax({
                     type: 'POST',
                     url: 'prevalidacion.php',
@@ -1008,7 +1007,7 @@ if ($objUser->checkRol("Cliente") && !$objUser->checkRol("Admin"))
     $cc = $objUser->getNumDocu();
     $idCli = $objUser->getId();
     echo("<script>
-          alert('llamado por un cliente');
+//          alert('llamado por un cliente');
           document.getElementById('labnumguia').style.visibility='hidden';
           document.getElementById('numguia').style.visibility='hidden';
           ElementosDatosABuscarDestinatarioInvisibles();

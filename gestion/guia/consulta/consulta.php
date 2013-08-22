@@ -127,7 +127,7 @@ while ($fila = mysql_fetch_assoc($results2))
 
     $destiDirec = $fila["direccion_destinatario_guia"];
 
-    if ($estadoGuia != 3 && empty($iddestinatario))
+    if ($estadoGuia != 3 && $objUser->checkRol('Admin'))
     {
         $resaltar = "";
         if ($estadoGuia == 2)

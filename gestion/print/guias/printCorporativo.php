@@ -222,7 +222,7 @@ inner join departamento dp1 on dp1.iddepartamento = c1.departamento_iddepartamen
 inner join departamento dp2 on dp2.iddepartamento = c2.departamento_iddepartamento
 left join destinatario d on d.iddestinatario = g.tercero_iddestinatario
 where date(g.`fecha`) BETWEEN '$fecha1' AND '$fecha2' AND g.estado = 1 and documento_destinatario is not null and g.causal_devolucion_idcausal_devolucion <> 3
-AND g.owner = $idUser";
+AND g.owner = $idUser order by g.idguia";
 
 //  echo($query2);
 //die();

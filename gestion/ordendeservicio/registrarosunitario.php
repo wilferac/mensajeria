@@ -146,7 +146,7 @@ $ciudaddestino, '$direcciondestinatario', '$extraDestinatario',
                '$numero_guia', '$nombreproducto', $idtipoproducto, $valorDeclarado,
                  $peso,   '$contenido', $largo, $ancho, $alto,1 ,$idAsignacion
                )";
-      echo($query);
+//      echo($query);
       mysql_query($query) or die("0");
 
       

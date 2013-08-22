@@ -2,11 +2,11 @@
 /**
  * local
  */
-//$archivo = "/var/www/Mensajeria/param/param.properties";
+$archivo = "/var/www/Mensajeria/param/param.properties";
 /**
  * servidor
  */
-$archivo = "/home/innovate/public_html/Mensajeria/param/param.properties";
+//$archivo = "/home/innovate/public_html/Mensajeria/param/param.properties";
 
 
 //if(!file_exists($archivo))

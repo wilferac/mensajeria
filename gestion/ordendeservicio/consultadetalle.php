@@ -58,10 +58,9 @@ eg.`nombre_causal_devolucion`, ca.`nombrecausales`,
 m.`idmanifiesto`,
 m.`fechaCreacion`,
 concat(t.`nombres_tercero`,' ', t.apellidos_tercero) AS mensajero,
+concat(t4.`nombres_tercero`,' ', t4.apellidos_tercero) AS aliado,
 z.`nombre_zona`,
 eg.`idcausal_devolucion` AS idEstado
-
-
 FROM guia g
 LEFT JOIN (SELECT gm.* FROM guia_manifiesto gm 
 LEFT JOIN guia_manifiesto gm2
@@ -74,13 +73,13 @@ INNER JOIN ciudad c2 ON c2.`idciudad` = g.`ciudad_iddestino`
 INNER JOIN departamento d2 ON d2.`iddepartamento` = c2.`departamento_iddepartamento`
 INNER JOIN estadoGuia eg ON eg.`idcausal_devolucion` = g.`causal_devolucion_idcausal_devolucion`
 LEFT JOIN causales ca ON  ca.`idcausales` = guia_mani.idCausal
-
 LEFT JOIN tercero_manifiesto tm ON tm.`idmanifiesto` = m.`idmanifiesto` AND tm.`tipo` = 2
 LEFT JOIN tercero t ON t.`idtercero` = tm.`idtercero`
+LEFT JOIN tercero_manifiesto tm4 ON tm4.`idmanifiesto` = m.`idmanifiesto` AND tm4.`tipo` = 4
+LEFT JOIN tercero t4 ON t4.`idtercero` = tm4.`idtercero`
 LEFT JOIN zona z ON z.`idzona` = m.`zonamensajero`
 WHERE g.`orden_servicio_idorden_servicio` = $idorden_servicio
-order by g.orden_servicio_idorden_servicio
-       
+order by g.orden_servicio_idorden_servicio     
 ";
 
    if (!$res = mysql_query($queryGuias))
@@ -104,24 +103,22 @@ order by g.orden_servicio_idorden_servicio
        $numero_guia = $filas["numero_guia"];
        $destinatario = $filas["nombre_destinatario_guia"];
        $direccion = $filas["direccion_destinatario_guia"];
-        $direccion = eregi_replace("[\n|\r|\n\r]", ' ', $direccion);
+       $direccion = eregi_replace("[\n|\r|\n\r]", ' ', $direccion);
        $ciuOrigen = $filas["ciuOrigen"];
        $depOrigen = $filas["depOrigen"];
        $ciuDesti = $filas["ciuDesti"];
        $depDesti = $filas["depDesti"];
-       $estado = $filas["nombre_causal_devolucion"] . ' ' . $filas["nombrecausales"];
+       $estado = $filas["nombre_causal_devolucion"];
+       $causal = $filas["nombrecausales"];
        $idManifiesto = $filas["idmanifiesto"];
        $fechaAsignacion = $filas["fechaCreacion"];
        $mensajero = $filas["mensajero"];
        $zona = $filas["nombre_zona"];
        $idEstado = $filas["idEstado"];
-
-
-
-
-
+       $aliado = $filas['aliado'];
+       
        $dataSet2 = $dataSet2 . "['$numero_guia','$destinatario','$direccion','$ciuOrigen',
-'$depOrigen','$ciuDesti','$depDesti','$estado','$idManifiesto','$fechaAsignacion','$mensajero','$zona '],";
+'$depOrigen','$ciuDesti','$depDesti','$estado','$causal','$idManifiesto','$fechaAsignacion','$mensajero','$aliado','$zona'],";
 
 //       $nombre_tipo_producto = strtolower($nombre_tipo_producto);
        switch ($idEstado)
@@ -240,10 +237,12 @@ order by g.orden_servicio_idorden_servicio
                         {"sTitle": "Ciudad Destino"},
                         {"sTitle": "Dpto. Destino"},
                         {"sTitle": "Estado"},
+                        {"sTitle": "Causal Devolución"},
                         {"sTitle": "N. Manifiesto"},
                         //fecha ultimo manifiesto
                         {"sTitle": "Fecha"},
                         {"sTitle": "Mensajero"},
+                        {"sTitle": "Aliado"},
                         {"sTitle": "Zona"},
                     ],
                     "sDom": 'T<"clear">lfrtip', "oTableTools": {"aButtons": ["copy", "xls", {"sExtends": "pdf",

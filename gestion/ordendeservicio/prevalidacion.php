@@ -59,7 +59,7 @@ AND s.`facturacion` = '$find' and ag.estado_asignacion = 1";
         }
 
         //verifico si es una guia de masivo
-        if (!strstr($numguia, 'MM') && !strstr($numguia, 'cc'))
+        if (!strstr($numguia, 'MM') && !strstr($numguia, 'CC'))
         {
             //verifico si es una guia credito
             if (!$entroFor)
@@ -221,7 +221,7 @@ ElementosClientesVisibles(true,'$idtercero','$documento_tercero','$nombres_terce
 
 
                 echo "<script>
-                    alert('entro aca');
+//                    alert('entro aca');
                     ElementosClientesInvisibles();
                     ElementosClientesVisibles(true,'$idtercero','$documento_tercero','$nombres_tercero','$apellidos_tercero','$direccion_tercero');
                    // document.getElementById('tipoproducto').value = '$nomProducto';
@@ -319,7 +319,7 @@ function fillEditData($numguia)
 
 
         echo "<script>
-            alert('entro aca');
+//            alert('entro aca');
             ElementosClientesInvisibles();
             ElementosClientesVisibles(true,'$idtercero','$documento_tercero','$nombres_tercero','$apellidos_tercero','$direccion_tercero');
             document.getElementById('tipoproducto').value = '$nomtp';

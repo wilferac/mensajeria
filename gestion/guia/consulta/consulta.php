@@ -18,6 +18,7 @@ if ($objUser->getStatus() != 1)
 
 $fecha1 = $_REQUEST['fecha1'];
 $fecha2 = $_REQUEST['fecha2'];
+$numGuia = $_REQUEST['numGuia'];
 
 if(empty($fecha1))
 {
@@ -52,7 +53,8 @@ g.idguia , g.numero_guia ,gm.`idEstadoGuia` ,g.causal_devolucion_idcausal_devolu
             p.idproducto, p.nombre_producto, p.tipo_producto_idtipo_producto, tp.nombre_tipo_producto,
             t.idtercero , t.documento_tercero, t.nombres_tercero, t.apellidos_tercero, 
             t.direccion_tercero, DATE(g.fecha) AS fechaGuia, TIME(g.fecha) AS horaGuia,DATE(m.`fechaCreacion`) AS maniFecha ,gm.`manId`,
-            d.documento_destinatario, g.nombre_destinatario_guia, gm.`fechaManual` , DATE(gm.`fechaDescarga`), c.nombrecausales
+            d.documento_destinatario, g.nombre_destinatario_guia, gm.`fechaManual` , DATE(gm.`fechaDescarga`), c.nombrecausales,
+            d.telefono_destinatario, d.telefono2_destinatario , d.celular_destinatario 
             FROM guia g INNER JOIN  tercero t ON g.tercero_idremitente = t.idtercero  
             INNER JOIN ciudad c1 ON c1.idciudad = g.ciudad_idorigen INNER JOIN ciudad c2 ON c2.idciudad = g.ciudad_iddestino
             INNER JOIN producto p ON p.idproducto = g.producto_idproducto
@@ -66,7 +68,13 @@ g.idguia , g.numero_guia ,gm.`idEstadoGuia` ,g.causal_devolucion_idcausal_devolu
             LEFT JOIN tercero_manifiesto tm ON tm.`idmanifiesto` = m.`idmanifiesto` AND tm.`tipo` = 2
             LEFT JOIN tercero term ON term.idtercero = tm.`idtercero`
             INNER JOIN orden_servicio os ON os.`idorden_servicio` = g.`orden_servicio_idorden_servicio`
-            WHERE gm2.`gmId`  IS NULL AND date(g.`fecha`) BETWEEN '$fecha1' AND '$fecha2' AND g.estado = 1";
+            WHERE gm2.`gmId`  IS NULL  AND g.estado = 1";
+            
+if(isset($numGuia) && $numGuia != ""){
+  $query2.= " AND g.`numero_guia` ='".$numGuia."'";
+} else {
+  $query2.= " AND date(g.`fecha`) BETWEEN '$fecha1' AND '$fecha2'";
+}
 
 //echo($query2);
 //si es usuario y no es admin
@@ -98,12 +106,14 @@ while ($fila = mysql_fetch_assoc($results2))
 //    $idtercero = $fila["idtercero"];
     $estadoGuia = $fila["causal_devolucion_idcausal_devolucion"];
     $dniDestinatario = $fila["documento_destinatario"];
+    $telDesti = $fila["telefono_destinatario"]." ".$fila["telefono2_destinatario"]." ".$fila["celular_destinatario"];
     $nomDestinatario = $fila["nombre_destinatario_guia"];
     $estadoGuiaCausal = $fila["nombre_causal_devolucion"];
     $causalDevolucion = $fila["nombrecausales"];
     $iddestinatario = $fila["tercero_iddestinatario"];
     if (empty($iddestinatario))
     {
+        $telDesti = "Incompleto";
         $dniDestinatario = "Incompleto";
         $nomDestinatario = "Incompleto";
     }
@@ -148,7 +158,7 @@ while ($fila = mysql_fetch_assoc($results2))
     $imprimir = "<button type=\'button\' onclick=\'abrir(\"../../unitario/guia/printCorporativo.php?idGuia=$idGuia\")\'>Imprimir</button>";
     //$editar = "<button type=\'button\' onclick=\'abrir(\"../../ordendeservicio/addosunitario.php?idGuiaFill=$idGuia\")\'>Editar</button>";
 //acumulo en el dataset
-    $dataSet = $dataSet . "['$linkDetalle','$idMani','$fecha','$hora','$documento_tercero','$nombres_tercero','$nomtp','$nomOrigen','$nomDestino','$dniDestinatario','$nomDestinatario','$destiDirec','$estadoGuiaCausal','$causalDevolucion','$fechaEstado','$numOrdenServ','$nomMensajero','$imprimir','$linkmodificar'],";
+    $dataSet = $dataSet . "['$linkDetalle','$idMani','$fecha','$hora','$documento_tercero','$nombres_tercero','$nomtp','$nomOrigen','$nomDestino','$telDesti','$nomDestinatario','$destiDirec','$estadoGuiaCausal','$causalDevolucion','$fechaEstado','$numOrdenServ','$nomMensajero','$imprimir','$linkmodificar'],";
 }
 
 $dataSet = substr_replace($dataSet, "];", strlen($dataSet) - 1);
@@ -203,7 +213,7 @@ $vacio = false;
                 {"sTitle": "Tipo"},
                 {"sTitle": "Origen"},
                 {"sTitle": "Destino"},
-                {"sTitle": "Destinatario C.C."},
+                {"sTitle": "Tel. Destinatario"},
                 {"sTitle": "Destinatario"},
                 {"sTitle": "Dirección"},
                 {"sTitle": "Estado"},

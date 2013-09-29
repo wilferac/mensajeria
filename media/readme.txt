@@ -1,0 +1,1 @@
+carpeta que contiene los archivos multimedia de la aplicacion

@@ -70,6 +70,7 @@
           $numOs = $guia->getNumeroOrdenSer();
           if (empty($numOs))
           {
+            $numOs = 0;
               $ordenes[0]++;
           }
           else
@@ -87,23 +88,24 @@
                   $devueltas[$numOs] = 0;
                   $enDestino[$numOs] = 0;
                   $enManifiesto[$numOs] = 0;
+                  continue;
               }
-              $estado = $guia->getIdEstado();
-              switch ($estado)
-              {
-                  case 2:
-                      $devueltas[$numOs]++;
-                      break;
-                  case 3:
-                      $entregadas[$numOs]++;
-                      break;
-                  case 4:
-                      $enManifiesto[$numOs]++;
-                      break;
-                  case 5:
-                      $enDestino[$numOs]++;
-                      break;
-              }
+          }
+          $estado = $guia->getIdEstado();
+          switch ($estado)
+          {
+              case 2:
+                  $devueltas[$numOs]++;
+                  break;
+              case 3:
+                  $entregadas[$numOs]++;
+                  break;
+              case 4:
+                  $enManifiesto[$numOs]++;
+                  break;
+              case 5:
+                  $enDestino[$numOs]++;
+                  break;
           }
       }
 
